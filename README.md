@@ -28,20 +28,20 @@ make
 To run the application, you need to start the core first.
 
 ```
-make run core
+make run-core
 ```
 
 Then, you can use either the administration or the user interface
 
 ```
-make run userI
-make run adminI
+make run-userI
+make run-adminI
 ```
 
 To stop the core, use
 
 ```
-make stop core
+make stop-core
 ```
 
 ## Running the tests
