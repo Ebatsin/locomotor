@@ -21,14 +21,9 @@ public class DBH {
 	 *
 	 * @return     The instance.
 	 */
-	public static DBH getInstance() {
+	public static synchronized DBH getInstance() {
 		if (db == null) {
-			synchronized (DBH.class) {
-				// double check lock
-				if (db == null) {
-					db = new DBH();
-				}
-			}
+			db = new DBH();
 		}
    		return db;
    	}
@@ -36,15 +31,11 @@ public class DBH {
    	/**
    	 * Connect to the default database
    	 */
-	public static void connect() {
+	public static synchronized void connect() {
 		if (mc == null) {
-			synchronized (DBH.class) {
-				// double check lock
-				if (mc == null) {
-					mc = new MongoClient();
-				}
-			}
+			mc = new MongoClient();
 		} else {
+			// disconnect first
 			disconnect();
 			mc = new MongoClient();
 		}
@@ -57,14 +48,9 @@ public class DBH {
    	 * @param      ip    The IP address
    	 * @param      port  The port
    	 */
-   	public static void connect(String ip, int port) {
+   	public static synchronized void connect(String ip, int port) {
 		if (mc == null) {
-			synchronized (DBH.class) {
-				// double check lock
-				if (mc == null) {
-					mc = new MongoClient(ip, port);
-				}
-			}
+				mc = new MongoClient(ip, port);
 		} else {
 			// disconnect first
 			disconnect();
@@ -76,7 +62,7 @@ public class DBH {
    	/**
    	 * Disconnect from the database
    	 */
-   	public static void disconnect() {
+   	public static synchronized void disconnect() {
    		mc.close();
    		mc = null;
    		System.out.println("Disconnected from the client");
