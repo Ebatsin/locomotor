@@ -19,6 +19,20 @@ public class Main {
 			db.connect();
 			db.disconnect();
 
+    		System.out.println(UserType.LIST.ordinal());
+
+    		for (UserType ut : UserType.values()) {
+    			System.out.println(ut.name());
+    			System.out.println(ut.ordinal());
+    		}
+
+    		System.out.println(UniverseType.LIST.ordinal());
+
+    		for (UniverseType ut : UniverseType.values()) {
+    			System.out.println(ut.name());
+    			System.out.println(ut.ordinal());
+    		}
+
 		} catch (Exception e) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
