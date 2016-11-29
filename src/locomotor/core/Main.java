@@ -1,6 +1,7 @@
 package locomotor.core;
 
 import java.util.logging.*;
+import locomotor.components.types.*;
 
 public class Main {
 	public static void main(String[] args) {

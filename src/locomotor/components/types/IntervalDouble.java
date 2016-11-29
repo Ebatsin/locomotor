@@ -1,4 +1,4 @@
-package locomotor.core;
+package locomotor.components.types;
 
 public class IntervalDouble extends Interval {
 

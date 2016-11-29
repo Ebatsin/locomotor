@@ -1,4 +1,4 @@
-package locomotor.core;
+package locomotor.components.types;
 
 /**
  * The UserType enumeration

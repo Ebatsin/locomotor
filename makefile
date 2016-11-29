@@ -26,9 +26,11 @@ FLAGC_DOC = -encoding UTF-8 -charset UTF-8 -docencoding UTF-8
 RM = rm -rf
 
 # paths
+COMPONENTS = locomotor/components
 CORE = locomotor/core
-USER = 
-ADMIN =
+INT_COMPONENTS = 
+INT_ADMIN =
+INT_ADMIN =
 
 # same name for all
 MAIN = Main.java
@@ -47,9 +49,9 @@ PACKAGE_INTERFACE_ADMIN =
 
 all: build-core
 
-build-core: 
+build-core:
 	-test -d $(CLASS) || mkdir $(CLASS)
-	$(CC) -d $(CLASS) -sourcepath $(SRC)/ $(SRC)/$(CORE)/$(MAIN) -classpath "$(LIB)/*:" $(FLAGS_CC)
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIB)/*:$(CLASS):" $(FLAGS_CC) $(SRC)/$(CORE)/$(MAIN)
 
 run-core:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE)
@@ -66,8 +68,9 @@ doc:
 ###################################################
 # Housekeeping:
 ###################################################
-clean:
-	-$(MAKE) clean-core
+clean: clean-components clean-core
 
+clean-components:
+	$(RM) $(CLASS)/$(COMPONENTS)/*
 clean-core:
-	rm -f $(CLASS)/$(CORE)/*
+	$(RM) $(CLASS)/$(CORE)/*
