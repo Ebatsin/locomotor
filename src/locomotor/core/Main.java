@@ -23,14 +23,14 @@ public class Main {
 
     		for (UserType ut : UserType.values()) {
     			System.out.println(ut.name());
-    			System.out.println(ut.ordinal());
+    			System.out.println(ut.getID());
     		}
 
     		System.out.println(UniverseType.LIST.ordinal());
 
     		for (UniverseType ut : UniverseType.values()) {
     			System.out.println(ut.name());
-    			System.out.println(ut.ordinal());
+    			System.out.println(ut.getID());
     		}
 
     		Interval[] intervals = new Interval[5];

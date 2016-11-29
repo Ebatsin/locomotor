@@ -6,19 +6,33 @@ package locomotor.core;
 public enum UniverseType {
     
     // integer interval 
-    INTEGER_INTERVAL(),
+    INTEGER_INTERVAL(0),
     // float interval
-    FLOAT_INTERVAL(),
+    FLOAT_INTERVAL(1),
     // list of string of characters
-    LIST(),
+    LIST(2),
     // boolean value, indicate if the field is empty or not
-    BOOLEAN(),
+    BOOLEAN(3),
     // tree
-    TREE();
+    TREE(4);
+
+    // the id (integer value)
+    private int _id;
 
     /**
      * Constructs the object (private to prevent other to instantiate new UniverseType)
     */
-    private UniverseType() {}
+    private UniverseType(int id) {
+        _id = id;
+    }
+
+    /**
+     * Gets the id.
+     *
+     * @return     The id.
+     */
+    public int getID() {
+        return _id;
+    }
     
 }
