@@ -1,4 +1,4 @@
-# Conventions de codage
+# Coding conventions
 
 ## Dependency policy
 
@@ -6,21 +6,21 @@
 
 ### Apps
 
-The system is composed of 3 apps : the **core**, the **user interface** and the **administrator interface**. Each of this can be found in the directory *src/apps*.
+The system is composed of 3 apps : the **core**, the **user interface** and the **administrator interface**.
 
-* **core** : The core is the main app which offers an interface to the DB. It acts as a server and answers the user requests;
-* **user interface** : The user interface is a client that allows the user to connect to the core, send requests and display the results.
-* **administrator interface** : The administrator interface is a client that allows the user to connect to the core and manage the DB.
+* **core** : The core is the main app which offers an interface to the DB. It acts as a server and answers the user requests. It can be found in *src/locomotor/core*
+* **user interface** : The user interface is a client that allows the user to connect to the core, send requests and display the results. It can be found in *src/locomotor/interface/user*
+* **administrator interface** : The administrator interface is a client that allows the user to connect to the core and manage the DB. It can be found in *src/locomotor/interface/administration*
 
 ### Components
 
-A collection of reusable componants which can be used by more than one app. The components can be found in the directory *src/components*.
+A collection of reusable components which can be used by more than one app. The components can be found in the directory *src/locomotor/components* for the elements shared between the 3 apps. For the elements shared only between the 2 interfaces, the components can be found in the directory *src/locomotor/interface/components*.
 
 ### Libs 
 
 A collection of libraries used by the project.
 
-**note** : not all libraries used by the project are stored on the repository
+**note** : not all libraries used by the project are stored on the repository.
 
 The libraries can be found in the directory *libs*
 
@@ -36,25 +36,25 @@ Each file can contain at most **one** outer class.
 
 ### Classes
 
-Each class name must start by an upper case character. The rest of the name is written in camelcase.
+Each class name must start with an upper case character. The rest of the name is written in camelCase.
 
 Example : `ThisIsAClassName`
 
 ### Methods
 
-Each method must start by a lower case character. The rest of the name is written in camelcase.
+Each method must start with a lower case character. The rest of the name is written in camelCase.
 
 Example : `thisIsAMethodName()`
 
 ### Attributes
 
-Each attribute must start by an underscore (_). The reste of the name is written in camelcase, starting with a lower case character.
+Each attribute must start with an underscore (_). The rest of the name is written in camelCase, starting with a lower case character.
 
 Example : `_thisIsAnAttributeName`
 
 ### Local variables & parameters
 
-The name must be written in camelcase starting with a lower case character.
+The name must be written in camelCase starting with a lower case character.
 
 Example : `thisIsAVariableName`
 
@@ -66,7 +66,7 @@ Example : `TypePrefix.THIS_IS_A_VALUE`
 
 ### Acronymes
 
-Acronymes in names must respect the naming convention in that file, even if it is not the way it is normally written
+Acronymes in names must respect the naming convention defined here, even if it is not the way it is normally written
 
 Example : `HttpCollection` (instead of `HTTPCollection`)
 
@@ -76,7 +76,7 @@ Example : `HttpCollection` (instead of `HTTPCollection`)
 
 ### Layout and indentation
 
-Indentation must use tabs.
+Indentation **must use tabs**.
 
 This is the design prefered :
 
