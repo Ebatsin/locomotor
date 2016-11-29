@@ -1,6 +1,6 @@
 package locomotor.components.types;
 
-public class IntervalInteger extends Interval {
+public class CIntervalInteger extends CInterval {
 
     /**
      * Initializes a closed interval [min, max].
@@ -8,7 +8,7 @@ public class IntervalInteger extends Interval {
      * @param  min the smaller endpoint
      * @param  max the larger endpoint
      */
-    public IntervalInteger(Integer min, Integer max) {
+    public CIntervalInteger(Integer min, Integer max) {
         super(min, max);
     }
 

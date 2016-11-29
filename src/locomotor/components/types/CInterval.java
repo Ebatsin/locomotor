@@ -1,6 +1,6 @@
 package locomotor.components.types;
 
-public abstract class Interval<T extends Comparable> {
+public abstract class CInterval<T extends Comparable> {
 
 	private T min;
     private T max;
@@ -13,7 +13,7 @@ public abstract class Interval<T extends Comparable> {
      * @throws IllegalArgumentException if the min endpoint is greater than the max endpoint
      * @todo handle error better
      */
-    public Interval(T min, T max) {
+    public CInterval(T min, T max) {
         if (min.compareTo(max) <= 0) {
             this.min = min;
             this.max = max;
@@ -51,7 +51,7 @@ public abstract class Interval<T extends Comparable> {
      * @return true if this interval intersects the argument interval;
      *         false otherwise
      */
-    public final boolean intersects(Interval that) {
+    public final boolean intersects(CInterval that) {
         if (this.max.compareTo(that.min) < 0) return false;
         if (that.max.compareTo(this.min) < 0) return false;
         return true;
@@ -79,7 +79,7 @@ public abstract class Interval<T extends Comparable> {
         if (other == this) return true;
         if (other == null) return false;
         if (other.getClass() != this.getClass()) return false;
-        Interval that = (Interval) other;
+        CInterval that = (CInterval) other;
         return this.min == that.min && this.max == that.max;
     }
 
