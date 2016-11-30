@@ -8,10 +8,10 @@ public class CIntervalInteger extends CInterval {
     /**
      * Initializes a closed interval [min, max].
      *
-     * @param  min the smaller endpoint
-     * @param  max the larger endpoint
+     * @param  min the smaller endpoint (64-bit)
+     * @param  max the larger endpoint (64-bit)
      */
-    public CIntervalInteger(Integer min, Integer max) {
+    public CIntervalInteger(Long min, Long max) {
         super(min, max);
     }
 
