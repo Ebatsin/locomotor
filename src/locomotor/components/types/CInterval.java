@@ -79,9 +79,15 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
      *         false otherwise
      */
     public final boolean equals(Object other) {
-        if (other == this) return true;
-        if (other == null) return false;
-        if (other.getClass() != this.getClass()) return false;
+        if(other == this) {
+            return true;
+        }
+        if(other == null) { 
+            return false;
+        }
+        if(other.getClass() != this.getClass()) {
+            return false;
+        }
         CInterval that = (CInterval) other;
         return this.min == that.min && this.max == that.max;
     }

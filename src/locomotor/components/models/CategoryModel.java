@@ -1,7 +1,7 @@
 package locomotor.components.models;
 
 /**
- * @todo describe the class
+ * @todo describe the class.
  */
 public class CategoryModel {
 

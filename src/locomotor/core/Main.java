@@ -4,6 +4,7 @@ import java.util.logging.*;
 import locomotor.components.types.*;
 
 public class Main {
+	
 	public static void main(String[] args) {
 
 		// disable logging on mongodb driver
