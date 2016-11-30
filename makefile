@@ -21,7 +21,7 @@ SRC = src
 CLASS = class
 DOC = doc
 
-FLAGS_CC = -Xdiags:verbose -Xlint:deprecation
+FLAGS_CC = -Xdiags:verbose
 FLAGC_DOC = -encoding UTF-8 -charset UTF-8 -docencoding UTF-8
 RM = rm -rf
 

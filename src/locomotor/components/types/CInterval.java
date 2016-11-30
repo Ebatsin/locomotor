@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+/**
+ * @todo describe the class
+ */
 public abstract class CInterval<T extends Comparable> {
 
 	private T min;
