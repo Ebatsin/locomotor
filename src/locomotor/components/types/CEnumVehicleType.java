@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+/**
+ * @todo
+ */
 public enum CEnumVehicleType {
     
     // integer
@@ -16,13 +19,19 @@ public enum CEnumVehicleType {
     STRING_INTERVAL(5),
     // tree
     TREE(7);
+    // integer list
+    INTEGER_LIST(8);
 
-    // the id (integer value)
+    /**
+     * The identifier.
+     */
     private int _id;
 
     /**
-     * Constructs the object (private to prevent other to instantiate new UniverseType)
-    */
+     * Constructs the object (private to prevent other to instantiate new CEnumVehicleType).
+     *
+     * @param      id    The identifier.
+     */
     private CEnumVehicleType(int id) {
         _id = id;
     }

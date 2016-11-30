@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+/**
+ * @todo
+ */
 public enum CEnumUserType {
     
     // boolean
@@ -15,12 +18,16 @@ public enum CEnumUserType {
     // tree
     TREE(7);
 
-    // the id (integer value)
+    /**
+     * The identifier
+     */
     private int _id;
 
     /**
-     * Constructs the object (private to prevent other to instantiate new UniverseType)
-    */
+     * Constructs the object (private to prevent other to instantiate new CEnumUserType).
+     *
+     * @param      id    The identifier.
+     */
     private CEnumUserType(int id) {
         _id = id;
     }

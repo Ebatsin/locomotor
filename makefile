@@ -34,6 +34,8 @@ MAIN = Main.java
 
 # paths
 COMPONENTS = $(PACKAGE)/components
+COMPONENTS_TYPES = $(COMPONENTS)/types
+COMPONENTS_MODELS = $(COMPONENTS)/models
 CORE = $(PACKAGE)/core
 INT_COMPONENTS = 
 INT_ADMIN =
@@ -51,6 +53,14 @@ CHK_STY_CONF = $(LIB)/google_checks.xml
 ###################################################
 
 all: build-core
+
+build-components: linter-components build-components-types build-components-models
+
+build-components-types:
+		$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(MONGO):$(CLASS):" $(FLAGS_CC) $(SRC)/$(COMPONENTS_TYPES)/*.java
+
+build-components-models:
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(MONGO):$(CLASS):" $(FLAGS_CC) $(SRC)/$(COMPONENTS_MODELS)/*.java
 
 build-core: linter-core
 	-test -d $(CLASS) || mkdir $(CLASS)
