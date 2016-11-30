@@ -18,7 +18,7 @@ public enum CEnumVehicleType {
     // string interval
     STRING_INTERVAL(5),
     // tree
-    TREE(7);
+    TREE(7),
     // integer list
     INTEGER_LIST(8);
 
