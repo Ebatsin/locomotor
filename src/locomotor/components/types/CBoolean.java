@@ -3,6 +3,6 @@ package locomotor.components.types;
 /**
  * @todo describe the class
  */
-public class CBoolean extends CType {
+public class CBoolean implements CUniverseType, CVehicleType {
 
 }

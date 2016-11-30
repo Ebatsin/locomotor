@@ -3,6 +3,6 @@ package locomotor.components.types;
 /**
  * @todo describe the class
  */
-public class CFloat extends CType {
+public class CFloat implements CVehicleType {
 
 }

@@ -12,7 +12,7 @@ public class CategoryModel {
 	/**
 	 * The name of the category of criteria(s)
 	 */
-	private String name;
+	private String _name;
 
 	/**
 	 * Constructs the category of criteria(s)

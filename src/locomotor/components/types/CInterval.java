@@ -3,7 +3,7 @@ package locomotor.components.types;
 /**
  * @todo describe the class
  */
-public abstract class CInterval<T extends Comparable> {
+public abstract class CInterval<T extends Comparable> implements CUniverseType, CVehicleType {
 
 	private T min;
     private T max;
