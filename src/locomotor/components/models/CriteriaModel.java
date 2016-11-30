@@ -1,63 +1,73 @@
 package locomotor.components.models;
 
+import locomotor.components.types.*;
+
 /**
- * @todo describe the class
+ * Holds useful and reusable data (model) of a criteria.
  */
 public class CriteriaModel {
 
 	/**
-	 * The identifier
+	 * The identifier.
 	 */
 	private int _id;
 	/**
-	 * The name of the category of criteria(s)
+	 * The name of the criteria.
 	 */
 	private String _name;
 
 	/**
-	 * The question to ask
+	 * The question to display to the user.
 	 */
 	private String _question;
 	
 	/**
-	 * Can the criteria be use for computing
+	 * Can the criteria be use for computing?
 	 */
 	private boolean _isComparable;
 
 	/**
-	 * The type of values that can take the criteria
+	 * @todo
 	 */
-	private UniverseType _typeUniverse;
+	private CEnumUniverseType _universeType;
 
 	/**
-	 * The values that can take the criteria
+	 * @@todo
 	 */
-	private Type _universe;
+	private CEnumVehicleType _vehicleType;
 
 	/**
-	 * The actual type of values that take the criteria
+	 * @todo
 	 */
-	private UserType _typeUser;
+	private CEnumUserType _userType;
 
 	/**
-	 * Constructs the category of criteria(s)
+	 * @todo
+	 */
+	private CUniverseType _universe;
+
+	/**
+	 * Constructs the criteria
 	 *
 	 * @param      id            The identifier
 	 * @param      name          The name
 	 * @param      question      The question
 	 * @param      isComparable  Indicates if comparable
-	 * @param      typeUniverse  The type universe
+	 * @param      universeType  The universe type
+	 * @param      vehicleType   The vehicle type
+	 * @param      userType      The user type
 	 * @param      universe      The universe
-	 * @param      typeUser      The type user
 	 */
-	public CriteriaModel(int id, String name, String question, boolean isComparable, UniverseType typeUniverse, Type universe, UserType typeUser) {
+	public CriteriaModel(int id, String name, String question, boolean isComparable, CEnumUniverseType universeType, CEnumVehicleType vehicleType, CEnumUserType userType,
+CUniverseType universe) {
 		_id = id;
 		_name = name;
 		_question = question;
 		_isComparable = isComparable;
-		_typeUniverse = _typeUniverse
+		_universeType = universeType;
+		_vehicleType = vehicleType;
+		_userType = userType;
 		_universe = universe;
-		_typeUser = typeUser;
 	}
 	
 }

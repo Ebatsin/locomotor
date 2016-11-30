@@ -6,16 +6,16 @@ package locomotor.components.models;
 public class FictionnalUniverse {
 
 	/**
-	 * The unique identifier
+	 * The unique identifier.
 	 */
-	private int _id;
+	private int _identifier;
 
 	/**
-	 * The name of the (fictionnal) universe
+	 * The name of the (fictionnal) universe.
 	 */
 	private String _name;
 	/**
-	 * The name of the image that illustrate the universe
+	 * The name of the image that illustrate the universe.
 	 */
 	private String _imageName;
 
@@ -27,7 +27,7 @@ public class FictionnalUniverse {
 	 * @param      imageName  The image name
 	 */
 	public FictionnalUniverse(int id, String name, String imageName) {
-		_id = id;
+		_identifier = id;
 		_name = name;
 		_imageName = imageName;
 	}

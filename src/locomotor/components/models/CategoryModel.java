@@ -1,16 +1,16 @@
 package locomotor.components.models;
 
 /**
- * @todo describe the class.
+ * Holds useful and reusable data (model) of a category of criteria(s).
  */
 public class CategoryModel {
 
 	/**
-	 * The identifier
+	 * The identifier.
 	 */
-	private int _id;
+	private int _identifier;
 	/**
-	 * The name of the category of criteria(s)
+	 * The name of the category of criteria(s).
 	 */
 	private String _name;
 
@@ -21,7 +21,7 @@ public class CategoryModel {
 	 * @param      name  The name of the category
 	 */
 	public CategoryModel(int id, String name) {
-		_id = id;
+		_identifier = id;
 		_name = name;
 	}
 
