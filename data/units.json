@@ -7,12 +7,12 @@
 		{
 			"name": "mm",
 			"long": "millimètre%s",
-			"factor": 0.0010000000474974513
+			"factor": 0.00100000004749745
 		},
 		{
 			"name": "cm",
 			"long": "centimètre%s",
-			"factor": 0.009999999776482582
+			"factor": 0.00999999977648258
 		},
 		{
 			"name": "m",
@@ -27,16 +27,16 @@
 		{
 			"name": "pc",
 			"long": "parsec%s",
-			"factor": 3.085677592628429e+16
+			"factor": 3.08567759262843e+16
 		},
 		{
 			"name": "al",
 			"long": "année%s-lumière",
-			"factor": 9.461000130527232e+15
+			"factor": 9.46100013052723e+15
 		},
 		{
 			"name": "ua",
-			"long": "unités astronomique",
+			"long": "unité%s astronomique",
 			"factor": 1.49597863936e+11
 		}
 	]
