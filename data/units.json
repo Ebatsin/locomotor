@@ -1,0 +1,43 @@
+{
+	"_id": {
+		"$oid": "5842d1af57ab9e6a5495f3e9"
+	},
+	"unitname": "distance",
+	"alt": [
+		{
+			"name": "mm",
+			"long": "millimètre%s",
+			"factor": 0.0010000000474974513
+		},
+		{
+			"name": "cm",
+			"long": "centimètre%s",
+			"factor": 0.009999999776482582
+		},
+		{
+			"name": "m",
+			"long": "mètre%s",
+			"factor": 1.0
+		},
+		{
+			"name": "km",
+			"long": "kilomètre%s",
+			"factor": 1000.0
+		},
+		{
+			"name": "pc",
+			"long": "parsec%s",
+			"factor": 3.085677592628429e+16
+		},
+		{
+			"name": "al",
+			"long": "année%s-lumière",
+			"factor": 9.461000130527232e+15
+		},
+		{
+			"name": "ua",
+			"long": "unités astronomique",
+			"factor": 1.49597863936e+11
+		}
+	]
+}
