@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * @todo
  */
@@ -24,6 +27,17 @@ public enum CEnumUniverseType {
     private int _id;
 
     /**
+     * Map to retrieve value from integer
+     */
+    private static Map<Integer, CEnumUniverseType> map = new HashMap<Integer, CEnumUniverseType>();
+
+    static {
+        for (CEnumUniverseType univEnum : CEnumUniverseType.values()) {
+            map.put(univEnum._id, univEnum);
+        }
+    }
+
+    /**
      * Constructs the object (private to prevent other to instantiate new CEnumUniverseType).
      *
      * @param      id    The identifier.
@@ -39,6 +53,17 @@ public enum CEnumUniverseType {
      */
     public int getID() {
         return _id;
+    }
+
+    /**
+     * Value of
+     *
+     * @param      id    The identifier
+     *
+     * @return     The value of the integer
+     */
+    public static CEnumUniverseType valueOf(int id) {
+        return map.get(id);
     }
     
 }
