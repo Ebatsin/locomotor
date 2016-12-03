@@ -41,3 +41,90 @@
 		}
 	]
 }
+{
+	"_id": {
+		"$oid": "5842d42157ab9e6a5495f3ea"
+	},
+	"unitname": "masse",
+	"alt": [
+		{
+			"name": "kg",
+			"long": "kilogramme%s",
+			"factor": 1.0
+		},
+		{
+			"name": "g",
+			"long": "gramme%s",
+			"factor": 0.0010000000474974513
+		},
+		{
+			"name": "t",
+			"long": "tonne%s",
+			"factor": 1000.0
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d53957ab9e6a5495f3eb"
+	},
+	"unitname": "volume",
+	"alt": [
+		{
+			"name": "m3",
+			"long": "mètre%s cube",
+			"factor": 1.0
+		},
+		{
+			"name": "dam3",
+			"long": "décamètre%s cube",
+			"factor": 1000.0
+		},
+		{
+			"name": "hm3",
+			"long": "hectomètre%s cube",
+			"factor": 1e+06
+		},
+		{
+			"name": "cm3",
+			"long": "centimètre%s cube",
+			"factor": 9.999999974752427e-07
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d5d857ab9e6a5495f3ec"
+	},
+	"unitname": "devise",
+	"alt": [
+		{
+			"name": "€",
+			"long": "euro%s",
+			"factor": 1.0
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d6a857ab9e6a5495f3ed"
+	},
+	"unitname": "vitesse",
+	"alt": [
+		{
+			"name": "m/s",
+			"long": "mètre%s par seconde",
+			"factor": 1.0
+		},
+		{
+			"name": "km/h",
+			"long": "kilomètre%s par heure",
+			"factor": 3.5999999046325684
+		},
+		{
+			"name": "km/s",
+			"long": "kilomètre%s par seconde",
+			"factor": 0.0010000000474974513
+		}
+	]
+}
