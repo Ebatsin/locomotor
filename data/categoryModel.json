@@ -51,6 +51,10 @@
 				{
 					"id": 8,
 					"name": "magie"
+				},
+				{
+					"id": 9,
+					"name": "antimatière"
 				}
 			]
 		},
@@ -600,6 +604,14 @@
 				{
 					"id": 5,
 					"name": "bafa"
+				},
+				{
+					"id": 6,
+					"name": "bus"
+				},
+				{
+					"id": 7,
+					"name": "license de pilote espace profond"
 				}
 			]
 		},
@@ -698,26 +710,22 @@
 				"values": [
 					{
 						"value": 0,
-						"name": "n/a"
-					},
-					{
-						"value": 1,
 						"name": "inexistant"
 					},
 					{
-						"value": 2,
+						"value": 1,
 						"name": "léger"
 					},
 					{
-						"value": 3,
+						"value": 2,
 						"name": "lourd"
 					},
 					{
-						"value": 4,
+						"value": 3,
 						"name": "très lourd"
 					},
 					{
-						"value": 5,
+						"value": 4,
 						"name": "cuirrassé"
 					}
 				],
@@ -725,7 +733,7 @@
 					"$numberLong": "0"
 				},
 				"max": {
-					"$numberLong": "5"
+					"$numberLong": "4"
 				}
 			}
 		}
