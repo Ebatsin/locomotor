@@ -1,0 +1,235 @@
+{
+	"_id": {
+		"$oid": "5842ccbf57ab9e689507bc13"
+	},
+	"name": "consommation",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842dffe57ab9e7e37048793"
+			},
+			"name": "carburant",
+			"question": "Quel type de carburant souhaitez-vous utiliser pour votre moyen de transport ?",
+			"isComparable": true,
+			"itemType": 8,
+			"userType": 5,
+			"universeType": 5,
+			"unit": 0,
+			"universe": [
+				{
+					"id": 0,
+					"name": "électrique"
+				},
+				{
+					"id": 1,
+					"name": "essence"
+				},
+				{
+					"id": 2,
+					"name": "diesel"
+				},
+				{
+					"id": 3,
+					"name": "foin"
+				},
+				{
+					"id": 4,
+					"name": "viande"
+				},
+				{
+					"id": 5,
+					"name": "vent"
+				},
+				{
+					"id": 6,
+					"name": "bois"
+				},
+				{
+					"id": 7,
+					"name": "nucléaire"
+				},
+				{
+					"id": 8,
+					"name": "magie"
+				}
+			]
+		},
+		{
+			"_id": {
+				"$oid": "5842e19957ab9e7e37048794"
+			},
+			"name": "consommation",
+			"question": "Quelle classe de consommation désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 5,
+			"universeType": 6,
+			"unit": 0,
+			"universe": {
+				"values": [
+					{
+						"value": 0,
+						"name": "troll"
+					},
+					{
+						"value": 1,
+						"name": "désolant"
+					},
+					{
+						"value": 2,
+						"name": "piètre"
+					},
+					{
+						"value": 3,
+						"name": "acceptable"
+					},
+					{
+						"value": 4,
+						"name": "effort exceptionnel"
+					},
+					{
+						"value": 5,
+						"name": "optimal"
+					}
+				],
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "5"
+				}
+			}
+		},
+		{
+			"name": "distance nominale",
+			"question": "Quelle distance souhaitez-vous pouvoir parcourir ?",
+			"isComparable": true,
+			"itemType": 3,
+			"userType": 3,
+			"universeType": 3,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "9223372036854775807"
+				}
+			}
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d7a657ab9e6a5495f3ee"
+	},
+	"name": "gabarit",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842e66a57ab9e83054cd9c0"
+			},
+			"name": "capacite de stockage",
+			"question": "Quelle capacité de stockage souhaitez-vous pouvoir disposer ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d53957ab9e6a5495f3eb"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e6db57ab9e83054cd9c1"
+			},
+			"name": "poids",
+			"question": "Quel poids total (à vide) souhaitez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d42157ab9e6a5495f3ea"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e72e57ab9e83054cd9c2"
+			},
+			"name": "longueur",
+			"question": "Quelle longueur désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e80f57ab9e845efbe02c"
+			},
+			"name": "largeur",
+			"question": "Quelle largeur désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e83357ab9e845efbe02d"
+			},
+			"name": "hauteur",
+			"question": "Quelle hauteur désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d7b257ab9e6a5495f3ef"
+	},
+	"name": "tarification",
+	"criteria": []
+}
+{
+	"_id": {
+		"$oid": "5842d7be57ab9e6a5495f3f0"
+	},
+	"name": "personne",
+	"criteria": []
+}
