@@ -35,18 +35,28 @@ public class CategoryModel {
 	}
 
 	/**
-	 * Outputs a human readable representation of the model.
+	 * Returns the identifier of this category.
 	 *
-	 * @return    The representation of the model.
+	 * @return The identifier of this category
 	 */
 	public String getID() {
 		return _identifier;
 	}
 
+	/**
+	 * Returns all the criteria of the category.
+	 *
+	 * @return The criteria of the category
+	 */
 	public ArrayList<CriteriaModel> getCriterias() {
 		return _criterias;
 	}
-
+	
+	/**
+	 * Outputs a human readable representation of the model.
+	 *
+	 * @return    The representation of the model.
+	 */
 	public String toString() {
 		String str = _identifier + " - " + _name + "\n";
 		for (CriteriaModel c : _criterias) {

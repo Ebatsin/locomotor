@@ -3,6 +3,7 @@ package locomotor.components.models;
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
 import locomotor.components.types.CEnumVehicleType;
+import locomotor.components.types.CUniverseType;
 
 /**
  * Holds useful and reusable data (model) of a criteria.
@@ -90,6 +91,11 @@ public class CriteriaModel {
 		return _universe;
 	}
 
+	/**
+	 * Outputs a human readable representation of the model.
+	 *
+	 * @return    The representation of the model.
+	 */
 	public String toString() {
 		String line = _identifier + " - " + _name + " - " + "Universe(" + _universeType
 			+ ") - " + "Vehicle(" + _vehicleType + ") - " + "User(" + _userType + ")\n";
