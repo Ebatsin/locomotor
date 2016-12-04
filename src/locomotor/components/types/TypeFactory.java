@@ -7,36 +7,19 @@ import org.bson.Document;
 public class TypeFactory {
 
 	public CUniverseType getUniverse(CEnumUniverseType type, Object o) {
-		System.out.println("Type = " + type);
 		switch(type) {
 			case BOOLEAN: {
-					Boolean testvar = null;
-					return new CBoolean(testvar);
+					return getBoolean(o);
 				}
-			case INTEGER_INTERVAL: {
-					Document universe = new Document("universe", o);
-					return new CIntervalInteger(universe.getLong("min"), universe.getLong("max"));
-			}
+			case INTEGER_INTERVAL:
 			case FLOAT_INTERVAL: {
-					Document universe = new Document("universe", o);
-					return new CIntervalDouble(universe.getDouble("min"), universe.getDouble("max"));
-			}			
+					return getInterval(type, o);
+			}		
 			case STRING_INTERVAL: {
-				ArrayList<Document> values = (ArrayList<Document>)o;
-				TreeMap<Long, String> map = new TreeMap<Long, String>();
-				for (Document value : values) {
-					map.put(new Long(value.getInteger("id")), value.getString("name"));
-				}
-				return new CMappedStringList(map);
+				return getStringInterval(o);
 			}
 			case WEIGHTED_STRING_LIST: {
-				Document universe = new Document("universe", o);
-				ArrayList<Document> values = (ArrayList<Document>)universe.get("values");
-				TreeMap<Long, String> map = new TreeMap<Long, String>();
-				for (Document value : values) {
-					map.put(new Long(value.getInteger("value")), value.getString("name"));
-				}
-				return new CWeightedStringList(universe.getLong("min"), universe.getLong("max"), map);
+				return getWeightedStringList(o);
 			}
 			case TREE: {
 					// todo
@@ -51,5 +34,42 @@ public class TypeFactory {
 			}
 		}
 		return null;
+	}
+
+	private CBoolean getBoolean(Object o) {
+		Boolean testvar = null;
+		return new CBoolean(testvar);
+	}
+
+	private CInterval getInterval(CEnumUniverseType type, Object o) {
+		Document universe = (Document)(new Document("universe", o)).get("universe");
+		CInterval ci;
+		// integer
+		if(type == CEnumUniverseType.INTEGER_INTERVAL) {
+			ci = new CIntervalInteger(universe.getLong("min"), universe.getLong("max"));
+		// float
+		} else {
+			ci = new CIntervalDouble(universe.getDouble("min"), universe.getDouble("max"));
+		}
+		return ci;
+	}
+
+	private CMappedStringList getStringInterval(Object o) {
+		ArrayList<Document> values = (ArrayList<Document>)o;
+		TreeMap<Long, String> map = new TreeMap<Long, String>();
+		for (Document value : values) {
+			map.put(new Long(value.getInteger("id")), value.getString("name"));
+		}
+		return new CMappedStringList(map);
+	}
+
+	private CWeightedStringList getWeightedStringList(Object o) {
+		Document universe = (Document)(new Document("universe", o)).get("universe");
+		ArrayList<Document> values = (ArrayList<Document>)universe.get("values");
+		TreeMap<Long, String> map = new TreeMap<Long, String>();
+		for (Document value : values) {
+			map.put(new Long(value.getInteger("value")), value.getString("name"));
+		}
+		return new CWeightedStringList(universe.getLong("min"), universe.getLong("max"), map);
 	}
 }

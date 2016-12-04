@@ -60,7 +60,7 @@ public class CriteriaModel {
 	 */
 	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, CEnumUniverseType universeType, CEnumVehicleType vehicleType, CEnumUserType userType,
 CUniverseType universe) {
-		_identifier = _identifier;
+		_identifier = identifier;
 		_name = name;
 		_question = question;
 		_isComparable = isComparable;
