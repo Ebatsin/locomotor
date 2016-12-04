@@ -1,13 +1,17 @@
 package locomotor.core;
 
-import java.util.logging.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import locomotor.components.models.*;
-import locomotor.components.types.*;
+import locomotor.components.models.CategoryModel;
+import locomotor.components.models.Vehicle;
 
 public class Main {
 	
+	/**
+	 * One method to rule them all.
+	 */
 	public static void main(String[] args) {
 
 		// disable logging on mongodb driver
@@ -28,8 +32,9 @@ public class Main {
 
 			db.disconnect();
 
-		} catch (Exception e) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		}
+		catch(Exception exception) {
+			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
 		}
 		
 	}
