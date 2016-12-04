@@ -1,7 +1,7 @@
 package locomotor.components.models;
 
 /**
- * @todo describe the class.
+ * Represent the (fictionnal) universe (or world) where the vehcles come from.
  */
 public class FictionnalUniverse {
 

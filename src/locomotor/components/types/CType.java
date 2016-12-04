@@ -1,6 +1,9 @@
 package locomotor.components.types;
 
 /**
- * @todo Describe the class.
+ * Interface that represent all of our type.
+ * @see CEnumUniverseType.
+ * @see CEnumVehicleType.
+ * @see CEnumUserType.
  */
 public interface CType {}

@@ -102,7 +102,9 @@ public class DBH {
 	}
 
 	/**
-	 * @todo Describe the method.
+	 * Gets the categories model.
+	 *
+	 * @return     The categories model.
 	 */
 	public static ArrayList<CategoryModel> getCategoriesModel() {
 		ArrayList<CategoryModel> listCatMod = new ArrayList<CategoryModel>();
@@ -158,7 +160,11 @@ public class DBH {
 	}
 
 	/**
-	 * @todo Describe the method.
+	 * Gets the vehicles.
+	 *
+	 * @param      catModel  The categories model
+	 *
+	 * @return     The vehicles.
 	 */
 	public static ArrayList<Vehicle> getVehicles(ArrayList<CategoryModel> catModel) {
 	

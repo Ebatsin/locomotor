@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @todo describe the class.
+ * Represent a N-ary tree, that handle an Integer (32-bit) and a String.
+ * @see CEnumUniverseType.
+ * @see CEnumVehicleType.
+ * @see CEnumUserType.
  */
 public class CTree implements CUniverseType, CVehicleType, CUserType {
 	

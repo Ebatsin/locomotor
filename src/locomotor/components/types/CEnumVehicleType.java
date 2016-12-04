@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @todo Describe the class.
+ * Enum that list all the possible types of data of the "vehicle".
  */
 public enum CEnumVehicleType {
 	

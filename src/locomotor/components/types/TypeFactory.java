@@ -6,11 +6,17 @@ import java.util.TreeMap;
 import org.bson.Document;
 
 /**
- * @todo Describe the class.
+ * Front-end to create type objects.
  */
 public class TypeFactory {
+	
 	/**
-	 * @todo Describe the method.
+	 * Gets the universe.
+	 *
+	 * @param      type    The type of universe to create
+	 * @param      object  The object containing the data of the universe to create
+	 *
+	 * @return     The universe.
 	 */
 	public CUniverseType getUniverse(CEnumUniverseType type, Object object) {
 		switch(type) {
@@ -58,7 +64,13 @@ public class TypeFactory {
 	}
 
 	/**
-	 * @todo Describe the method.
+	 * Gets the vehicle.
+	 *
+	 * @param      type      The type of vehicle to create
+	 * @param      object    The object containing the data of the vehicle to create
+	 * @param      universe  The universe containing the data of the universe
+	 *
+	 * @return     The vehicle.
 	 */
 	public CVehicleType getVehicle(CEnumVehicleType type, Object object, CUniverseType universe) {
 		switch(type) {
@@ -109,6 +121,13 @@ public class TypeFactory {
 		return null;
 	}
 
+	/**
+	 * Gets the tree.
+	 *
+	 * @param      o     The object containg the raw data
+	 *
+	 * @return     The tree.
+	 */
 	private CTree getTree(Object o) {
 		Document universe = (Document)(new Document("universe", o)).get("universe");
 		CTree root = new CTree(universe.getInteger("id"), universe.getString("value"));
@@ -121,6 +140,14 @@ public class TypeFactory {
 		return root;
 	}
 
+	/**
+	 * Gets the subtree.
+	 *
+	 * @param      o     The object containg the raw data of the subtree
+	 * @param      tree  The root tree containg the data of the tree
+	 *
+	 * @return     The subtree.
+	 */
 	private CTree getTree(Object o, CTree tree) {
 		Document value = (Document)(new Document("value", o)).get("value");
 		

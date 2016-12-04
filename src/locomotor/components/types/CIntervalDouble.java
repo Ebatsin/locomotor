@@ -1,7 +1,10 @@
 package locomotor.components.types;
 
 /**
- * @todo describe the class.
+ * A interval between two Double.
+ * @see CEnumUniverseType.
+ * @see CEnumVehicleType.
+ * @see CEnumUserType.
  */
 public class CIntervalDouble extends CInterval {
 

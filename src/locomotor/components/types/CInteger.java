@@ -1,7 +1,8 @@
 package locomotor.components.types;
 
 /**
- * @todo describe the class.
+ * Encapsulate a Long value.
+ * @see CEnumVehicleType.
  */
 public class CInteger implements CVehicleType {
 

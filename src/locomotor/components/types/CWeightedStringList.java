@@ -3,7 +3,8 @@ package locomotor.components.types;
 import java.util.TreeMap;
 
 /**
- * @todo Describe the class.
+ * Encapsulate a map between an Integer (32-bit) and the String associated.
+ * The Integer represents the weighted.
  */
 public class CWeightedStringList extends CStringList {
 

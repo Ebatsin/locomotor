@@ -1,7 +1,8 @@
 package locomotor.components.types;
 
 /**
- * @todo describe the class.
+ * Encapsulate a Double value.
+ * @see CEnumVehicleType.
  */
 public class CFloat implements CVehicleType {
 

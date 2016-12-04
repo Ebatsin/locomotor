@@ -3,7 +3,8 @@ package locomotor.components.types;
 import java.util.ArrayList;
 
 /**
- * @todo describe the class.
+ * Encapsulate a array of integer (32-bit) values.
+ * @see CEnumVehicleType.
  */
 public class CIntegerList implements CVehicleType {
 

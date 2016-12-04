@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * @todo Describe the class.
+ * Encapsulate a map between an Integer (32-bit) and the String associated.
  */
 public abstract class CStringList implements CUniverseType, CVehicleType, CUserType {
 
