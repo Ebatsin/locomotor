@@ -32,7 +32,7 @@ public enum CEnumUserType {
 	private static Map<Integer, CEnumUserType> _map = new HashMap<Integer, CEnumUserType>();
 
 	static {
-		for (CEnumUserType univEnum : CEnumUserType.values()) {
+		for(CEnumUserType univEnum : CEnumUserType.values()) {
 			_map.put(univEnum._id, univEnum);
 		}
 	}

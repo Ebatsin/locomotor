@@ -3,7 +3,7 @@ package locomotor.components.types;
 import java.util.TreeMap;
 
 /**
- * @todo
+ * @todo Describe the class.
  */
 public class CMappedStringList extends CStringList {
 

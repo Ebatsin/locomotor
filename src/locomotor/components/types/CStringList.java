@@ -3,17 +3,20 @@ package locomotor.components.types;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * @todo Describe the class.
+ */
 public abstract class CStringList implements CUniverseType, CVehicleType, CUserType {
 
 	/**
-	 * The list of string (unique index)
+	 * The list of string (unique index).
 	 */
 	private TreeMap<Integer, String> _values;
 
 	/**
-	 * Constructs the list of string
+	 * Constructs the list of string.
 	 *
-	 * @param      value  The value
+	 * @param      values  The values to add
 	 */
 	public CStringList(TreeMap<Integer, String> values) {
 		_values = values;
@@ -25,15 +28,15 @@ public abstract class CStringList implements CUniverseType, CVehicleType, CUserT
 	 * @return     String representation of the object.
 	 */
 	public String toString() {
-		String s = "";
+		String str = "";
 		for(Map.Entry<Integer, String> value : _values.entrySet()) {
 			
 			Integer key = value.getKey();
 			String val = value.getValue();
 
-			s += key + " => " + val + "\n";
+			str += key + " => " + val + "\n";
 		}
-		return s;
+		return str;
 	}
 
 	public TreeMap<Integer, String> getMap() {

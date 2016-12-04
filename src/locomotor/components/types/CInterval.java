@@ -18,7 +18,7 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
 	 * @todo handle error better
 	 */
 	public CInterval(T min, T max) {
-		if (min.compareTo(max) <= 0) {
+		if(min.compareTo(max) <= 0) {
 			_min = min;
 			_max = max;
 		}
@@ -56,10 +56,10 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
 	 *         false otherwise
 	 */
 	public final boolean intersects(CInterval that) {
-		if (_max.compareTo(that._min) < 0) {
+		if(_max.compareTo(that._min) < 0) {
 			return false;
 		}
-		if (that._max.compareTo(_min) < 0) {
+		if(that._max.compareTo(_min) < 0) {
 			return false;
 		}
 		return true;

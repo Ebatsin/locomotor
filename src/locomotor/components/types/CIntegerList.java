@@ -28,7 +28,7 @@ public class CIntegerList implements CVehicleType {
 	 */
 	public String toString() {
 		String str = "";
-		for (Integer l : _value) {
+		for(Integer l : _value) {
 			str += " " + l;
 		}
 		return str;

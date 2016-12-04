@@ -1,6 +1,6 @@
 package locomotor.components.types;
 
 /**
- * @todo
+ * @todo Describe the class.
  */
 public interface CUserType extends CType {}
