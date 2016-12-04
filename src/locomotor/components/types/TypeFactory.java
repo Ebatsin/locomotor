@@ -23,7 +23,7 @@ public class TypeFactory {
 			}
 			case TREE: {
 					// todo
-					return new CTree("test");
+					return getTree(o);
 			}
 			default: {
 				// error
@@ -71,5 +71,17 @@ public class TypeFactory {
 			map.put(new Long(value.getInteger("value")), value.getString("name"));
 		}
 		return new CWeightedStringList(universe.getLong("min"), universe.getLong("max"), map);
+	}
+
+	private CTree<Long,String> getTree(Object o) {
+		Document universe = (Document)(new Document("universe", o)).get("universe");
+		CTree root = new CTree(new Long(universe.getInteger("id")), universe.getString("value"));
+		ArrayList<Object> children = (ArrayList<Object>)universe.get("children");
+		if (children != null) {
+			for (Object child : children) {
+				root.addChild(getTree(child));
+			}
+		}
+		return root;
 	}
 }
