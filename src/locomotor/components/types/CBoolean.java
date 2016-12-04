@@ -19,4 +19,13 @@ public class CBoolean implements CUniverseType, CVehicleType, CUserType {
 		_value = value;
 	}
 
+	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
+	public String toString() {
+		return "(" + _value + ")";
+	}
+
 }

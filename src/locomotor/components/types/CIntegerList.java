@@ -21,4 +21,17 @@ public class CIntegerList implements CVehicleType {
 		_value = value;
 	}
 
+	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
+	public String toString() {
+		String s = "";
+		for (Long l : _value) {
+			s += " " + l;
+		}
+		return s;
+	}
+
 }

@@ -71,7 +71,9 @@ CUniverseType universe) {
 	}
 
 	public String toString() {
-		return _identifier + " - " + _name + " - " + _universeType + " - " + _vehicleType + " - " + _userType + "\n";
+		String line = _identifier + " - " + _name + " - " + "Universe(" + _universeType + ") - " + "Vehicle(" +_vehicleType + ") - " + "User(" + _userType + ")\n";
+		line += _universe.toString() + "\n";
+		return line;
 	}
 	
 }

@@ -73,7 +73,7 @@ public class TypeFactory {
 		return new CWeightedStringList(universe.getLong("min"), universe.getLong("max"), map);
 	}
 
-	private CTree<Long,String> getTree(Object o) {
+	private CTree getTree(Object o) {
 		Document universe = (Document)(new Document("universe", o)).get("universe");
 		CTree root = new CTree(new Long(universe.getInteger("id")), universe.getString("value"));
 		ArrayList<Object> children = (ArrayList<Object>)universe.get("children");

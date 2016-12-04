@@ -23,10 +23,6 @@ public class Main {
 			db.connectToDatabase("locomotor");
 
 			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
-			
-			for (CategoryModel c : catModel) {
-				System.out.println(c);
-			}
 
 			db.disconnect();
 

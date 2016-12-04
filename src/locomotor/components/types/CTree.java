@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * @todo describe the class
  */
-public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserType {
+public class CTree implements CUniverseType, CVehicleType, CUserType {
 	
     /**
      * The identifier
@@ -19,7 +19,7 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
     /**
      * The list of children
      */
-    private List<CTree<Long,String>> _children;
+    private List<CTree> _children;
 
     /**
      * Constructs the CTree
@@ -27,7 +27,7 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
      * @param      data  The string
      */
     public CTree(Long id, String data) {
-    	_children = new ArrayList<CTree<Long,String>>();
+    	_children = new ArrayList<CTree>();
         _identifier = id;
         _data = data;
     }
@@ -64,7 +64,7 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
      * 
      * @return     The children.
      */
-    public List<CTree<Long,String>> getChildren() {
+    public List<CTree> getChildren() {
         return _children;
     }
 
@@ -75,7 +75,7 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
      * @param      data        The data
      */
     public void addChild(Long identifier, String data) {
-        CTree<Long,String> child = new CTree<Long,String>(identifier, data);
+        CTree child = new CTree(identifier, data);
         _children.add(child);
     }
 
@@ -84,7 +84,7 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
      *
      * @param      child  The child
      */
-    public void addChild(CTree<Long,String> child) {
+    public void addChild(CTree child) {
         _children.add(child);
     }
 
@@ -104,7 +104,7 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
      */
     public int leafCount() {
     	int count = 0;
-    	for (CTree<Long,String> child : _children) {
+    	for (CTree child : _children) {
     		if(child.isLeaf()) {
     			count++;
     		} else {
@@ -112,5 +112,24 @@ public class CTree<Long,String> implements CUniverseType, CVehicleType, CUserTyp
     		}
     	}
     	return count;
+    }
+
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return     String representation of the object.
+     */
+    public String toString() {
+        String s = "";
+        s += "(" + _identifier + "," + _data;
+        if(!isLeaf()) {
+            s += "\n";
+            for (CTree child : _children) {
+                s += child.toString();
+            }
+            s += "\n";
+        }
+        s += ")";
+        return s;
     }
 }
