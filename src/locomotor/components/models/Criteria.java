@@ -1,14 +1,14 @@
 package locomotor.components.models;
 
-import locomotor.components.types.CVehicleType;
+import locomotor.components.types.CComparableType;
 
-public class Criteria {
+public abstract class Criteria {
 
 	private String _idCritModel;
 
-	private CVehicleType _value;
+	private CComparableType _value;
 
-	public Criteria(String id, CVehicleType value) {
+	public Criteria(String id, CComparableType value) {
 		_idCritModel = id;
 		_value = value;
 	}

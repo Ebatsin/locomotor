@@ -2,16 +2,17 @@ package locomotor.components.models;
 
 import java.util.ArrayList;
 
-public class Category {
+public abstract class Category {
+	
 	private String _idCatModel;
-	private ArrayList<Criteria> _criterias;
+	private ArrayList<? extends Criteria> _criterias;
 
-	public Category(String id, ArrayList<Criteria> criterias) {
+	public Category(String id, ArrayList<? extends Criteria> criterias) {
 		_idCatModel = id;
 		_criterias = criterias;
 	}
 	
 	public String toString() {
-		return "Category: " + _idCatModel;
+		return _idCatModel;
 	}
 }

@@ -1,7 +1,7 @@
 package locomotor.components.types;
 
 /**
- * Interface that represent all of our universe type.
+ * Interface that represent all of our user type.
  * @see CEnumUserType.
  */
-public interface CUserType extends CType {}
+public interface CUserType extends CComparableType {}

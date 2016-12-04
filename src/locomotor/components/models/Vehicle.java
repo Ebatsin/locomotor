@@ -6,9 +6,9 @@ public class Vehicle {
 
 	private String _identifier;
 
-	private ArrayList<Category> _categories;
+	private ArrayList<VehicleCategory> _categories;
 
-	public Vehicle(String id, ArrayList<Category> categories) {
+	public Vehicle(String id, ArrayList<VehicleCategory> categories) {
 		_identifier = id;
 		_categories = categories;
 	}

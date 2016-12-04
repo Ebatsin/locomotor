@@ -9,11 +9,11 @@ import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import locomotor.components.models.Category;
 import locomotor.components.models.CategoryModel;
-import locomotor.components.models.Criteria;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Vehicle;
+import locomotor.components.models.VehicleCategory;
+import locomotor.components.models.VehicleCriteria;
 
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
@@ -181,7 +181,7 @@ public class DBH {
 				String id = doc.getObjectId("_id").toString();
 				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
 
-				ArrayList<Category> categories = new ArrayList<Category>();
+				ArrayList<VehicleCategory> categories = new ArrayList<VehicleCategory>();
 
 				System.out.println("Retrieving the categories of " + doc.getString("name"));
 				
@@ -208,7 +208,7 @@ public class DBH {
 						System.exit(0);
 					}
 
-					ArrayList<Criteria> criterias = new ArrayList<Criteria>();
+					ArrayList<VehicleCriteria> criterias = new ArrayList<VehicleCriteria>();
 					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
 					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
 
@@ -237,7 +237,7 @@ public class DBH {
 						CVehicleType value = typeFactory.getVehicle(currentCritMod.getVehicleType(),
 							currentCrit.get("value"), currentCritMod.getUniverse());
 
-						Criteria criteria = new Criteria(
+						VehicleCriteria criteria = new VehicleCriteria(
 							identifierCrit,
 							value
 						);
@@ -248,7 +248,7 @@ public class DBH {
 
 					}
 
-					Category category = new Category(
+					VehicleCategory category = new VehicleCategory(
 						identifierCat, criterias
 					);
 
