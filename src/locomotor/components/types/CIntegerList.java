@@ -3,17 +3,17 @@ package locomotor.components.types;
 import java.util.ArrayList;
 
 /**
- * @todo describe the class
+ * @todo describe the class.
  */
 public class CIntegerList implements CVehicleType {
 
 	/**
-	 * The list of integer value (32-bit)
+	 * The list of integer value (32-bit).
 	 */
 	private ArrayList<Integer> _value;
 
 	/**
-	 * Constructs the CIntegerList object
+	 * Constructs the CIntegerList object.
 	 *
 	 * @param      value  The value
 	 */
@@ -27,11 +27,11 @@ public class CIntegerList implements CVehicleType {
 	 * @return     String representation of the object.
 	 */
 	public String toString() {
-		String s = "";
+		String str = "";
 		for (Integer l : _value) {
-			s += " " + l;
+			str += " " + l;
 		}
-		return s;
+		return str;
 	}
 
 }

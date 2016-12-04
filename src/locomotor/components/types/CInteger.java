@@ -1,17 +1,17 @@
 package locomotor.components.types;
 
 /**
- * @todo describe the class
+ * @todo describe the class.
  */
 public class CInteger implements CVehicleType {
 
 	/**
-	 * The integer value (64-bit)
+	 * The integer value (64-bit).
 	 */
 	private Long _value;
 
 	/**
-	 * Constructs the CFloat object
+	 * Constructs the CFloat object.
 	 *
 	 * @param      value  The value
 	 */
