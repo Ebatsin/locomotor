@@ -105,6 +105,9 @@
 			}
 		},
 		{
+			"_id": {
+				"$oid": "58435bb857ab9e1127b9f105"
+			},
 			"name": "distance nominale",
 			"question": "Quelle distance souhaitez-vous pouvoir parcourir ?",
 			"isComparable": true,
