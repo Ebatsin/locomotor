@@ -8,16 +8,16 @@ import java.util.ArrayList;
 public class CIntegerList implements CVehicleType {
 
 	/**
-	 * The list of integer value (64-bit)
+	 * The list of integer value (32-bit)
 	 */
-	private ArrayList<Long> _value;
+	private ArrayList<Integer> _value;
 
 	/**
 	 * Constructs the CIntegerList object
 	 *
 	 * @param      value  The value
 	 */
-	public CIntegerList(ArrayList<Long> value) {
+	public CIntegerList(ArrayList<Integer> value) {
 		_value = value;
 	}
 
@@ -28,7 +28,7 @@ public class CIntegerList implements CVehicleType {
 	 */
 	public String toString() {
 		String s = "";
-		for (Long l : _value) {
+		for (Integer l : _value) {
 			s += " " + l;
 		}
 		return s;

@@ -11,7 +11,7 @@ public class CTree implements CUniverseType, CVehicleType, CUserType {
     /**
      * The identifier
      */
-    private Long _identifier;
+    private Integer _identifier;
 	/**
 	 * The string
 	 */
@@ -19,14 +19,14 @@ public class CTree implements CUniverseType, CVehicleType, CUserType {
     /**
      * The list of children
      */
-    private List<CTree> _children;
+    private ArrayList<CTree> _children;
 
     /**
      * Constructs the CTree
      *
      * @param      data  The string
      */
-    public CTree(Long id, String data) {
+    public CTree(Integer id, String data) {
     	_children = new ArrayList<CTree>();
         _identifier = id;
         _data = data;
@@ -37,7 +37,7 @@ public class CTree implements CUniverseType, CVehicleType, CUserType {
      *
      * @return     The identifier.
      */
-    public Long getID() {
+    public Integer getID() {
         return _identifier;
     }
 
@@ -64,7 +64,7 @@ public class CTree implements CUniverseType, CVehicleType, CUserType {
      * 
      * @return     The children.
      */
-    public List<CTree> getChildren() {
+    public ArrayList<CTree> getChildren() {
         return _children;
     }
 
@@ -74,7 +74,7 @@ public class CTree implements CUniverseType, CVehicleType, CUserType {
      * @param      identifier  The identifier
      * @param      data        The data
      */
-    public void addChild(Long identifier, String data) {
+    public void addChild(Integer identifier, String data) {
         CTree child = new CTree(identifier, data);
         _children.add(child);
     }
