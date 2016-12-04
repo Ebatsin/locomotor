@@ -31,7 +31,9 @@
 					}
 				},
 				{
-					"criterionModel": null,
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
 					"value": {
 						"min": {
 							"$numberLong": "10000"
@@ -287,7 +289,9 @@
 					}
 				},
 				{
-					"criterionModel": null,
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
 					"value": {
 						"min": {
 							"$numberLong": "50000"
