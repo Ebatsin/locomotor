@@ -7,8 +7,13 @@ import java.util.TreeMap;
  */
 public class CWeightedStringList extends CStringList {
 
-	public CWeightedStringList(TreeMap<Long, String> values) {
+	private Long _min;
+	private Long _max;
+
+	public CWeightedStringList(Long min, Long max, TreeMap<Long, String> values) {
 		super(values);
+		_min = min;
+		_max = max;
 	}
 	
 }
