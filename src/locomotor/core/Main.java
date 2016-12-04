@@ -1,6 +1,9 @@
 package locomotor.core;
 
 import java.util.logging.*;
+import java.util.ArrayList;
+
+import locomotor.components.models.*;
 import locomotor.components.types.*;
 
 public class Main {
@@ -16,9 +19,15 @@ public class Main {
 
 			DBH db = DBH.getInstance();
 			db.connect("localhost", 27017);
-			db.disconnect();
-			db.connect("localhost", 27017);
-			db.connect();
+			
+			db.connectToDatabase("locomotor");
+
+			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			
+			for (CategoryModel c : catModel) {
+				System.out.println(c);
+			}
+
 			db.disconnect();
 
 		} catch (Exception e) {
