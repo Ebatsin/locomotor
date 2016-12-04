@@ -10,7 +10,7 @@ public class CriteriaModel {
 	/**
 	 * The identifier.
 	 */
-	private String _id;
+	private String _identifier;
 	/**
 	 * The name of the criteria.
 	 */
@@ -58,9 +58,9 @@ public class CriteriaModel {
 	 * @param      userType      The user type
 	 * @param      universe      The universe
 	 */
-	public CriteriaModel(String id, String name, String question, Boolean isComparable, CEnumUniverseType universeType, CEnumVehicleType vehicleType, CEnumUserType userType,
+	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, CEnumUniverseType universeType, CEnumVehicleType vehicleType, CEnumUserType userType,
 CUniverseType universe) {
-		_id = id;
+		_identifier = _identifier;
 		_name = name;
 		_question = question;
 		_isComparable = isComparable;
@@ -68,6 +68,10 @@ CUniverseType universe) {
 		_vehicleType = vehicleType;
 		_userType = userType;
 		_universe = universe;
+	}
+
+	public String toString() {
+		return _identifier + " - " + _name + " - " + _universeType + " - " + _vehicleType + " - " + _userType + "\n";
 	}
 	
 }

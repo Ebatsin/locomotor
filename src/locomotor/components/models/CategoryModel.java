@@ -35,7 +35,11 @@ public class CategoryModel {
 	}
 
 	public String toString() {
-		return _identifier + " - " + _name;
+		String str = _identifier + " - " + _name;
+		for (CriteriaModel c : _criterias) {
+			str += c.toString();
+		}
+		return str;
 	}
 
 }
