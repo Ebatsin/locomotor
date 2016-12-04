@@ -70,6 +70,18 @@ CUniverseType universe) {
 		_universe = universe;
 	}
 
+	public String getID() {
+		return _identifier;
+	}
+
+	public CEnumVehicleType getVehicleType() {
+		return _vehicleType;
+	}
+
+	public CUniverseType getUniverse() {
+		return _universe;
+	}
+
 	public String toString() {
 		String line = _identifier + " - " + _name + " - " + "Universe(" + _universeType + ") - " + "Vehicle(" +_vehicleType + ") - " + "User(" + _userType + ")\n";
 		line += _universe.toString() + "\n";

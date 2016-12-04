@@ -34,6 +34,14 @@ public class CategoryModel {
 		_criterias = criterias;
 	}
 
+	public String getID() {
+		return _identifier;
+	}
+
+	public ArrayList<CriteriaModel> getCriterias() {
+		return _criterias;
+	}
+	
 	public String toString() {
 		String str = _identifier + " - " + _name + "\n";
 		for (CriteriaModel c : _criterias) {
@@ -41,5 +49,6 @@ public class CategoryModel {
 		}
 		return str;
 	}
+
 
 }

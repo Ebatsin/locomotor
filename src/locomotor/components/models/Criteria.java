@@ -13,4 +13,8 @@ public class Criteria {
 		_value = value;
 	}
 
+	public String toString() {
+		return _value.toString() + "\n";
+	}
+
 }
