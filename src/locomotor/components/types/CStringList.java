@@ -8,14 +8,14 @@ public abstract class CStringList implements CUniverseType, CVehicleType, CUserT
 	/**
 	 * The list of string (unique index)
 	 */
-	private TreeMap<Long, String> _values;
+	private TreeMap<Integer, String> _values;
 
 	/**
 	 * Constructs the list of string
 	 *
 	 * @param      value  The value
 	 */
-	public CStringList(TreeMap<Long, String> values) {
+	public CStringList(TreeMap<Integer, String> values) {
 		_values = values;
 	}
 
@@ -26,14 +26,18 @@ public abstract class CStringList implements CUniverseType, CVehicleType, CUserT
 	 */
 	public String toString() {
 		String s = "";
-		for(Map.Entry<Long, String> value : _values.entrySet()) {
+		for(Map.Entry<Integer, String> value : _values.entrySet()) {
 			
-			Long key = value.getKey();
+			Integer key = value.getKey();
 			String val = value.getValue();
 
 			s += key + " => " + val + "\n";
 		}
 		return s;
+	}
+
+	public TreeMap<Integer, String> getMap() {
+		return _values;
 	}
 
 }

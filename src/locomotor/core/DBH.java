@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.FindIterable;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import locomotor.components.models.*;
 import locomotor.components.types.*;
@@ -106,12 +107,11 @@ public class DBH {
    				ArrayList<CriteriaModel> criteriasMod = new ArrayList<CriteriaModel>();
 
    				System.out.println("Retrieving the criterias of " + name);
+		   		
+		   		TypeFactory typeFactory = new TypeFactory();
 
 		   		for (Document crit : critIt) {
 
-		   			TypeFactory typeFactory = new TypeFactory();
-
-		   			CEnumUniverseType.valueOf(crit.getInteger("universeType"));
 		   			CUniverseType universe = typeFactory.getUniverse(CEnumUniverseType.valueOf(crit.getInteger("universeType")), crit.get("universe"));
 
 		   			CriteriaModel criteria = new CriteriaModel(
@@ -139,6 +139,102 @@ public class DBH {
    		});
 
    		return listCatMod;
+   	}
+
+   	public static ArrayList<Vehicle> getVehicles(ArrayList<CategoryModel> catModel) {
+   	
+   		ArrayList<Vehicle> listVehicles = new ArrayList<Vehicle>();
+   		
+   		FindIterable<Document> vehicles = md.getCollection("items").find();
+   		
+   		System.out.println("Retrieving the vehicles");
+
+   		vehicles.forEach(new Block<Document>() {
+   			@Override
+			public void apply(final Document doc) {
+
+				String id = doc.getObjectId("_id").toString();
+				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
+
+				ArrayList<Category> categories = new ArrayList<Category>();
+
+   				System.out.println("Retrieving the categories of " + doc.getString("name"));
+		   		
+		   		TypeFactory typeFactory = new TypeFactory();
+
+		   		// iterator to iterate simultaneously
+		   		ListIterator<CategoryModel> itCatMod = catModel.listIterator();
+				ListIterator<Document> itCat = catIt.listIterator();
+
+				while (itCatMod.hasNext() && itCat.hasNext()) {
+
+					CategoryModel currentCatMod = itCatMod.next();
+					Document currentCat = itCat.next();
+
+					String identifierCat = currentCat.getObjectId("categoryModel").toString();
+					System.out.println("Category " + identifierCat);
+
+					// check category model
+					if(!currentCatMod.getID().equals(identifierCat)) {
+						// error
+				        System.err.println("Error: Category model does not match current category");
+				        System.err.println(currentCat);
+				        System.err.println(currentCatMod);
+				   		System.exit(0);
+					}
+
+					ArrayList<Criteria> criterias = new ArrayList<Criteria>();
+					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
+					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
+
+					// iterator to iterate simultaneously
+		   			ListIterator<CriteriaModel> itCriMod = critModIt.listIterator();
+					ListIterator<Document> itCrit = critIt.listIterator();
+
+					while (itCriMod.hasNext() && itCrit.hasNext()) {
+
+						CriteriaModel currentCritMod = itCriMod.next();
+						Document currentCrit = itCrit.next();
+
+						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
+						System.out.println("Criterion " + identifierCrit);
+
+						// check criteria model
+						if(!currentCritMod.getID().equals(identifierCrit)) {
+							// error
+					        System.err.println("Error: Criteria model does not match current criteria");
+					        System.err.println(currentCrit);
+					        System.err.println(currentCritMod);
+					   		System.exit(0);
+						}
+
+						// creation criteria
+			   			CVehicleType value = typeFactory.getVehicle(currentCritMod.getVehicleType(), currentCrit.get("value"), currentCritMod.getUniverse());
+
+			   			Criteria criteria = new Criteria(
+				   			identifierCrit,
+				   			value
+			 			);
+
+			   			criterias.add(criteria);
+
+			   			System.out.println(criteria);
+
+					}
+
+					Category category = new Category(
+			   			identifierCat, criterias
+		 			);
+
+		 			categories.add(category);
+
+				}
+
+			}
+		});
+
+		return listVehicles;
+
    	}
 
 }

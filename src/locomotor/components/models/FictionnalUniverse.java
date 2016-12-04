@@ -8,7 +8,7 @@ public class FictionnalUniverse {
 	/**
 	 * The unique identifier.
 	 */
-	private int _identifier;
+	private String _identifier;
 
 	/**
 	 * The name of the (fictionnal) universe.
@@ -26,7 +26,7 @@ public class FictionnalUniverse {
 	 * @param      name       The name
 	 * @param      imageName  The image name
 	 */
-	public FictionnalUniverse(int id, String name, String imageName) {
+	public FictionnalUniverse(String id, String name, String imageName) {
 		_identifier = id;
 		_name = name;
 		_imageName = imageName;

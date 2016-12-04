@@ -10,4 +10,8 @@ public class Category {
 		_idCatModel = id;
 		_criterias = criterias;
 	}
+	
+	public String toString() {
+		return "Category: " + _idCatModel;
+	}
 }

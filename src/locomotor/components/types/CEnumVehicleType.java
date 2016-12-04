@@ -18,12 +18,10 @@ public enum CEnumVehicleType {
     INTEGER_INTERVAL(3),
     // float interval
     FLOAT_INTERVAL(4),
-    // string interval
-    STRING_INTERVAL(5),
-    // tree
-    TREE(7),
     // integer list
-    INTEGER_LIST(8);
+    INTEGER_LIST(8),
+    // integer list
+    INTEGER_TREE(9);
 
     /**
      * The identifier.

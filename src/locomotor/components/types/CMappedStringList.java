@@ -7,7 +7,7 @@ import java.util.TreeMap;
  */
 public class CMappedStringList extends CStringList {
 
-	public CMappedStringList(TreeMap<Long, String> values) {
+	public CMappedStringList(TreeMap<Integer, String> values) {
 		super(values);
 	}
 	

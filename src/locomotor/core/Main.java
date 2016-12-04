@@ -24,6 +24,8 @@ public class Main {
 
 			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
+			ArrayList<Vehicle> vehicles = db.getVehicles(catModel);
+
 			db.disconnect();
 
 		} catch (Exception e) {
