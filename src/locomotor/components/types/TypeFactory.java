@@ -7,41 +7,41 @@ import org.bson.Document;
 public class TypeFactory {
 
 	public CUniverseType getUniverse(CEnumUniverseType type, Object o) {
+		System.out.println("Type = " + type);
 		switch(type) {
 			case BOOLEAN: {
 					Boolean testvar = null;
-					return CBoolean(testvar);
-			} break;
+					return new CBoolean(testvar);
+				}
 			case INTEGER_INTERVAL: {
 					Document universe = new Document("universe", o);
-					return CIntervalInteger(universe.getLong("min"), universe.getLong("max"));
-			} break;
+					return new CIntervalInteger(universe.getLong("min"), universe.getLong("max"));
+			}
 			case FLOAT_INTERVAL: {
 					Document universe = new Document("universe", o);
-					return CIntervalFloat(universe.getDouble("min"), universe.getDouble("max"));
-			} break;			
+					return new CIntervalDouble(universe.getDouble("min"), universe.getDouble("max"));
+			}			
 			case STRING_INTERVAL: {
-				ArrayList<Document> universe = (ArrayList<Document>)new Document("universe", o);
+				ArrayList<Document> values = (ArrayList<Document>)o;
 				TreeMap<Long, String> map = new TreeMap<Long, String>();
-				ArrayList<Document> universeString = (ArrayList<Document>)universe;
-				for (Document crit : universe) {
-					map.put(ucrit.getLong("id");, crit.getString("name"););
+				for (Document value : values) {
+					map.put(new Long(value.getInteger("id")), value.getString("name"));
 				}
-				return CMappedStringList(map);
-			} break;
+				return new CMappedStringList(map);
+			}
 			case WEIGHTED_STRING_LIST: {
-				ArrayList<Document> universe = (ArrayList<Document>)new Document("universe", o);
+				Document universe = new Document("universe", o);
+				ArrayList<Document> values = (ArrayList<Document>)universe.get("values");
 				TreeMap<Long, String> map = new TreeMap<Long, String>();
-				ArrayList<Document> universeString = (ArrayList<Document>)universe;
-				for (Document crit : universe) {
-					map.put(crit.getLong("value"), crit.getString("name"));
+				for (Document value : values) {
+					map.put(new Long(value.getInteger("value")), value.getString("name"));
 				}
-				return CWeightedStringList(crit.getLong("min"), crit.getLong("max"), map);
-			} break;
+				return new CWeightedStringList(universe.getLong("min"), universe.getLong("max"), map);
+			}
 			case TREE: {
 					// todo
-					return CTree("test");
-			} break;
+					return new CTree("test");
+			}
 			default: {
 				// error
 		        System.err.println("Error: Illegal universe type");
@@ -50,5 +50,6 @@ public class TypeFactory {
 		   		System.exit(0);
 			}
 		}
+		return null;
 	}
 }

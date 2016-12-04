@@ -112,6 +112,8 @@ public class DBH {
 		   			System.out.println("Retrieving the values of " + crit.getString("name"));
 
 		   			TypeFactory typeFactory = new TypeFactory();
+
+		   			CEnumUniverseType.valueOf(crit.getInteger("universeType"));
 		   			CUniverseType universe = typeFactory.getUniverse(CEnumUniverseType.valueOf(crit.getInteger("universeType")), crit.get("universe"));
 
 		   			CriteriaModel criteria = new CriteriaModel(
