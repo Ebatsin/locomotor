@@ -1,6 +1,8 @@
 package locomotor.components.models;
 
-import locomotor.components.types.*;
+import locomotor.components.types.CEnumUniverseType;
+import locomotor.components.types.CEnumUserType;
+import locomotor.components.types.CEnumVehicleType;
 
 /**
  * Holds useful and reusable data (model) of a criteria.
@@ -22,34 +24,34 @@ public class CriteriaModel {
 	private String _question;
 	
 	/**
-	 * Can the criteria be use for computing?
+	 * Wether the criteria can be used for computing or not.
 	 */
 	private Boolean _isComparable;
 
 	/**
-	 * @todo
+	 * The type of the structure that represents the universe.
 	 */
 	private CEnumUniverseType _universeType;
 
 	/**
-	 * @@todo
+	 * The type of the structure that represents the vehicle's criteria value.
 	 */
 	private CEnumVehicleType _vehicleType;
 
 	/**
-	 * @todo
+	 * The type of the structure that represents what the user will have to submit.
 	 */
 	private CEnumUserType _userType;
 
 	/**
-	 * @todo
+	 * The universe of the values accepted for this criteria.
 	 */
 	private CUniverseType _universe;
 
 	/**
-	 * Constructs the criteria
+	 * Constructs the criteria.
 	 *
-	 * @param      id            The identifier
+	 * @param      identifier    The identifier
 	 * @param      name          The name
 	 * @param      question      The question
 	 * @param      isComparable  Indicates if comparable
@@ -58,8 +60,9 @@ public class CriteriaModel {
 	 * @param      userType      The user type
 	 * @param      universe      The universe
 	 */
-	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, CEnumUniverseType universeType, CEnumVehicleType vehicleType, CEnumUserType userType,
-CUniverseType universe) {
+	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, 
+			CEnumUniverseType universeType, CEnumVehicleType vehicleType, 
+			CEnumUserType userType, CUniverseType universe) {
 		_identifier = identifier;
 		_name = name;
 		_question = question;
@@ -70,8 +73,14 @@ CUniverseType universe) {
 		_universe = universe;
 	}
 
+	/**
+	 * Outputs a human readable representation of the model.
+	 *
+	 * @return    The representation of the model.
+	 */
 	public String toString() {
-		String line = _identifier + " - " + _name + " - " + "Universe(" + _universeType + ") - " + "Vehicle(" +_vehicleType + ") - " + "User(" + _userType + ")\n";
+		String line = _identifier + " - " + _name + " - " + "Universe(" + _universeType
+			+ ") - " + "Vehicle(" + _vehicleType + ") - " + "User(" + _userType + ")\n";
 		line += _universe.toString() + "\n";
 		return line;
 	}

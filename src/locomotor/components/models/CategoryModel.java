@@ -18,12 +18,12 @@ public class CategoryModel {
 	private String _name;
 
 	/**
-	 * The criterias
+	 * The criterias.
 	 */
 	private ArrayList<CriteriaModel> _criterias;
 
 	/**
-	 * Constructs the category of criteria(s)
+	 * Constructs the category of criteria(s).
 	 *
 	 * @param      id    The identifier
 	 * @param      name  The name of the category
@@ -34,6 +34,11 @@ public class CategoryModel {
 		_criterias = criterias;
 	}
 
+	/**
+	 * Outputs a human readable representation of the model.
+	 *
+	 * @return    The representation of the model.
+	 */
 	public String toString() {
 		String str = _identifier + " - " + _name + "\n";
 		for (CriteriaModel c : _criterias) {

@@ -1,6 +1,6 @@
 package locomotor.components.models;
 
-import locomotor.components.types.*;
+import locomotor.components.types.CVehicleType;
 
 public class Criteria {
 

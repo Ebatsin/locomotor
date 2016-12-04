@@ -1,7 +1,7 @@
 package locomotor.components.models;
 
 /**
- * @todo describe the class
+ * @todo describe the class.
  */
 public class FictionnalUniverse {
 
@@ -20,7 +20,7 @@ public class FictionnalUniverse {
 	private String _imageName;
 
 	/**
-	 * Constructs the fictionnal universe
+	 * Constructs the fictionnal universe.
 	 *
 	 * @param      id         The identifier
 	 * @param      name       The name
