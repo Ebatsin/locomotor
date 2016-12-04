@@ -1,17 +1,17 @@
 package locomotor.components.types;
 
 /**
- * @todo describe the class
+ * @todo describe the class.
  */
 public class CBoolean implements CUniverseType, CVehicleType, CUserType {
 
 	/**
-	 * The boolean value
+	 * The boolean value.
 	 */
 	private Boolean _value;
 
 	/**
-	 * Constructs the CBoolean object
+	 * Constructs the CBoolean object.
 	 *
 	 * @param      value  The value
 	 */
