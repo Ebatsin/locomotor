@@ -3,10 +3,13 @@ package locomotor.core;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Map;
+import java.util.TreeMap;
 
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Vehicle;
 
+import locomotor.components.network.IEndpointHandler;
 import locomotor.components.network.NetworkHandler;
 
 public class Main {
@@ -42,7 +45,16 @@ public class Main {
 		System.out.println("get network instance");
 		NetworkHandler nh = NetworkHandler.getInstance();
 		System.out.println("init");
-		nh.init(8000, "key.pfx", "motdepasse");
+		nh.init(8000, "/", "key.pfx", "motdepasse");
+
+		System.out.println("Add handlers");
+		nh.link("api", new IEndpointHandler() {
+			public void handle(TreeMap<String, String> parameters) {
+				for(Map.Entry<String,String> entry : parameters.entrySet()) {
+					System.out.println(entry.getKey() + " => " + entry.getValue());
+				}
+			}
+		});
 
 		System.out.println("start");
 		nh.start();
