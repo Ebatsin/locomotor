@@ -32,12 +32,24 @@ import javax.net.ssl.TrustManagerFactory;
  * handling connections and dispatching the clients on different threads.
  */
 public class NetworkHandler {
+	/**
+	 * Contains the only instance of NetworkHandler.
+	 */
 	private static NetworkHandler _netHandler = null;
 
+	/**
+	 * Contains the HTTPS server used by the handler.
+	 */
 	private HttpsServer _server;
 
+	/**
+	 * Contains a mapping of the endpoints mapped to their handling function.
+	 */
 	private HashMap<String, IEndpointHandler> _handlers;
 
+	/**
+	 * The root of the server. Only the request made on this directory will be listened to by the server.
+	 */
 	private String _root;
 
 
@@ -56,10 +68,6 @@ public class NetworkHandler {
 		}
 
 		return _netHandler;
-	}
-
-	public synchronized void init(int ip, String endpoint) {
-
 	}
 
 	/**
@@ -122,12 +130,6 @@ public class NetworkHandler {
 					+ " on '" + exchange.getRequestURI() + "'");
 				TreeMap<String, String> parameters = parsePostParameters(exchange.getRequestBody());
 				IEndpointHandler handler = _handlers.get(exchange.getRequestURI().toString());
-				System.out.println("Hooks existants :");
-				for(Map.Entry<String,IEndpointHandler> entry : _handlers.entrySet()) {
-					System.out.println(entry.getKey() + " => " + entry.getValue());
-				}
-
-				System.out.println("trouvé : " + handler);
 
 				if(handler == null) {
 					handler = _handlers.get(exchange.getRequestURI() + "/");
@@ -153,11 +155,10 @@ public class NetworkHandler {
 
 	/**
 	 * Add a handler for an URI.
-	 * @param endpoint The URI that will be matched (ex: for https://serverAddress/a/b, give "a/b" as the endpoint)
+	 * @param endpoint The URI that will be matched (ex: for https://serverAddress/root/a/b, give "a/b" as the endpoint)
 	 * @param handler The handler that will handle the request
 	 */
 	public void link(String endpoint, IEndpointHandler handler) {
-		System.out.println("endpoint creation : '" + _root + endpoint + "'. objet : " + handler);
 		_handlers.put(_root + endpoint, handler);
 	}
 
@@ -176,12 +177,21 @@ public class NetworkHandler {
 		_server.stop(5);
 	}
 
-	public TreeMap<String, String> parsePostParameters(InputStream is) {
+	/**
+	 * Convert the stream given by the client to a map of parameters (in a key=>value fashion).
+	 * @param is The input stream that contains the parameters of the form "a=b&c=d"
+	 * @return A map containing all the parameters
+	 */
+	private TreeMap<String, String> parsePostParameters(InputStream is) {
 		try {
 			TreeMap<String, String> params = new TreeMap<String, String>();
 			InputStreamReader isr = new InputStreamReader(is,"utf-8");
 			BufferedReader br = new BufferedReader(isr);
 			String query = br.readLine();
+
+			if(query == null) {
+				return params;
+			}
 
 			String[] keyval = query.split("[&]");
 			for(String str : keyval) {
