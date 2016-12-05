@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Vehicle;
 
+import locomotor.components.network.NetworkHandler;
+
 public class Main {
 	
 	/**
@@ -36,6 +38,14 @@ public class Main {
 		catch(Exception exception) {
 			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
 		}
+
+		System.out.println("get network instance");
+		NetworkHandler nh = NetworkHandler.getInstance();
+		System.out.println("init");
+		nh.init(8000, "key.pfx", "motdepasse");
+
+		System.out.println("start");
+		nh.start();
 		
 	}
 }
