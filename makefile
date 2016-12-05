@@ -28,8 +28,8 @@ RM = rm -rf
 # packages
 PACKAGE = locomotor
 PACKAGE_CORE = $(PACKAGE).core.Main
-PACKAGE_INTERFACE_USER =
-PACKAGE_INTERFACE_ADMIN =
+PACKAGE_FRONT_USER = $(PACKAGE).front.user.Main
+PACKAGE_FRONT_ADMIN =
 MAIN = Main.java
 
 # paths
@@ -37,9 +37,10 @@ COMPONENTS = $(PACKAGE)/components
 COMPONENTS_TYPES = $(COMPONENTS)/types
 COMPONENTS_MODELS = $(COMPONENTS)/models
 CORE = $(PACKAGE)/core
+FRONT = $(PACKAGE)/front
 INT_COMPONENTS = 
 INT_ADMIN =
-INT_ADMIN =
+INT_USER = $(FRONT)/user
 
 # lib
 MONGO = $(LIB)/*
@@ -66,8 +67,15 @@ build-core: linter-core
 	-test -d $(CLASS) || mkdir $(CLASS)
 	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(MONGO):$(CLASS):" $(FLAGS_CC) $(SRC)/$(CORE)/$(MAIN)
 
+build-front-user:
+	-test -d $(CLASS) || mkdir $(CLASS)
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(CLASS):resources:" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
+
 run-core:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE)
+
+run-front-user:
+	$(RUN) -classpath "$(CLASS):resources:" $(PACKAGE_FRONT_USER)
 
 ###################################################
 # Doc:
