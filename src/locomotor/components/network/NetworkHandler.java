@@ -121,7 +121,7 @@ public class NetworkHandler {
 				System.out.println("Client connection. \nRequest method : " + exchange.getRequestMethod() 
 					+ " on '" + exchange.getRequestURI() + "'");
 				TreeMap<String, String> parameters = parsePostParameters(exchange.getRequestBody());
-				IEndpointHandler handler = _handlers.get(exchange.getRequestURI());
+				IEndpointHandler handler = _handlers.get(exchange.getRequestURI().toString());
 				System.out.println("Hooks existants :");
 				for(Map.Entry<String,IEndpointHandler> entry : _handlers.entrySet()) {
 					System.out.println(entry.getKey() + " => " + entry.getValue());
