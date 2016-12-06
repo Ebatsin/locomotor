@@ -1,8 +1,11 @@
 # Locomotor
 
-Locomotor is a real and fictional vehicles comparator. It is based on predefined criteria that the user can select. It outputs a list of the vehicles that fit the most the user's query. The comparator works in a client/server design, allowing multiple users to use the same dataset at the same time.
+Locomotor is a real and fictional vehicles comparator. It is based on predefined criterias that the user can select. It outputs a list of the vehicles that fit "the most" the user's query. The comparator works in a client/server design, allowing multiple users to use the same dataset at the same time.
 
-The project also offers 2 clients. The first one is an administation interface which allow the user to modify the dataset, the other is an easy to use interface enabling the user to search for a vehicle.
+The project offers 2 clients: 
+
+- the first one is an administation interface which allow the user to modify the dataset.
+- the other is an easy to use interface enabling the user to search for a vehicle and retrieve his booking.
 
 ## Getting Started
 
@@ -46,7 +49,7 @@ make stop-core
 
 ### Fill the database
 
-If you want to use a prefilled database, use the ones in the _data_ directory.
+If you want to use a prefilled database, use the ones in the `data` directory.
 
 ```shell
 for i in data/*.json; do mongoimport -d locomotor -c $(basename $i .json) $i; done
@@ -54,7 +57,7 @@ for i in data/*.json; do mongoimport -d locomotor -c $(basename $i .json) $i; do
 
 ## Running the tests
 
-To check that your code is compliant with our coding convention without having to compile the project, use :
+To check that your code is compliant with our coding convention without having to compile the project, use:
 
 ```shell
 make linter
