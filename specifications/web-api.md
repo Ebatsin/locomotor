@@ -1,17 +1,27 @@
-# Locomotor HTTPS API
+# Locomotor Web API
 
-The core of *Locomotor* allows JSON exchanges bewteen himself and the client over HTTPS. Once the client is connected to the server, it receives a token which allows him to exchange with the server and stay authentificated.
+The Locomotor Web API allows to build applications that interact with *Locomotor* in
+others ways than the interfaces we provide out of the box.
 
-The server proposes an API with which the client can request services. All endpoint accept parameters sent in **POST**. The server send back a json object of the following form :
+## Notice
+
+The Web API consists of HTTP-[RPC](https://en.wikipedia.org/wiki/Remote_procedure_call) endpoints, all of the form `https://server.com/api/ENDPOINT`. Each endpoint represents a service.
+
+All endpoints *must* be called using **HTTPS**. Arguments *must* be sent in **POST**.
+
+The response is a JSON object, which will always
+contain a top-level boolean property `success`, indicating *success* or *failure*. 
+
+For *success*, the `data` property will contain the results of the request.
 
 ```json
 {
   "success": true, // the request has successed
-  "data": ... // the core response
+  "data": ... // the results object
 }
 ```
 
-In case of a failure, the response is of the following form :
+In case of a `failure`, the `message` property will contain a short human-readable error message.
 
 ```json
 {
@@ -20,11 +30,13 @@ In case of a failure, the response is of the following form :
 }
 ```
 
-In the following code fences describing the server responses, only the "data" attribute is shown.
+In the following code fences describing the API responses, only the ` state` is shown, hence the `data` property.
 
-## Connection & Authentification
+## Token
 
-The first step to exchange with the server is to authentificate the client. To do so, the client must send a login and a password. To which the server will respond with a long term token and a short term token.
+Except for authentification and registration, **all endpoint require a token**, which identifies the user. 
+
+Our API come with two types of token: **long term** and **short term**.
 
 ### Long term token
 
@@ -32,88 +44,162 @@ The long term token is stored by the client. It allows the user to authentificat
 
 ### Short term token
 
-The short term token is used to keep track of a client during a session. It has a lifespan of about 2 hours after the last connection.
-
-### Connection with a token
-
-If the client have a long term token, it can authentificate itself with it instead of asking the user to type in a password and a login
+The short term token is used to keep track of a client during a session. It has a lifespan of about 2 hours after the last connection. **This is the token require by endpoint.**
 
 # API endpoints
 
-In all the definitions below, the short term token given by the user is represented by the character **$**.
+In all the definitions below, the **short term token** given by the user is represented by the character `$`.
 
-All requests must be served to `https://serveraddress/api/...`
+## User
 
-## Authentification
+### Authentification
 
-### With login
+This method authentifies the user and provide a short term token, used for others endpoints.
 
-\> api/user/auth
+If the client already have a long term token, it can authentificate itself with it instead of asking the user to type in a password and a login.
 
-**Parameters :**
+```
+api/user/auth
+```
 
-* **login**: the username of the user
-* **password**: the password of the user
+#### With a token
 
-**Returns:**
+##### Arguments
+
+| Argument | Description         |
+| :------- | :------------------ |
+| token    | the long term token |
+
+##### Response
 
 ```json
 {
-  "short-term-token": n,
-  "long-term-token": o
+  "success": true,
+  "data": {
+    "short-term-token": n
+  }
 }
 ```
 
+#### With login
 
+##### Arguments
 
-### With token
+| Argument | Description  |
+| :------- | :----------- |
+| login    | the username |
+| password | the password |
 
-\> api/user/auth
-
-**Parameters :**
-
-* **token**: the user's token
-
-**Returns:**
+##### Response
 
 ```json
 {
-  "short-term-token": n
+  "success": true,
+  "data": {
+    "short-term-token": n
+    "long-term-token": o,
+  }
 }
 ```
 
+### Revoke
 
+This method revokes an short term token. For example, call this to log out a user.
 
-## Get the notifications
+```
+api/user/revoke
+```
 
-\> api/user/get-all-notifications
+##### Arguments
 
-**Parameters:**
+| Argument | Description          |
+| :------- | :------------------- |
+| token    | the short term token |
 
-* **token**: the user's token
-
-**Returns:**
+##### Response
 
 ```json
-[
-  "notification 1",
-  "notification 2",
-  ...
-]
+{
+  "success": true,
+  "data": {}
+}
 ```
 
+### Register
 
-
-## Get the model
-
-\> api/model/get
-
-**Parameters:**
-
-none
-
-**Returns:**
+This method is used to create a new user.
 
 ```
+api/user/register
+```
+
+##### Arguments
+
+| Argument | Description  |
+| :------- | :----------- |
+| login    | the username |
+| password | the password |
+
+##### Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "short-term-token": n
+    "long-term-token": o,
+  }
+}
+```
+
+### Get notifications
+
+This method is used to get all the pending notifications of the user.
 
 ```
+api/user/get-notifications
+```
+
+##### Arguments
+
+| Argument | Description          |
+| :------- | :------------------- |
+| token    | the short term token |
+
+##### Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "notif": [
+     	{...},
+       	{...},
+      	...
+    ]
+  }
+}
+```
+
+The response contains a list of notifications objects.
+
+# Object types
+
+These are the core objects you'll find, as part of API arguments or responses.
+
+### Notifications
+
+A notification object contains information about the user's notification.
+
+```json
+{
+  "id": "01234",
+  "message": "This is a message"
+}
+```
+
+| Attribute | Type   | Description                              |
+| :-------- | :----- | ---------------------------------------- |
+| id        | string | the unique identifier of the notification |
+| message   | string | the notification message                 |
+
