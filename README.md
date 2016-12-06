@@ -44,8 +44,6 @@ To stop the core, use
 make stop-core
 ```
 
-
-
 ### Fill the database
 
 If you want to use a prefilled database, use the ones in the _data_ directory.
@@ -53,8 +51,6 @@ If you want to use a prefilled database, use the ones in the _data_ directory.
 ```shell
 for i in data/*.json; do mongoimport -d locomotor -c $(basename $i .json) $i; done
 ```
-
-
 
 ## Running the tests
 

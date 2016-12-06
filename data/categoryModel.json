@@ -1,0 +1,744 @@
+{
+	"_id": {
+		"$oid": "5842ccbf57ab9e689507bc13"
+	},
+	"name": "consommation",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842dffe57ab9e7e37048793"
+			},
+			"name": "carburant",
+			"question": "Quel type de carburant souhaitez-vous utiliser pour votre moyen de transport ?",
+			"isComparable": true,
+			"itemType": 8,
+			"userType": 5,
+			"universeType": 5,
+			"unit": 0,
+			"universe": [
+				{
+					"id": 0,
+					"name": "électrique"
+				},
+				{
+					"id": 1,
+					"name": "essence"
+				},
+				{
+					"id": 2,
+					"name": "diesel"
+				},
+				{
+					"id": 3,
+					"name": "foin"
+				},
+				{
+					"id": 4,
+					"name": "viande"
+				},
+				{
+					"id": 5,
+					"name": "vent"
+				},
+				{
+					"id": 6,
+					"name": "bois"
+				},
+				{
+					"id": 7,
+					"name": "nucléaire"
+				},
+				{
+					"id": 8,
+					"name": "magie"
+				},
+				{
+					"id": 9,
+					"name": "antimatière"
+				}
+			]
+		},
+		{
+			"_id": {
+				"$oid": "5842e19957ab9e7e37048794"
+			},
+			"name": "consommation",
+			"question": "Quelle classe de consommation désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 5,
+			"universeType": 6,
+			"unit": 0,
+			"universe": {
+				"values": [
+					{
+						"value": 0,
+						"name": "troll"
+					},
+					{
+						"value": 1,
+						"name": "désolant"
+					},
+					{
+						"value": 2,
+						"name": "piètre"
+					},
+					{
+						"value": 3,
+						"name": "acceptable"
+					},
+					{
+						"value": 4,
+						"name": "effort exceptionnel"
+					},
+					{
+						"value": 5,
+						"name": "optimal"
+					}
+				],
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "5"
+				}
+			}
+		},
+		{
+			"_id": {
+				"$oid": "58435bb857ab9e1127b9f105"
+			},
+			"name": "distance nominale",
+			"question": "Quelle distance souhaitez-vous pouvoir parcourir ?",
+			"isComparable": true,
+			"itemType": 3,
+			"userType": 3,
+			"universeType": 3,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "9223372036854775807"
+				}
+			}
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d7a657ab9e6a5495f3ee"
+	},
+	"name": "gabarit",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842e66a57ab9e83054cd9c0"
+			},
+			"name": "capacite de stockage",
+			"question": "Quelle capacité de stockage souhaitez-vous pouvoir disposer ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d53957ab9e6a5495f3eb"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e6db57ab9e83054cd9c1"
+			},
+			"name": "poids",
+			"question": "Quel poids total (à vide) souhaitez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d42157ab9e6a5495f3ea"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e72e57ab9e83054cd9c2"
+			},
+			"name": "longueur",
+			"question": "Quelle longueur désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e80f57ab9e845efbe02c"
+			},
+			"name": "largeur",
+			"question": "Quelle largeur désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842e83357ab9e845efbe02d"
+			},
+			"name": "hauteur",
+			"question": "Quelle hauteur désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d1af57ab9e6a5495f3e9"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d7b257ab9e6a5495f3ef"
+	},
+	"name": "tarification",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842e9b057ab9e881b260712"
+			},
+			"name": "prix",
+			"question": "Quel prix désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d5d857ab9e6a5495f3ec"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842ea4c57ab9e888ccd9378"
+			},
+			"name": "caution",
+			"question": "Quelle caution désirez-vous pour votre véhicule ?",
+			"isComparable": false,
+			"itemType": 1,
+			"userType": 4,
+			"universeType": 4,
+			"unit": {
+				"$oid": "5842d5d857ab9e6a5495f3ec"
+			},
+			"universe": {
+				"min": 0.0,
+				"max": 1.7976931348623157e+308
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842ea7a57ab9e888ccd9379"
+			},
+			"name": "confort",
+			"question": "Quelle classe de confort désirez-vous pour votre véhicule ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 5,
+			"universeType": 6,
+			"unit": 0,
+			"universe": {
+				"values": [
+					{
+						"value": 0,
+						"name": "minimaliste"
+					},
+					{
+						"value": 1,
+						"name": "c'est l'armée mon gars"
+					},
+					{
+						"value": 2,
+						"name": "inconfortable"
+					},
+					{
+						"value": 3,
+						"name": "gênant"
+					},
+					{
+						"value": 4,
+						"name": "passable"
+					},
+					{
+						"value": 5,
+						"name": "simple"
+					},
+					{
+						"value": 6,
+						"name": "standard"
+					},
+					{
+						"value": 7,
+						"name": "confortable"
+					},
+					{
+						"value": 8,
+						"name": "luxueux"
+					},
+					{
+						"value": 9,
+						"name": "somptueux"
+					},
+					{
+						"value": 10,
+						"name": "indécent"
+					}
+				],
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "10"
+				}
+			}
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842d7be57ab9e6a5495f3f0"
+	},
+	"name": "personne",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842ebfb57ab9e888ccd937a"
+			},
+			"name": "nombre de places",
+			"question": "À combien envisagez vous de voyager ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 3,
+			"universeType": 3,
+			"unit": 0,
+			"universe": {
+				"min": {
+					"$numberLong": "1"
+				},
+				"max": {
+					"$numberLong": "5000"
+				}
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842f07057ab9e8ee0ed6c84"
+			},
+			"name": "publique",
+			"question": "Désirez-vous voyager en transport en commun ?",
+			"isComparable": true,
+			"itemType": 2,
+			"userType": 2,
+			"universeType": 2,
+			"unit": 0,
+			"universe": null
+		},
+		{
+			"_id": {
+				"$oid": "5842f08e57ab9e8ee0ed6c85"
+			},
+			"name": "equipage",
+			"question": "Combien de personnes (en plus de vous) sont requises pour opérer le véhicule ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 3,
+			"universeType": 3,
+			"unit": 0,
+			"universe": {
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "5000"
+				}
+			}
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "5842f0b257ab9e8ee0ed6c86"
+	},
+	"name": "_self_",
+	"criteria": [
+		{
+			"_id": {
+				"$oid": "5842f0b857ab9e8ee0ed6c87"
+			},
+			"name": "vivant",
+			"question": "Êtes-vous un écolo casse couille qui a décidé que voyager à dos de dragon c'était de la crde la cruauté envers les dragons ?",
+			"isComparable": true,
+			"itemType": 2,
+			"userType": 2,
+			"universeType": 2,
+			"unit": 0,
+			"universe": null
+		},
+		{
+			"_id": {
+				"$oid": "5842f0e057ab9e8ee0ed6c88"
+			},
+			"name": "environnement",
+			"question": "Quels sont les types d'environnement dans lequel le véhicule peut aller ?",
+			"isComparable": true,
+			"itemType": 7,
+			"userType": 7,
+			"universeType": 7,
+			"unit": 0,
+			"universe": {
+				"value": "tous",
+				"id": 31,
+				"children": [
+					{
+						"value": "route",
+						"id": 3,
+						"children": [
+							{
+								"value": "urbaine",
+								"id": 0
+							},
+							{
+								"value": "campagne",
+								"id": 1
+							},
+							{
+								"value": "chemin",
+								"id": 2
+							}
+						]
+					},
+					{
+						"value": "aérien",
+						"id": 7,
+						"children": [
+							{
+								"value": "hautes couches atmosphériques",
+								"id": 4
+							},
+							{
+								"value": "middle",
+								"id": 5
+							},
+							{
+								"value": "proche du sol",
+								"id": 6
+							}
+						]
+					},
+					{
+						"value": "terrestre",
+						"id": 20,
+						"children": [
+							{
+								"value": "plat",
+								"id": 11,
+								"children": [
+									{
+										"value": "enneigé",
+										"id": 8
+									},
+									{
+										"value": "désertique",
+										"id": 9
+									},
+									{
+										"value": "marécageux",
+										"id": 10
+									}
+								]
+							},
+							{
+								"value": "accidenté",
+								"id": 15,
+								"children": [
+									{
+										"value": "enneigé",
+										"id": 12
+									},
+									{
+										"value": "désertique",
+										"id": 13
+									},
+									{
+										"value": "marécageux",
+										"id": 14
+									}
+								]
+							},
+							{
+								"value": "(montagneux",
+								"id": 16
+							},
+							{
+								"value": "enneigé",
+								"id": 17
+							},
+							{
+								"value": "désertique",
+								"id": 18
+							},
+							{
+								"value": "marécageux",
+								"id": 19
+							}
+						]
+					},
+					{
+						"value": "rails",
+						"id": 21
+					},
+					{
+						"value": "marin",
+						"id": 26,
+						"children": [
+							{
+								"value": "surface",
+								"id": 22
+							},
+							{
+								"value": "pied",
+								"id": 23
+							},
+							{
+								"value": "peu profond",
+								"id": 24
+							},
+							{
+								"value": "profond",
+								"id": 25
+							}
+						]
+					},
+					{
+						"value": "espace",
+						"id": 29,
+						"children": [
+							{
+								"value": "peu profond",
+								"id": 27
+							},
+							{
+								"value": "profond",
+								"id": 28
+							}
+						]
+					},
+					{
+						"value": "sous-terrain",
+						"id": 30
+					}
+				]
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842f3e257ab9e8ee0ed6c89"
+			},
+			"name": "permis",
+			"question": "Quels sont les permis que vous possédez ?",
+			"isComparable": true,
+			"itemType": 8,
+			"userType": 5,
+			"universeType": 5,
+			"unit": 0,
+			"universe": [
+				{
+					"id": 0,
+					"name": "bateau"
+				},
+				{
+					"id": 1,
+					"name": "voiture"
+				},
+				{
+					"id": 2,
+					"name": "avion"
+				},
+				{
+					"id": 3,
+					"name": "véhicule supra luminique"
+				},
+				{
+					"id": 4,
+					"name": "vétérinaire"
+				},
+				{
+					"id": 5,
+					"name": "bafa"
+				},
+				{
+					"id": 6,
+					"name": "bus"
+				},
+				{
+					"id": 7,
+					"name": "license de pilote espace profond"
+				}
+			]
+		},
+		{
+			"_id": {
+				"$oid": "5842f6e557ab9e93bb852083"
+			},
+			"name": "vitesse maximale",
+			"question": "Quelle vitesse maximale désirez-vous pouvoir atteindre avec votre véhicule ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 3,
+			"universeType": 3,
+			"unit": {
+				"$oid": "5842d6a857ab9e6a5495f3ed"
+			},
+			"universe": {
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "9223372036854775807"
+				}
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842f77457ab9e93bb852084"
+			},
+			"name": "fiabilité",
+			"question": "Va-t-on mourir durant ce trajet ? Votez chez vous par SMS",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 5,
+			"universeType": 6,
+			"unit": 0,
+			"universe": {
+				"values": [
+					{
+						"value": 0,
+						"name": "galaxy note 7"
+					},
+					{
+						"value": 1,
+						"name": "explosif"
+					},
+					{
+						"value": 2,
+						"name": "dangereux"
+					},
+					{
+						"value": 3,
+						"name": "défaillant"
+					},
+					{
+						"value": 4,
+						"name": "peu fiable"
+					},
+					{
+						"value": 5,
+						"name": "fiable"
+					},
+					{
+						"value": 6,
+						"name": "sécurisé"
+					},
+					{
+						"value": 7,
+						"name": "infaillible"
+					},
+					{
+						"value": 8,
+						"name": "titanic"
+					}
+				],
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "8"
+				}
+			}
+		},
+		{
+			"_id": {
+				"$oid": "5842f7f857ab9e93bb852085"
+			},
+			"name": "armement",
+			"question": "Quel type d'armement désirez-vous sur votre véhicule ?",
+			"isComparable": true,
+			"itemType": 0,
+			"userType": 5,
+			"universeType": 6,
+			"unit": 0,
+			"universe": {
+				"values": [
+					{
+						"value": 0,
+						"name": "inexistant"
+					},
+					{
+						"value": 1,
+						"name": "léger"
+					},
+					{
+						"value": 2,
+						"name": "lourd"
+					},
+					{
+						"value": 3,
+						"name": "très lourd"
+					},
+					{
+						"value": 4,
+						"name": "cuirrassé"
+					}
+				],
+				"min": {
+					"$numberLong": "0"
+				},
+				"max": {
+					"$numberLong": "4"
+				}
+			}
+		}
+	]
+}
