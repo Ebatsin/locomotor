@@ -2,9 +2,9 @@ package locomotor.components.types;
 
 /**
  * Encapsulate a Double value.
- * @see CEnumVehicleType.
+ * @see CEnumItemType.
  */
-public class CFloat implements CVehicleType {
+public class CFloat implements CItemType {
 
 	/**
 	 * The float value (double-precision 64-bit IEEE 754 floating point).

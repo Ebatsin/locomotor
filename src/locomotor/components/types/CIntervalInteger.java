@@ -3,7 +3,7 @@ package locomotor.components.types;
 /**
  * A interval between two Long.
  * @see CEnumUniverseType.
- * @see CEnumVehicleType.
+ * @see CEnumItemType.
  * @see CEnumUserType.
  */
 public class CIntervalInteger extends CInterval {

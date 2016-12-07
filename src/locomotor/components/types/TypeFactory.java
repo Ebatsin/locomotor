@@ -64,15 +64,15 @@ public class TypeFactory {
 	}
 
 	/**
-	 * Gets the vehicle.
+	 * Gets the item.
 	 *
-	 * @param      type      The type of vehicle to create
-	 * @param      object    The object containing the data of the vehicle to create
+	 * @param      type      The type of item to create
+	 * @param      object    The object containing the data of the item to create
 	 * @param      universe  The universe containing the data of the universe
 	 *
-	 * @return     The vehicle.
+	 * @return     The item.
 	 */
-	public CVehicleType getVehicle(CEnumVehicleType type, Object object, CUniverseType universe) {
+	public CItemType getItem(CEnumItemType type, Object object, CUniverseType universe) {
 		switch(type) {
 			case INTEGER: {
 				Document value = (Document)(new Document("value", object));
@@ -111,8 +111,9 @@ public class TypeFactory {
 				CTree tree = getTree(object, treeMod);
 				return tree;
 			}	
-			default: { // error
-				System.err.println("Error: Illegal vehicle type");
+			default: { 
+				// error
+				System.err.println("Error: Illegal item type");
 				System.err.println(type);
 				System.err.println(object);
 				System.exit(0);

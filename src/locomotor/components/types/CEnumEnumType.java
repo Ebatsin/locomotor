@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Enum that list all the possible types of data of the "vehicle".
+ * Enum that list all the possible types of data of the "item".
  */
-public enum CEnumVehicleType {
+public enum CEnumItemType {
 	
 	// integer
 	INTEGER(0),
@@ -31,21 +31,21 @@ public enum CEnumVehicleType {
 	/**
 	 * Map to retrieve value from integer.
 	 */
-	private static Map<Integer, CEnumVehicleType> _map
-		= new HashMap<Integer, CEnumVehicleType>();
+	private static Map<Integer, CEnumItemType> _map
+		= new HashMap<Integer, CEnumItemType>();
 
 	static {
-		for (CEnumVehicleType univEnum : CEnumVehicleType.values()) {
+		for (CEnumItemType univEnum : CEnumItemType.values()) {
 			_map.put(univEnum._id, univEnum);
 		}
 	}
 
 	/**
-	 * Constructs the object (private to prevent other to instantiate new CEnumVehicleType).
+	 * Constructs the object (private to prevent other to instantiate new CEnumItemType).
 	 *
 	 * @param      id    The identifier.
 	 */
-	private CEnumVehicleType(int id) {
+	private CEnumItemType(int id) {
 		_id = id;
 	}
 
@@ -65,7 +65,7 @@ public enum CEnumVehicleType {
 	 *
 	 * @return     The value of the integer
 	 */
-	public static CEnumVehicleType valueOf(int id) {
+	public static CEnumItemType valueOf(int id) {
 		return _map.get(id);
 	}
 	

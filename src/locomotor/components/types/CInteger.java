@@ -2,9 +2,9 @@ package locomotor.components.types;
 
 /**
  * Encapsulate a Long value.
- * @see CEnumVehicleType.
+ * @see CEnumItemType.
  */
-public class CInteger implements CVehicleType {
+public class CInteger implements CItemType {
 
 	/**
 	 * The integer value (64-bit).

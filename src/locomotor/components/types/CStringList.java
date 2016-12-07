@@ -6,7 +6,7 @@ import java.util.TreeMap;
 /**
  * Encapsulate a map between an Integer (32-bit) and the String associated.
  */
-public abstract class CStringList implements CUniverseType, CVehicleType, CUserType {
+public abstract class CStringList implements CUniverseType, CItemType, CUserType {
 
 	/**
 	 * The list of string (unique index).

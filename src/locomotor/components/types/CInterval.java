@@ -3,10 +3,10 @@ package locomotor.components.types;
 /**
  * A interval between two T (Comparable).
  * @see CEnumUniverseType.
- * @see CEnumVehicleType.
+ * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public abstract class CInterval<T extends Comparable> implements CUniverseType, CVehicleType,
+public abstract class CInterval<T extends Comparable> implements CUniverseType, CItemType,
 	CUserType {
 
 	private T _min;

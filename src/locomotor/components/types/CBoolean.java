@@ -3,10 +3,10 @@ package locomotor.components.types;
 /**
  * Encapsulate a Boolean value.
  * @see CEnumUniverseType.
- * @see CEnumVehicleType.
+ * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CBoolean implements CUniverseType, CVehicleType, CUserType {
+public class CBoolean implements CUniverseType, CItemType, CUserType {
 
 	/**
 	 * The boolean value.

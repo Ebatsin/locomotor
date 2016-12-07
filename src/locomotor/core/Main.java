@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import locomotor.components.models.CategoryModel;
-import locomotor.components.models.Vehicle;
+import locomotor.components.models.Item;
 
 import locomotor.components.network.IEndpointHandler;
 import locomotor.components.network.NetworkHandler;
@@ -33,7 +33,7 @@ public class Main {
 
 			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
-			ArrayList<Vehicle> vehicles = db.getVehicles(catModel);
+			ArrayList<Item> items = db.getItems(catModel);
 
 			db.disconnect();
 

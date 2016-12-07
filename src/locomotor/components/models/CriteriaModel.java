@@ -2,7 +2,7 @@ package locomotor.components.models;
 
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
-import locomotor.components.types.CEnumVehicleType;
+import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CUniverseType;
 
 /**
@@ -35,9 +35,9 @@ public class CriteriaModel {
 	private CEnumUniverseType _universeType;
 
 	/**
-	 * The type of the structure that represents the vehicle's criteria value.
+	 * The type of the structure that represents the item's criteria value.
 	 */
-	private CEnumVehicleType _vehicleType;
+	private CEnumItemType _itemType;
 
 	/**
 	 * The type of the structure that represents what the user will have to submit.
@@ -57,19 +57,19 @@ public class CriteriaModel {
 	 * @param      question      The question
 	 * @param      isComparable  Indicates if comparable
 	 * @param      universeType  The universe type
-	 * @param      vehicleType   The vehicle type
+	 * @param      itemType      The item type
 	 * @param      userType      The user type
 	 * @param      universe      The universe
 	 */
 	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, 
-			CEnumUniverseType universeType, CEnumVehicleType vehicleType, 
+			CEnumUniverseType universeType, CEnumItemType itemType, 
 			CEnumUserType userType, CUniverseType universe) {
 		_identifier = identifier;
 		_name = name;
 		_question = question;
 		_isComparable = isComparable;
 		_universeType = universeType;
-		_vehicleType = vehicleType;
+		_itemType = itemType;
 		_userType = userType;
 		_universe = universe;
 	}
@@ -83,8 +83,8 @@ public class CriteriaModel {
 		return _identifier;
 	}
 
-	public CEnumVehicleType getVehicleType() {
-		return _vehicleType;
+	public CEnumItemType getItemType() {
+		return _itemType;
 	}
 
 	public CUniverseType getUniverse() {
@@ -98,7 +98,7 @@ public class CriteriaModel {
 	 */
 	public String toString() {
 		String line = _identifier + " - " + _name + " - " + "Universe(" + _universeType
-			+ ") - " + "Vehicle(" + _vehicleType + ") - " + "User(" + _userType + ")\n";
+			+ ") - " + "Item(" + _itemType + ") - " + "User(" + _userType + ")\n";
 		line += _universe.toString() + "\n";
 		return line;
 	}	

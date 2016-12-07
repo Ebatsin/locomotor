@@ -2,13 +2,13 @@ package locomotor.components.models;
 
 import java.util.ArrayList;
 
-public class Vehicle {
+public class Item {
 
 	private String _identifier;
 
-	private ArrayList<VehicleCategory> _categories;
+	private ArrayList<ItemCategory> _categories;
 
-	public Vehicle(String id, ArrayList<VehicleCategory> categories) {
+	public Item(String id, ArrayList<ItemCategory> categories) {
 		_identifier = id;
 		_categories = categories;
 	}

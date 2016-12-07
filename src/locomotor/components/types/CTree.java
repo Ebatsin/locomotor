@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * Represent a N-ary tree, that handle an Integer (32-bit) and a String.
  * @see CEnumUniverseType.
- * @see CEnumVehicleType.
+ * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CTree implements CUniverseType, CVehicleType, CUserType {
+public class CTree implements CUniverseType, CItemType, CUserType {
 	
 	/**
 	 * The identifier.

@@ -11,15 +11,15 @@ import java.util.ListIterator;
 
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.CriteriaModel;
-import locomotor.components.models.Vehicle;
-import locomotor.components.models.VehicleCategory;
-import locomotor.components.models.VehicleCriteria;
+import locomotor.components.models.Item;
+import locomotor.components.models.ItemCategory;
+import locomotor.components.models.ItemCriteria;
 
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
-import locomotor.components.types.CEnumVehicleType;
+import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CUniverseType;
-import locomotor.components.types.CVehicleType;
+import locomotor.components.types.CItemType;
 import locomotor.components.types.TypeFactory;
 
 import org.bson.Document;
@@ -138,7 +138,7 @@ public class DBH {
 						crit.getString("question"),
 						crit.getBoolean("isComparable"),
 						CEnumUniverseType.valueOf(crit.getInteger("universeType")),
-						CEnumVehicleType.valueOf(crit.getInteger("itemType")),
+						CEnumItemType.valueOf(crit.getInteger("itemType")),
 						CEnumUserType.valueOf(crit.getInteger("userType")),
 						universe
 					);
@@ -160,28 +160,28 @@ public class DBH {
 	}
 
 	/**
-	 * Gets the vehicles.
+	 * Gets the items.
 	 *
 	 * @param      catModel  The categories model
 	 *
-	 * @return     The vehicles.
+	 * @return     The items.
 	 */
-	public static ArrayList<Vehicle> getVehicles(ArrayList<CategoryModel> catModel) {
+	public static ArrayList<Item> getItems(ArrayList<CategoryModel> catModel) {
 	
-		ArrayList<Vehicle> listVehicles = new ArrayList<Vehicle>();
+		ArrayList<Item> listItems = new ArrayList<Item>();
 		
-		FindIterable<Document> vehicles = md.getCollection("items").find();
+		FindIterable<Document> items = md.getCollection("items").find();
 		
-		System.out.println("Retrieving the vehicles");
+		System.out.println("Retrieving the items");
 
-		vehicles.forEach(new Block<Document>() {
+		items.forEach(new Block<Document>() {
 			@Override
 			public void apply(final Document doc) {
 
 				String id = doc.getObjectId("_id").toString();
 				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
 
-				ArrayList<VehicleCategory> categories = new ArrayList<VehicleCategory>();
+				ArrayList<ItemCategory> categories = new ArrayList<ItemCategory>();
 
 				System.out.println("Retrieving the categories of " + doc.getString("name"));
 				
@@ -208,7 +208,7 @@ public class DBH {
 						System.exit(0);
 					}
 
-					ArrayList<VehicleCriteria> criterias = new ArrayList<VehicleCriteria>();
+					ArrayList<ItemCriteria> criterias = new ArrayList<ItemCriteria>();
 					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
 					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
 
@@ -234,10 +234,10 @@ public class DBH {
 						}
 
 						// creation criteria
-						CVehicleType value = typeFactory.getVehicle(currentCritMod.getVehicleType(),
+						CItemType value = typeFactory.getItem(currentCritMod.getItemType(),
 							currentCrit.get("value"), currentCritMod.getUniverse());
 
-						VehicleCriteria criteria = new VehicleCriteria(
+						ItemCriteria criteria = new ItemCriteria(
 							identifierCrit,
 							value
 						);
@@ -248,7 +248,7 @@ public class DBH {
 
 					}
 
-					VehicleCategory category = new VehicleCategory(
+					ItemCategory category = new ItemCategory(
 						identifierCat, criterias
 					);
 
@@ -259,7 +259,7 @@ public class DBH {
 			}
 		});
 
-		return listVehicles;
+		return listItems;
 
 	}
 
