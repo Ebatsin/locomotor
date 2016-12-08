@@ -34,6 +34,11 @@ public abstract class NetworkResponse {
 		_exchange = exchange;
 	}
 
+	/**
+	 * Send the client an error message. The message is formatted in JSON.
+	 * @param error The HTTP error code to use
+	 * @param message The message to send in the JSON object, describing the error to the user
+	 */
 	public void failure(ErrorCode error, String message) {
 		JsonObject obj = Json.object().add("success", "false").add("message", message);
 		String json = obj.toString();
@@ -43,6 +48,13 @@ public abstract class NetworkResponse {
 		sendAnswer(baos, "application/json", error.getValue(), data.length);
 	}
 
+	/**
+	 * Send the response to the client.
+	 * @param out The content of the message to send
+	 * @param contentType The MIME type of the content sent
+	 * @param code The HTTP status code to send
+	 * @param length The length of the message sent. If unknown, can be set to 0
+	 */
 	private void sendAnswer(ByteArrayOutputStream out, String contentType, int code, int length) {
 		Headers headers = _exchange.getResponseHeaders();
 		if(contentType != null) {

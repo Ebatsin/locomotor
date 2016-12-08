@@ -1,6 +1,5 @@
 package locomotor.components.network;
 
-import java.util.List;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpsConfigurator;
@@ -17,6 +16,7 @@ import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.security.KeyStore;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -64,7 +64,6 @@ public class NetworkHandler {
 	/**
 	 * Create a server using a custom certificate (useful when using self-signed certificates).
 	 * @param port The port to listen to
-	 * @param root The directory to listen to. Must start by "/" (if you want to listen to everything, use "/")
 	 * @param keyStoreName The path to the keyStore that contains the certificate
 	 * @param keyStorePassword The password of the keyStore
 	 */
@@ -102,7 +101,8 @@ public class NetworkHandler {
 						params.setSSLParameters(context.getDefaultSSLParameters());
 					}
 					catch(Exception exception) {
-						System.out.println("Error"); // @todo create meaningful messages
+						System.out.println("Unable to create context to serve the client. Aborting. Error : "
+							+ exception.toString());
 					}
 				}
 			});
