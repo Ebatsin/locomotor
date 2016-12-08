@@ -52,6 +52,8 @@ public class Main {
 		nh.createEndpoint("/api/test", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				if(data.isValid()) {
+					System.out.println("paramètres définis : " + data.getParametersName());
+
 					if(data.isDefined("text1")) {
 						System.out.println("Contenu de text1 : '" + data.getAsString("text1") + "'");
 					}

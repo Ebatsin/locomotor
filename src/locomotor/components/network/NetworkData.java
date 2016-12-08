@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
@@ -129,6 +131,15 @@ public class NetworkData {
 	 */
 	public boolean isDefined(String param) {
 		return _params.containsKey(param);
+	}
+
+	public ArrayList<String> getParametersName() {
+		ArrayList<String> names = new ArrayList<String>();
+		for(Map.Entry<String, ByteArrayOutputStream> entry : _params.entrySet()) {
+			names.add(entry.getKey());
+		}
+
+		return names;
 	}
 
 	/**
