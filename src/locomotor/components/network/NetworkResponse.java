@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import locomotor.components.MutableInteger;
 
 public abstract class NetworkResponse {	
 	HttpExchange _exchange;
@@ -41,12 +42,56 @@ public abstract class NetworkResponse {
 	 */
 	public void failure(ErrorCode error, String message) {
 		JsonObject obj = Json.object().add("success", "false").add("message", message);
+		MutableInteger length = new MutableInteger();
+		ByteArrayOutputStream out = toByteArrayOutputStream(obj, length);
+		sendAnswer(out, "application/json", error.getValue(), length.intValue());
+	}
+
+	/**
+	 * Convert a JSON object to an ByteArrayOutputStream
+	 * @param obj The object to be converted
+	 * @return A newly created ByteArrayOutputStream
+	 */
+	private ByteArrayOutputStream toByteArrayOutputStream(JsonObject obj) {
+		return toByteArrayOutputStream(obj, null);
+	}
+
+	/**
+	 * Convert a JSON object to an ByteArrayOutputStream and stores the length of the generated object
+	 * @param obj The object to be converted
+	 * @param length The object in which to store the length of the ByteArrayOutputStream
+	 * @return A newly created ByteArrayOutputStream
+	 */
+	private ByteArrayOutputStream toByteArrayOutputStream(JsonObject obj, MutableInteger length) {
 		String json = obj.toString();
-		byte[] data = json.getBytes(StandardCharsets.UTF_8);
+		return toByteArrayOutputStream(json, length);
+	}
+
+	/**
+	 * Convert a String object to an ByteArrayOutputStream
+	 * @param string The string to be converted
+	 * @return A newly created ByteArrayOutputStream
+	 */
+	private ByteArrayOutputStream toByteArrayOutputStream(String string) {
+		return toByteArrayOutputStream(string, null);
+	}
+
+	/**
+	 * Convert a String object to an ByteArrayOutputStream
+	 * @param string The string to be converted
+	 * @param length The object in which to store the length of the ByteArrayOutputStream
+	 * @return A newly created ByteArrayOutputStream
+	 */
+	private ByteArrayOutputStream toByteArrayOutputStream(String string, MutableInteger length) {
+		byte[] data = string.getBytes(StandardCharsets.UTF_8);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length);
 		baos.write(data, 0, data.length);
-		sendAnswer(baos, "application/json", error.getValue(), data.length);
+		if(length != null) {
+			length.set(data.length);
+		}
+		return baos;
 	}
+
 
 	/**
 	 * Send the response to the client.
