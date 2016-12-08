@@ -15,48 +15,84 @@
 			"userType": 5,
 			"universeType": 5,
 			"unit": 0,
-			"universe": [
-				{
-					"id": 0,
-					"name": "électrique"
-				},
-				{
-					"id": 1,
-					"name": "essence"
-				},
-				{
-					"id": 2,
-					"name": "diesel"
-				},
-				{
-					"id": 3,
-					"name": "foin"
-				},
-				{
-					"id": 4,
-					"name": "viande"
-				},
-				{
-					"id": 5,
-					"name": "vent"
-				},
-				{
-					"id": 6,
-					"name": "bois"
-				},
-				{
-					"id": 7,
-					"name": "nucléaire"
-				},
-				{
-					"id": 8,
-					"name": "magie"
-				},
-				{
-					"id": 9,
-					"name": "antimatière"
-				}
-			]
+			"universe": {
+				"nodes": [
+					{
+						"id": 0,
+						"name": "électrique"
+					},
+					{
+						"id": 1,
+						"name": "essence"
+					},
+					{
+						"id": 2,
+						"name": "diesel"
+					},
+					{
+						"id": 3,
+						"name": "foin"
+					},
+					{
+						"id": 4,
+						"name": "viande"
+					},
+					{
+						"id": 5,
+						"name": "vent"
+					},
+					{
+						"id": 6,
+						"name": "bois"
+					},
+					{
+						"id": 7,
+						"name": "nucléaire"
+					},
+					{
+						"id": 8,
+						"name": "magie"
+					},
+					{
+						"id": 9,
+						"name": "antimatière"
+					}
+				],
+				"relations": [
+					{
+						"start": 0,
+						"end": 1
+					},
+					{
+						"start": 0,
+						"end": 2
+					},
+					{
+						"start": 7,
+						"end": 9
+					},
+					{
+						"start": 1,
+						"end": 2
+					},
+					{
+						"start": 4,
+						"end": 3
+					},
+					{
+						"start": 3,
+						"end": 5
+					},
+					{
+						"start": 3,
+						"end": 6
+					},
+					{
+						"start": 5,
+						"end": 6
+					}
+				]
+			}
 		},
 		{
 			"_id": {
@@ -428,146 +464,224 @@
 			"universeType": 7,
 			"unit": 0,
 			"universe": {
-				"value": "tous",
-				"id": 31,
-				"children": [
+				"tree": {
+					"value": "tous",
+					"id": 31,
+					"children": [
+						{
+							"value": "route",
+							"id": 3,
+							"children": [
+								{
+									"value": "urbaine",
+									"id": 0
+								},
+								{
+									"value": "campagne",
+									"id": 1
+								},
+								{
+									"value": "chemin",
+									"id": 2
+								}
+							]
+						},
+						{
+							"value": "aérien",
+							"id": 7,
+							"children": [
+								{
+									"value": "hautes couches atmosphériques",
+									"id": 4
+								},
+								{
+									"value": "middle",
+									"id": 5
+								},
+								{
+									"value": "proche du sol",
+									"id": 6
+								}
+							]
+						},
+						{
+							"value": "terrestre",
+							"id": 20,
+							"children": [
+								{
+									"value": "plat",
+									"id": 11,
+									"children": [
+										{
+											"value": "enneigé",
+											"id": 8
+										},
+										{
+											"value": "désertique",
+											"id": 9
+										},
+										{
+											"value": "marécageux",
+											"id": 10
+										}
+									]
+								},
+								{
+									"value": "accidenté",
+									"id": 15,
+									"children": [
+										{
+											"value": "enneigé",
+											"id": 12
+										},
+										{
+											"value": "désertique",
+											"id": 13
+										},
+										{
+											"value": "marécageux",
+											"id": 14
+										}
+									]
+								},
+								{
+									"value": "montagneux",
+									"id": 19,
+									"children": [
+										{
+											"value": "enneigé",
+											"id": 16
+										},
+										{
+											"value": "désertique",
+											"id": 17
+										},
+										{
+											"value": "marécageux",
+											"id": 18
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": "rails",
+							"id": 21
+						},
+						{
+							"value": "marin",
+							"id": 26,
+							"children": [
+								{
+									"value": "surface",
+									"id": 22
+								},
+								{
+									"value": "pied",
+									"id": 23
+								},
+								{
+									"value": "peu profond",
+									"id": 24
+								},
+								{
+									"value": "profond",
+									"id": 25
+								}
+							]
+						},
+						{
+							"value": "espace",
+							"id": 29,
+							"children": [
+								{
+									"value": "peu profond",
+									"id": 27
+								},
+								{
+									"value": "profond",
+									"id": 28
+								}
+							]
+						},
+						{
+							"value": "sous-terrain",
+							"id": 30
+						}
+					]
+				},
+				"relations": [
 					{
-						"value": "route",
-						"id": 3,
-						"children": [
-							{
-								"value": "urbaine",
-								"id": 0
-							},
-							{
-								"value": "campagne",
-								"id": 1
-							},
-							{
-								"value": "chemin",
-								"id": 2
-							}
-						]
+						"start": 4,
+						"end": 27
 					},
 					{
-						"value": "aérien",
-						"id": 7,
-						"children": [
-							{
-								"value": "hautes couches atmosphériques",
-								"id": 4
-							},
-							{
-								"value": "middle",
-								"id": 5
-							},
-							{
-								"value": "proche du sol",
-								"id": 6
-							}
-						]
+						"start": 4,
+						"end": 27
 					},
 					{
-						"value": "terrestre",
-						"id": 20,
-						"children": [
-							{
-								"value": "plat",
-								"id": 11,
-								"children": [
-									{
-										"value": "enneigé",
-										"id": 8
-									},
-									{
-										"value": "désertique",
-										"id": 9
-									},
-									{
-										"value": "marécageux",
-										"id": 10
-									}
-								]
-							},
-							{
-								"value": "accidenté",
-								"id": 15,
-								"children": [
-									{
-										"value": "enneigé",
-										"id": 12
-									},
-									{
-										"value": "désertique",
-										"id": 13
-									},
-									{
-										"value": "marécageux",
-										"id": 14
-									}
-								]
-							},
-							{
-								"value": "(montagneux",
-								"id": 16
-							},
-							{
-								"value": "enneigé",
-								"id": 17
-							},
-							{
-								"value": "désertique",
-								"id": 18
-							},
-							{
-								"value": "marécageux",
-								"id": 19
-							}
-						]
+						"start": 0,
+						"end": 8
 					},
 					{
-						"value": "rails",
-						"id": 21
+						"start": 1,
+						"end": 8
 					},
 					{
-						"value": "marin",
-						"id": 26,
-						"children": [
-							{
-								"value": "surface",
-								"id": 22
-							},
-							{
-								"value": "pied",
-								"id": 23
-							},
-							{
-								"value": "peu profond",
-								"id": 24
-							},
-							{
-								"value": "profond",
-								"id": 25
-							}
-						]
+						"start": 1,
+						"end": 9
 					},
 					{
-						"value": "espace",
-						"id": 29,
-						"children": [
-							{
-								"value": "peu profond",
-								"id": 27
-							},
-							{
-								"value": "profond",
-								"id": 28
-							}
-						]
+						"start": 1,
+						"end": 10
 					},
 					{
-						"value": "sous-terrain",
-						"id": 30
+						"start": 1,
+						"end": 12
+					},
+					{
+						"start": 1,
+						"end": 13
+					},
+					{
+						"start": 1,
+						"end": 14
+					},
+					{
+						"start": 2,
+						"end": 8
+					},
+					{
+						"start": 2,
+						"end": 9
+					},
+					{
+						"start": 2,
+						"end": 10
+					},
+					{
+						"start": 2,
+						"end": 12
+					},
+					{
+						"start": 2,
+						"end": 13
+					},
+					{
+						"start": 2,
+						"end": 14
+					},
+					{
+						"start": 2,
+						"end": 16
+					},
+					{
+						"start": 2,
+						"end": 17
+					},
+					{
+						"start": 2,
+						"end": 18
 					}
 				]
 			}
@@ -583,40 +697,68 @@
 			"userType": 5,
 			"universeType": 5,
 			"unit": 0,
-			"universe": [
-				{
-					"id": 0,
-					"name": "bateau"
-				},
-				{
-					"id": 1,
-					"name": "voiture"
-				},
-				{
-					"id": 2,
-					"name": "avion"
-				},
-				{
-					"id": 3,
-					"name": "véhicule supra luminique"
-				},
-				{
-					"id": 4,
-					"name": "vétérinaire"
-				},
-				{
-					"id": 5,
-					"name": "bafa"
-				},
-				{
-					"id": 6,
-					"name": "bus"
-				},
-				{
-					"id": 7,
-					"name": "license de pilote espace profond"
-				}
-			]
+			"universe": {
+				"nodes": [
+					{
+						"id": 0,
+						"name": "bateau"
+					},
+					{
+						"id": 1,
+						"name": "voiture"
+					},
+					{
+						"id": 2,
+						"name": "avion"
+					},
+					{
+						"id": 3,
+						"name": "véhicule supra luminique"
+					},
+					{
+						"id": 4,
+						"name": "vétérinaire"
+					},
+					{
+						"id": 5,
+						"name": "bafa"
+					},
+					{
+						"id": 6,
+						"name": "bus"
+					},
+					{
+						"id": 7,
+						"name": "license de pilote espace profond"
+					}
+				],
+				"relations": [
+					{
+						"start": 0,
+						"end": 1
+					},
+					{
+						"start": 0,
+						"end": 6
+					},
+					{
+						"start": 1,
+						"end": 6
+					},
+					{
+						"start": 4,
+						"end": 5
+					},
+					{
+						"start": 2,
+						"end": 3
+					},
+					{
+						"start": 3,
+						"end": 7
+					}
+				]
+			}
 		},
 		{
 			"_id": {
