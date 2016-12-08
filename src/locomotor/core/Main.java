@@ -13,6 +13,8 @@ import locomotor.components.network.IEndpointHandler;
 import locomotor.components.network.NetworkData;
 import locomotor.components.network.NetworkHandler;
 import locomotor.components.network.NetworkResponseFactory;
+import locomotor.components.network.NetworkResponse;
+import locomotor.components.network.NetworkJsonResponse;
 
 public class Main {
 	
@@ -64,6 +66,9 @@ public class Main {
 				else {
 					System.out.println("There was an error while parsing the parameters");
 				}
+
+				NetworkJsonResponse resp = response.getJsonContext();
+				resp.failure(NetworkResponse.ErrorCode.NOT_FOUND, "Ça a l'air de fonctionner");
 			}
 		});
 

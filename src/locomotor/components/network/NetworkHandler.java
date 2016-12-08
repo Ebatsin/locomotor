@@ -121,10 +121,11 @@ public class NetworkHandler {
 				}
 
 				if(handler == null) {
-					// @todo : handle no API answer
+					NetworkJsonResponse njr = new NetworkJsonResponse(exchange);
+					njr.failure(NetworkResponse.ErrorCode.BAD_REQUEST, "There is no API endpoint with this name.");
+					return;
 				}
 				else {
-					System.out.println("Longueur : " + exchange.getRequestHeaders().getFirst("Content-Length"));
 					handler.handle(new NetworkData(exchange), new NetworkResponseFactory(exchange));
 				}
 			}
