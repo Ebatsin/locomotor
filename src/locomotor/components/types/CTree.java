@@ -9,7 +9,7 @@ import java.util.List;
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CTree implements CUniverseType, CItemType, CUserType {
+public class CTree implements CItemType, CUserType {
 	
 	/**
 	 * The identifier.

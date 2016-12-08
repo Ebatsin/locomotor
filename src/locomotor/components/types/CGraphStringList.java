@@ -3,8 +3,12 @@ package locomotor.components.types;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+
 import locomotor.components.Pair;
 
+/**
+ * @todo
+ */
 public class CGraphStringList implements CUniverseType {
 
 	/**
@@ -45,7 +49,7 @@ public class CGraphStringList implements CUniverseType {
 		str += "Relations:\n";
 		for(Pair<Integer, Integer> value : _relations) {
 		
-			str += value.getLeft() + " - " + value.getRight() + "\n";
+			str += value.toString() + "\n";
 		}
 		return str;
 	}

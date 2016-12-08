@@ -59,7 +59,15 @@ public class TypeFactory {
 				return new CWeightedStringList(universe.getLong("min"), universe.getLong("max"), map);
 			}
 			case TREE: {
-				return getTree(object);
+				Document universe = (Document)(new Document("universe", object)).get("universe");
+				CTree tree = getTree(universe.get("tree"));
+				
+				ArrayList<Document> relations = (ArrayList<Document>)universe.get("relations");
+				ArrayList<Pair<Integer, Integer>> pair = new ArrayList<Pair<Integer, Integer>>();
+				for(Document value : relations) {
+					pair.add(new Pair(value.getInteger("start"), value.getInteger("end")));
+				}
+				return new CGraphTree(tree, pair);
 			}
 			default: { // error
 				System.err.println("Error: Illegal universe type");
@@ -115,8 +123,8 @@ public class TypeFactory {
 				return new CMappedStringList(map);
 			}
 			case INTEGER_TREE: {
-				CTree treeMod = (CTree)universe;
-				CTree tree = getTree(object, treeMod);
+				CGraphTree treeMod = (CGraphTree)universe;
+				CTree tree = getTree(object, treeMod.getTree());
 				return tree;
 			}	
 			default: { 

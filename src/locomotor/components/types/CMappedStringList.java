@@ -7,6 +7,11 @@ import java.util.TreeMap;
  */
 public class CMappedStringList extends CStringList {
 
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      values  The values
+	 */
 	public CMappedStringList(TreeMap<Integer, String> values) {
 		super(values);
 	}
