@@ -3,6 +3,8 @@ package locomotor.components.types;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import locomotor.components.Pair;
+
 import org.bson.Document;
 
 /**
@@ -34,12 +36,18 @@ public class TypeFactory {
 				return new CIntervalDouble(universe.getDouble("min"), universe.getDouble("max"));
 			}		
 			case STRING_INTERVAL: {
-				ArrayList<Document> values = (ArrayList<Document>)object;
+				Document universe = (Document)(new Document("universe", object)).get("universe");
+				ArrayList<Document> nodes = (ArrayList<Document>)universe.get("nodes");
 				TreeMap<Integer, String> map = new TreeMap<Integer, String>();
-				for(Document value : values) {
+				ArrayList<Document> relations = (ArrayList<Document>)universe.get("relations");
+				ArrayList<Pair<Integer, Integer>> pair = new ArrayList<Pair<Integer, Integer>>();
+				for(Document value : nodes) {
 					map.put(value.getInteger("id"), value.getString("name"));
 				}
-				return new CMappedStringList(map);
+				for(Document value : relations) {
+					pair.add(new Pair(value.getInteger("start"), value.getInteger("end")));
+				}
+				return new CGraphStringList(map, pair);
 			}
 			case WEIGHTED_STRING_LIST: {
 				Document universe = (Document)(new Document("universe", object)).get("universe");
@@ -98,7 +106,7 @@ public class TypeFactory {
 				ArrayList<Integer> values = (ArrayList<Integer>)object;
 				TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 				
-				CStringList listMod = (CStringList)universe;
+				CGraphStringList listMod = (CGraphStringList)universe;
 				TreeMap<Integer, String> critMap = listMod.getMap();
 				
 				for(Integer value : values) {

@@ -39,6 +39,11 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 		return str;
 	}
 
+	/**
+	 * Gets the map.
+	 *
+	 * @return     The map.
+	 */
 	public TreeMap<Integer, String> getMap() {
 		return _values;
 	}

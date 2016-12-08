@@ -129,6 +129,8 @@ public class DBH {
 
 				for(Document crit : critIt) {
 
+					System.out.println("Retrieving the criteria " + crit.getString("name"));
+
 					CUniverseType universe = typeFactory.getUniverse(CEnumUniverseType.valueOf(
 						crit.getInteger("universeType")), crit.get("universe"));
 
