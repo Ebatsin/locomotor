@@ -110,9 +110,8 @@ public class NetworkData {
 			return _params.get(param).toString("utf-8");
 		}
 		catch(Exception exception) {
+			return "";
 		}
-
-		return "";
 	}
 
 	/**
@@ -133,6 +132,10 @@ public class NetworkData {
 		return _params.containsKey(param);
 	}
 
+	/**
+	 * Returns all the received parameters names.
+	 * @return An array of the received parameters names.
+	 */
 	public ArrayList<String> getParametersName() {
 		ArrayList<String> names = new ArrayList<String>();
 		for(Map.Entry<String, ByteArrayOutputStream> entry : _params.entrySet()) {
