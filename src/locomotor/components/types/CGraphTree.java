@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import locomotor.components.Pair;
 
 /**
- * @todo
+ * @todo .
  */
 public class CGraphTree implements CUniverseType {
 
 	/**
-	 * The tree representing the universe (all possible data)
+	 * The tree representing the universe (all possible data).
 	 */
 	private CTree _universeTree;
 
@@ -22,8 +22,8 @@ public class CGraphTree implements CUniverseType {
 	/**
 	 * Constructs the object.
 	 *
-	 * @param      universeTree  The universe tree
-	 * @param      relations     The relations
+	 * @param      universeTree  The universe tree.
+	 * @param      relations     The relations.
 	 */
 	public CGraphTree(CTree universeTree, ArrayList<Pair<Integer, Integer>> relations) {
 		_universeTree = universeTree;

@@ -9,11 +9,11 @@ import java.util.TreeMap;
 public class CWeightedStringList extends CStringList {
 
 	/**
-	 * The minimum bound
+	 * The minimum bound.
 	 */
 	private Long _min;
 	/**
-	 * The maximum bound
+	 * The maximum bound.
 	 */
 	private Long _max;
 

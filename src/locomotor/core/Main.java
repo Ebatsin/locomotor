@@ -1,10 +1,10 @@
 package locomotor.core;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;

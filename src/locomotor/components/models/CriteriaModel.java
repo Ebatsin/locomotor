@@ -1,8 +1,8 @@
 package locomotor.components.models;
 
+import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
-import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CUniverseType;
 
 /**

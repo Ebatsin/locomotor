@@ -15,11 +15,11 @@ import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
 import locomotor.components.models.ItemCriteria;
 
+import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
-import locomotor.components.types.CEnumItemType;
-import locomotor.components.types.CUniverseType;
 import locomotor.components.types.CItemType;
+import locomotor.components.types.CUniverseType;
 import locomotor.components.types.TypeFactory;
 
 import org.bson.Document;

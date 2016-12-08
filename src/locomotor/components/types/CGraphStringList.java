@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import locomotor.components.Pair;
 
 /**
- * @todo
+ * @todo .
  */
 public class CGraphStringList implements CUniverseType {
 

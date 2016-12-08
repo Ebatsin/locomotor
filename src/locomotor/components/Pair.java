@@ -1,57 +1,58 @@
 package locomotor.components;
 
 /**
- * Generics pair
+ * Generics pair.
  *
- * @param      <L>   The left element
- * @param      <R>   The right element
+ * @param      <L>   The left element.
+ * @param      <R>   The right element.
  */
 public class Pair<L, R> {
-    
-    /**
-     * The left value
-     */
-    private L _left;
-    /**
-     * The right value
-     */
-    private R _right;
 
-    /**
-     * Constructs the object.
-     *
-     * @param      left   The left
-     * @param      right  The right
-     */
-    public Pair(L left, R right) {
-        _left = left;
-        _right = right;
-    }
+	/**
+	 * The left element.
+	 */
+	private L _left;
 
-    /**
-     * Gets the left.
-     *
-     * @return     The left.
-     */
-    public L getLeft() {
-        return _left;
-    }
+	/**
+	 * The right element.
+	 */
+	private R _right;
 
-    /**
-     * Gets the right.
-     *
-     * @return     The right.
+	/**
+	 * Constructs the object.
+	 *
+	 * @param	left   The left element.
+	 * @param	right  The right element.
      */
-    public R getRight() {
-        return _right;
-    }
+	public Pair(L left, R right) {
+		_left = left;
+		_right = right;
+	}
 
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return     String representation of the object.
-     */
-    public String toString() {
-        return _right + ";" + _left;
-    }
+	/**
+	 * Gets the left element.
+	 *
+	 * @return     The left element.
+	 */
+	public L getLeft() {
+		return _left;
+	}
+
+	/**
+	 * Gets the right element.
+	 *
+	 * @return     The right element.
+	 */
+	public R getRight() {
+		return _right;
+	}
+
+	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
+	public String toString() {
+		return _right + ";" + _left;
+	}
 }
