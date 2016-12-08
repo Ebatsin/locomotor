@@ -1,5 +1,6 @@
 package locomotor.components.network;
 
+import java.util.List;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpsConfigurator;
@@ -42,20 +43,10 @@ public class NetworkHandler {
 	 */
 	private HttpsServer _server;
 
-	/**
-	 * Contains a mapping of the endpoints mapped to their handling function.
-	 */
-	private HashMap<String, IEndpointHandler> _handlers;
-
-	/**
-	 * The root of the server. Only the request made on this directory will be listened to by the server.
-	 */
-	private String _root;
-
+	private HashMap<String, IEndpointHandler> _endpointHandlers;
 
 	private NetworkHandler() {
-		_root = "/";
-		_handlers = new HashMap<String, IEndpointHandler>();
+		_endpointHandlers = new HashMap<String, IEndpointHandler>();
 	}
 
 	/**
@@ -77,11 +68,10 @@ public class NetworkHandler {
 	 * @param keyStoreName The path to the keyStore that contains the certificate
 	 * @param keyStorePassword The password of the keyStore
 	 */
-	public synchronized void init(int port, String root, String keyStoreName, String keyStorePassword) {
+	public synchronized void init(int port, String keyStoreName, String keyStorePassword) {
 		try {
 			InetSocketAddress address = new InetSocketAddress(port);
 			char[] password = keyStorePassword.toCharArray();
-
 
 			_server = HttpsServer.create(address, 0);
 
@@ -122,44 +112,27 @@ public class NetworkHandler {
 			System.exit(1);
 		}
 
-		_root = root;
-
-		_server.createContext(_root, new HttpHandler() {
+		_server.createContext("/", new HttpHandler() {
 			public void handle(HttpExchange exchange) throws IOException {
-				System.out.println("Client connection. \nRequest method : " + exchange.getRequestMethod() 
-					+ " on '" + exchange.getRequestURI() + "'");
-				TreeMap<String, String> parameters = parsePostParameters(exchange.getRequestBody());
-				IEndpointHandler handler = _handlers.get(exchange.getRequestURI().toString());
-
+				System.out.println("Client connection on '" + exchange.getRequestURI() + "'");
+				IEndpointHandler handler = _endpointHandlers.get(exchange.getRequestURI().toString());
 				if(handler == null) {
-					handler = _handlers.get(exchange.getRequestURI() + "/");
+					handler = _endpointHandlers.get(exchange.getRequestURI().toString() + '/');
 				}
 
-				String response;
-
 				if(handler == null) {
-					response = "Impossible to find a handler for this request";
+					// @todo : handle no API answer
 				}
 				else {
-					response = "hang on";
-					handler.handle(parameters);
+					System.out.println("Longueur : " + exchange.getRequestHeaders().getFirst("Content-Length"));
+					handler.handle(new NetworkData(exchange), new NetworkResponseFactory(exchange));
 				}
-
-				exchange.sendResponseHeaders(200, response.length());
-				OutputStream os = exchange.getResponseBody();
-				os.write(response.getBytes());
-				os.close();
 			}
 		});
 	}
 
-	/**
-	 * Add a handler for an URI.
-	 * @param endpoint The URI that will be matched (ex: for https://serverAddress/root/a/b, give "a/b" as the endpoint)
-	 * @param handler The handler that will handle the request
-	 */
-	public void link(String endpoint, IEndpointHandler handler) {
-		_handlers.put(_root + endpoint, handler);
+	public void createEndpoint(String endpointName, IEndpointHandler handler) {
+		_endpointHandlers.put(endpointName + '/', handler);
 	}
 
 	/**
@@ -175,38 +148,5 @@ public class NetworkHandler {
 	 */
 	public void stop() {
 		_server.stop(5);
-	}
-
-	/**
-	 * Convert the stream given by the client to a map of parameters (in a key=>value fashion).
-	 * @param is The input stream that contains the parameters of the form "a=b&c=d"
-	 * @return A map containing all the parameters
-	 */
-	private TreeMap<String, String> parsePostParameters(InputStream is) {
-		try {
-			TreeMap<String, String> params = new TreeMap<String, String>();
-			InputStreamReader isr = new InputStreamReader(is,"utf-8");
-			BufferedReader br = new BufferedReader(isr);
-			String query = br.readLine();
-
-			if(query == null) {
-				return params;
-			}
-
-			String[] keyval = query.split("[&]");
-			for(String str : keyval) {
-				String[] param = str.split("[=]");
-				String key = URLDecoder.decode(param[0], System.getProperty("file.encoding"));
-				String value = URLDecoder.decode(param[1], System.getProperty("file.encoding"));
-				params.put(key, value);
-			}
-
-			return params;
-		}
-		catch(Exception exception) {
-			System.out.println("Error while parsing parameters. " + exception.toString());
-			System.exit(1);
-		}
-		return null;
 	}
 }

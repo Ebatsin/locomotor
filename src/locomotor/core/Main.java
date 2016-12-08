@@ -10,7 +10,9 @@ import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Vehicle;
 
 import locomotor.components.network.IEndpointHandler;
+import locomotor.components.network.NetworkData;
 import locomotor.components.network.NetworkHandler;
+import locomotor.components.network.NetworkResponseFactory;
 
 public class Main {
 	
@@ -45,16 +47,24 @@ public class Main {
 		System.out.println("get network instance");
 		NetworkHandler nh = NetworkHandler.getInstance();
 		System.out.println("init");
-		nh.init(8000, "/", "key.pfx", "motdepasse");
+		nh.init(8000, "key.pfx", "motdepasse");
 
-		System.out.println("Add handlers");
-		nh.link("api", new IEndpointHandler() {
-			public void handle(TreeMap<String, String> parameters) {
-				for(Map.Entry<String,String> entry : parameters.entrySet()) {
-					System.out.println(entry.getKey() + " => " + entry.getValue());
+		nh.createEndpoint("/api/test", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {
+				if(data.isValid()) {
+					if(data.isDefined("text1")) {
+						System.out.println("Contenu de text1 : '" + data.getAsString("text1") + "'");
+					}
+					else {
+						System.out.println("Le paramètre text1 n'a pas été trouvé");
+					}
+				}
+				else {
+					System.out.println("There was an error while parsing the parameters");
 				}
 			}
 		});
+
 
 		System.out.println("start");
 		nh.start();
