@@ -459,7 +459,7 @@
 			"name": "environnement",
 			"question": "Quels sont les types d'environnement dans lequel le véhicule peut aller ?",
 			"isComparable": true,
-			"itemType": 7,
+			"itemType": 9,
 			"userType": 7,
 			"universeType": 7,
 			"unit": 0,
