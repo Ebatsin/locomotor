@@ -1,6 +1,6 @@
 package locomotor.components.types;
 
 /**
- * @todo .
+ * @todo.
  */
 public interface CComparableType extends CType {}
