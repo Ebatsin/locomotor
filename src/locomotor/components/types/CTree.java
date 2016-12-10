@@ -9,7 +9,7 @@ import java.util.List;
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CTree implements CItemType, CUserType {
+public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree> {
 	
 	/**
 	 * The identifier.
@@ -135,5 +135,18 @@ public class CTree implements CItemType, CUserType {
 		}
 		str += ")";
 		return str;
+	}
+
+	/**
+	 * Compare the tree of the vehicle with the tree of the user
+	 *
+	 * @param      user      The user tree
+	 * @param      universe  The universe tree (containg the graph)
+	 *
+	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 */
+	public double compare(CTree user, CGraphTree universe) {
+		// @todo
+		return 0.0;
 	}
 }
