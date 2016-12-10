@@ -92,7 +92,11 @@ public class TypeFactory {
 		switch(type) {
 			case INTEGER: {
 				Document value = (Document)(new Document("value", object));
-				return new CInteger(value.getLong("value"));
+				if (universe.getClass() == CIntervalInteger.class) {
+					return new CInteger(value.getLong("value"));
+				} else {
+					return new CWeightedInteger(value.getLong("value"));
+				}
 			}
 			case FLOAT: {
 				Document value = (Document)(new Document("value", object));

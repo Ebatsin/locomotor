@@ -27,5 +27,5 @@ public class CWeightedStringList extends CStringList {
 		super(values);
 		_min = min;
 		_max = max;
-	}	
+	}
 }

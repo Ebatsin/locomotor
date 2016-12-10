@@ -1,15 +1,9 @@
 package locomotor.components.types;
 
 /**
- * Encapsulate a Long value.
- * @see CEnumItemType.
+ * @todo.
  */
-public class CInteger implements CItemType, CComparable<CIntervalInteger, CIntervalInteger> {
-
-	/**
-	 * The integer value (64-bit).
-	 */
-	private Long _value;
+public class CInteger extends CLong implements CComparable<CIntervalInteger, CIntervalInteger> {
 
 	/**
 	 * Constructs the CFloat object.
@@ -17,16 +11,7 @@ public class CInteger implements CItemType, CComparable<CIntervalInteger, CInter
 	 * @param      value  The value
 	 */
 	public CInteger(Long value) {
-		_value = value;
-	}
-
-	/**
-	 * Returns a string representation of the object.
-	 *
-	 * @return     String representation of the object.
-	 */
-	public String toString() {
-		return "(" + _value + ")";
+		super(value);
 	}
 
 	/**
