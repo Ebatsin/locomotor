@@ -6,7 +6,7 @@ package locomotor.components.types;
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CIntervalInteger extends CInterval {
+public class CIntervalInteger extends CInterval implements CComparable<CIntervalInteger, CIntervalInteger> {
 
 	/**
 	 * Initializes a closed interval [min, max].
@@ -16,6 +16,19 @@ public class CIntervalInteger extends CInterval {
 	 */
 	public CIntervalInteger(Long min, Long max) {
 		super(min, max);
+	}
+
+	/**
+	 * Compare the integer interval value of the vehicle with the integer interval value of the user
+	 *
+	 * @param      user      The user
+	 * @param      universe  The universe
+	 *
+	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 */
+	public double compare(CIntervalInteger user, CIntervalInteger universe) {
+		// @todo
+		return 0.0;
 	}
 
 }

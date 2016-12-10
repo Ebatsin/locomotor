@@ -34,13 +34,13 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	/**
 	 * Compare boolean value
 	 *
-	 * @param      item      The item
+	 * @param      user      The user criteria
 	 * @param      universe  The universe
 	 *
 	 * @return     1.0 (match), 0.0 otherwise
 	 */
-	public double compare(CBoolean item, CBoolean universe) {
-		return (_value == item._value) ? 1.0 : 0.0;
+	public double compare(CBoolean user, CBoolean universe) {
+		return (_value == user._value) ? 1.0 : 0.0;
 	}
 
 }

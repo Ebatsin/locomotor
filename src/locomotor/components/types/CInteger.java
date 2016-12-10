@@ -4,7 +4,7 @@ package locomotor.components.types;
  * Encapsulate a Long value.
  * @see CEnumItemType.
  */
-public class CInteger implements CItemType {
+public class CInteger implements CItemType, CComparable<CIntervalInteger, CIntervalInteger> {
 
 	/**
 	 * The integer value (64-bit).
@@ -27,6 +27,19 @@ public class CInteger implements CItemType {
 	 */
 	public String toString() {
 		return "(" + _value + ")";
+	}
+
+	/**
+	 * Compare the integer value of the vehicle with the integer interval value of the user
+	 *
+	 * @param      user      The user
+	 * @param      universe  The universe
+	 *
+	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 */
+	public double compare(CIntervalInteger user, CIntervalInteger universe) {
+		// @todo
+		return 0.0;
 	}
 	
 }
