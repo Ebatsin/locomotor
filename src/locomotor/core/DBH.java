@@ -4,6 +4,9 @@ import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.set;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ import locomotor.components.types.CUniverseType;
 import locomotor.components.types.TypeFactory;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  * Singleton class for handling database connection and requests.
@@ -263,6 +267,45 @@ public class DBH {
 
 		return listItems;
 
+	}
+
+	/**
+	 * Creates an user.
+	 *
+	 * @param      username  The username
+	 * @param      password  The password
+	 */
+	public static void createUser(String username, String password) {
+		MongoCollection<Document> users = md.getCollection("users");
+		Document userAlreadyExists = users.find(eq("username", username)).first();
+		if (userAlreadyExists != null) {
+			// @todo: handle username already exists
+			System.out.println(userAlreadyExists.toJson());
+		} else {
+			
+			Document user = new Document();
+			user.append("username", username.trim());
+			user.append("password", "");
+			user.append("isAdmin", false);
+			user.append("notifications", new ArrayList<Document>());
+			users.insertOne(user);
+			
+			ObjectId id = (ObjectId)user.get("_id");
+			String passwordHash = "";
+			
+			try {
+
+				passwordHash = PasswordStorage.createHash(password + id.toString());
+
+			} catch(Exception ex) {
+				// delete the user from the database
+				users.deleteOne(eq("_id", id));
+            	System.out.println("ERROR: " + ex);
+            	System.exit(1);
+			}
+			// add hashed password
+			users.updateOne(eq("_id", id), set("password", passwordHash));
+		}
 	}
 
 }
