@@ -15,9 +15,9 @@ import locomotor.components.models.Vehicle;
 import locomotor.components.network.IEndpointHandler;
 import locomotor.components.network.NetworkData;
 import locomotor.components.network.NetworkHandler;
-import locomotor.components.network.NetworkResponseFactory;
-import locomotor.components.network.NetworkResponse;
 import locomotor.components.network.NetworkJsonResponse;
+import locomotor.components.network.NetworkResponse;
+import locomotor.components.network.NetworkResponseFactory;
 
 public class Main {
 	

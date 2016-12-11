@@ -38,8 +38,8 @@ COMPONENTS_TYPES = $(COMPONENTS)/types
 COMPONENTS_MODELS = $(COMPONENTS)/models
 CORE = $(PACKAGE)/core
 FRONT = $(PACKAGE)/front
-INT_COMPONENTS = 
-INT_ADMIN =
+INT_COMPONENTS = $(FRONT)/components
+INT_ADMIN = $(FRONT)/administration
 INT_USER = $(FRONT)/user
 
 # lib
@@ -101,16 +101,31 @@ clean-core:
 	$(RM) $(CLASS)/$(CORE)/*
 
 ###################################################
-# Housekeeping:
+# Lintering:
 ###################################################
 
 .PHONY: linter
-linter: linter-components linter-core
+linter: linter-core linter-front
 
-.PHONY: linter-components
+.PHONY: linter-core
 linter-core: linter-components
 	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(CORE)
 
 .PHONY: linter-components
 linter-components:
 	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(COMPONENTS)
+
+.PHONY: linter-front
+linter-front: linter-front-components linter-front-user linter-front-admin
+
+.PHONY: linter-front-components
+linter-front-components:
+	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(INT_COMPONENTS)
+
+.PHONY: linter-front-user
+linter-front-user:
+	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(INT_USER)
+
+.PHONY: linter-front-admin
+linter-front-admin:
+	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(INT_ADMIN)

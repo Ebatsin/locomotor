@@ -1,8 +1,10 @@
 package locomotor.front.user;
 
 import com.eclipsesource.json.JsonObject;
-import java.util.function.Consumer;
+
 import java.util.TreeMap;
+import java.util.function.Consumer;
+
 import locomotor.front.components.network.ClientRequest;
 
 public class Main {
@@ -22,6 +24,6 @@ public class Main {
 			}
 		});
 
-		while(true);
+		while(true) {}
 	}
 }

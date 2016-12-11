@@ -2,17 +2,17 @@ package locomotor.front.components.network;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
-import java.io.InputStream;
-import java.net.URL;
-import javax.net.ssl.HttpsURLConnection;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-import java.util.Scanner;
-import java.util.TreeMap;
-
 
 import java.io.DataInputStream; // @todo remove it
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ClientRequest {
 	String _hostname;
