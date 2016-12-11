@@ -1,5 +1,8 @@
 package locomotor.core;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -68,7 +71,10 @@ public class Main {
 				}
 
 				NetworkJsonResponse resp = response.getJsonContext();
-				resp.failure(NetworkResponse.ErrorCode.NOT_FOUND, "Ça a l'air de fonctionner");
+				JsonObject obj = Json.object()
+					.add("test", "ok")
+					.add("message", "bonjour");
+				resp.success(obj);
 			}
 		});
 

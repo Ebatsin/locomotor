@@ -52,7 +52,7 @@ public abstract class NetworkResponse {
 	 * @param obj The object to be converted
 	 * @return A newly created ByteArrayOutputStream
 	 */
-	private ByteArrayOutputStream toByteArrayOutputStream(JsonObject obj) {
+	protected ByteArrayOutputStream toByteArrayOutputStream(JsonObject obj) {
 		return toByteArrayOutputStream(obj, null);
 	}
 
@@ -62,7 +62,7 @@ public abstract class NetworkResponse {
 	 * @param length The object in which to store the length of the ByteArrayOutputStream
 	 * @return A newly created ByteArrayOutputStream
 	 */
-	private ByteArrayOutputStream toByteArrayOutputStream(JsonObject obj, MutableInteger length) {
+	protected ByteArrayOutputStream toByteArrayOutputStream(JsonObject obj, MutableInteger length) {
 		String json = obj.toString();
 		return toByteArrayOutputStream(json, length);
 	}
@@ -72,7 +72,7 @@ public abstract class NetworkResponse {
 	 * @param string The string to be converted
 	 * @return A newly created ByteArrayOutputStream
 	 */
-	private ByteArrayOutputStream toByteArrayOutputStream(String string) {
+	protected ByteArrayOutputStream toByteArrayOutputStream(String string) {
 		return toByteArrayOutputStream(string, null);
 	}
 
@@ -82,7 +82,7 @@ public abstract class NetworkResponse {
 	 * @param length The object in which to store the length of the ByteArrayOutputStream
 	 * @return A newly created ByteArrayOutputStream
 	 */
-	private ByteArrayOutputStream toByteArrayOutputStream(String string, MutableInteger length) {
+	protected ByteArrayOutputStream toByteArrayOutputStream(String string, MutableInteger length) {
 		byte[] data = string.getBytes(StandardCharsets.UTF_8);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length);
 		baos.write(data, 0, data.length);
@@ -100,7 +100,7 @@ public abstract class NetworkResponse {
 	 * @param code The HTTP status code to send
 	 * @param length The length of the message sent. If unknown, can be set to 0
 	 */
-	private void sendAnswer(ByteArrayOutputStream out, String contentType, int code, int length) {
+	protected void sendAnswer(ByteArrayOutputStream out, String contentType, int code, int length) {
 		Headers headers = _exchange.getResponseHeaders();
 		if(contentType != null) {
 			headers.set("Content-Type", contentType);
