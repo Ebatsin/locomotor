@@ -4,10 +4,10 @@ import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Updates.set;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.Updates.set;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -281,7 +281,8 @@ public class DBH {
 		if (userAlreadyExists != null) {
 			// @todo: handle username already exists
 			System.out.println(userAlreadyExists.toJson());
-		} else {
+		}
+		else {
 			
 			Document user = new Document();
 			user.append("username", username.trim());
@@ -297,11 +298,12 @@ public class DBH {
 
 				passwordHash = PasswordStorage.createHash(password + id.toString());
 
-			} catch(Exception ex) {
+			}
+			catch(Exception ex) {
 				// delete the user from the database
 				users.deleteOne(eq("_id", id));
-            	System.out.println("ERROR: " + ex);
-            	System.exit(1);
+				System.out.println("ERROR: " + ex);
+				System.exit(1);
 			}
 			// add hashed password
 			users.updateOne(eq("_id", id), set("password", passwordHash));

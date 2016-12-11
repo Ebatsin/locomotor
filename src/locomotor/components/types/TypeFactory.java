@@ -94,7 +94,8 @@ public class TypeFactory {
 				Document value = (Document)(new Document("value", object));
 				if (universe.getClass() == CIntervalInteger.class) {
 					return new CInteger(value.getLong("value"));
-				} else {
+				}
+				else {
 					return new CWeightedInteger(value.getLong("value"));
 				}
 			}

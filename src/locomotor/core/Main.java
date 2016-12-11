@@ -34,6 +34,8 @@ public class Main {
 			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
 			ArrayList<Item> items = db.getItems(catModel);
+			
+			// db.createUser("test", "motdepasse");
 
 			db.disconnect();
 
@@ -42,22 +44,22 @@ public class Main {
 			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
 		}
 
-		System.out.println("get network instance");
-		NetworkHandler nh = NetworkHandler.getInstance();
-		System.out.println("init");
-		nh.init(8000, "/", "key.pfx", "motdepasse");
+		// System.out.println("get network instance");
+		// NetworkHandler nh = NetworkHandler.getInstance();
+		// System.out.println("init");
+		// nh.init(8000, "/", "key.pfx", "motdepasse");
 
-		System.out.println("Add handlers");
-		nh.link("api", new IEndpointHandler() {
-			public void handle(TreeMap<String, String> parameters) {
-				for(Map.Entry<String,String> entry : parameters.entrySet()) {
-					System.out.println(entry.getKey() + " => " + entry.getValue());
-				}
-			}
-		});
+		// System.out.println("Add handlers");
+		// nh.link("api", new IEndpointHandler() {
+		// 	public void handle(TreeMap<String, String> parameters) {
+		// 		for(Map.Entry<String,String> entry : parameters.entrySet()) {
+		// 			System.out.println(entry.getKey() + " => " + entry.getValue());
+		// 		}
+		// 	}
+		// });
 
-		System.out.println("start");
-		nh.start();
+		// System.out.println("start");
+		// nh.start();
 		
 	}
 }
