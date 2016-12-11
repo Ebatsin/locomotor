@@ -1,0 +1,18 @@
+{
+	"_id": {
+		"$oid": "584d825657ab9e49c8781b60"
+	},
+	"username": "test",
+	"password": "sha1:64000:18:K4UUmNjrJISTW/dslOlRjG5WTpF5X4as:VLkf9BSXgiJaFxZu8KrO3akP",
+	"isAdmin": false,
+	"notifications": []
+}
+{
+	"_id": {
+		"$oid": "584dd1be9c98e0d31c6a8edb"
+	},
+	"username": "test2",
+	"password": "sha1:64000:18:X6VyFYw0uRgiyjojLps3+8tgZLY73Kot:ne/iSnG/aGqgcYX5LcDd4gau",
+	"isAdmin": false,
+	"notifications": []
+}
