@@ -69,13 +69,13 @@ build-core: linter-core
 
 build-front-user:
 	-test -d $(CLASS) || mkdir $(CLASS)
-	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(CLASS):resources:" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIB)/*:$(CLASS):resources:" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
 
 run-core:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE)
 
 run-front-user:
-	$(RUN) -classpath "$(CLASS):resources:" $(PACKAGE_FRONT_USER)
+	$(RUN) -classpath "$(LIB)/*:$(CLASS):resources:" $(PACKAGE_FRONT_USER)
 
 ###################################################
 # Doc:
