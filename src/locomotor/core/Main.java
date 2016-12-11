@@ -31,11 +31,13 @@ public class Main {
 			
 			db.connectToDatabase("locomotor");
 
-			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
-			ArrayList<Item> items = db.getItems(catModel);
+			// ArrayList<Item> items = db.getItems(catModel);
 			
-			// db.createUser("test", "motdepasse");
+			db.createUser("test2", "motdepasse");
+			db.authUser("test", "motdepasse");
+			db.authUser("test2", "motdepasse");
 
 			db.disconnect();
 
