@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import locomotor.components.logging.*;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 
@@ -26,20 +27,40 @@ public class Main {
 
 		try {
 
-			DBH db = DBH.getInstance();
-			db.connect("localhost", 27017);
+			ErrorHandler eh = ErrorHandler.getInstance();
+
+			Long pid = new Long(1234);
+
+			ErrorContext ec = eh.add(pid);
+
+			String method1 = "methodGetCriteria";
+			Logging log1 = new Logging("An error has occured while retrieving a criteria model", true, "context values or message");
+
+			ec.add(method1, log1);
+
+			String method2 = "methodAddBooking";
+			Logging log2 = new Logging("An error has occured adding a booking, the vehicle does not exist", true, "user x, vehicle x");
+
+			ec.add(method2, log2);
+
+			System.out.println(ec);
+
+			eh.remove(pid);
+
+			// DBH db = DBH.getInstance();
+			// db.connect("localhost", 27017);
 			
-			db.connectToDatabase("locomotor");
+			// db.connectToDatabase("locomotor");
 
 			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
 			// ArrayList<Item> items = db.getItems(catModel);
 			
-			db.createUser("test2", "motdepasse");
-			db.authUser("test", "motdepasse");
-			db.authUser("test2", "motdepasse");
+			// db.createUser("test2", "motdepasse");
+			// db.authUser("test", "motdepasse");
+			// db.authUser("test2", "motdepasse");
 
-			db.disconnect();
+			// db.disconnect();
 
 		}
 		catch(Exception exception) {
