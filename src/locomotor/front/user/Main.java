@@ -18,7 +18,7 @@ public class Main {
 
 		ClientRequest cr = new ClientRequest("https://localhost:8000/");
 		cr.addParam("idParam1", "le contenu de mon paramètre");
-		cr.addParam("text1", "Un petit et esthétique texte permettant de voir si le contenu arrive bien à destination");
+		cr.addParam("test1", "Un petit et esthétique texte permettant de voir si le contenu arrive bien à destination");
 		cr.requestJson("api/test").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				System.out.println(obj.toString());

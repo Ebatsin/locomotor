@@ -42,25 +42,26 @@ public class ClientRequest {
 	public CompletableFuture<JsonObject> requestJson(String endpoint) {
 		return CompletableFuture.supplyAsync(new Supplier<JsonObject>() {
 			public JsonObject get() {
+				InputStream inStream;
+
+				_params.send(_hostname + endpoint);
 				try {
-					_params.send(_hostname + endpoint);
-
-					Scanner scanner = new Scanner(_params.getURLConnection().getInputStream(), "utf-8").useDelimiter("\\A");
-					String response;
-					if(scanner.hasNext()) {
-						response = scanner.next();
-					}
-					else {
-						response = Json.object().toString(); // empty object
-					}
-
-					return Json.parse(response).asObject();
+					inStream = _params.getURLConnection().getInputStream();
 				}
-				catch(IOException exception) {
-					System.out.println("une erreur est apparue");
-					System.out.println(exception.toString());
-					return Json.object();
+				catch(Exception exception) {
+					inStream = _params.getURLConnection().getErrorStream();
 				}
+				
+				Scanner scanner = new Scanner(inStream, "utf-8").useDelimiter("\\A");
+				String response;
+				if(scanner.hasNext()) {
+					response = scanner.next();
+				}
+				else {
+					response = Json.object().toString(); // empty object
+				}
+
+				return Json.parse(response).asObject();
 			}
 		});
 	}

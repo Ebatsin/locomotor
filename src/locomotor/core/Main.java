@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Vehicle;
 
+import locomotor.components.network.API;
 import locomotor.components.network.IEndpointHandler;
 import locomotor.components.network.NetworkData;
 import locomotor.components.network.NetworkHandler;
@@ -54,7 +55,7 @@ public class Main {
 		System.out.println("init");
 		nh.init(8000, "key.pfx", "motdepasse");
 
-		nh.createEndpoint("/api/test", new IEndpointHandler() {
+		/*nh.createEndpoint("/api/test", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				if(data.isValid()) {
 					System.out.println("paramètres définis : " + data.getParametersName());
@@ -76,7 +77,9 @@ public class Main {
 					.add("message", "bonjour");
 				resp.success(obj);
 			}
-		});
+		});*/
+
+		API.createHooks(nh);
 
 
 		System.out.println("start");
