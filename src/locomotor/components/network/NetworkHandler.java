@@ -16,6 +16,7 @@ import java.net.InetSocketAddress;
 import java.net.URLDecoder;
 import java.security.KeyStore;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -32,18 +33,20 @@ import javax.net.ssl.TrustManagerFactory;
  * handling connections and dispatching the clients on different threads.
  */
 public class NetworkHandler {
+	/**
+	 * Contains the only instance of NetworkHandler.
+	 */
 	private static NetworkHandler _netHandler = null;
 
+	/**
+	 * Contains the HTTPS server used by the handler.
+	 */
 	private HttpsServer _server;
 
-	private HashMap<String, IEndpointHandler> _handlers;
-
-	private String _root;
-
+	private HashMap<String, IEndpointHandler> _endpointHandlers;
 
 	private NetworkHandler() {
-		_root = "/";
-		_handlers = new HashMap<String, IEndpointHandler>();
+		_endpointHandlers = new HashMap<String, IEndpointHandler>();
 	}
 
 	/**
@@ -58,22 +61,16 @@ public class NetworkHandler {
 		return _netHandler;
 	}
 
-	public synchronized void init(int ip, String endpoint) {
-
-	}
-
 	/**
 	 * Create a server using a custom certificate (useful when using self-signed certificates).
 	 * @param port The port to listen to
-	 * @param root The directory to listen to. Must start by "/" (if you want to listen to everything, use "/")
 	 * @param keyStoreName The path to the keyStore that contains the certificate
 	 * @param keyStorePassword The password of the keyStore
 	 */
-	public synchronized void init(int port, String root, String keyStoreName, String keyStorePassword) {
+	public synchronized void init(int port, String keyStoreName, String keyStorePassword) {
 		try {
 			InetSocketAddress address = new InetSocketAddress(port);
 			char[] password = keyStorePassword.toCharArray();
-
 
 			_server = HttpsServer.create(address, 0);
 
@@ -104,7 +101,8 @@ public class NetworkHandler {
 						params.setSSLParameters(context.getDefaultSSLParameters());
 					}
 					catch(Exception exception) {
-						System.out.println("Error"); // @todo create meaningful messages
+						System.out.println("Unable to create context to serve the client. Aborting. Error : "
+							+ exception.toString());
 					}
 				}
 			});
@@ -114,51 +112,28 @@ public class NetworkHandler {
 			System.exit(1);
 		}
 
-		_root = root;
-
-		_server.createContext(_root, new HttpHandler() {
+		_server.createContext("/", new HttpHandler() {
 			public void handle(HttpExchange exchange) throws IOException {
-				System.out.println("Client connection. \nRequest method : " + exchange.getRequestMethod() 
-					+ " on '" + exchange.getRequestURI() + "'");
-				TreeMap<String, String> parameters = parsePostParameters(exchange.getRequestBody());
-				IEndpointHandler handler = _handlers.get(exchange.getRequestURI().toString());
-				System.out.println("Hooks existants :");
-				for(Map.Entry<String,IEndpointHandler> entry : _handlers.entrySet()) {
-					System.out.println(entry.getKey() + " => " + entry.getValue());
+				System.out.println("Client connection on '" + exchange.getRequestURI() + "'");
+				IEndpointHandler handler = _endpointHandlers.get(exchange.getRequestURI().toString());
+				if(handler == null) {
+					handler = _endpointHandlers.get(exchange.getRequestURI().toString() + '/');
 				}
 
-				System.out.println("trouvé : " + handler);
-
 				if(handler == null) {
-					handler = _handlers.get(exchange.getRequestURI() + "/");
-				}
-
-				String response;
-
-				if(handler == null) {
-					response = "Impossible to find a handler for this request";
+					NetworkJsonResponse njr = new NetworkJsonResponse(exchange);
+					njr.failure(NetworkResponse.ErrorCode.BAD_REQUEST, "There is no API endpoint with this name.");
+					return;
 				}
 				else {
-					response = "hang on";
-					handler.handle(parameters);
+					handler.handle(new NetworkData(exchange), new NetworkResponseFactory(exchange));
 				}
-
-				exchange.sendResponseHeaders(200, response.length());
-				OutputStream os = exchange.getResponseBody();
-				os.write(response.getBytes());
-				os.close();
 			}
 		});
 	}
 
-	/**
-	 * Add a handler for an URI.
-	 * @param endpoint The URI that will be matched (ex: for https://serverAddress/a/b, give "a/b" as the endpoint)
-	 * @param handler The handler that will handle the request
-	 */
-	public void link(String endpoint, IEndpointHandler handler) {
-		System.out.println("endpoint creation : '" + _root + endpoint + "'. objet : " + handler);
-		_handlers.put(_root + endpoint, handler);
+	public void createEndpoint(String endpointName, IEndpointHandler handler) {
+		_endpointHandlers.put(endpointName + '/', handler);
 	}
 
 	/**
@@ -174,29 +149,5 @@ public class NetworkHandler {
 	 */
 	public void stop() {
 		_server.stop(5);
-	}
-
-	public TreeMap<String, String> parsePostParameters(InputStream is) {
-		try {
-			TreeMap<String, String> params = new TreeMap<String, String>();
-			InputStreamReader isr = new InputStreamReader(is,"utf-8");
-			BufferedReader br = new BufferedReader(isr);
-			String query = br.readLine();
-
-			String[] keyval = query.split("[&]");
-			for(String str : keyval) {
-				String[] param = str.split("[=]");
-				String key = URLDecoder.decode(param[0], System.getProperty("file.encoding"));
-				String value = URLDecoder.decode(param[1], System.getProperty("file.encoding"));
-				params.put(key, value);
-			}
-
-			return params;
-		}
-		catch(Exception exception) {
-			System.out.println("Error while parsing parameters. " + exception.toString());
-			System.exit(1);
-		}
-		return null;
 	}
 }

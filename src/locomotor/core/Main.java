@@ -1,5 +1,8 @@
 package locomotor.core;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,8 +13,13 @@ import locomotor.components.logging.*;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 
+import locomotor.components.network.API;
 import locomotor.components.network.IEndpointHandler;
+import locomotor.components.network.NetworkData;
 import locomotor.components.network.NetworkHandler;
+import locomotor.components.network.NetworkJsonResponse;
+import locomotor.components.network.NetworkResponse;
+import locomotor.components.network.NetworkResponseFactory;
 
 public class Main {
 	
@@ -67,22 +75,40 @@ public class Main {
 			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
 		}
 
-		// System.out.println("get network instance");
-		// NetworkHandler nh = NetworkHandler.getInstance();
-		// System.out.println("init");
-		// nh.init(8000, "/", "key.pfx", "motdepasse");
+		System.out.println("get network instance");
+		NetworkHandler nh = NetworkHandler.getInstance();
+		System.out.println("init");
+		nh.init(8000, "key.pfx", "motdepasse");
 
-		// System.out.println("Add handlers");
-		// nh.link("api", new IEndpointHandler() {
-		// 	public void handle(TreeMap<String, String> parameters) {
-		// 		for(Map.Entry<String,String> entry : parameters.entrySet()) {
-		// 			System.out.println(entry.getKey() + " => " + entry.getValue());
-		// 		}
-		// 	}
-		// });
+		/*nh.createEndpoint("/api/test", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {
+				if(data.isValid()) {
+					System.out.println("paramètres définis : " + data.getParametersName());
 
-		// System.out.println("start");
-		// nh.start();
+					if(data.isDefined("text1")) {
+						System.out.println("Contenu de text1 : '" + data.getAsString("text1") + "'");
+					}
+					else {
+						System.out.println("Le paramètre text1 n'a pas été trouvé");
+					}
+				}
+				else {
+					System.out.println("There was an error while parsing the parameters");
+				}
+
+				NetworkJsonResponse resp = response.getJsonContext();
+				JsonObject obj = Json.object()
+					.add("test", "ok")
+					.add("message", "bonjour");
+				resp.success(obj);
+			}
+		});*/
+
+		API.createHooks(nh);
+
+
+		System.out.println("start");
+		nh.start();
 		
 	}
 }
