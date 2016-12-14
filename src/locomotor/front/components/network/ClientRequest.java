@@ -16,9 +16,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class ClientRequest {
 	String _hostname;
+	FileUpload _params;
 
 	public ClientRequest(String hostname) {
 		_hostname = hostname;
+		_params = new FileUpload();
 	}
 
 	public CompletableFuture<InputStream> requestBinary(String endpoint, TreeMap<String, String> parameters) {
@@ -29,18 +31,21 @@ public class ClientRequest {
 		});
 	}
 
-	public CompletableFuture<JsonObject> requestJson(String endpoint, TreeMap<String, String> parameters) {
+	public void addParam(String name, String value) {
+		_params.add(name, value);
+	}
+
+	public void addParam(String name, InputStream value) {
+		_params.add(name, value);
+	}
+
+	public CompletableFuture<JsonObject> requestJson(String endpoint) {
 		return CompletableFuture.supplyAsync(new Supplier<JsonObject>() {
 			public JsonObject get() {
 				try {
-					System.out.println("contruction de la requête");
-					URL url = new URL(_hostname + endpoint);
-					System.out.println("construction de la connection");
-					HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+					_params.send(_hostname + endpoint);
 
-					System.out.println("ouverture de la connection");
-
-					Scanner scanner = new Scanner(connection.getInputStream(), "utf-8").useDelimiter("\\A");
+					Scanner scanner = new Scanner(_params.getURLConnection().getInputStream(), "utf-8").useDelimiter("\\A");
 					String response;
 					if(scanner.hasNext()) {
 						response = scanner.next();
