@@ -12,6 +12,10 @@ public class NetworkJsonResponse extends NetworkResponse {
 		super(exchange);
 	}
 
+	/**
+	* Send the client an JSON object. Mark the exchange as a success.
+	* @param object The JSON object to send the user
+	*/
 	public void success(JsonObject object) {
 		JsonObject root = Json.object().add("success", "true").add("data", object);
 		MutableInteger length = new MutableInteger();
