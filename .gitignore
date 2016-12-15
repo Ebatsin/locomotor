@@ -19,6 +19,6 @@ hs_err_pid*
 
 class/
 /.gtm/
-ressources/core/
-ressources/admin/
-ressources/user/
+resources/core/
+resources/admin/
+resources/user/
