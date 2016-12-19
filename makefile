@@ -15,14 +15,13 @@
 
 CC = javac
 RUN = java
-CCD = javadoc
+CCD = doxygen
 LIB = lib
 SRC = src
 CLASS = class
 DOC = doc
 
 FLAGS_CC = -Xdiags:verbose
-FLAGC_DOC = -encoding UTF-8 -charset UTF-8 -docencoding UTF-8
 RM = rm -rf
 
 # packages
@@ -46,6 +45,7 @@ INT_USER = $(FRONT)/user
 MONGO = $(LIB)/*
 CHK_STY = $(LIB)/checkstyle-7.3-all.jar
 CHK_STY_CONF = $(LIB)/google_checks.xml
+DOC_CONF = doxygen.cfg
 
 #TODO: handle windows
 
@@ -84,13 +84,13 @@ run-front-user:
 .PHONY: doc
 doc: 
 	test -d $(DOC) || mkdir $(DOC)
-	$(CCD) -sourcepath $(SRC) -d $(DOC) -subpackages $(PACKAGE) $(FLAGS_DOC)
+	$(CCD) $(DOC_CONF)
 
 ###################################################
 # Housekeeping:
 ###################################################
 .PHONY: clean
-clean: clean-components clean-core
+clean: clean-components clean-core clean-doc
 
 .PHONY: clean-components
 clean-components:
@@ -99,6 +99,10 @@ clean-components:
 .PHONY: clean-core
 clean-core:
 	$(RM) $(CLASS)/$(CORE)/*
+
+.PHONY: clean-doc
+clean-doc:
+	$(RM) $(DOC)/*
 
 ###################################################
 # Lintering:
