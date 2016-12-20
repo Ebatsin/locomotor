@@ -42,7 +42,7 @@ public class PasswordStorage {
 			super(message, source);
 		}
 	}
-
+	
 	public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
 	// These constants may be changed without breaking existing hashes.

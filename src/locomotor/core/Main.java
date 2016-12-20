@@ -21,6 +21,9 @@ import locomotor.components.network.NetworkJsonResponse;
 import locomotor.components.network.NetworkResponse;
 import locomotor.components.network.NetworkResponseFactory;
 
+/**
+ * Where all the magic happens.
+ */
 public class Main {
 	
 	/**

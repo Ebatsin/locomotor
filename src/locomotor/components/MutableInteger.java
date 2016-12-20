@@ -1,11 +1,25 @@
 package locomotor.components;
 
+/**
+ * A class for Integer objects that you can change.
+ */
 public class MutableInteger extends Number {
+
+	/**
+	 * The value holds by the class
+	 */
 	int _value;
 
+	/**
+	 * Maximum value that can be hold by the class
+	 */
 	static int MAX_VALUE = Integer.MAX_VALUE;
-	static int MIN_VALUE = Integer.MIN_VALUE;
 
+	/**
+	 * Minimum value that can be hold by the class
+	 */
+	static int MIN_VALUE = Integer.MIN_VALUE;
+	
 	public MutableInteger() {
 		_value = 0;
 	}
