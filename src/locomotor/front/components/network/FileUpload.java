@@ -3,6 +3,7 @@ package locomotor.front.components.network;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
@@ -63,6 +64,9 @@ public class FileUpload {
 			OutputStream out = _connection.getOutputStream();
 			_outStream.writeTo(out);
 			out.flush();
+		}
+		catch(ConnectException ce) {
+			System.out.println("Cannot connect to the server (not running, firewall, network issues, etc.)");
 		}
 		catch(Exception exception) {
 			System.out.println("Unable to UTF-8 encore the finish data");
