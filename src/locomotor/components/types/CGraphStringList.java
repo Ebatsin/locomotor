@@ -6,6 +6,9 @@ import java.util.TreeMap;
 
 import locomotor.components.Pair;
 
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
 /**
  * @todo .
  */
@@ -17,9 +20,9 @@ public class CGraphStringList implements CUniverseType {
 	private TreeMap<Integer, String> _values;
 
 	/**
-	 * The list of relations between two nodes.
+	 * The graph of relations.
 	 */
-	private ArrayList<Pair<Integer, Integer>> _relations;
+	private SimpleGraph<Integer, DefaultEdge> _graph;
 
 	/**
 	 * Constructs the object.
@@ -29,7 +32,17 @@ public class CGraphStringList implements CUniverseType {
 	 */
 	public CGraphStringList(TreeMap<Integer, String> values, ArrayList<Pair<Integer, Integer>> relations) {
 		_values = values;
-		_relations = relations;
+        
+        // create vertices
+        _graph = new SimpleGraph(DefaultEdge.class);
+        for(Integer key: values.keySet()){
+        	_graph.addVertex(key);
+        }
+
+        // create edges
+        for(Pair<Integer, Integer> value : relations) {
+        	_graph.addEdge(value.getLeft(), value.getRight());
+        }
 	}
 
 	/**
@@ -46,11 +59,7 @@ public class CGraphStringList implements CUniverseType {
 
 			str += key + "(" + val + ")\n";
 		}
-		str += "Relations:\n";
-		for(Pair<Integer, Integer> value : _relations) {
-		
-			str += value.toString() + "\n";
-		}
+		str += "Relations:\n" + _graph.toString();
 		return str;
 	}
 
@@ -61,15 +70,6 @@ public class CGraphStringList implements CUniverseType {
 	 */
 	public TreeMap<Integer, String> getMap() {
 		return _values;
-	}
-
-	/**
-	 * Gets the relations.
-	 *
-	 * @return     The relations.
-	 */
-	public ArrayList<Pair<Integer, Integer>> getRelations() {
-		return _relations;
 	}
 	
 }
