@@ -2,10 +2,19 @@ package locomotor.components.logging;
 
 import java.util.TreeMap;
 
+/**
+ * Singleton class for handling error that can be raised while performing actions.
+ */
 public class ErrorHandler {
 
-	private static ErrorHandler eh = null;
+	/**
+	 * Singleton error handler object, with lazy instanciation.
+	 */
+	private static ErrorHandler _eh = new ErrorHandler();
 	
+	/**
+	 * The context for each thread (request)
+	 */
 	private TreeMap<Long, ErrorContext> _context;
 
 	/**
@@ -20,19 +29,45 @@ public class ErrorHandler {
 	 *
 	 * @return     The instance.
 	 */
-	public static synchronized ErrorHandler getInstance() {
-		if(eh == null) {
-			eh = new ErrorHandler();
-		}
-		return eh;
+	public static ErrorHandler getInstance() {
+		return _eh;
 	}
 
-	public ErrorContext add(long pid) {
+	/**
+	 * Add a thread/request
+	 *
+	 * @param      pid   The pid of the thread running the request
+	 *
+	 * @return     The ErrorContext object, our custom stacktrace
+	 */
+	private ErrorContext add(long pid) {
 		ErrorContext ec = new ErrorContext();
 		_context.put(pid, ec);
 		return ec;
 	}
 
+	/**
+	 * Get a thread/request
+	 *
+	 * @param      pid   The pid of the thread running the request
+	 *
+	 * @return     The ErrorContext object, our custom stacktrace
+	 */
+	public ErrorContext get(long pid) {
+		ErrorContext ec = _context.get(pid);
+		// already exist
+		if (ec != null) {
+			return ec;
+		}
+		// nope, then create
+		return add(pid);
+	}
+
+	/**
+	 * Remove the thread/request
+	 *
+	 * @param      pid   The pid of the thread running the request
+	 */
 	public void remove(long pid) {
 		_context.remove(pid);
 	}

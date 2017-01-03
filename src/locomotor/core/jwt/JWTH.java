@@ -17,6 +17,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import java.lang.Thread;
+import locomotor.components.logging.*;
+
 /**
  * JSON Web Token class handler: create and check token.
  */
@@ -143,6 +146,10 @@ public class JWTH {
 	 * @return     The long-time token
 	 */
 	public static String createLongToken(String subject, boolean isAdmin) {
+		String method1 = "createLongToken";
+		Logging log1 = new Logging("Create the long term token", false, "User " + subject);
+		ErrorContext ec = ErrorHandler.getInstance().get(Thread.currentThread().getId());
+		ec.add(method1, log1);
 		// 60 days
 		long duration = 5184000000L;
 		return createToken(subject, isAdmin, duration);

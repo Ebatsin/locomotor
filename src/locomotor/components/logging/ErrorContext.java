@@ -4,10 +4,19 @@ import java.util.ArrayDeque;
 
 import locomotor.components.Pair;
 
+/**
+ * @todo.
+ */
 public class ErrorContext {
 	
+	/**
+	 * Is there an error?
+	 */
 	private boolean _isError;
 
+	/**
+	 * Custom stacktrace.
+	 */
 	private ArrayDeque<Pair<String, Logging>> _stackTrace;
 
 	public ErrorContext() {
@@ -19,6 +28,7 @@ public class ErrorContext {
 
 	public void add(String method, Logging log) {
 		// @todo: extract boolean value from Logging and OR with _isError
+		_isError = _isError || log._errorState;
 		_stackTrace.add(new Pair<String, Logging>(method, log));
 	}
 

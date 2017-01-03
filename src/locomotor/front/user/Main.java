@@ -25,6 +25,18 @@ public class Main extends Application {
 
 		System.out.println("Tentative de requête");
 
+		ClientRequest cr = new ClientRequest("https://localhost:8000/");
+		cr.addParam("username", "test");
+		cr.addParam("password", "motdepasse");
+		cr.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString());
+				
+				String token = obj.get("data").asObject().get("short-term-token").asString();
+
+			}
+		});
+
 		ClientRequest cr2 = new ClientRequest("https://localhost:8000/");
 		cr2.addParam("username", "test");
 		cr2.addParam("password", "motdepasse");
@@ -34,13 +46,53 @@ public class Main extends Application {
 				
 				String token = obj.get("data").asObject().get("short-term-token").asString();
 
-				ClientRequest cr = new ClientRequest("https://localhost:8000/");
-				cr.addParam("token", token);
-				cr.requestJson("api/test").thenAccept(new Consumer<JsonObject>() {
-					public void accept(JsonObject obj) {
-						System.out.println(obj.toString());
-					}
-				});
+			}
+		});
+
+		ClientRequest cr3 = new ClientRequest("https://localhost:8000/");
+		cr3.addParam("username", "test");
+		cr3.addParam("password", "motdepasse");
+		cr3.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString());
+				
+				String token = obj.get("data").asObject().get("short-term-token").asString();
+
+			}
+		});
+
+		ClientRequest cr4 = new ClientRequest("https://localhost:8000/");
+		cr4.addParam("username", "test");
+		cr4.addParam("password", "motdepasse");
+		cr4.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString());
+				
+				String token = obj.get("data").asObject().get("short-term-token").asString();
+
+			}
+		});
+
+		ClientRequest cr5 = new ClientRequest("https://localhost:8000/");
+		cr5.addParam("username", "test");
+		cr5.addParam("password", "motdepasse");
+		cr5.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString());
+				
+				String token = obj.get("data").asObject().get("short-term-token").asString();
+
+			}
+		});
+
+		ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
+		cr6.addParam("username", "test");
+		cr6.addParam("password", "motdepasse");
+		cr6.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString());
+				
+				String token = obj.get("data").asObject().get("short-term-token").asString();
 
 			}
 		});

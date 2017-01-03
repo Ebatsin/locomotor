@@ -42,7 +42,7 @@ public class Main {
 
 			// Long pid = new Long(1234);
 
-			// ErrorContext ec = eh.add(pid);
+			// ErrorContext ec = eh.get(pid);
 
 			// String method1 = "methodGetCriteria";
 			// Logging log1 = new Logging("An error has occured while retrieving a criteria model", true, "context values or message");
@@ -58,12 +58,12 @@ public class Main {
 
 			// eh.remove(pid);
 
-			DBH db = DBH.getInstance();
-			db.connect("localhost", 27017);
+			// DBH db = DBH.getInstance();
+			// db.connect("localhost", 27017);
 			
-			db.connectToDatabase("locomotor");
+			// db.connectToDatabase("locomotor");
 
-			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
 			// ArrayList<Item> items = db.getItems(catModel);
 			
@@ -71,17 +71,17 @@ public class Main {
 			// db.authUser("test", "motdepasse");
 			// db.authUser("test2", "motdepasse");
 
-			db.disconnect();
+			// db.disconnect();
 
 		}
 		catch(Exception exception) {
 			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
 		}
 
-		// System.out.println("get network instance");
-		// NetworkHandler nh = NetworkHandler.getInstance();
-		// System.out.println("init");
-		// nh.init(8000, "key.pfx", "motdepasse");
+		System.out.println("get network instance");
+		NetworkHandler nh = NetworkHandler.getInstance();
+		System.out.println("init");
+		nh.init(8000, "key.pfx", "motdepasse");
 
 		/*nh.createEndpoint("/api/test", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
@@ -107,11 +107,11 @@ public class Main {
 			}
 		});*/
 
-		// API.createHooks(nh);
+		API.createHooks(nh);
 
 
-		// System.out.println("start");
-		// nh.start();
+		System.out.println("start");
+		nh.start();
 		
 	}
 }
