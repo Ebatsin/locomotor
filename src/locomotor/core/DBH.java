@@ -35,17 +35,17 @@ import org.bson.types.ObjectId;
 public class DBH {
 
 	/**
-	 * Singleton database handler object, with lazy instanciation
+	 * Singleton database handler object, with lazy instanciation.
 	 */
 	private static DBH db = null;
 
 	/**
-	 * Singleton client object, with lazy instanciation
+	 * Singleton client object, with lazy instanciation.
 	 */
 	private static MongoClient mc = null;
 
 	/**
-	 * Singleton database object, with lazy instanciation
+	 * Singleton database object, with lazy instanciation.
 	 */
 	private static MongoDatabase md;
 

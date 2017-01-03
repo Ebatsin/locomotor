@@ -8,13 +8,13 @@ import locomotor.components.types.CComparableType;
 public abstract class Criteria {
 
 	/**
-	 * Identify the criteria model
-	 * It is possible to infer the type of the value
+	 * Identify the criteria model.
+	 * It is possible to infer the type of the value.
 	 */
 	private String _idCritModel;
 
 	/**
-	 * The value of the criteria
+	 * The value of the criteria.
 	 */
 	private CComparableType _value;
 

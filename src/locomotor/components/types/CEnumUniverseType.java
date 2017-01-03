@@ -8,17 +8,34 @@ import java.util.Map;
  */
 public enum CEnumUniverseType {
 	
-	// boolean
+	/**
+	 * Boolean value
+	 */
 	BOOLEAN(2),
-	// integer interval 
+
+	/**
+	 * Integer interval
+	 */
 	INTEGER_INTERVAL(3),
-	// float interval
+	
+	/**
+	 * Float interval
+	 */
 	FLOAT_INTERVAL(4),
-	// string interval
+
+	/**
+	 * String interval
+	 */
 	STRING_INTERVAL(5),
-	// weighted string list
+
+	/**
+	 * Weighted string list (set)
+	 */	
 	WEIGHTED_STRING_LIST(6),
-	// tree
+	
+	/**
+	 * Tree
+	 */
 	TREE(7);
 
 	/**
@@ -32,6 +49,9 @@ public enum CEnumUniverseType {
 	private static Map<Integer, CEnumUniverseType> _map
 		= new HashMap<Integer, CEnumUniverseType>();
 
+	/**
+	 * Construct the map between integer value and universe type
+	 */
 	static {
 		for (CEnumUniverseType univEnum : CEnumUniverseType.values()) {
 			_map.put(univEnum._id, univEnum);

@@ -25,8 +25,9 @@ public class CategoryModel {
 	/**
 	 * Constructs the category of criteria(s).
 	 *
-	 * @param      id    The identifier
-	 * @param      name  The name of the category
+	 * @param      id         The identifier
+	 * @param      name       The name
+	 * @param      criterias  The criterias
 	 */
 	public CategoryModel(String id, String name, ArrayList<CriteriaModel> criterias) {
 		_identifier = id;

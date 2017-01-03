@@ -1,28 +1,34 @@
 package locomotor.core.jwt;
 
-import javax.crypto.spec.SecretKeySpec;
-import javax.crypto.SecretKey;
-import javax.crypto.KeyGenerator;
-import java.security.NoSuchAlgorithmException;
-import javax.xml.bind.DatatypeConverter;
-import java.util.Date; 
-import java.util.Base64; 
-import java.security.Key;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64; 
+import java.util.Date; 
 import java.util.concurrent.TimeUnit;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+
+/**
+ * JSON Web Token class handler: create and check token.
+ */
 public class JWTH {
 
 	/**
-	 * Singleton JSON Web Token handler object, with lazy instanciation
+	 * Singleton JSON Web Token handler object, with lazy instanciation.
 	 */
 	private static JWTH jwt = null;
 
 	/**
-	 * @todo currently hard, need to generate and store or retrieve it
+	 * @todo currently hard, need to generate and store or retrieve it.
 	 */
 	private static String secretKey = "testKey";
 
@@ -42,7 +48,7 @@ public class JWTH {
 		}
 		return jwt;
 	}
- 
+
 	/**
 	 * Creates a token.
 	 *
@@ -53,39 +59,39 @@ public class JWTH {
 	 * @return     The token (serialized)
 	 */
 	private static String createToken(String subject, boolean isAdmin, long expiration) {
-	 
+
 		// the JWT signature algorithm we will be using to sign the token (HMAC using SHA-512)
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
 		
 		// current time
 		long nowMillis = System.currentTimeMillis();
 		Date now = new Date(nowMillis);
-	 
-		//We will sign our JWT with our ApiKey secret
+
+		// we will sign our JWT with our secretKey
 		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secretKey);
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-	 
-		//Let's set the JWT Claims
+
+		// set claims
 		JwtBuilder builder = Jwts.builder()
 							.setSubject(subject)
 							.setIssuer("LocomotorServer")
 							.setIssuedAt(now)
 							.claim("role", (isAdmin ? "admin" : "user"))
 							.signWith(signatureAlgorithm, signingKey);
-	 
+
 		// add the expiration if specified
 		if (expiration >= 0) {
-		long expMillis = nowMillis + expiration;
+			long expMillis = nowMillis + expiration;
 			Date exp = new Date(expMillis);
 			builder.setExpiration(exp);
 		}
-	 
+
 		// builds the JWT and serializes it to a compact, URL-safe string
 		return builder.compact();
 	}
 
 	/**
-	 * Validate the token signature
+	 * Validate the token signature.
 	 *
 	 * @param      token  The token
 	 *
@@ -98,10 +104,11 @@ public class JWTH {
 		try {
 			
 			claims = Jwts.parser()         
-		   		.setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-		   		.parseClaimsJws(token).getBody();
+				.setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
+				.parseClaimsJws(token).getBody();
 
-		} catch (SignatureException se) {
+		}
+		catch (SignatureException se) {
 			
 			System.out.println("Error: token signature not valid");
 			System.out.println(se);
@@ -142,7 +149,7 @@ public class JWTH {
 	}
 
 	/**
-	 * Check token validity
+	 * Check token validity.
 	 *
 	 * @param      token  The token
 	 */

@@ -6,17 +6,17 @@ package locomotor.components;
 public class MutableInteger extends Number {
 
 	/**
-	 * The value holds by the class
+	 * The value holds by the class.
 	 */
 	int _value;
 
 	/**
-	 * Maximum value that can be hold by the class
+	 * Maximum value that can be hold by the class.
 	 */
 	static int MAX_VALUE = Integer.MAX_VALUE;
 
 	/**
-	 * Minimum value that can be hold by the class
+	 * Minimum value that can be hold by the class.
 	 */
 	static int MIN_VALUE = Integer.MIN_VALUE;
 	

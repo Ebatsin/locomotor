@@ -38,32 +38,32 @@ public class Main {
 
 		try {
 
-			ErrorHandler eh = ErrorHandler.getInstance();
+			// ErrorHandler eh = ErrorHandler.getInstance();
 
-			Long pid = new Long(1234);
+			// Long pid = new Long(1234);
 
-			ErrorContext ec = eh.add(pid);
+			// ErrorContext ec = eh.add(pid);
 
-			String method1 = "methodGetCriteria";
-			Logging log1 = new Logging("An error has occured while retrieving a criteria model", true, "context values or message");
+			// String method1 = "methodGetCriteria";
+			// Logging log1 = new Logging("An error has occured while retrieving a criteria model", true, "context values or message");
 
-			ec.add(method1, log1);
+			// ec.add(method1, log1);
 
-			String method2 = "methodAddBooking";
-			Logging log2 = new Logging("An error has occured adding a booking, the vehicle does not exist", true, "user x, vehicle x");
+			// String method2 = "methodAddBooking";
+			// Logging log2 = new Logging("An error has occured adding a booking, the vehicle does not exist", true, "user x, vehicle x");
 
-			ec.add(method2, log2);
+			// ec.add(method2, log2);
 
-			System.out.println(ec);
+			// System.out.println(ec);
 
-			eh.remove(pid);
+			// eh.remove(pid);
 
-			// DBH db = DBH.getInstance();
-			// db.connect("localhost", 27017);
+			DBH db = DBH.getInstance();
+			db.connect("localhost", 27017);
 			
-			// db.connectToDatabase("locomotor");
+			db.connectToDatabase("locomotor");
 
-			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 
 			// ArrayList<Item> items = db.getItems(catModel);
 			
@@ -71,17 +71,17 @@ public class Main {
 			// db.authUser("test", "motdepasse");
 			// db.authUser("test2", "motdepasse");
 
-			// db.disconnect();
+			db.disconnect();
 
 		}
 		catch(Exception exception) {
 			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
 		}
 
-		System.out.println("get network instance");
-		NetworkHandler nh = NetworkHandler.getInstance();
-		System.out.println("init");
-		nh.init(8000, "key.pfx", "motdepasse");
+		// System.out.println("get network instance");
+		// NetworkHandler nh = NetworkHandler.getInstance();
+		// System.out.println("init");
+		// nh.init(8000, "key.pfx", "motdepasse");
 
 		/*nh.createEndpoint("/api/test", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
@@ -107,11 +107,11 @@ public class Main {
 			}
 		});*/
 
-		API.createHooks(nh);
+		// API.createHooks(nh);
 
 
-		System.out.println("start");
-		nh.start();
+		// System.out.println("start");
+		// nh.start();
 		
 	}
 }

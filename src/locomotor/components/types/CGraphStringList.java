@@ -32,17 +32,17 @@ public class CGraphStringList implements CUniverseType {
 	 */
 	public CGraphStringList(TreeMap<Integer, String> values, ArrayList<Pair<Integer, Integer>> relations) {
 		_values = values;
-        
-        // create vertices
-        _graph = new SimpleGraph(DefaultEdge.class);
-        for(Integer key: values.keySet()){
-        	_graph.addVertex(key);
-        }
+		
+		// create vertices
+		_graph = new SimpleGraph(DefaultEdge.class);
+		for(Integer key : values.keySet()) {
+			_graph.addVertex(key);
+		}
 
-        // create edges
-        for(Pair<Integer, Integer> value : relations) {
-        	_graph.addEdge(value.getLeft(), value.getRight());
-        }
+		// create edges
+		for(Pair<Integer, Integer> value : relations) {
+			_graph.addEdge(value.getLeft(), value.getRight());
+		}
 	}
 
 	/**

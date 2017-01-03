@@ -3,17 +3,17 @@ package locomotor.components.models;
 import java.util.ArrayList;
 
 /**
- * @todo.
+ * @todo
  */
 public abstract class Category {
 	
 	/**
-	 * The unique identifier of the category
+	 * The unique identifier of the category.
 	 */
 	private String _idCatModel;
 
 	/**
-	 * The list of criterias
+	 * The list of criterias.
 	 */
 	private ArrayList<? extends Criteria> _criterias;
 

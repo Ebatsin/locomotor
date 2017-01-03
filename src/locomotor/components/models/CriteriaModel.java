@@ -83,10 +83,20 @@ public class CriteriaModel {
 		return _identifier;
 	}
 
+	/**
+	 * Gets the item type.
+	 *
+	 * @return     The item type.
+	 */
 	public CEnumItemType getItemType() {
 		return _itemType;
 	}
 
+	/**
+	 * Gets the universe.
+	 *
+	 * @return     The universe.
+	 */
 	public CUniverseType getUniverse() {
 		return _universe;
 	}

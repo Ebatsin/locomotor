@@ -8,19 +8,39 @@ import java.util.Map;
  */
 public enum CEnumItemType {
 	
-	// integer
+	/**
+	 * Integer value
+	 */
 	INTEGER(0),
-	// float
+	
+	/**
+	 * Float value
+	 */
 	FLOAT(1),
-	// boolean
+	
+	/**
+	 * Boolean value
+	 */
 	BOOLEAN(2),
-	// integer interval 
+	
+	/**
+	 * Integer interval value
+	 */
 	INTEGER_INTERVAL(3),
-	// float interval
+	
+	/**
+	 * Float interval value
+	 */
 	FLOAT_INTERVAL(4),
-	// integer list
+	
+	/**
+	 * List (set) of integer
+	 */
 	INTEGER_LIST(8),
-	// integer list
+	
+	/**
+	 * Tree of integer
+	 */
 	INTEGER_TREE(9);
 
 	/**
@@ -34,6 +54,9 @@ public enum CEnumItemType {
 	private static Map<Integer, CEnumItemType> _map
 		= new HashMap<Integer, CEnumItemType>();
 
+	/**
+	 * Construct the map between integer value and item type
+	 */
 	static {
 		for (CEnumItemType univEnum : CEnumItemType.values()) {
 			_map.put(univEnum._id, univEnum);
