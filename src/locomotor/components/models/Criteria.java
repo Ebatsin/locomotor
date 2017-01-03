@@ -16,7 +16,7 @@ public abstract class Criteria {
 	/**
 	 * The value of the criteria.
 	 */
-	private CComparableType _value;
+	protected CComparableType _value;
 
 	/**
 	 * Constructs the object.
@@ -36,6 +36,10 @@ public abstract class Criteria {
 	 */
 	public String toString() {
 		return _value.toString() + "\n";
+	}
+
+	public CComparableType getValue() {
+		return _value;
 	}
 
 }

@@ -28,4 +28,8 @@ public class Item {
 		_categories = categories;
 	}
 
+	public ArrayList<ItemCategory> getCategories() {
+		return _categories;
+	}
+
 }

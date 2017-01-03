@@ -15,7 +15,7 @@ public abstract class Category {
 	/**
 	 * The list of criterias.
 	 */
-	private ArrayList<? extends Criteria> _criterias;
+	protected ArrayList<? extends Criteria> _criterias;
 
 	/**
 	 * Constructs the object.
@@ -35,5 +35,9 @@ public abstract class Category {
 	 */
 	public String toString() {
 		return _idCatModel;
+	}
+
+	public ArrayList<? extends Criteria> getCriterias() {
+		return _criterias;
 	}
 }
