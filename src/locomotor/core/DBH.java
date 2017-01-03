@@ -274,6 +274,10 @@ public class DBH {
 
 				}
 
+				Item item = new Item(id, categories);
+
+				listItems.add(item);
+
 			}
 		});
 
