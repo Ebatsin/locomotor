@@ -11,7 +11,7 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 	/**
 	 * The list of string (unique index).
 	 */
-	private TreeMap<Integer, String> _values;
+	protected TreeMap<Integer, String> _values;
 
 	/**
 	 * Constructs the list of string.

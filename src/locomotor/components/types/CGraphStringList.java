@@ -8,6 +8,7 @@ import locomotor.components.Pair;
 
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.alg.FloydWarshallShortestPaths;
 
 /**
  * @todo .
@@ -23,6 +24,11 @@ public class CGraphStringList implements CUniverseType {
 	 * The graph of relations.
 	 */
 	private SimpleGraph<Integer, DefaultEdge> _graph;
+
+	/**
+	 * Floyd-Warshall shortest paths
+	 */
+	private FloydWarshallShortestPaths<Integer, DefaultEdge> _fwsp;
 
 	/**
 	 * Constructs the object.
@@ -43,6 +49,9 @@ public class CGraphStringList implements CUniverseType {
 		for(Pair<Integer, Integer> value : relations) {
 			_graph.addEdge(value.getLeft(), value.getRight());
 		}
+
+		// shortest paths, no computations are performed yet
+		_fwsp = new FloydWarshallShortestPaths(_graph);
 	}
 
 	/**
@@ -71,5 +80,14 @@ public class CGraphStringList implements CUniverseType {
 	public TreeMap<Integer, String> getMap() {
 		return _values;
 	}
+
+	protected double getDiameter() {
+		return _fwsp.getDiameter();
+	}
+
+	protected double distance(Integer start, Integer end) {
+		return _fwsp.shortestDistance(start, end);
+	}
+
 	
 }
