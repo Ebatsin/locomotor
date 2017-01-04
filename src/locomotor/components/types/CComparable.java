@@ -1,7 +1,7 @@
 package locomotor.components.types;
 
 /**
- * @todo
+ * @todo.
  */
 public interface CComparable<US extends CUserType, UN extends CUniverseType> {
 

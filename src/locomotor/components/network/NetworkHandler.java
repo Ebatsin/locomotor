@@ -25,14 +25,12 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.TrustManagerFactory;
 
-
-
-
 /**
  * Singleton class tp handle all the tasks related to the network. Setting the server up, 
  * handling connections and dispatching the clients on different threads.
  */
 public class NetworkHandler {
+	
 	/**
 	 * Contains the only instance of NetworkHandler.
 	 */
@@ -43,8 +41,14 @@ public class NetworkHandler {
 	 */
 	private HttpsServer _server;
 
+	/**
+	 * @todo.
+	 */
 	private HashMap<String, IEndpointHandler> _endpointHandlers;
 
+	/**
+	 * @todo.
+	 */
 	private NetworkHandler() {
 		_endpointHandlers = new HashMap<String, IEndpointHandler>();
 	}
@@ -132,6 +136,12 @@ public class NetworkHandler {
 		});
 	}
 
+	/**
+	 * Creates an endpoint.
+	 *
+	 * @param      endpointName  The endpoint name
+	 * @param      handler       The handler
+	 */
 	public void createEndpoint(String endpointName, IEndpointHandler handler) {
 		_endpointHandlers.put(endpointName + '/', handler);
 	}

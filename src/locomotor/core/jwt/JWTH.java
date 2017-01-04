@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 
+import java.lang.Thread;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64; 
@@ -17,8 +18,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import java.lang.Thread;
-import locomotor.components.logging.*;
+import locomotor.components.logging.ErrorContext;
+import locomotor.components.logging.ErrorHandler;
+import locomotor.components.logging.Logging;
 
 /**
  * JSON Web Token class handler: create and check token.

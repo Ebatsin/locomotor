@@ -9,37 +9,37 @@ import java.util.Map;
 public enum CEnumItemType {
 	
 	/**
-	 * Integer value
+	 * Integer value.
 	 */
 	INTEGER(0),
 	
 	/**
-	 * Float value
+	 * Float value.
 	 */
 	FLOAT(1),
 	
 	/**
-	 * Boolean value
+	 * Boolean value.
 	 */
 	BOOLEAN(2),
 	
 	/**
-	 * Integer interval value
+	 * Integer interval value.
 	 */
 	INTEGER_INTERVAL(3),
 	
 	/**
-	 * Float interval value
+	 * Float interval value.
 	 */
 	FLOAT_INTERVAL(4),
 	
 	/**
-	 * List (set) of integer
+	 * List (set) of integer.
 	 */
 	INTEGER_LIST(8),
 	
 	/**
-	 * Tree of integer
+	 * Tree of integer.
 	 */
 	INTEGER_TREE(9);
 

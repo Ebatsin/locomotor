@@ -3,17 +3,17 @@ package locomotor.components.models;
 import java.util.ArrayList;
 
 /**
- * @todo
+ * @todo.
  */
 public class UserItem {
 
 	/**
-	 * @todo
+	 * @todo.
 	 */
 	private ArrayList<UserCategory> _categories;
 
 	/**
-	 * @todo
+	 * @todo.
 	 */
 	public UserItem(ArrayList<UserCategory> categories) {
 		_categories = categories;

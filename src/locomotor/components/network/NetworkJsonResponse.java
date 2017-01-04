@@ -6,12 +6,21 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.ByteArrayOutputStream;
 import locomotor.components.MutableInteger;
 
+/**
+ * @todo.
+ */
 public class NetworkJsonResponse extends NetworkResponse {
 
+	/**
+	 * @todo.
+	 */
 	public NetworkJsonResponse(HttpExchange exchange) {
 		super(exchange);
 	}
 
+	/**
+	 * @todo.
+	 */
 	public void success(JsonObject object) {
 		JsonObject root = Json.object().add("success", "true").add("data", object);
 		MutableInteger length = new MutableInteger();

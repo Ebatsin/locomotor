@@ -3,7 +3,7 @@ package locomotor.components.models;
 import java.util.ArrayList;
 
 /**
- * @todo
+ * @todo.
  */
 public abstract class Category {
 	

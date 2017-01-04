@@ -8,17 +8,34 @@ import java.util.Map;
  */
 public enum CEnumUserType {
 	
-	// boolean
+	/**
+	 * Boolean value.
+	 */
 	BOOLEAN(2),
-	// integer interval 
+
+	/**
+	 * Integer interval value.
+	 */
 	INTEGER_INTERVAL(3),
-	// float interval
+	
+	/**
+	 * Float interval value.
+	 */
 	FLOAT_INTERVAL(4),
-	// string interval
+	
+	/**
+	 * String interval value (identify by integer).
+	 */
 	STRING_INTERVAL(5),
-	// weighted string list
+	
+	/**
+	 * Weighted string list (set, identify by integer).
+	 */
 	WEIGHTED_STRING_LIST(6),
-	// tree
+	
+	/**
+	 * Tree of integer.
+	 */
 	TREE(7);
 
 	/**

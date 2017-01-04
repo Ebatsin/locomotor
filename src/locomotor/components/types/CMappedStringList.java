@@ -1,7 +1,7 @@
 package locomotor.components.types;
 
-import java.util.TreeMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Encapsulate a map between an Integer (32-bit) and the String associated.
@@ -40,25 +40,25 @@ public class CMappedStringList extends CStringList implements CComparable<CMappe
 
 		// case 2: item is included in user
 		if (isItemSubsetOfUser) {
-			return itemKey.size()/userKey.size();
+			return itemKey.size() / userKey.size();
 		}
 
 		// case 3: item intersect or not user
 		double diameter = universe.getDiameter();
-		int numberOfPaths = userKey.size()*itemKey.size();
 		double distance;
-		double distanceBis, sumOfDistance = 0.0;
+		double sumOfDistance = 0.0;
+		int numberOfPaths = userKey.size() * itemKey.size();
 
 		for (Integer ui : userKey) {
 			for (Integer ij : itemKey) {
 				distance = universe.distance(ui, ij);
-				distanceBis = Math.max(0, ((diameter-distance)/diameter));
-				sumOfDistance += distanceBis;
+				distance = Math.max(0, ((diameter - distance) / diameter));
+				sumOfDistance += distance;
 			}
 		}
 
 		// avoid divide by zero
-		return (sumOfDistance == 0.0) ? sumOfDistance : sumOfDistance/numberOfPaths;
+		return (sumOfDistance == 0.0) ? sumOfDistance : (sumOfDistance / numberOfPaths);
 	}
 	
 }

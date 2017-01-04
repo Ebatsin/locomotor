@@ -14,15 +14,34 @@ import java.util.function.Supplier;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * @todo.
+ */
 public class ClientRequest {
+	
+	/**
+	 * @todo.
+	 */
 	String _hostname;
+
+	/**
+	 * @todo.
+	 */
 	FileUpload _params;
 
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      hostname  The hostname
+	 */
 	public ClientRequest(String hostname) {
 		_hostname = hostname;
 		_params = new FileUpload();
 	}
 
+	/**
+	 * @todo.
+	 */
 	public CompletableFuture<InputStream> requestBinary(String endpoint, TreeMap<String, String> parameters) {
 		return CompletableFuture.supplyAsync(new Supplier<InputStream>() {
 			public InputStream get() {
@@ -31,14 +50,29 @@ public class ClientRequest {
 		});
 	}
 
+	/**
+	 * Adds a parameter.
+	 *
+	 * @param      name   The name
+	 * @param      value  The value
+	 */
 	public void addParam(String name, String value) {
 		_params.add(name, value);
 	}
 
+	/**
+	 * Adds a parameter.
+	 *
+	 * @param      name   The name
+	 * @param      value  The value
+	 */
 	public void addParam(String name, InputStream value) {
 		_params.add(name, value);
 	}
 
+	/**
+	 * @todo.
+	 */
 	public CompletableFuture<JsonObject> requestJson(String endpoint) {
 		return CompletableFuture.supplyAsync(new Supplier<JsonObject>() {
 			public JsonObject get() {

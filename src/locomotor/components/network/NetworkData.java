@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.FileItemStream;
  * Holds all the data about the parameters sent in a POST request.
  */
 public class NetworkData {
+	
 	/**
 	 * Contains all the parameters sent in the request.
 	 */

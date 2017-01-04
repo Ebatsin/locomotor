@@ -9,32 +9,32 @@ import java.util.Map;
 public enum CEnumUniverseType {
 	
 	/**
-	 * Boolean value
+	 * Boolean value.
 	 */
 	BOOLEAN(2),
 
 	/**
-	 * Integer interval
+	 * Integer interval value.
 	 */
 	INTEGER_INTERVAL(3),
 	
 	/**
-	 * Float interval
+	 * Float interval value.
 	 */
 	FLOAT_INTERVAL(4),
 
 	/**
-	 * String interval
+	 * String interval value (identify by integer).
 	 */
 	STRING_INTERVAL(5),
 
 	/**
-	 * Weighted string list (set)
+	 * Weighted string list (set, identify by integer).
 	 */	
 	WEIGHTED_STRING_LIST(6),
 	
 	/**
-	 * Tree
+	 * Tree of integer.
 	 */
 	TREE(7);
 

@@ -1,7 +1,7 @@
 package locomotor.components.logging;
 
 /**
- * @todo
+ * @todo.
  */
 public class Logging {
 	
@@ -11,7 +11,7 @@ public class Logging {
 	private String _message;
 
 	/**
-	 * Error or not?
+	 * Is there an error.	
 	 */
 	protected boolean _errorState;
 

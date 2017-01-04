@@ -13,7 +13,7 @@ public class ErrorHandler {
 	private static ErrorHandler _eh = new ErrorHandler();
 	
 	/**
-	 * The context for each thread (request)
+	 * The context for each thread (request).
 	 */
 	private TreeMap<Long, ErrorContext> _context;
 
@@ -34,7 +34,7 @@ public class ErrorHandler {
 	}
 
 	/**
-	 * Add a thread/request
+	 * Add a thread/request.
 	 *
 	 * @param      pid   The pid of the thread running the request
 	 *
@@ -47,7 +47,7 @@ public class ErrorHandler {
 	}
 
 	/**
-	 * Get a thread/request
+	 * Get a thread/request.
 	 *
 	 * @param      pid   The pid of the thread running the request
 	 *
@@ -64,7 +64,7 @@ public class ErrorHandler {
 	}
 
 	/**
-	 * Remove the thread/request
+	 * Remove the thread/request.
 	 *
 	 * @param      pid   The pid of the thread running the request
 	 */

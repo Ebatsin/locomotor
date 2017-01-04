@@ -3,17 +3,24 @@ package locomotor.components.network;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 
-import java.lang.Thread;
 import java.lang.InterruptedException;
+import java.lang.Thread;
 
+import locomotor.components.logging.ErrorContext;
+import locomotor.components.logging.ErrorHandler;
 import locomotor.core.jwt.JWTH;
-import locomotor.components.logging.*;
 
 /**
  * Network interface shown to the client.
  */
 public class API {
-	static public void createHooks(NetworkHandler nh) {
+
+	/**
+	 * Creates the hooks + @todo.
+	 *
+	 * @param      nh    The network handler
+	 */
+	public static void createHooks(NetworkHandler nh) {
 		nh.createEndpoint("/api/test", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				if(data.isValid()) {
@@ -44,9 +51,10 @@ public class API {
 				System.out.println("Sleep");
 				
 				try {
-				    Thread.sleep(2000); 
-				} catch(InterruptedException ex) {
-				    Thread.currentThread().interrupt();
+					Thread.sleep(2000); 
+				}
+				catch(InterruptedException ex) {
+					Thread.currentThread().interrupt();
 				}
 
 				if(data.isValid()) {
@@ -63,11 +71,11 @@ public class API {
 
 				// get tokens
 				JWTH jwt = JWTH.getInstance();
-		        String longToken = jwt.createLongToken("123456", false);
-		        String shortToken = jwt.createShortToken("123456", false);
+				String longToken = jwt.createLongToken("123456", false);
+				String shortToken = jwt.createShortToken("123456", false);
 
-		        // print and remove context error
-		        System.out.println(ec);
+				// print and remove context error
+				System.out.println(ec);
 				eh.remove(Thread.currentThread().getId());
 
 				response.getJsonContext().success(Json.object()

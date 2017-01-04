@@ -15,9 +15,6 @@ import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
 import locomotor.components.models.ItemCriteria;
-import locomotor.components.types.CMappedStringList;
-import locomotor.components.types.CGraphStringList;
-
 import locomotor.components.network.API;
 import locomotor.components.network.IEndpointHandler;
 import locomotor.components.network.NetworkData;
@@ -25,6 +22,8 @@ import locomotor.components.network.NetworkHandler;
 import locomotor.components.network.NetworkJsonResponse;
 import locomotor.components.network.NetworkResponse;
 import locomotor.components.network.NetworkResponseFactory;
+import locomotor.components.types.CGraphStringList;
+import locomotor.components.types.CMappedStringList;
 
 /**
  * Where all the magic happens.

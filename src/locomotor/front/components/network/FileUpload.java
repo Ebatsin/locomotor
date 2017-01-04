@@ -7,13 +7,39 @@ import java.net.ConnectException;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * @todo.
+ */
 public class FileUpload {
+
+	/**
+	 * @todo.
+	 */
 	URL _url;
+
+	/**
+	 * @todo.
+	 */
 	HttpsURLConnection _connection;
+
+	/**
+	 * @todo.
+	 */
 	ByteArrayOutputStream _outStream;
+
+	/**
+	 * @todo.
+	 */
 	int _length;
+
+	/**
+	 * @todo.
+	 */
 	String _boundary;
 
+	/**
+	 * Constructs the object.
+	 */
 	public FileUpload() {
 		try {
 			_outStream = new ByteArrayOutputStream();
@@ -25,6 +51,9 @@ public class FileUpload {
 		}
 	}
 
+	/**
+	 * @todo.
+	 */
 	public void add(String parameter, String value) {
 		try {
 			String addedContent = "--" + _boundary + "\r\n"
@@ -40,10 +69,16 @@ public class FileUpload {
 		}
 	}
 
+	/**
+	 * @todo.
+	 */
 	public void add(String parameter, InputStream value) {
 
 	}
 
+	/**
+	 * @todo.
+	 */
 	public void send(String requestURL) {
 		try {
 			_url = new URL(requestURL);
@@ -73,6 +108,11 @@ public class FileUpload {
 		}
 	}
 
+	/**
+	 * Gets the url connection.
+	 *
+	 * @return     The url connection.
+	 */
 	public HttpsURLConnection getURLConnection() {
 		return _connection;
 	}

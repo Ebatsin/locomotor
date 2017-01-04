@@ -10,27 +10,75 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import locomotor.components.MutableInteger;
 
+/**
+ * @todo.
+ */
 public abstract class NetworkResponse {	
+	
+	/**
+	 * @todo.
+	 */
 	HttpExchange _exchange;
 
+	/**
+	 * @todo.
+	 */
 	public enum ErrorCode {
-		BAD_REQUEST(400), // the server will not process the request due to a malformed request (parameters missing, ...)
-		UNAUTHORIZED_ACCESS(401), // the user need to authenticate
-		FORBIDDEN_ACCESS(403), // the user can not access this part
-		NOT_FOUND(404), // the data was not found
-		LENGTH_REQUIRED(411); // the request must specify its length
+		
+		/**
+		 * The server will not process the request due to a malformed request (parameters missing, ...).
+		 */
+		BAD_REQUEST(400),
 
+		/**
+		 * The user need to authenticate.
+		 */
+		UNAUTHORIZED_ACCESS(401),
+		
+		/**
+		 * The user can not access this part.
+		 */
+		FORBIDDEN_ACCESS(403),
+		
+		/**
+		 * The data was not found.
+		 */
+		NOT_FOUND(404),
+
+		/**
+		 * The request must specify its length.
+		 */
+		LENGTH_REQUIRED(411);
+
+		/**
+		 * The identifier.
+		 */
 		private final int _id;
 
+		/**
+		 * Constructs the object.
+		 *
+		 * @param      id    The identifier
+		 */
 		ErrorCode(int id) {
 			_id = id;
 		}
 
+		/**
+		 * Gets the value.
+		 *
+		 * @return     The value.
+		 */
 		public int getValue() {
 			return _id;
 		}
 	}
 
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      exchange  The exchange
+	 */
 	public NetworkResponse(HttpExchange exchange) {
 		_exchange = exchange;
 	}
@@ -48,7 +96,7 @@ public abstract class NetworkResponse {
 	}
 
 	/**
-	 * Convert a JSON object to an ByteArrayOutputStream
+	 * Convert a JSON object to an ByteArrayOutputStream.
 	 * @param obj The object to be converted
 	 * @return A newly created ByteArrayOutputStream
 	 */
@@ -57,7 +105,7 @@ public abstract class NetworkResponse {
 	}
 
 	/**
-	 * Convert a JSON object to an ByteArrayOutputStream and stores the length of the generated object
+	 * Convert a JSON object to an ByteArrayOutputStream and stores the length of the generated object.
 	 * @param obj The object to be converted
 	 * @param length The object in which to store the length of the ByteArrayOutputStream
 	 * @return A newly created ByteArrayOutputStream
@@ -68,7 +116,7 @@ public abstract class NetworkResponse {
 	}
 
 	/**
-	 * Convert a String object to an ByteArrayOutputStream
+	 * Convert a String object to an ByteArrayOutputStream.
 	 * @param string The string to be converted
 	 * @return A newly created ByteArrayOutputStream
 	 */
@@ -77,7 +125,7 @@ public abstract class NetworkResponse {
 	}
 
 	/**
-	 * Convert a String object to an ByteArrayOutputStream
+	 * Convert a String object to an ByteArrayOutputStream.
 	 * @param string The string to be converted
 	 * @param length The object in which to store the length of the ByteArrayOutputStream
 	 * @return A newly created ByteArrayOutputStream

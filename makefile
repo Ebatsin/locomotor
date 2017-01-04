@@ -109,7 +109,7 @@ clean-doc:
 ###################################################
 
 .PHONY: linter
-linter: linter-core linter-front
+linter: linter-components linter-core linter-front
 
 .PHONY: linter-core
 linter-core: linter-components
@@ -120,7 +120,7 @@ linter-components:
 	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(COMPONENTS)
 
 .PHONY: linter-front
-linter-front: linter-front-components linter-front-user linter-front-admin
+linter-front: linter-components linter-front-components linter-front-user
 
 .PHONY: linter-front-components
 linter-front-components:
@@ -129,7 +129,3 @@ linter-front-components:
 .PHONY: linter-front-user
 linter-front-user:
 	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(INT_USER)
-
-.PHONY: linter-front-admin
-linter-front-admin:
-	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(INT_ADMIN)

@@ -6,9 +6,9 @@ import java.util.TreeMap;
 
 import locomotor.components.Pair;
 
+import org.jgrapht.alg.FloydWarshallShortestPaths;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
-import org.jgrapht.alg.FloydWarshallShortestPaths;
 
 /**
  * @todo .
@@ -26,7 +26,7 @@ public class CGraphStringList implements CUniverseType {
 	private SimpleGraph<Integer, DefaultEdge> _graph;
 
 	/**
-	 * Floyd-Warshall shortest paths
+	 * Floyd-Warshall shortest paths.
 	 */
 	private FloydWarshallShortestPaths<Integer, DefaultEdge> _fwsp;
 
@@ -81,10 +81,23 @@ public class CGraphStringList implements CUniverseType {
 		return _values;
 	}
 
+	/**
+	 * Gets the diameter.
+	 *
+	 * @return     The diameter.
+	 */
 	protected double getDiameter() {
 		return _fwsp.getDiameter();
 	}
 
+	/**
+	 * Get the distance, the length of a shortest path.
+	 *
+	 * @param      start  The start
+	 * @param      end    The end
+	 *
+	 * @return     the shortest distance between start and end
+	 */
 	protected double distance(Integer start, Integer end) {
 		return _fwsp.shortestDistance(start, end);
 	}
