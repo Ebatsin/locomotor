@@ -2,6 +2,9 @@ package locomotor.front.user;
 
 import com.eclipsesource.json.JsonObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.lang.Class;
 import java.util.function.Consumer;
 
@@ -10,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import locomotor.front.components.network.BinaryObject;
 import locomotor.front.components.network.ClientRequest;
 import locomotor.front.components.network.FileUpload;
 
@@ -30,10 +34,8 @@ public class Main extends Application {
 		cr.addParam("password", "motdepasse");
 		cr.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-				
+				System.out.println(obj.toString());	
 				String token = obj.get("data").asObject().get("short-term-token").asString();
-
 			}
 		});
 
@@ -97,6 +99,47 @@ public class Main extends Application {
 			}
 		});
 
+		ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
+		cr7.addParam("name", "chat.png");
+		cr7.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
+			public void accept(BinaryObject obj) {
+				if(obj.isSuccess()) {
+					ByteArrayOutputStream img = obj.getAsBinary();
+					try {
+						OutputStream outputStream = new FileOutputStream("resources/user/images/cat" + obj.guessFileExtension());
+						img.writeTo(outputStream);
+					}
+					catch(Exception exception) {
+						System.out.println("unable to write the file");
+					}
+				}
+				else {
+					System.out.println("erreur : " + obj.getErrorMessage());
+				}
+				System.exit(0);
+			}
+		});
+
+		ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
+		cr8.addParam("name", "firefox.jpg");
+		cr8.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
+			public void accept(BinaryObject obj) {
+				if(obj.isSuccess()) {
+					ByteArrayOutputStream img = obj.getAsBinary();
+					try {
+						OutputStream outputStream = new FileOutputStream("resources/user/images/firefox" + obj.guessFileExtension());
+						img.writeTo(outputStream);
+					}
+					catch(Exception exception) {
+						System.out.println("unable to write the file");
+					}
+				}
+				else {
+					System.out.println("erreur : " + obj.getErrorMessage());
+				}
+				System.exit(0);
+			}
+		});
 		
 		while(true) {} // wait for the request to be sent and the response read
 	}

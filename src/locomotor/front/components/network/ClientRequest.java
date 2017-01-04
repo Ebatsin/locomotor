@@ -51,6 +51,53 @@ public class ClientRequest {
 	}
 
 	/**
+	 * @todo.
+	 */
+	public CompletableFuture<BinaryObject> requestBinary(String endpoint) {
+		return CompletableFuture.supplyAsync(new Supplier<BinaryObject>() {
+			public BinaryObject get() {
+				InputStream inStream;
+				String mimeType = null;
+
+				_params.send(_hostname + endpoint);
+
+				try { // binary response
+					inStream = _params.getURLConnection().getInputStream();
+
+					// find the MIME-TYPE returned by the server
+					int cpt = 1;
+					String headerName = "";
+					while((headerName = _params.getURLConnection().getHeaderFieldKey(cpt)) != null || cpt == 0) {
+						if(headerName.equals("Content-type")) {
+							mimeType = _params.getURLConnection().getHeaderField(cpt);
+						}
+						++cpt;
+					}
+
+					if(mimeType == null) {
+						return new BinaryObject("Non specified MIME-TYPE for the image");
+					}
+					return new BinaryObject(inStream, mimeType);
+				}
+				catch(Exception exception) { // json error message
+					inStream = _params.getURLConnection().getErrorStream();
+					Scanner scanner = new Scanner(inStream, "utf-8").useDelimiter("\\A");
+					String response;
+					if(scanner.hasNext()) {
+						response = scanner.next();
+						JsonObject obj = Json.parse(response).asObject();
+						if(obj.get("message") != null) {
+							return new BinaryObject(obj.get("message").asString());
+						}
+					}
+				}
+
+				return new BinaryObject("Unknown error");
+			}
+		});
+	}
+
+	/**
 	 * Adds a parameter.
 	 *
 	 * @param      name   The name

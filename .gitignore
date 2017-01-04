@@ -20,3 +20,6 @@ hs_err_pid*
 class/
 /.gtm/
 doc/
+resources/core/
+resources/admin/
+resources/user/
