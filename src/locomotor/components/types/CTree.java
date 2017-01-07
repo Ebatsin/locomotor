@@ -1,9 +1,9 @@
 package locomotor.components.types;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 /**
  * Represent a N-ary tree, that handle an Integer (32-bit) and a String.

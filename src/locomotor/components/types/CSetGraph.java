@@ -32,8 +32,6 @@ public class CSetGraph /*implements CUniverseType*/ {
 	 */
 	public CSetGraph(Set<Integer> vertices, ArrayList<Pair<Integer, Integer>> edges) {
 
-		System.out.println("vertices = " + vertices);
-
 		// create vertices
 		_graph = new SimpleGraph(DefaultEdge.class);
 		for(Integer key : vertices) {
