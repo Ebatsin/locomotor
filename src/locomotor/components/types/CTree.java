@@ -2,6 +2,8 @@ package locomotor.components.types;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Represent a N-ary tree, that handle an Integer (32-bit) and a String.
@@ -138,6 +140,24 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 	}
 
 	/**
+	 * Return a set representation of the leaves.
+	 *
+	 * @return     Set representation of the leaves.
+	 */
+	public Set<Integer> toSet() {
+		Set<Integer> set = new HashSet<Integer>();
+		if(!isLeaf()) {
+			for(CTree child : _children) {
+				set.addAll(child.toSet());
+			}
+		}
+		else {
+			set.add(this._identifier);
+		}
+		return set;
+	}
+
+	/**
 	 * Compare the tree of the vehicle with the tree of the user
 	 *
 	 * @param      user      The user tree
@@ -146,7 +166,10 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CTree user, CGraphTree universe) {
-		// @todo
-		return 0.0;
+		
+		Set<Integer> userKey = user.toSet();
+		Set<Integer> itemKey = this.toSet();
+
+		return universe.compare(userKey, itemKey);
 	}
 }

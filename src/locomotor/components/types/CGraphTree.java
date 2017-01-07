@@ -7,17 +7,12 @@ import locomotor.components.Pair;
 /**
  * @todo .
  */
-public class CGraphTree implements CUniverseType {
+public class CGraphTree extends CSetGraph implements CUniverseType {
 
 	/**
 	 * The tree representing the universe (all possible data).
 	 */
 	private CTree _universeTree;
-
-	/**
-	 * The list of relations between two leave.
-	 */
-	private ArrayList<Pair<Integer, Integer>> _relations;
 
 	/**
 	 * Constructs the object.
@@ -26,8 +21,8 @@ public class CGraphTree implements CUniverseType {
 	 * @param      relations     The relations.
 	 */
 	public CGraphTree(CTree universeTree, ArrayList<Pair<Integer, Integer>> relations) {
+		super(universeTree.toSet(), relations);
 		_universeTree = universeTree;
-		_relations = relations;
 	}
 
 	/**
@@ -46,11 +41,7 @@ public class CGraphTree implements CUniverseType {
 	 */
 	public String toString() {
 		String str = "Tree: " + _universeTree.toString() + "\n";
-		str += "Relations:\n";
-		for(Pair<Integer, Integer> value : _relations) {
-		
-			str += value.toString() + "\n";
-		}
+		str += super.toString();
 		return str;
 	}
 }

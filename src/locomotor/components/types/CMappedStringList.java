@@ -29,36 +29,8 @@ public class CMappedStringList extends CStringList implements CComparable<CMappe
 		Set<Integer> userKey = user._values.keySet();
 		Set<Integer> itemKey = this._values.keySet();
 
-		boolean isUserSubsetOfItem = itemKey.containsAll(userKey);
+		return universe.compare(userKey, itemKey);
 
-		// case 1: user is included or egal to item
-		if (itemKey.equals(userKey) || isUserSubsetOfItem) {
-			return 1.0;
-		}
-		
-		boolean isItemSubsetOfUser = userKey.containsAll(itemKey);
-
-		// case 2: item is included in user
-		if (isItemSubsetOfUser) {
-			return itemKey.size() / userKey.size();
-		}
-
-		// case 3: item intersect or not user
-		double diameter = universe.getDiameter();
-		double distance;
-		double sumOfDistance = 0.0;
-		int numberOfPaths = userKey.size() * itemKey.size();
-
-		for (Integer ui : userKey) {
-			for (Integer ij : itemKey) {
-				distance = universe.distance(ui, ij);
-				distance = Math.max(0, ((diameter - distance) / diameter));
-				sumOfDistance += distance;
-			}
-		}
-
-		// avoid divide by zero
-		return (sumOfDistance == 0.0) ? sumOfDistance : (sumOfDistance / numberOfPaths);
 	}
 	
 }

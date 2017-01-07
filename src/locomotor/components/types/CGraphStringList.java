@@ -6,29 +6,15 @@ import java.util.TreeMap;
 
 import locomotor.components.Pair;
 
-import org.jgrapht.alg.FloydWarshallShortestPaths;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
-
 /**
  * @todo .
  */
-public class CGraphStringList implements CUniverseType {
+public class CGraphStringList extends CSetGraph implements CUniverseType {
 
 	/**
 	 * The list of string (unique index).
 	 */
 	private TreeMap<Integer, String> _values;
-
-	/**
-	 * The graph of relations.
-	 */
-	private SimpleGraph<Integer, DefaultEdge> _graph;
-
-	/**
-	 * Floyd-Warshall shortest paths.
-	 */
-	private FloydWarshallShortestPaths<Integer, DefaultEdge> _fwsp;
 
 	/**
 	 * Constructs the object.
@@ -37,21 +23,8 @@ public class CGraphStringList implements CUniverseType {
 	 * @param      relations  The relations
 	 */
 	public CGraphStringList(TreeMap<Integer, String> values, ArrayList<Pair<Integer, Integer>> relations) {
+		super(values.keySet(), relations);
 		_values = values;
-		
-		// create vertices
-		_graph = new SimpleGraph(DefaultEdge.class);
-		for(Integer key : values.keySet()) {
-			_graph.addVertex(key);
-		}
-
-		// create edges
-		for(Pair<Integer, Integer> value : relations) {
-			_graph.addEdge(value.getLeft(), value.getRight());
-		}
-
-		// shortest paths, no computations are performed yet
-		_fwsp = new FloydWarshallShortestPaths(_graph);
 	}
 
 	/**
@@ -68,7 +41,7 @@ public class CGraphStringList implements CUniverseType {
 
 			str += key + "(" + val + ")\n";
 		}
-		str += "Relations:\n" + _graph.toString();
+		str += super.toString();
 		return str;
 	}
 
@@ -80,27 +53,5 @@ public class CGraphStringList implements CUniverseType {
 	public TreeMap<Integer, String> getMap() {
 		return _values;
 	}
-
-	/**
-	 * Gets the diameter.
-	 *
-	 * @return     The diameter.
-	 */
-	protected double getDiameter() {
-		return _fwsp.getDiameter();
-	}
-
-	/**
-	 * Get the distance, the length of a shortest path.
-	 *
-	 * @param      start  The start
-	 * @param      end    The end
-	 *
-	 * @return     the shortest distance between start and end
-	 */
-	protected double distance(Integer start, Integer end) {
-		return _fwsp.shortestDistance(start, end);
-	}
-
 	
 }
