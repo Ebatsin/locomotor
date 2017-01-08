@@ -40,6 +40,24 @@ public class Main {
 		Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
 		mongoLogger.setLevel(Level.SEVERE); 
 
+		Gaussian g = Gaussian.getInstance();
+		System.out.println("Tests gaussian cdf.");
+		System.out.println("cdf(-5) = " + g.cdf(-5) + " true value : " + g.trueCdf(-5));
+		System.out.println("cdf(5) = " + g.cdf(5) + " true value : " + g.trueCdf(5));
+		System.out.println("cdf(-2) = " + g.cdf(-2) + " true value : " + g.trueCdf(-2));
+		System.out.println("cdf(2) = " + g.cdf(2) + " true value : " + g.trueCdf(2));
+		System.out.println("cdf(-2.004) = " + g.cdf(-2.004) + " true value : " + g.trueCdf(-2.004));
+		System.out.println("cdf(2.004) = " + g.cdf(2.004) + " true value : " + g.trueCdf(2.004));
+		System.out.println("cdf(0) = " + g.cdf(0) + " true value : " + g.trueCdf(0));
+		System.out.println("Tests gaussian pdf.");
+		System.out.println("pdf(-5) = " + g.pdf(-5) + " true value : " + g.truePdf(-5));
+		System.out.println("pdf(5) = " + g.pdf(5) + " true value : " + g.truePdf(5));
+		System.out.println("pdf(-2) = " + g.pdf(-2) + " true value : " + g.truePdf(-2));
+		System.out.println("pdf(-2.004) = " + g.pdf(-2.004) + " true value : " + g.truePdf(-2.004));
+		System.out.println("pdf(2.004) = " + g.pdf(2.004) + " true value : " + g.truePdf(2.004));
+		System.out.println("pdf(2) = " + g.pdf(2) + " true value : " + g.truePdf(2));
+		System.out.println("pdf(0) = " + g.pdf(0) + " true value : " + g.truePdf(0));
+
 		try {
 
 			// ErrorHandler eh = ErrorHandler.getInstance();
