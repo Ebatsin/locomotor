@@ -1,0 +1,24 @@
+{
+	"_id": {
+		"$oid": "584336b157ab9e1521a8bd9f"
+	},
+	"name": "Harry Potter",
+	"description": "Dans l'univers de Harry Potter, les personnages utilisent de nombreux moyens de transport réservés aux sorciers, qu'il s'agisse de transports moldus détournés, de créatures fantastiques (hippogriffe, phénix, sombral, ou dragon), d'objets magiques inventés (balais, tapis volants, etc.) ou de techniques de téléportation.",
+	"image": "url"
+}
+{
+	"_id": {
+		"$oid": "58433b6557ab9e238922b8cc"
+	},
+	"name": "Star Wars",
+	"description": "L'histoire de Star Wars se déroule dans une galaxie qui se fait le théâtre d'affrontements entre les Chevaliers Jedi et les Seigneurs noirs des Sith, personnes sensibles à la Force, un champ énergétique mystérieux leur procurant des pouvoirs psychiques. Les Jedi maîtrisent le Côté lumineux de la Force, pouvoir bénéfique et défensif, pour maintenir la paix dans la galaxie. Les Sith utilisent le Côté obscur, pouvoir nuisible et destructeur, pour leurs usages personnels et pour dominer la galaxie.",
+	"image": "url"
+}
+{
+	"_id": {
+		"$oid": "58717def7e37eaf5657984aa"
+	},
+	"name": "Batman",
+	"description": "Batman est l’alter-ego de Bruce Wayne, un riche milliardaire qui combat le crime sous les traits du justicier de la nuit. Il a sa disposition de nombreux moyens de transports sont pour l'aider dans son combat : la Batmobile, la Bat-Moto, le Bat-Wing ou Bat-Plane, le Bat-Boat ou encore le Bat-deltaplane (Jet Pack).",
+	"image": "url"
+}

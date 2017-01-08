@@ -475,3 +475,476 @@
 		}
 	]
 }
+{
+	"_id": {
+		"$oid": "58717b167e37eaf5657984a9"
+	},
+	"name": "Éclair de Feu",
+	"universe": {
+		"$oid": "584336b157ab9e1521a8bd9f"
+	},
+	"description": "Le balai volant est utilisé comme moyen de locomotion dans l'univers des sorciers. C'est également le moyen de transport légal le plus répandu, loin devant le tapis volant. Il est de plus en plus utilisé pour les loisirs et le sport, comme le Quidditch. De forme et de taille variables, le balai est généralement composé d'un manche en bois et d'un faisceau de brindilles fixé à son extrémité arrière. Rien ne le distingue d'un balai Moldu si ce n'est les sortilèges dont il est doté et qui lui permettent de voler.",
+	"image": "url",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						8
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "0"
+						},
+						"max": {
+							"$numberLong": "5000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 2.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 2.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 1.5
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 0.05
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 0.05
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 10.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 50.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "3"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 7,
+								"children": [
+									{
+										"value": 5
+									},
+									{
+										"value": 6
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						7
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "66"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "58717fea7e37eaf8d85dd5e7"
+	},
+	"name": "Batmobile",
+	"universe": {
+		"$oid": "58717def7e37eaf5657984aa"
+	},
+	"description": "La Batmobile est le véhicule du personnage de bande dessinée Batman. C'est un véhicule tout terrain, auto-alimenté, blindé, utilisé pour la poursuite de véhicules, le transport des prisonniers ou encore comme laboratoire mobile.",
+	"image": "url",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						1,
+						7
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "1000"
+						},
+						"max": {
+							"$numberLong": "150000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 5.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 2500.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 2.7
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 4.5
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 1.6
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 500.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 2000.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											},
+											{
+												"value": 14
+											}
+										]
+									},
+									{
+										"value": 16,
+										"children": [
+											{
+												"value": 17
+											},
+											{
+												"value": 18
+											},
+											{
+												"value": 19
+											}
+										]
+									}
+								]
+							},
+							{
+								"value": 21
+							},
+							{
+								"value": 30
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						1
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "50"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "7"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				}
+			]
+		}
+	]
+}
