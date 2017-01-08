@@ -11,6 +11,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ListIterator;
 
 import locomotor.components.models.CategoryModel;
@@ -199,57 +200,85 @@ public class DBH {
 				String id = doc.getObjectId("_id").toString();
 				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
 
+				HashMap<String, Document> categoriesItemMap = new HashMap<String, Document>();
+				for (Document d : catIt) {
+				   categoriesItemMap.put(d.getObjectId("categoryModel").toString(), d);
+				}
+
 				ArrayList<ItemCategory> categories = new ArrayList<ItemCategory>();
 
 				System.out.println("Retrieving the categories of " + doc.getString("name"));
 				
 				TypeFactory typeFactory = new TypeFactory();
 
-				// iterator to iterate simultaneously
+				// iterator
 				ListIterator<CategoryModel> itCatMod = catModel.listIterator();
-				ListIterator<Document> itCat = catIt.listIterator();
 
-				while(itCatMod.hasNext() && itCat.hasNext()) {
+				while(itCatMod.hasNext()) {
 
 					CategoryModel currentCatMod = itCatMod.next();
-					Document currentCat = itCat.next();
+					// not found yet
+					Document currentCat = categoriesItemMap.get(currentCatMod.getID());
+
+					// looking for the good category
+					// for (Document itCat : catIt) {
+					// 	String identifierCat = itCat.getObjectId("categoryModel").toString();
+					// 	if(currentCatMod.getID().equals(identifierCat)) {
+					// 		currentCat = itCat;
+					// 	}
+					// }
+
+					// not found
+					if (currentCat == null) {
+						// error
+						System.err.println("Error: Category model does not match any category of the current item");
+						System.err.println(currentCatMod);
+						System.err.println(catIt);
+						System.exit(0);
+					}
 
 					String identifierCat = currentCat.getObjectId("categoryModel").toString();
 					System.out.println("Category " + identifierCat);
 
-					// check category model
-					if(!currentCatMod.getID().equals(identifierCat)) {
-						// error
-						System.err.println("Error: Category model does not match current category");
-						System.err.println(currentCat);
-						System.err.println(currentCatMod);
-						System.exit(0);
-					}
-
 					ArrayList<ItemCriteria> criterias = new ArrayList<ItemCriteria>();
 					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
+
+					HashMap<String, Document> criteriasItemMap = new HashMap<String, Document>();
+					for (Document d : critIt) {
+					   criteriasItemMap.put(d.getObjectId("criterionModel").toString(), d);
+					}
+
 					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
 
 					// iterator to iterate simultaneously
 					ListIterator<CriteriaModel> itCriMod = critModIt.listIterator();
-					ListIterator<Document> itCrit = critIt.listIterator();
 
-					while(itCriMod.hasNext() && itCrit.hasNext()) {
+					while(itCriMod.hasNext()) {
 
 						CriteriaModel currentCritMod = itCriMod.next();
-						Document currentCrit = itCrit.next();
+						// not found yet
+						Document currentCrit = criteriasItemMap.get(currentCritMod.getID());
+
+						// looking for the good criteria
+						// for (Document itCrit : critIt) {
+						// 	String identifierCrit = itCrit.getObjectId("criterionModel").toString();
+						// 	if(currentCritMod.getID().equals(identifierCrit)) {
+						// 		currentCrit = itCrit;
+						// 	}
+						// }
+						
+						// not found
+						if(currentCrit == null) {
+							// error
+							System.err.println("Error: Criteria model does not match any criteria of the current category");
+							System.err.println(currentCritMod);
+							System.err.println(critIt);
+							System.exit(0);
+						}
 
 						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
 						System.out.println("Criterion " + identifierCrit);
 
-						// check criteria model
-						if(!currentCritMod.getID().equals(identifierCrit)) {
-							// error
-							System.err.println("Error: Criteria model does not match current criteria");
-							System.err.println(currentCrit);
-							System.err.println(currentCritMod);
-							System.exit(0);
-						}
 
 						// creation criteria
 						CItemType value = typeFactory.getItem(currentCritMod.getItemType(),
