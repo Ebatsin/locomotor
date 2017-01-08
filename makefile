@@ -129,3 +129,11 @@ linter-front-components:
 .PHONY: linter-front-user
 linter-front-user:
 	$(RUN) -jar $(CHK_STY) -c $(CHK_STY_CONF) $(SRC)/$(INT_USER)
+
+###################################################
+# Database:
+###################################################
+
+DATA = $(shell echo data/*.json)
+update-database:
+	$(foreach file, $(DATA), mongoimport -d locomotor -c $(shell basename $(file) .json) --drop --file $(file);)
