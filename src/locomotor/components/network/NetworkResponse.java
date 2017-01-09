@@ -4,12 +4,16 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.lang.Thread;
+import java.util.Arrays;
+
 import locomotor.components.MutableInteger;
 
 /**
@@ -165,6 +169,8 @@ public abstract class NetworkResponse {
 		}
 		catch(IOException exception) {
 			System.out.println("Error : unable to send the response to the user");
+			System.out.println(exception);
+			System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 		}
 	}
 

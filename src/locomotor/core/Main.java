@@ -3,6 +3,7 @@ package locomotor.core;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 
+import java.lang.Thread;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -40,23 +41,23 @@ public class Main {
 		Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
 		mongoLogger.setLevel(Level.SEVERE); 
 
-		Gaussian g = Gaussian.getInstance();
-		System.out.println("Tests gaussian cdf.");
-		System.out.println("cdf(-5) = " + g.cdf(-5) + " true value : " + g.trueCdf(-5));
-		System.out.println("cdf(5) = " + g.cdf(5) + " true value : " + g.trueCdf(5));
-		System.out.println("cdf(-2) = " + g.cdf(-2) + " true value : " + g.trueCdf(-2));
-		System.out.println("cdf(2) = " + g.cdf(2) + " true value : " + g.trueCdf(2));
-		System.out.println("cdf(-2.004) = " + g.cdf(-2.004) + " true value : " + g.trueCdf(-2.004));
-		System.out.println("cdf(2.004) = " + g.cdf(2.004) + " true value : " + g.trueCdf(2.004));
-		System.out.println("cdf(0) = " + g.cdf(0) + " true value : " + g.trueCdf(0));
-		System.out.println("Tests gaussian pdf.");
-		System.out.println("pdf(-5) = " + g.pdf(-5) + " true value : " + g.truePdf(-5));
-		System.out.println("pdf(5) = " + g.pdf(5) + " true value : " + g.truePdf(5));
-		System.out.println("pdf(-2) = " + g.pdf(-2) + " true value : " + g.truePdf(-2));
-		System.out.println("pdf(-2.004) = " + g.pdf(-2.004) + " true value : " + g.truePdf(-2.004));
-		System.out.println("pdf(2.004) = " + g.pdf(2.004) + " true value : " + g.truePdf(2.004));
-		System.out.println("pdf(2) = " + g.pdf(2) + " true value : " + g.truePdf(2));
-		System.out.println("pdf(0) = " + g.pdf(0) + " true value : " + g.truePdf(0));
+		// Gaussian g = Gaussian.getInstance();
+		// System.out.println("Tests gaussian cdf.");
+		// System.out.println("cdf(-5) = " + g.cdf(-5) + " true value : " + g.trueCdf(-5));
+		// System.out.println("cdf(5) = " + g.cdf(5) + " true value : " + g.trueCdf(5));
+		// System.out.println("cdf(-2) = " + g.cdf(-2) + " true value : " + g.trueCdf(-2));
+		// System.out.println("cdf(2) = " + g.cdf(2) + " true value : " + g.trueCdf(2));
+		// System.out.println("cdf(-2.004) = " + g.cdf(-2.004) + " true value : " + g.trueCdf(-2.004));
+		// System.out.println("cdf(2.004) = " + g.cdf(2.004) + " true value : " + g.trueCdf(2.004));
+		// System.out.println("cdf(0) = " + g.cdf(0) + " true value : " + g.trueCdf(0));
+		// System.out.println("Tests gaussian pdf.");
+		// System.out.println("pdf(-5) = " + g.pdf(-5) + " true value : " + g.truePdf(-5));
+		// System.out.println("pdf(5) = " + g.pdf(5) + " true value : " + g.truePdf(5));
+		// System.out.println("pdf(-2) = " + g.pdf(-2) + " true value : " + g.truePdf(-2));
+		// System.out.println("pdf(-2.004) = " + g.pdf(-2.004) + " true value : " + g.truePdf(-2.004));
+		// System.out.println("pdf(2.004) = " + g.pdf(2.004) + " true value : " + g.truePdf(2.004));
+		// System.out.println("pdf(2) = " + g.pdf(2) + " true value : " + g.truePdf(2));
+		// System.out.println("pdf(0) = " + g.pdf(0) + " true value : " + g.truePdf(0));
 
 		try {
 
@@ -80,22 +81,18 @@ public class Main {
 
 			// eh.remove(pid);
 
-			DBH db = DBH.getInstance();
-			db.connect("localhost", 27017);
+			// DBH db = DBH.getInstance();
+			// db.connect("localhost", 27017);
 			
-			db.connectToDatabase("locomotor");
+			// db.connectToDatabase("locomotor");
 
-			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
-			ArrayList<Item> items;
+			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			// ArrayList<Item> items = db.getItems(catModel);
 
-			long startTime = System.nanoTime();
+			// long startTime = System.nanoTime();
 
-			for (int ii = 0; ii < 1000; ii++) {
-				 items = db.getItems(catModel);
-			}
-
-			long estimatedTime = System.nanoTime() - startTime;
-			System.out.println(TimeUnit.MILLISECONDS.convert(estimatedTime, TimeUnit.NANOSECONDS) + " ms");
+			// long estimatedTime = System.nanoTime() - startTime;
+			// System.out.println(TimeUnit.MILLISECONDS.convert(estimatedTime, TimeUnit.NANOSECONDS) + " ms");
 			
 
 			// System.out.println("Test compare");
@@ -144,7 +141,7 @@ public class Main {
 			// db.authUser("test", "motdepasse");
 			// db.authUser("test2", "motdepasse");
 
-			db.disconnect();
+			// db.disconnect();
 
 		}
 		catch(Exception exception) {
@@ -152,10 +149,10 @@ public class Main {
 			exception.printStackTrace();
 		}
 
-		// System.out.println("get network instance");
-		// NetworkHandler nh = NetworkHandler.getInstance();
-		// System.out.println("init");
-		// nh.init(8000, "key.pfx", "motdepasse");
+		System.out.println("get network instance");
+		NetworkHandler nh = NetworkHandler.getInstance();
+		System.out.println("init");
+		nh.init(8000, "key.pfx", "motdepasse");
 
 		/*nh.createEndpoint("/api/test", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
@@ -181,11 +178,12 @@ public class Main {
 			}
 		});*/
 
-		// API.createHooks(nh);
+		API.createHooks(nh);
 
-
-		// System.out.println("start");
-		// nh.start();
+		System.out.println("start");
+		// Thread serverThread = new Thread(nh);
+        // serverThread.start();
+		nh.start();
 		
 	}
 }

@@ -220,14 +220,6 @@ public class DBH {
 					// not found yet
 					Document currentCat = categoriesItemMap.get(currentCatMod.getID());
 
-					// looking for the good category
-					// for (Document itCat : catIt) {
-					// 	String identifierCat = itCat.getObjectId("categoryModel").toString();
-					// 	if(currentCatMod.getID().equals(identifierCat)) {
-					// 		currentCat = itCat;
-					// 	}
-					// }
-
 					// not found
 					if (currentCat == null) {
 						// error
@@ -258,14 +250,6 @@ public class DBH {
 						CriteriaModel currentCritMod = itCriMod.next();
 						// not found yet
 						Document currentCrit = criteriasItemMap.get(currentCritMod.getID());
-
-						// looking for the good criteria
-						// for (Document itCrit : critIt) {
-						// 	String identifierCrit = itCrit.getObjectId("criterionModel").toString();
-						// 	if(currentCritMod.getID().equals(identifierCrit)) {
-						// 		currentCrit = itCrit;
-						// 	}
-						// }
 						
 						// not found
 						if(currentCrit == null) {

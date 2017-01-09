@@ -19,11 +19,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.Executors;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.TrustManagerFactory;
+
 
 /**
  * Singleton class tp handle all the tasks related to the network. Setting the server up, 
@@ -150,7 +152,8 @@ public class NetworkHandler {
 	 * Starts the server.
 	 */
 	public void start() {
-		_server.setExecutor(null);
+		// 100 threads
+		_server.setExecutor(Executors.newFixedThreadPool(100));
 		_server.start();
 	}
 
