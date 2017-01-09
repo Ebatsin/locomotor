@@ -108,7 +108,8 @@ public class BinaryObject {
 			case "image/png" : { // Java 7 allows string in case statements
 				return ".png";
 			}
-			case "image/jpg": {
+			case "image/jpg":
+			case "image/jpeg": {
 				return ".jpg";
 			}
 			default: {
