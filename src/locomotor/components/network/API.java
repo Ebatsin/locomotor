@@ -50,13 +50,6 @@ public class API {
 
 				System.out.println("Thread PID = " + Thread.currentThread().getId());
 				System.out.println("Sleep");
-				
-				try {
-					Thread.sleep(2000); 
-				}
-				catch(InterruptedException ex) {
-					Thread.currentThread().interrupt();
-				}
 
 				if(data.isValid()) {
 					System.out.println("Paramètres reçus : " + data.getParametersName());
@@ -87,6 +80,7 @@ public class API {
 
 		nh.createEndpoint("/img/get", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
+				System.out.println("Thread PID image = " + Thread.currentThread().getId());
 				if(data.isValid()) {
 					if(!data.isDefined("name")) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 

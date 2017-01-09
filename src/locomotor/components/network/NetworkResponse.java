@@ -16,6 +16,8 @@ import java.util.Arrays;
 
 import locomotor.components.MutableInteger;
 
+import org.apache.tika.Tika;
+
 /**
  * @todo.
  */
@@ -162,7 +164,6 @@ public abstract class NetworkResponse {
 
 		try {
 			_exchange.sendResponseHeaders(code, length);
-
 			OutputStream bodyResponse = _exchange.getResponseBody();
 			out.writeTo(bodyResponse);
 			bodyResponse.close();
@@ -184,7 +185,8 @@ public abstract class NetworkResponse {
 		String contentType = "";
 
 		try {
-			contentType = Files.probeContentType(out.toPath());
+			Tika tika = new Tika();
+			contentType = tika.detect(out);
 			headers.set("Content-Type", contentType);
 		}
 		catch(Exception exception) {
