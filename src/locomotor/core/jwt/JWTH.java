@@ -18,7 +18,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import locomotor.components.logging.ErrorContext;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
 
@@ -134,6 +133,7 @@ public class JWTH {
 	 * @return     The short-time token
 	 */
 	public static String createShortToken(String subject, boolean isAdmin) {
+		ErrorHandler.getInstance().push("createShortToken", false, "Create the short term token", "User " + subject);
 		// 2 hours
 		long duration = 7200000L;
 		return createToken(subject, isAdmin, duration);
@@ -148,10 +148,7 @@ public class JWTH {
 	 * @return     The long-time token
 	 */
 	public static String createLongToken(String subject, boolean isAdmin) {
-		String method1 = "createLongToken";
-		Logging log1 = new Logging("Create the long term token", false, "User " + subject);
-		ErrorContext ec = ErrorHandler.getInstance().get(Thread.currentThread().getId());
-		ec.add(method1, log1);
+		ErrorHandler.getInstance().push("createLongToken", false, "Create the long term token", "User " + subject);
 		// 60 days
 		long duration = 5184000000L;
 		return createToken(subject, isAdmin, duration);
@@ -163,6 +160,7 @@ public class JWTH {
 	 * @param      token  The token
 	 */
 	public static void checkToken(String token) {
+		ErrorHandler.getInstance().push("checkToken", false, "Check the token", token);
 
 		// not null cause error check before
 		Claims claims = verifyTokenSignature(token);

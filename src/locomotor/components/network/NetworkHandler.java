@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpsConfigurator;
 import com.sun.net.httpserver.HttpsParameters;
 import com.sun.net.httpserver.HttpsServer;
 
+import java.lang.Thread;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,6 +26,9 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.TrustManagerFactory;
+
+import locomotor.components.logging.ErrorContext;
+import locomotor.components.logging.ErrorHandler;
 
 
 /**
@@ -132,7 +136,14 @@ public class NetworkHandler {
 					return;
 				}
 				else {
+					
+					// create error context for the current thread
+					ErrorHandler.getInstance().get();
+
 					handler.handle(new NetworkData(exchange), new NetworkResponseFactory(exchange));
+
+					// remove error context for the current thread
+					ErrorHandler.getInstance().remove();
 				}
 			}
 		});

@@ -1,6 +1,9 @@
 package locomotor.components.logging;
 
+import java.lang.Thread;
 import java.util.TreeMap;
+
+import locomotor.components.Pair;
 
 /**
  * Singleton class for handling error that can be raised while performing actions.
@@ -36,40 +39,58 @@ public class ErrorHandler {
 	/**
 	 * Add a thread/request.
 	 *
-	 * @param      pid   The pid of the thread running the request
-	 *
 	 * @return     The ErrorContext object, our custom stacktrace
 	 */
-	private ErrorContext add(long pid) {
+	private ErrorContext add() {
 		ErrorContext ec = new ErrorContext();
-		_context.put(pid, ec);
+		_context.put(Thread.currentThread().getId(), ec);
 		return ec;
 	}
 
 	/**
 	 * Get a thread/request.
 	 *
-	 * @param      pid   The pid of the thread running the request
-	 *
 	 * @return     The ErrorContext object, our custom stacktrace
 	 */
-	public ErrorContext get(long pid) {
-		ErrorContext ec = _context.get(pid);
+	public ErrorContext get() {
+		ErrorContext ec = _context.get(Thread.currentThread().getId());
 		// already exist
 		if (ec != null) {
 			return ec;
 		}
 		// nope, then create
-		return add(pid);
+		return add();
 	}
 
 	/**
-	 * Remove the thread/request.
-	 *
-	 * @param      pid   The pid of the thread running the request
+	 * Remove the current thread/request
 	 */
-	public void remove(long pid) {
-		_context.remove(pid);
+	public void remove() {
+		_context.remove(Thread.currentThread().getId());
+	}
+
+	/**
+	 * Push a log onto the stacktrace
+	 *
+	 * @param      method  The method
+	 * @param      log     The log
+	 */
+	public void push(String method, boolean isError, String general, String details) {
+		ErrorContext ec = _context.get(Thread.currentThread().getId());
+		ec.push(method, new Logging(general, isError, details));
+	}
+
+	/**
+	 * Pop the last log from the stacktrace
+	 *
+	 * @return     The message/details log couple
+	 */
+	public Pair<String, Logging> pop() {
+		ErrorContext ec = _context.get(Thread.currentThread().getId());
+		if (!ec.isEmpty()) {
+			return ec.pop();
+		}
+		return null;
 	}
 
 }

@@ -25,7 +25,6 @@ public class API {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				if(data.isValid()) {
 					System.out.println("Paramètres reçus : " + data.getParametersName());
-					System.out.println("Thread PID = " + Thread.currentThread().getId());
 					if(!data.isDefined("token")) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "Le paramètre `token` n'a pas été trouvé. Il est obligatoire pour cette requête");
 						return;
@@ -47,10 +46,6 @@ public class API {
 		});
 		nh.createEndpoint("/api/user/auth", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
-
-				System.out.println("Thread PID = " + Thread.currentThread().getId());
-				System.out.println("Sleep");
-
 				if(data.isValid()) {
 					System.out.println("Paramètres reçus : " + data.getParametersName());
 				}
@@ -59,18 +54,14 @@ public class API {
 					return;
 				}
 
-				// create error context
-				ErrorHandler eh = ErrorHandler.getInstance();
-				ErrorContext ec = eh.get(Thread.currentThread().getId());
-
 				// get tokens
 				JWTH jwt = JWTH.getInstance();
 				String longToken = jwt.createLongToken("123456", false);
 				String shortToken = jwt.createShortToken("123456", false);
 
-				// print and remove context error
-				System.out.println(ec);
-				eh.remove(Thread.currentThread().getId());
+				// print context error
+				ErrorContext ec = ErrorHandler.getInstance().get();
+				System.out.print(ec);
 
 				response.getJsonContext().success(Json.object()
 						.add("short-term-token", shortToken)
@@ -80,7 +71,6 @@ public class API {
 
 		nh.createEndpoint("/img/get", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
-				System.out.println("Thread PID image = " + Thread.currentThread().getId());
 				if(data.isValid()) {
 					if(!data.isDefined("name")) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 

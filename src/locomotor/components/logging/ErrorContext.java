@@ -30,14 +30,31 @@ public class ErrorContext {
 	}
 
 	/**
-	 * Add a trace in the stacktrace.
+	 * Push a trace on top of the stacktrace.
 	 *
 	 * @param      method  The method
 	 * @param      log     The log
 	 */
-	public void add(String method, Logging log) {
+	public void push(String method, Logging log) {
 		_isError = _isError || log._errorState;
-		_stackTrace.add(new Pair<String, Logging>(method, log));
+		_stackTrace.push(new Pair<String, Logging>(method, log));
+	}
+
+	/**
+	 * Remove the last trace from the stacktrace.
+	 *
+	 * @param      method  The method
+	 * @param      log     The log
+	 */
+	public Pair<String, Logging> pop() {
+		if (!_stackTrace.isEmpty()) {
+			return _stackTrace.pop();
+		}
+		return null;
+	}
+
+	public boolean isEmpty() {
+		return  _stackTrace.isEmpty();
 	}
 
 	/**
