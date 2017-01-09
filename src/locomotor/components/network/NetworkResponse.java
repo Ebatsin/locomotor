@@ -200,7 +200,13 @@ public abstract class NetworkResponse {
 			bodyResponse.close();
 		}
 		catch(IOException exception) {
-			System.out.println("Error : unable to send the response to the user");
+			System.out.println("Error : unable to send the response to the user 1");
+			System.out.println(exception);
+			exception.printStackTrace();
+		} catch(Exception exception) {
+			System.out.println("Error : unable to send the response to the user 2");
+			System.out.println(exception);
+			exception.printStackTrace();		
 		}
 	}
 }

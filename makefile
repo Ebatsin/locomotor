@@ -90,7 +90,7 @@ doc:
 # Housekeeping:
 ###################################################
 .PHONY: clean
-clean: clean-components clean-core clean-doc
+clean: clean-components clean-core clean-front clean-doc
 
 .PHONY: clean-components
 clean-components:
@@ -99,6 +99,10 @@ clean-components:
 .PHONY: clean-core
 clean-core:
 	$(RM) $(CLASS)/$(CORE)/*
+
+.PHONY: clean-front
+clean-front:
+	$(RM) $(CLASS)/$(FRONT)/*
 
 .PHONY: clean-doc
 clean-doc:
