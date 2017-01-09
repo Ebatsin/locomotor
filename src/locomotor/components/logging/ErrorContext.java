@@ -42,9 +42,6 @@ public class ErrorContext {
 
 	/**
 	 * Remove the last trace from the stacktrace.
-	 *
-	 * @param      method  The method
-	 * @param      log     The log
 	 */
 	public Pair<String, Logging> pop() {
 		if (!_stackTrace.isEmpty()) {
@@ -53,6 +50,11 @@ public class ErrorContext {
 		return null;
 	}
 
+	/**
+	 * Determines if empty.
+	 *
+	 * @return     True if empty, False otherwise.
+	 */
 	public boolean isEmpty() {
 		return  _stackTrace.isEmpty();
 	}

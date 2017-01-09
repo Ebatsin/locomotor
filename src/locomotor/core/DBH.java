@@ -197,12 +197,11 @@ public class DBH {
 			@Override
 			public void apply(final Document doc) {
 
-				String id = doc.getObjectId("_id").toString();
 				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
 
 				HashMap<String, Document> categoriesItemMap = new HashMap<String, Document>();
 				for (Document d : catIt) {
-				   categoriesItemMap.put(d.getObjectId("categoryModel").toString(), d);
+					categoriesItemMap.put(d.getObjectId("categoryModel").toString(), d);
 				}
 
 				ArrayList<ItemCategory> categories = new ArrayList<ItemCategory>();
@@ -222,7 +221,7 @@ public class DBH {
 
 					// not found
 					if (currentCat == null) {
-						// error
+						// @todo: error
 						System.err.println("Error: Category model does not match any category of the current item");
 						System.err.println(currentCatMod);
 						System.err.println(catIt);
@@ -237,7 +236,7 @@ public class DBH {
 
 					HashMap<String, Document> criteriasItemMap = new HashMap<String, Document>();
 					for (Document d : critIt) {
-					   criteriasItemMap.put(d.getObjectId("criterionModel").toString(), d);
+						criteriasItemMap.put(d.getObjectId("criterionModel").toString(), d);
 					}
 
 					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
@@ -253,7 +252,7 @@ public class DBH {
 						
 						// not found
 						if(currentCrit == null) {
-							// error
+							// @todo: error
 							System.err.println("Error: Criteria model does not match any criteria of the current category");
 							System.err.println(currentCritMod);
 							System.err.println(critIt);
@@ -287,6 +286,7 @@ public class DBH {
 
 				}
 
+				String id = doc.getObjectId("_id").toString();
 				Item item = new Item(id, categories);
 
 				listItems.add(item);

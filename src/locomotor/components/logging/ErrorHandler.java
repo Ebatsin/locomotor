@@ -63,17 +63,19 @@ public class ErrorHandler {
 	}
 
 	/**
-	 * Remove the current thread/request
+	 * Remove the current thread/request.
 	 */
 	public void remove() {
 		_context.remove(Thread.currentThread().getId());
 	}
 
 	/**
-	 * Push a log onto the stacktrace
+	 * Push a log onto the stacktrace.
 	 *
-	 * @param      method  The method
-	 * @param      log     The log
+	 * @param      method   The method
+	 * @param      isError  Indicates if error
+	 * @param      general  The general message
+	 * @param      details  The details message
 	 */
 	public void push(String method, boolean isError, String general, String details) {
 		ErrorContext ec = _context.get(Thread.currentThread().getId());
@@ -81,7 +83,7 @@ public class ErrorHandler {
 	}
 
 	/**
-	 * Pop the last log from the stacktrace
+	 * Pop the last log from the stacktrace.
 	 *
 	 * @return     The message/details log couple
 	 */

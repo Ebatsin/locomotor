@@ -9,9 +9,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.Thread;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.lang.Thread;
 import java.util.Arrays;
 
 import locomotor.components.MutableInteger;
