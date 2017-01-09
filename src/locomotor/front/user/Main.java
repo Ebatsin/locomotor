@@ -116,7 +116,6 @@ public class Main extends Application {
 				else {
 					System.out.println("erreur : " + obj.getErrorMessage());
 				}
-				System.exit(0);
 			}
 		});
 
@@ -137,7 +136,6 @@ public class Main extends Application {
 				else {
 					System.out.println("erreur : " + obj.getErrorMessage());
 				}
-				System.exit(0);
 			}
 		});
 		
