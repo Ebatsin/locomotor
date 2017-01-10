@@ -27,8 +27,7 @@ public class CIntervalInteger extends CInterval implements CComparable<CInterval
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CIntervalInteger user, CIntervalInteger universe) {
-		// @todo
-		return 0.0;
+		return universe.compareDelegate(user, this);
 	}
 
 }
