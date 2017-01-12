@@ -20,6 +20,8 @@ LIB = lib
 SRC = src
 CLASS = class
 DOC = doc
+RESOURCES = resources
+DATA = data
 
 FLAGS_CC = -Xdiags:verbose
 RM = rm -rf
@@ -42,7 +44,7 @@ INT_ADMIN = $(FRONT)/administration
 INT_USER = $(FRONT)/user
 
 # lib
-MONGO = $(LIB)/*
+LIBALL = $(LIB)/*
 CHK_STY = $(LIB)/checkstyle-7.3-all.jar
 CHK_STY_CONF = $(LIB)/google_checks.xml
 DOC_CONF = doxygen.cfg
@@ -58,24 +60,24 @@ all: build-core
 build-components: linter-components build-components-types build-components-models
 
 build-components-types:
-		$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(MONGO):$(CLASS):" $(FLAGS_CC) $(SRC)/$(COMPONENTS_TYPES)/*.java
+		$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIBALL):$(CLASS):" $(FLAGS_CC) $(SRC)/$(COMPONENTS_TYPES)/*.java
 
 build-components-models:
-	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(MONGO):$(CLASS):" $(FLAGS_CC) $(SRC)/$(COMPONENTS_MODELS)/*.java
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIBALL):$(CLASS):" $(FLAGS_CC) $(SRC)/$(COMPONENTS_MODELS)/*.java
 
 build-core: linter-core
 	-test -d $(CLASS) || mkdir $(CLASS)
-	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(MONGO):$(CLASS):" $(FLAGS_CC) $(SRC)/$(CORE)/$(MAIN)
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIBALL):$(CLASS):" $(FLAGS_CC) $(SRC)/$(CORE)/$(MAIN)
 
 build-front-user:
 	-test -d $(CLASS) || mkdir $(CLASS)
-	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIB)/*:$(CLASS):resources:" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
+	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIBALL):$(CLASS):$(RESOURCES):" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
 
 run-core:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE)
 
 run-front-user:
-	$(RUN) -classpath "$(LIB)/*:$(CLASS):resources:" $(PACKAGE_FRONT_USER)
+	$(RUN) -classpath "$(LIB)/*:$(CLASS):$(RESOURCES):" $(PACKAGE_FRONT_USER)
 
 ###################################################
 # Doc:
@@ -138,6 +140,6 @@ linter-front-user:
 # Database:
 ###################################################
 
-DATA = $(shell echo data/*.json)
+DATAJSON = $(shell echo $(DATA)/*.json)
 update-database:
-	$(foreach file, $(DATA), mongoimport -d locomotor -c $(shell basename $(file) .json) --drop --file $(file);)
+	$(foreach file, $(DATAJSON), mongoimport -d $(PACKAGE) -c $(shell basename $(file) .json) --drop --file $(file);)
