@@ -40,51 +40,20 @@ public class Main {
 		// cf http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/management/logging/
 		Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
 		mongoLogger.setLevel(Level.SEVERE); 
-
-		// Gaussian g = Gaussian.getInstance();
-		// System.out.println("Tests gaussian cdf.");
-		// System.out.println("cdf(-5) = " + g.cdf(-5) + " true value : " + g.trueCdf(-5));
-		// System.out.println("cdf(5) = " + g.cdf(5) + " true value : " + g.trueCdf(5));
-		// System.out.println("cdf(-2) = " + g.cdf(-2) + " true value : " + g.trueCdf(-2));
-		// System.out.println("cdf(2) = " + g.cdf(2) + " true value : " + g.trueCdf(2));
-		// System.out.println("cdf(-2.004) = " + g.cdf(-2.004) + " true value : " + g.trueCdf(-2.004));
-		// System.out.println("cdf(2.004) = " + g.cdf(2.004) + " true value : " + g.trueCdf(2.004));
-		// System.out.println("cdf(0) = " + g.cdf(0) + " true value : " + g.trueCdf(0));
-		// System.out.println("Tests gaussian pdf.");
-		// System.out.println("pdf(-5) = " + g.pdf(-5) + " true value : " + g.truePdf(-5));
-		// System.out.println("pdf(5) = " + g.pdf(5) + " true value : " + g.truePdf(5));
-		// System.out.println("pdf(-2) = " + g.pdf(-2) + " true value : " + g.truePdf(-2));
-		// System.out.println("pdf(-2.004) = " + g.pdf(-2.004) + " true value : " + g.truePdf(-2.004));
-		// System.out.println("pdf(2.004) = " + g.pdf(2.004) + " true value : " + g.truePdf(2.004));
-		// System.out.println("pdf(2) = " + g.pdf(2) + " true value : " + g.truePdf(2));
-		// System.out.println("pdf(0) = " + g.pdf(0) + " true value : " + g.truePdf(0));
-
-		try {
-
-			// ErrorHandler eh = ErrorHandler.getInstance();
-
-			// Long pid = new Long(1234);
-
-			// ErrorContext ec = eh.get(pid);
-
-			// String method1 = "methodGetCriteria";
-			// Logging log1 = new Logging("An error has occured while retrieving a criteria model", true, "context values or message");
-
-			// ec.add(method1, log1);
-
-			// String method2 = "methodAddBooking";
-			// Logging log2 = new Logging("An error has occured adding a booking, the vehicle does not exist", true, "user x, vehicle x");
-
-			// ec.add(method2, log2);
-
-			// System.out.println(ec);
-
-			// eh.remove(pid);
-
-			// DBH db = DBH.getInstance();
-			// db.connect("localhost", 27017);
 			
-			// db.connectToDatabase("locomotor");
+		DBH db = DBH.getInstance();
+		db.connect("localhost", 27017);
+		db.connectToDatabase("locomotor");
+
+		NetworkHandler nh = NetworkHandler.getInstance();
+		nh.init(8000, "key.pfx", "motdepasse");
+
+		API.createHooks(nh);
+		nh.start();
+
+		// db.disconnect();
+		
+		// try {
 
 			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 			// ArrayList<Item> items = db.getItems(catModel);
@@ -141,49 +110,11 @@ public class Main {
 			// db.authUser("test", "motdepasse");
 			// db.authUser("test2", "motdepasse");
 
-			// db.disconnect();
-
-		}
-		catch(Exception exception) {
-			System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
-			exception.printStackTrace();
-		}
-
-		System.out.println("get network instance");
-		NetworkHandler nh = NetworkHandler.getInstance();
-		System.out.println("init");
-		nh.init(8000, "key.pfx", "motdepasse");
-
-		/*nh.createEndpoint("/api/test", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				if(data.isValid()) {
-					System.out.println("paramètres définis : " + data.getParametersName());
-
-					if(data.isDefined("text1")) {
-						System.out.println("Contenu de text1 : '" + data.getAsString("text1") + "'");
-					}
-					else {
-						System.out.println("Le paramètre text1 n'a pas été trouvé");
-					}
-				}
-				else {
-					System.out.println("There was an error while parsing the parameters");
-				}
-
-				NetworkJsonResponse resp = response.getJsonContext();
-				JsonObject obj = Json.object()
-					.add("test", "ok")
-					.add("message", "bonjour");
-				resp.success(obj);
-			}
-		});*/
-
-		API.createHooks(nh);
-
-		System.out.println("start");
-		// Thread serverThread = new Thread(nh);
-        // serverThread.start();
-		nh.start();
+		// }
+		// catch(Exception exception) {
+		// 	System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
+		// 	exception.printStackTrace();
+		// }		
 		
 	}
 }

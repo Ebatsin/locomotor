@@ -35,109 +35,95 @@ public class Main extends Application {
 		cr.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				System.out.println(obj.toString());	
-				String token = obj.get("data").asObject().get("short-term-token").asString();
 			}
 		});
 
 		ClientRequest cr2 = new ClientRequest("https://localhost:8000/");
 		cr2.addParam("username", "test");
-		cr2.addParam("password", "motdepasse");
 		cr2.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-				
-				String token = obj.get("data").asObject().get("short-term-token").asString();
-
+				System.out.println("pas de password");	
+				System.out.println(obj.toString());	
 			}
 		});
 
 		ClientRequest cr3 = new ClientRequest("https://localhost:8000/");
-		cr3.addParam("username", "test");
 		cr3.addParam("password", "motdepasse");
 		cr3.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-				
-				String token = obj.get("data").asObject().get("short-term-token").asString();
-
+				System.out.println("pas de username");		
+				System.out.println(obj.toString());	
 			}
 		});
 
 		ClientRequest cr4 = new ClientRequest("https://localhost:8000/");
 		cr4.addParam("username", "test");
-		cr4.addParam("password", "motdepasse");
+		cr4.addParam("password", "efvwsdvs");
 		cr4.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-				
-				String token = obj.get("data").asObject().get("short-term-token").asString();
-
+				System.out.println("invalid password");		
+				System.out.println(obj.toString());	
 			}
 		});
 
 		ClientRequest cr5 = new ClientRequest("https://localhost:8000/");
-		cr5.addParam("username", "test");
-		cr5.addParam("password", "motdepasse");
+		cr5.addParam("token", "pouet");
 		cr5.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-				
-				String token = obj.get("data").asObject().get("short-term-token").asString();
-
+				System.out.println("invalid token");		
+				System.out.println(obj.toString());	
 			}
 		});
 
 		ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
-		cr6.addParam("username", "test");
-		cr6.addParam("password", "motdepasse");
+		// this is the long term token for (test:motdepasse)
+		String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
+		cr6.addParam("token", longTerm);
 		cr6.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				System.out.println(obj.toString());
-				
-				String token = obj.get("data").asObject().get("short-term-token").asString();
-
 			}
 		});
 
-		ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
-		cr7.addParam("name", "chat.png");
-		cr7.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
-			public void accept(BinaryObject obj) {
-				if(obj.isSuccess()) {
-					ByteArrayOutputStream img = obj.getAsBinary();
-					try {
-						OutputStream outputStream = new FileOutputStream("resources/user/images/cat" + obj.guessFileExtension());
-						img.writeTo(outputStream);
-					}
-					catch(Exception exception) {
-						System.out.println("unable to write the file");
-					}
-				}
-				else {
-					System.out.println("erreur : " + obj.getErrorMessage());
-				}
-			}
-		});
+		// ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
+		// cr7.addParam("name", "chat.png");
+		// cr7.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
+		// 	public void accept(BinaryObject obj) {
+		// 		if(obj.isSuccess()) {
+		// 			ByteArrayOutputStream img = obj.getAsBinary();
+		// 			try {
+		// 				OutputStream outputStream = new FileOutputStream("resources/user/images/cat" + obj.guessFileExtension());
+		// 				img.writeTo(outputStream);
+		// 			}
+		// 			catch(Exception exception) {
+		// 				System.out.println("unable to write the file");
+		// 			}
+		// 		}
+		// 		else {
+		// 			System.out.println("erreur : " + obj.getErrorMessage());
+		// 		}
+		// 	}
+		// });
 
-		ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
-		cr8.addParam("name", "firefox.jpg");
-		cr8.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
-			public void accept(BinaryObject obj) {
-				if(obj.isSuccess()) {
-					ByteArrayOutputStream img = obj.getAsBinary();
-					try {
-						OutputStream outputStream = new FileOutputStream("resources/user/images/firefox" + obj.guessFileExtension());
-						img.writeTo(outputStream);
-					}
-					catch(Exception exception) {
-						System.out.println("unable to write the file");
-					}
-				}
-				else {
-					System.out.println("erreur : " + obj.getErrorMessage());
-				}
-			}
-		});
+		// ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
+		// cr8.addParam("name", "firefox.jpg");
+		// cr8.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
+		// 	public void accept(BinaryObject obj) {
+		// 		if(obj.isSuccess()) {
+		// 			ByteArrayOutputStream img = obj.getAsBinary();
+		// 			try {
+		// 				OutputStream outputStream = new FileOutputStream("resources/user/images/firefox" + obj.guessFileExtension());
+		// 				img.writeTo(outputStream);
+		// 			}
+		// 			catch(Exception exception) {
+		// 				System.out.println("unable to write the file");
+		// 			}
+		// 		}
+		// 		else {
+		// 			System.out.println("erreur : " + obj.getErrorMessage());
+		// 		}
+		// 	}
+		// });
 		
 		while(true) {} // wait for the request to be sent and the response read
 	}
