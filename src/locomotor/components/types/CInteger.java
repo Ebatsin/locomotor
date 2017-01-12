@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import locomotor.components.Compare;
+
 /**
  * @todo.
  */
@@ -23,7 +25,7 @@ public class CInteger extends CLong implements CComparable<CIntervalInteger, CIn
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CIntervalInteger user, CIntervalInteger universe) {
-		return Compare.uniqueValue(user.min(), user.max(), _value);
+		return Compare.uniqueValue(user.min().doubleValue(), user.max().doubleValue(), value().doubleValue());
 	}
 	
 }

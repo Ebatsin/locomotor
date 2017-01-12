@@ -20,6 +20,10 @@ public abstract class CLong implements CItemType {
 		_value = value;
 	}
 
+	public Long value() {
+		return _value;
+	}
+
 	/**
 	 * Returns a string representation of the object.
 	 *

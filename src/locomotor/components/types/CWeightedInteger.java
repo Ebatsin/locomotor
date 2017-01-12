@@ -25,7 +25,7 @@ public class CWeightedInteger extends CLong implements CComparable<CWeightedStri
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CWeightedStringList user, CWeightedStringList universe) {
-		return Compare.uniqueValue(user.min(), user.max(), _value);
+		return Compare.uniqueValue(user.min(), user.max(), value());
 	}
 	
 }

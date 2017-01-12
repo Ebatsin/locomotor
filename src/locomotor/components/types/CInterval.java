@@ -7,7 +7,7 @@ package locomotor.components.types;
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public abstract class CInterval<T extends Comparable> implements CUniverseType, CItemType,
+public abstract class CInterval<T extends Number> implements CUniverseType, CItemType,
 	CUserType {
 
 	private T _min;
@@ -22,7 +22,7 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
 	 * @todo handle error better
 	 */
 	public CInterval(T min, T max) {
-		if(min.compareTo(max) <= 0) {
+		if(min.doubleValue() < max.doubleValue()) {
 			_min = min;
 			_max = max;
 		}
@@ -60,10 +60,10 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
 	 *         false otherwise
 	 */
 	public final boolean intersects(CInterval that) {
-		if(_max.compareTo(that._min) < 0) {
+		if(_max.doubleValue() < that._min.doubleValue()) {
 			return false;
 		}
-		if(that._max.compareTo(_min) < 0) {
+		if(_min.doubleValue() > that._max.doubleValue()) {
 			return false;
 		}
 		return true;
@@ -77,7 +77,7 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
 	 *         false otherwise
 	 */
 	public final boolean contains(T value) {
-		return (_min.compareTo(value) <= 0) && (_max.compareTo(value) >= 0);
+		return _min.doubleValue() <= value.doubleValue() && _max.doubleValue() >= value.doubleValue();
 	}
 	
 	/**

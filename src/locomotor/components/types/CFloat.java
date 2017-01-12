@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import locomotor.components.Compare;
+
 /**
  * Encapsulate a Double value.
  * @see CEnumItemType.
@@ -38,7 +40,7 @@ public class CFloat implements CItemType, CComparable<CIntervalDouble, CInterval
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CIntervalDouble user, CIntervalDouble universe) {
-		return Compare.uniqueValue(user.min(), user.max(), _value);
+		return Compare.uniqueValue(user.min().doubleValue(), user.max().doubleValue(), _value.doubleValue());
 	}
 
 }
