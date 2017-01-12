@@ -7,9 +7,11 @@ import java.io.File;
 import java.lang.InterruptedException;
 import java.lang.Thread;
 
-import locomotor.components.logging.ErrorContext;
+import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
+import locomotor.components.logging.Logging;
 import locomotor.core.jwt.JWTH;
+import locomotor.core.DBH;
 
 /**
  * Network interface shown to the client.
@@ -21,51 +23,69 @@ public class API {
 	* @param nh The NetworkHandler to which the endpoint will be attached
 	*/
 	public static void createHooks(NetworkHandler nh) {
-		nh.createEndpoint("/api/test", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				if(data.isValid()) {
-					System.out.println("Paramètres reçus : " + data.getParametersName());
-					if(!data.isDefined("token")) {
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "Le paramètre `token` n'a pas été trouvé. Il est obligatoire pour cette requête");
-						return;
-					}
-					
-					String token = data.getAsString("token");
-					JWTH jwt = JWTH.getInstance();
-					jwt.checkToken(token);
-				}
-				else {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"La requête doit être au format POST pour être lue par le serveur");
-					return;
-				}
-
-				response.getJsonContext().success(Json.object()
-						.add("message", "Bienvenue à toi"));
-			}
-		});
 		nh.createEndpoint("/api/user/auth", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
-				if(data.isValid()) {
-					System.out.println("Paramètres reçus : " + data.getParametersName());
-				}
-				else {
+				
+				if(!data.isValid()) {
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "La requête doit être au format POST pour être lue par le serveur");
 					return;
+				}			
+				
+				// all parameter, ok
+				if((data.isDefined("username") && data.isDefined("password")) || (data.isDefined("token"))){
+					
+					JWTH jwt = JWTH.getInstance();
+					if (data.isDefined("username") && data.isDefined("password")) {
+						
+						// check user exist and good password
+						Pair<String,Boolean> claims = DBH.getInstance().authUser(data.getAsString("username"), data.getAsString("password"));
+						// check error
+						if (claims == null) {
+							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, log.getRight().toString());
+							return;
+						}
+						String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+						String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+
+						response.getJsonContext().success(Json.object()
+							.add("short-term-token", shortToken)
+							.add("long-term-token", longToken));
+					}
+					else {
+						
+						// auth with token
+						String longToken = data.getAsString("token");
+						Pair<String,Boolean> claims = jwt.checkToken(longToken);
+						
+						// check error
+						if (claims == null) {
+							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, log.getRight().toString());
+							return;
+						}
+
+						String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+						response.getJsonContext().success(Json.object()
+							.add("short-term-token", shortToken));
+						
+					}
+
+				} else { // error
+
+					String errorMessage = "";
+					if((!data.isDefined("username") && data.isDefined("password")) || 
+						(data.isDefined("username") && !data.isDefined("password")) || 
+						(!data.isDefined("username") && !data.isDefined("password"))) {
+						// missing username or password
+						errorMessage = "At least, one of the folowing parameter is missing: `username`, `password`. Both of them are mandatory for this request.";
+					}
+					else if (!data.isDefined("token")) {
+						// missing token
+						errorMessage = "The folowing parameter is missing: `token`. It is mandatory for this request.";
+					}
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
 				}
-
-				// get tokens
-				JWTH jwt = JWTH.getInstance();
-				String longToken = jwt.createLongToken("123456", false);
-				String shortToken = jwt.createShortToken("123456", false);
-
-				// print context error
-				ErrorContext ec = ErrorHandler.getInstance().get();
-				System.out.print(ec);
-
-				response.getJsonContext().success(Json.object()
-						.add("short-term-token", shortToken)
-						.add("long-term-token", longToken));
 			}
 		});
 

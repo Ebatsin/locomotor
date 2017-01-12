@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ListIterator;
 
+import locomotor.components.Pair;
+
+import locomotor.components.logging.ErrorHandler;
+
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
@@ -350,15 +354,18 @@ public class DBH {
 	 *
 	 * @param      username  The username
 	 * @param      password  The password
+	 *
+	 * @return     The ObjectID of the user and his role
 	 */
-	public static void authUser(String username, String password) {
+	public static Pair<String,Boolean> authUser(String username, String password) {
 
 		MongoCollection<Document> users = md.getCollection("users");
 		Document user = users.find(eq("username", username)).first();
 		
+		// no user with that username
 		if (user == null) {
-			// @todo: handle user with that username does not exist
-			return;
+			ErrorHandler.getInstance().push("authUser", true, "The username or the password is not correct", "The username does not exist");
+			return null;
 		}
 		
 		ObjectId id = (ObjectId)user.get("_id");
@@ -372,19 +379,19 @@ public class DBH {
 		}
 		catch(Exception ex) {
 			
-			// @todo: handle exception
-			System.out.println("ERROR: " + ex);
-			System.exit(1);
+			// bad password
+			ErrorHandler.getInstance().push("authUser", true, "Error while hashing the password", "");
+			return null;
 
 		}
 
 		if (!isPasswordValid) {
-			// @todo: handle password is not valid
-			return;
+			ErrorHandler.getInstance().push("authUser", true, "The username or the password is not correct", "The password is not correct");
+			return null;
 		}
 
 		// @todo: check pending notifications
-		// @todo: return OK
+		return new Pair(id.toString(), user.getBoolean("isAdmin"));
 
 	}
 

@@ -19,7 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import locomotor.components.logging.ErrorHandler;
-import locomotor.components.logging.Logging;
+import locomotor.components.Pair;
 
 /**
  * JSON Web Token class handler: create and check token.
@@ -80,7 +80,7 @@ public class JWTH {
 							.setSubject(subject)
 							.setIssuer("LocomotorServer")
 							.setIssuedAt(now)
-							.claim("role", (isAdmin ? "admin" : "user"))
+							.claim("role", isAdmin)
 							.signWith(signatureAlgorithm, signingKey);
 
 		// add the expiration if specified
@@ -114,9 +114,13 @@ public class JWTH {
 		}
 		catch (SignatureException se) {
 			
-			System.out.println("Error: token signature not valid");
-			System.out.println(se);
-			// @todo: handle error with new system
+			ErrorHandler.getInstance().push("verifyTokenSignature", true, "The token signature is not valid", token);
+			return null;
+
+		}
+		catch (Exception ex) {
+
+			ErrorHandler.getInstance().push("verifyTokenSignature", true, "An error occured while checking token signature", token);
 			return null;
 
 		}
@@ -158,19 +162,28 @@ public class JWTH {
 	 * Check token validity.
 	 *
 	 * @param      token  The token
+	 *
+	 * @return     The subject and the isAdmin role
 	 */
-	public static void checkToken(String token) {
+	public static Pair<String,Boolean> checkToken(String token) {
 		ErrorHandler.getInstance().push("checkToken", false, "Check the token", token);
 
-		// not null cause error check before
 		Claims claims = verifyTokenSignature(token);
+		
+		// null is error, verification fail
+		if (claims == null) {
+			return null;
+		}
 
+		// check the validity
 		boolean isTokenStillValid = claims.getExpiration().after(new Date(System.currentTimeMillis()));
 
-		// @todo: handle error with new system, if not valid
-		
-		System.out.println("Subject: " + claims.getSubject());
-		System.out.println("Issuer: " + claims.getIssuer());
-		System.out.println("Role: " + claims.get("role"));
+		if (!isTokenStillValid) {
+			// @todo: tell user to disconnect and reconnect to regenerate long term token
+			ErrorHandler.getInstance().push("checkToken", true, "The token is no longer valid", "Expiration date of the token is " + claims.getExpiration());
+			return null;
+		}
+
+		return new Pair(claims.getSubject(), claims.get("role"));
 	}
 }
