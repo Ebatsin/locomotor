@@ -303,19 +303,22 @@ public class DBH {
 	}
 
 	/**
-	 * Creates an user.
+	 * Register an user.
 	 *
 	 * @param      username  The username
 	 * @param      password  The password
+	 *
+	 * @return     The ObjectID of the user and his role
 	 */
-	public static void createUser(String username, String password) {
+	public static Pair<String,Boolean> registerUser(String username, String password) {
 		MongoCollection<Document> users = md.getCollection("users");
 		Document userAlreadyExists = users.find(eq("username", username)).first();
 		
+		// check already exist
 		if (userAlreadyExists != null) {
-			// @todo: handle username already exists
-			System.out.println(userAlreadyExists.toJson());
-			return;
+			// handle username already exists
+			ErrorHandler.getInstance().push("registerUser", true, "The username is already taken by another user", "");
+			return null;
 		}
 			
 		Document user = new Document();
@@ -337,16 +340,15 @@ public class DBH {
 	
 			// delete the user from the database
 			users.deleteOne(eq("_id", id));
-			// @todo: handle exception
-			System.out.println("ERROR: " + ex);
-			System.exit(1);
+			ErrorHandler.getInstance().push("registerUser", true, "An error occurred while processing the registration. Please retry.", "");
+			return null;
 
 		}
 		
 		// add hashed password
 		users.updateOne(eq("_id", id), set("password", passwordHash));
 
-		// @todo: return OK
+		return new Pair(id.toString(), user.getBoolean("isAdmin"));
 	}
 
 	/**
@@ -394,6 +396,5 @@ public class DBH {
 		return new Pair(id.toString(), user.getBoolean("isAdmin"));
 
 	}
-
 
 }

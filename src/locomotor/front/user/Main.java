@@ -29,57 +29,75 @@ public class Main extends Application {
 
 		System.out.println("Tentative de requête");
 
-		ClientRequest cr = new ClientRequest("https://localhost:8000/");
-		cr.addParam("username", "test");
-		cr.addParam("password", "motdepasse");
-		cr.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// ClientRequest cr = new ClientRequest("https://localhost:8000/");
+		// cr.addParam("username", "test");
+		// cr.addParam("password", "motdepasse");
+		// cr.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println(obj.toString());	
+		// 	}
+		// });
+
+		// ClientRequest cr2 = new ClientRequest("https://localhost:8000/");
+		// cr2.addParam("username", "test");
+		// cr2.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println("pas de password");	
+		// 		System.out.println(obj.toString());	
+		// 	}
+		// });
+
+		// ClientRequest cr3 = new ClientRequest("https://localhost:8000/");
+		// cr3.addParam("password", "motdepasse");
+		// cr3.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println("pas de username");		
+		// 		System.out.println(obj.toString());	
+		// 	}
+		// });
+
+		// ClientRequest cr4 = new ClientRequest("https://localhost:8000/");
+		// cr4.addParam("username", "test");
+		// cr4.addParam("password", "efvwsdvs");
+		// cr4.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println("invalid password");		
+		// 		System.out.println(obj.toString());	
+		// 	}
+		// });
+
+		// ClientRequest cr5 = new ClientRequest("https://localhost:8000/");
+		// cr5.addParam("token", "pouet");
+		// cr5.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println("invalid token");		
+		// 		System.out.println(obj.toString());	
+		// 	}
+		// });
+
+		// ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
+		// // this is the long term token for (test:motdepasse)
+		// String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
+		// cr6.addParam("token", longTerm);
+		// cr6.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println(obj.toString());
+		// 	}
+		// });
+
+		ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
+		cr7.addParam("username", "test");
+		cr7.addParam("password", "motdepasse");
+		cr7.requestJson("api/user/register").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());	
+				System.out.println(obj.toString());
 			}
 		});
 
-		ClientRequest cr2 = new ClientRequest("https://localhost:8000/");
-		cr2.addParam("username", "test");
-		cr2.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
-			public void accept(JsonObject obj) {
-				System.out.println("pas de password");	
-				System.out.println(obj.toString());	
-			}
-		});
-
-		ClientRequest cr3 = new ClientRequest("https://localhost:8000/");
-		cr3.addParam("password", "motdepasse");
-		cr3.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
-			public void accept(JsonObject obj) {
-				System.out.println("pas de username");		
-				System.out.println(obj.toString());	
-			}
-		});
-
-		ClientRequest cr4 = new ClientRequest("https://localhost:8000/");
-		cr4.addParam("username", "test");
-		cr4.addParam("password", "efvwsdvs");
-		cr4.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
-			public void accept(JsonObject obj) {
-				System.out.println("invalid password");		
-				System.out.println(obj.toString());	
-			}
-		});
-
-		ClientRequest cr5 = new ClientRequest("https://localhost:8000/");
-		cr5.addParam("token", "pouet");
-		cr5.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
-			public void accept(JsonObject obj) {
-				System.out.println("invalid token");		
-				System.out.println(obj.toString());	
-			}
-		});
-
-		ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
-		// this is the long term token for (test:motdepasse)
-		String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
-		cr6.addParam("token", longTerm);
-		cr6.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
+		cr8.addParam("username", "test3");
+		cr8.addParam("password", "motdepasse");
+		cr8.requestJson("api/user/register").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				System.out.println(obj.toString());
 			}

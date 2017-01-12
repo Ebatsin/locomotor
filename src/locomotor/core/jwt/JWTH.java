@@ -18,8 +18,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import locomotor.components.logging.ErrorHandler;
 import locomotor.components.Pair;
+import locomotor.components.logging.ErrorHandler;
 
 /**
  * JSON Web Token class handler: create and check token.

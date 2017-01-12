@@ -27,7 +27,7 @@ public class API {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				
 				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "La requête doit être au format POST pour être lue par le serveur");
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "The request must be in POST format to be read by the server");
 					return;
 				}			
 				
@@ -78,12 +78,49 @@ public class API {
 						(data.isDefined("username") && !data.isDefined("password")) || 
 						(!data.isDefined("username") && !data.isDefined("password"))) {
 						// missing username or password
-						errorMessage = "At least, one of the folowing parameter is missing: `username`, `password`. Both of them are mandatory for this request.";
+						errorMessage = "At least, one of the following parameter is missing: `username`, `password`. Both of them are mandatory for this request.";
 					}
 					else if (!data.isDefined("token")) {
 						// missing token
-						errorMessage = "The folowing parameter is missing: `token`. It is mandatory for this request.";
+						errorMessage = "The following parameter is missing: `token`. It is mandatory for this request.";
 					}
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+				}
+			}
+		});
+
+		nh.createEndpoint("/api/user/register", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {
+				
+				if(!data.isValid()) {
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "La requête doit être au format POST pour être lue par le serveur");
+					return;
+				}			
+				
+				// all parameter, ok
+				if((data.isDefined("username") && data.isDefined("password"))){
+					
+					JWTH jwt = JWTH.getInstance();						
+					// check user exist
+					Pair<String,Boolean> claims = DBH.getInstance().registerUser(data.getAsString("username"), data.getAsString("password"));
+					
+					// check error
+					if (claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, log.getRight().toString());
+						return;
+					}
+					
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+					String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken)
+						.add("long-term-token", longToken));
+
+				} else { // error
+
+					String errorMessage = "At least, one of the following parameter is missing: `username`, `password`. Both of them are mandatory for this request.";
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
 				}
 			}
