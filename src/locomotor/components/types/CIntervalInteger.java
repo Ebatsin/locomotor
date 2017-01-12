@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import locomotor.components.Compare;
+
 /**
  * A interval between two Long.
  * @see CEnumUniverseType.
@@ -27,7 +29,7 @@ public class CIntervalInteger extends CInterval implements CComparable<CInterval
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CIntervalInteger user, CIntervalInteger universe) {
-		return universe.compareDelegate(user, this);
+		return Compare.intervalValue(user.min().doubleValue(), user.max().doubleValue(), min().doubleValue(), max().doubleValue());
 	}
 
 }

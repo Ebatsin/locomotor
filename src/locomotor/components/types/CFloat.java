@@ -38,8 +38,7 @@ public class CFloat implements CItemType, CComparable<CIntervalDouble, CInterval
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CIntervalDouble user, CIntervalDouble universe) {
-		// @todo
-		return 0.0;
+		return Compare.uniqueValue(user.min(), user.max(), _value);
 	}
 
 }

@@ -17,6 +17,14 @@ public class CWeightedStringList extends CStringList {
 	 */
 	private Long _max;
 
+	public Long min() {
+		return _min;
+	}
+
+	public Long max() {
+		return _max;
+	}
+
 	/**
 	 * Builds a Weighted list.
 	 * @param min     The lightest weight

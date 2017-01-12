@@ -25,33 +25,33 @@ public class Gaussian {
 		double value;
 		double sum;
 		double term;
-		double valueX;
+		double index;
 
 		// generate the lookup tables for the pdf functions (1000 steps from -4 to 4)
 		for(int i = 0; i <= _steps / 2; ++i) {
-			valueX = _stepsLength * i;
+			index = _stepsLength * i;
 			// lookup table for the pdf function
-			value = Math.exp(-valueX * valueX / 2) / sqrt2PI;
-			_pdfLookUp.put(valueX, valueX);
-			_pdfLookUp.put(-valueX, valueX);
+			value = Math.exp(-index * index / 2) / sqrt2PI;
+			_pdfLookUp.put(index, value);
+			_pdfLookUp.put(-index, value);
 		}
 
 		// lookup table for the cdf function using taylor approximation
 		for(int i = 0; i <= _steps / 2; ++i) {
-			valueX = _stepsLength * i;
+			index = _stepsLength * i;
 
 			sum = 0.0;
-			term = valueX;
+			term = index;
 
 			for(int j = 3; sum + term != sum; j += 2) {
 				sum = sum + term;
-				term = term * valueX * valueX / j;
+				term = term * index * index / j;
 			}
 
-			value = 0.5 + sum * pdf(valueX);
+			value = 0.5 + sum * pdf(index);
 
-			_cdfLookUp.put(valueX, value);
-			_cdfLookUp.put(-valueX, 1 - value);
+			_cdfLookUp.put(index, value);
+			_cdfLookUp.put(-index, 1 - value);
 		}
 	}
 

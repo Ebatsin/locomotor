@@ -1,7 +1,7 @@
 package locomotor.components.types;
 
 import java.lang.Math;
-import locomotor.core.Gaussian;
+import locomotor.components.Compare;
 
 /**
  * A interval between two Double.
@@ -30,6 +30,6 @@ public class CIntervalDouble extends CInterval implements CComparable<CIntervalD
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	public double compare(CIntervalDouble user, CIntervalDouble universe) {
-		return universe.compareDelegate(user, this);
+		return Compare.intervalValue(user.min().doubleValue(), user.max().doubleValue(), min().doubleValue(), max().doubleValue());
 	}
 }

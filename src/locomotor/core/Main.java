@@ -26,6 +26,8 @@ import locomotor.components.network.NetworkResponse;
 import locomotor.components.network.NetworkResponseFactory;
 import locomotor.components.types.*;
 
+import locomotor.components.Compare;
+
 /**
  * Where all the magic happens.
  */
@@ -35,6 +37,24 @@ public class Main {
 	 * One method to rule them all.
 	 */
 	public static void main(String[] args) {
+
+		System.out.println("Test de comparaisons.");
+		System.out.println("Comparaisons valeurs uniques : ");
+		System.out.println("[0, 10] - 5 : note = " + Compare.uniqueValue(0, 10, 5)); // 1.0
+		System.out.println("[0, 10] - 0 : note = " + Compare.uniqueValue(0, 10, 0)); // 1.0
+		System.out.println("[0, 10] - 10 : note = " + Compare.uniqueValue(0, 10, 10)); // 1.0
+		System.out.println("[0, 10] - -2 : note = " + Compare.uniqueValue(0, 10, -2)); // ~0.811
+		System.out.println("[0, 10] - 12 : note = " + Compare.uniqueValue(0, 10, 12)); // ~0.811
+		System.out.println("[0, 10] - -5 : note = " + Compare.uniqueValue(0, 10, -5)); // ~0.520
+		System.out.println("[0, 10] - 15 : note = " + Compare.uniqueValue(0, 10, 15)); // ~0.520
+
+		System.out.println("Comparaison intervalles : ");
+		System.out.println("[0, 10] - [0, 10] : note = " + Compare.intervalValue(0, 10, 0, 10)); // 1.0
+		System.out.println("[0, 10] - [2, 8] : note = " + Compare.intervalValue(0, 10, 2, 8)); // ~0.819
+		System.out.println("[0, 10] - [-2, 12] : note = " + Compare.intervalValue(0, 10, -2, 12)); // 1.0
+		System.out.println("[0, 10] - [10, 15] : note = " + Compare.intervalValue(0, 10, 10, 15)); // ~0.25
+		System.out.println("[0, 10] - [11, 13] : note = " + Compare.intervalValue(0, 10, 11, 13)); // ~0.08
+		System.out.println("[0, 10] - [11, 20] : note = " + Compare.intervalValue(0, 10, 11, 20)); // ~0.089
 
 		// disable logging on mongodb driver
 		// cf http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/management/logging/
