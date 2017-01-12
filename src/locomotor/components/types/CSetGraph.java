@@ -3,6 +3,7 @@ package locomotor.components.types;
 import java.util.ArrayList;
 import java.util.Set;
 
+import locomotor.components.Compare;
 import locomotor.components.Pair;
 
 import org.jgrapht.alg.FloydWarshallShortestPaths;
@@ -61,7 +62,7 @@ public class CSetGraph /*implements CUniverseType*/ {
 	 *
 	 * @return     The diameter.
 	 */
-	protected double getDiameter() {
+	public double getDiameter() {
 		return _fwsp.getDiameter();
 	}
 
@@ -73,7 +74,7 @@ public class CSetGraph /*implements CUniverseType*/ {
 	 *
 	 * @return     the shortest distance between start and end
 	 */
-	protected double distance(Integer start, Integer end) {
+	public double distance(Integer start, Integer end) {
 		return _fwsp.shortestDistance(start, end);
 	}
 
@@ -86,38 +87,7 @@ public class CSetGraph /*implements CUniverseType*/ {
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	protected double compare(Set<Integer> userKey, Set<Integer> itemKey) {
-
-		boolean isUserSubsetOfItem = itemKey.containsAll(userKey);
-
-		// case 1: user is included or egal to item
-		if (itemKey.equals(userKey) || isUserSubsetOfItem) {
-			return 1.0;
-		}
-		
-		boolean isItemSubsetOfUser = userKey.containsAll(itemKey);
-
-		// case 2: item is included in user
-		if (isItemSubsetOfUser) {
-			return itemKey.size() / userKey.size();
-		}
-
-		// case 3: item intersect or not user
-		double diameter = this.getDiameter();
-		double distance;
-		double sumOfDistance = 0.0;
-		int numberOfPaths = userKey.size() * itemKey.size();
-
-		for (Integer ui : userKey) {
-			for (Integer ij : itemKey) {
-				distance = this.distance(ui, ij);
-				distance = Math.max(0, ((diameter - distance) / diameter));
-				sumOfDistance += distance;
-			}
-		}
-
-		// avoid divide by zero
-		return (sumOfDistance == 0.0) ? sumOfDistance : (sumOfDistance / numberOfPaths);
-
+		return Compare.graphValue(userKey, itemKey, this);
 	}
 	
 }

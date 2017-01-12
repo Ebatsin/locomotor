@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import locomotor.components.Compare;
+
 /**
  * Encapsulate a Boolean value.
  * @see CEnumUniverseType.
@@ -22,6 +24,10 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 		_value = value;
 	}
 
+	public Boolean value() {
+		return _value;
+	}
+
 	/**
 	 * Returns a string representation of the object.
 	 *
@@ -40,7 +46,7 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	 * @return     1.0 (match), 0.0 otherwise
 	 */
 	public double compare(CBoolean user, CBoolean universe) {
-		return (_value == user._value) ? 1.0 : 0.0;
+		return Compare.booleanValue(user, this);
 	}
 
 }

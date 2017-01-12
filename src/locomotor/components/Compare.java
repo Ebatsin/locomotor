@@ -1,7 +1,10 @@
 package locomotor.components;
 
 import java.lang.Math;
+import java.util.Set;
 import locomotor.core.Gaussian;
+import locomotor.components.types.CBoolean;
+import locomotor.components.types.CSetGraph;
 
 public class Compare {
 
@@ -71,5 +74,52 @@ public class Compare {
 		}
 
 		return mark;
+	}
+
+	/**
+	 * Compare the string list of the vehicle with the string list of the user
+	 *
+	 * @param      userKey      The user key set
+	 * @param      itemKey      The item key set
+	 * @param      universeKey  The universe set
+	 *
+	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 */
+	public static double graphValue(Set<Integer> userKey, Set<Integer> itemKey, CSetGraph universeKey) {
+
+		boolean isUserSubsetOfItem = itemKey.containsAll(userKey);
+
+		// case 1: user is included or egal to item
+		if (itemKey.equals(userKey) || isUserSubsetOfItem) {
+			return 1.0;
+		}
+		
+		boolean isItemSubsetOfUser = userKey.containsAll(itemKey);
+
+		// case 2: item is included in user
+		if (isItemSubsetOfUser) {
+			return itemKey.size() / userKey.size();
+		}
+
+		// case 3: item intersect or not user
+		double diameter = universeKey.getDiameter();
+		double distance;
+		double sumOfDistance = 0.0;
+		int numberOfPaths = userKey.size() * itemKey.size();
+
+		for (Integer ui : userKey) {
+			for (Integer ij : itemKey) {
+				distance = universeKey.distance(ui, ij);
+				distance = Math.max(0, ((diameter - distance) / diameter));
+				sumOfDistance += distance;
+			}
+		}
+
+		// avoid divide by zero
+		return (sumOfDistance == 0.0) ? sumOfDistance : (sumOfDistance / numberOfPaths);
+	}
+
+	public static double booleanValue(CBoolean user, CBoolean item) {		
+		return (item.value() == user.value()) ? 1.0 : 0.0;
 	}
 }
