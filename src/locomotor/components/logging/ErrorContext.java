@@ -60,6 +60,15 @@ public class ErrorContext {
 	}
 
 	/**
+	 * Determines if error.
+	 *
+	 * @return     True if error, False otherwise.
+	 */
+	protected boolean isError() {
+		return _isError;
+	}
+
+	/**
 	 * Returns a string representation of the object.
 	 *
 	 * @return     String representation of the object.

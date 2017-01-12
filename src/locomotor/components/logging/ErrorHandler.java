@@ -95,4 +95,14 @@ public class ErrorHandler {
 		return null;
 	}
 
+	/**
+	 * Determines if error.
+	 *
+	 * @return     True if error, False otherwise.
+	 */
+	public boolean isError() {
+		ErrorContext ec = _context.get(Thread.currentThread().getId());
+		return ec.isError();
+	}
+
 }

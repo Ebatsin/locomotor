@@ -36,7 +36,7 @@ public class Logging {
 	}
 
 	public String toString() {
-		return "Message: " + _message + "\n" + "Context: " + _context;
+		return _message;
 	}
 
 }
