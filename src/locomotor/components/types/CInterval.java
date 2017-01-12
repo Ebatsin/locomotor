@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import locomotor.core.Gaussian;
+
 /**
  * A interval between two T (Comparable).
  * @see CEnumUniverseType.
@@ -119,40 +121,41 @@ public abstract class CInterval<T extends Comparable> implements CUniverseType, 
 	 * @return     1.0 (best match), tend toward 0.0 otherwise
 	 */
 	protected double compareDelegate(CInterval user, CInterval item) {
-		Gaussian gaussian = Gaussian.getInstance();
-		float mappedIntervalMax = 2; // the mapped interval is [-2; 2]
+		// Gaussian gaussian = Gaussian.getInstance();
+		// float mappedIntervalMax = 2; // the mapped interval is [-2; 2]
 
-		double userFactor = (2.0 * mappedIntervalMax) / (user.max() - user.max());
-		double userOffset = (user.min() * userFactor) + mappedIntervalMax;
+		// double userFactor = (2.0 * mappedIntervalMax) / (user.max() - user.max());
+		// double userOffset = (user.min() * userFactor) + mappedIntervalMax;
 
-		double offsetedMinPoint = item.min() * userFactor - userOffset;
-		double offsetedMaxPoint = item.max() * userFactor - userOffset;
+		// double offsetedMinPoint = item.min() * userFactor - userOffset;
+		// double offsetedMaxPoint = item.max() * userFactor - userOffset;
 
-		double factor = 1.0 / (gaussian.cdf(mappedIntervalMax) - gaussian.cdf(-mappedIntervalMax));
+		// double factor = 1.0 / (gaussian.cdf(mappedIntervalMax) - gaussian.cdf(-mappedIntervalMax));
 
-		double mark = 0;
+		// double mark = 0;
 
-		if(offsetedMaxPoint < -mappedIntervalMax || offsetedMinPoint > mappedIntervalMax) { // out of the user's interval
-			mark = gaussian.cdf(offsetedMaxPoint) - gaussian.cdf(offsetedMinPoint);
-			// map the value in [0; 0.25]
-			mark *= 0.25 / gaussian.cdf(-mappedIntervalMax);
-		}
-		else {
-			mark = Math.min(1.0, (gaussian.cdf(offsetedMaxPoint) - gaussian.cdf(offsetedMinPoint)) * factor);
+		// if(offsetedMaxPoint < -mappedIntervalMax || offsetedMinPoint > mappedIntervalMax) { // out of the user's interval
+		// 	mark = gaussian.cdf(offsetedMaxPoint) - gaussian.cdf(offsetedMinPoint);
+		// 	// map the value in [0; 0.25]
+		// 	mark *= 0.25 / gaussian.cdf(-mappedIntervalMax);
+		// }
+		// else {
+		// 	mark = Math.min(1.0, (gaussian.cdf(offsetedMaxPoint) - gaussian.cdf(offsetedMinPoint)) * factor);
 
-			if(offsetedMaxPoint < mappedIntervalMax) { // penality application
-				double diff = Math.min(gaussian.cdf(-mappedIntervalMax), gaussian.cdf(mappedIntervalMax) - gaussian.cdf(offsetedMaxPoint)) * factor;
-				mark -= diff;
-			}
-			if(offsetedMinPoint > -mappedIntervalMax) {
-				double diff = Math.min(gaussian.cdf(-mappedIntervalMax), gaussian.cdf(offsetedMinPoint) - gaussian.cdf(-mappedIntervalMax)) * factor;
-				mark -= diff;
-			}
+		// 	if(offsetedMaxPoint < mappedIntervalMax) { // penality application
+		// 		double diff = Math.min(gaussian.cdf(-mappedIntervalMax), gaussian.cdf(mappedIntervalMax) - gaussian.cdf(offsetedMaxPoint)) * factor;
+		// 		mark -= diff;
+		// 	}
+		// 	if(offsetedMinPoint > -mappedIntervalMax) {
+		// 		double diff = Math.min(gaussian.cdf(-mappedIntervalMax), gaussian.cdf(offsetedMinPoint) - gaussian.cdf(-mappedIntervalMax)) * factor;
+		// 		mark -= diff;
+		// 	}
 
-			// normalize the mark and map it in [0.25; 1]
-			mark = Math.max(0.0, Math.min(1.0, mark)) * 0.75 + 0.25;
-		}
+		// 	// normalize the mark and map it in [0.25; 1]
+		// 	mark = Math.max(0.0, Math.min(1.0, mark)) * 0.75 + 0.25;
+		// }
 
-		return mark;
+		// return mark;
+		return 0.0;
 	}
 }
