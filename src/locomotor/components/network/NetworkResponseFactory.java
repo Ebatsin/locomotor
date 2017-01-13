@@ -7,9 +7,6 @@ import com.sun.net.httpserver.HttpExchange;
  */
 public class NetworkResponseFactory {
 	
-	/**
-	 * @todo.
-	 */
 	HttpExchange _exchange;
 
 	/**

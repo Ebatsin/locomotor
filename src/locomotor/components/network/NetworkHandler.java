@@ -48,13 +48,10 @@ public class NetworkHandler {
 	private HttpsServer _server;
 
 	/**
-	 * @todo.
+	 * contains the mapping between the API endpoint names and their handlers.
 	 */
 	private HashMap<String, IEndpointHandler> _endpointHandlers;
 
-	/**
-	 * @todo.
-	 */
 	private NetworkHandler() {
 		_endpointHandlers = new HashMap<String, IEndpointHandler>();
 	}

@@ -9,13 +9,10 @@ import java.io.ByteArrayOutputStream;
 import locomotor.components.MutableInteger;
 
 /**
- * @todo.
+ * This class is used to send a response that contains JSON data to the client.
  */
 public class NetworkJsonResponse extends NetworkResponse {
 
-	/**
-	 * @todo.
-	 */
 	public NetworkJsonResponse(HttpExchange exchange) {
 		super(exchange);
 	}

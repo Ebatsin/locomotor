@@ -19,17 +19,14 @@ import locomotor.components.MutableInteger;
 import org.apache.tika.Tika;
 
 /**
- * @todo.
+ * This class format and send the response to the client.
  */
 public abstract class NetworkResponse {	
-	
-	/**
-	 * @todo.
-	 */
+
 	HttpExchange _exchange;
 
 	/**
-	 * @todo.
+	 * Contains all the usefull error codes that the server can return in case of error.
 	 */
 	public enum ErrorCode {
 		
