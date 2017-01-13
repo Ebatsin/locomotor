@@ -1,9 +1,9 @@
 package locomotor.components.types;
 
 /**
- * @todo.
+ * Define two type that implements the comparison process.
  */
-public interface CComparable<US extends CUserType, UN extends CUniverseType> {
+public interface CComparable<S extends CUserType, N extends CUniverseType> {
 
 	/**
 	 * Compare a item and an user criteria, return a mark between 0 and 1.
@@ -13,6 +13,6 @@ public interface CComparable<US extends CUserType, UN extends CUniverseType> {
 	 *
 	 * @return     A mark between 1 (best match) and 0.
 	 */
-	public double compare(US user, UN universe);
+	public double compare(S user, N universe);
 
 }

@@ -3,7 +3,7 @@ package locomotor.components.types;
 import locomotor.components.Compare;
 
 /**
- * @todo.
+ * Encapsulate a 64-bit integer value.
  */
 public class CInteger extends CLong implements CComparable<CIntervalInteger, CIntervalInteger> {
 

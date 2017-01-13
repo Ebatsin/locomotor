@@ -32,7 +32,7 @@ public class JWTH {
 	private static JWTH jwt = null;
 
 	/**
-	 * @todo currently hard, need to generate and store or retrieve it.
+	 * The private key.
 	 */
 	private static String secretKey = "testKey";
 
@@ -114,13 +114,15 @@ public class JWTH {
 		}
 		catch (SignatureException se) {
 			
-			ErrorHandler.getInstance().push("verifyTokenSignature", true, "The token signature is not valid", token);
+			String message = "The token signature is not valid";
+			ErrorHandler.getInstance().push("verifyTokenSignature", true, message, token);
 			return null;
 
 		}
 		catch (Exception ex) {
 
-			ErrorHandler.getInstance().push("verifyTokenSignature", true, "An error occured while checking token signature", token);
+			String message = "An error occured while checking token signature";
+			ErrorHandler.getInstance().push("verifyTokenSignature", true, message, token);
 			return null;
 
 		}
@@ -180,7 +182,8 @@ public class JWTH {
 
 		if (!isTokenStillValid) {
 			// @todo: tell user to disconnect and reconnect to regenerate long term token
-			ErrorHandler.getInstance().push("checkToken", true, "The token is no longer valid", "Expiration date of the token is " + claims.getExpiration());
+			String message = "Expiration date of the token is " + claims.getExpiration();
+			ErrorHandler.getInstance().push("checkToken", true, "The token is no longer valid", message);
 			return null;
 		}
 

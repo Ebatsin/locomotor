@@ -5,7 +5,8 @@ import java.util.ArrayDeque;
 import locomotor.components.Pair;
 
 /**
- * @todo.
+ * Contains the path that lead to program to the current point.
+ * If an error is generated, the stacktrace can show the context that possibly raised that error.
  */
 public class ErrorContext {
 	

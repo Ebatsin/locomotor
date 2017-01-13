@@ -3,7 +3,8 @@ package locomotor.components.models;
 import java.util.ArrayList;
 
 /**
- * An user category can be compare with another category based on the same model category.
+ * An user category, identified by his category model and containing a list of criterias.
+ * It can be compare with another category based on the same model category.
  */
 public class UserCategory extends Category {
 

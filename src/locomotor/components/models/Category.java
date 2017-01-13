@@ -3,7 +3,7 @@ package locomotor.components.models;
 import java.util.ArrayList;
 
 /**
- * @todo.
+ * A category of criterias, based on a model category.
  */
 public abstract class Category {
 	

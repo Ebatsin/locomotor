@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import locomotor.components.Pair;
 
 /**
- * @todo .
+ * Represents a tree (@see CTree) with a graph of relations between the leaves of that tree.
  */
 public class CGraphTree extends CSetGraph implements CUniverseType {
 

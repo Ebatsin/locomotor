@@ -3,7 +3,7 @@ package locomotor.components.types;
 import locomotor.components.Compare;
 
 /**
- * @todo.
+ * Represents a weighted integer.
  */
 public class CWeightedInteger extends CLong implements CComparable<CWeightedStringList, CWeightedStringList> {
 

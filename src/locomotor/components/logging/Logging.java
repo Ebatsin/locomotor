@@ -1,7 +1,7 @@
 package locomotor.components.logging;
 
 /**
- * @todo.
+ * Simply wrap logging information (method, parameters or message).
  */
 public class Logging {
 	
@@ -35,6 +35,11 @@ public class Logging {
 
 	}
 
+	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
 	public String toString() {
 		return _message;
 	}

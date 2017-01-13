@@ -324,9 +324,7 @@ public class DBH {
 	 *
 	 * @return     The ObjectID of the user and his role
 	 */
-	public static Pair<String,Boolean> registerUser(String username, String password) {
-		MongoCollection<Document> users = md.getCollection("users");
-		
+	public static Pair<String,Boolean> registerUser(String username, String password) {		
 		// check already exist
 		if (DBH.getInstance().usernameAlreadyTaken(username)) {
 			ErrorHandler.getInstance().push("registerUser", true, "The username is already taken by another user", "");
@@ -338,6 +336,7 @@ public class DBH {
 		user.append("password", "");
 		user.append("isAdmin", false);
 		user.append("notifications", new ArrayList<Document>());
+		MongoCollection<Document> users = md.getCollection("users");
 		users.insertOne(user);
 			
 		ObjectId id = (ObjectId)user.get("_id");
@@ -352,7 +351,8 @@ public class DBH {
 	
 			// delete the user from the database
 			users.deleteOne(eq("_id", id));
-			ErrorHandler.getInstance().push("registerUser", true, "An error occurred while processing the registration. Please retry.", "");
+			String message = "An error occurred while processing the registration. Please retry.";
+			ErrorHandler.getInstance().push("registerUser", true, message, "");
 			return null;
 
 		}
@@ -378,7 +378,9 @@ public class DBH {
 		
 		// no user with that username
 		if (user == null) {
-			ErrorHandler.getInstance().push("authUser", true, "The username or the password is not correct", "The username does not exist");
+			String messageGen = "The username or the password is not correct";
+			String messageCont = "The username does not exist";
+			ErrorHandler.getInstance().push("authUser", true, messageGen, messageCont);
 			return null;
 		}
 		
@@ -394,17 +396,19 @@ public class DBH {
 		catch(Exception ex) {
 			
 			// bad password
-			ErrorHandler.getInstance().push("authUser", true, "Error while hashing the password", "");
+			String message = "Error while hashing the password";
+			ErrorHandler.getInstance().push("authUser", true, message, "");
 			return null;
 
 		}
 
 		if (!isPasswordValid) {
-			ErrorHandler.getInstance().push("authUser", true, "The username or the password is not correct", "The password is not correct");
+			String messageGen = "The username or the password is not correct";
+			String messageCont = "The password is not correct";
+			ErrorHandler.getInstance().push("authUser", true, messageGen, messageCont);
 			return null;
 		}
 
-		// @todo: check pending notifications
 		return new Pair(id.toString(), user.getBoolean("isAdmin"));
 
 	}

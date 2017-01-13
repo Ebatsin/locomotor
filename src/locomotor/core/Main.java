@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import locomotor.components.logging.*;
+import locomotor.components.Compare;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
@@ -25,8 +25,6 @@ import locomotor.components.network.NetworkJsonResponse;
 import locomotor.components.network.NetworkResponse;
 import locomotor.components.network.NetworkResponseFactory;
 import locomotor.components.types.*;
-
-import locomotor.components.Compare;
 
 /**
  * Where all the magic happens.

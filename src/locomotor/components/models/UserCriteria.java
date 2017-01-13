@@ -3,7 +3,8 @@ package locomotor.components.models;
 import locomotor.components.types.CUserType;
 
 /**
- * An user criteria can be compare with another criteria based on the same model criteria.
+ * An user criteria, identified by his criteria model and containing a value.
+ * It can be compare with another criteria based on the same model criteria.
  */
 public class UserCriteria extends Criteria {
 

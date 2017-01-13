@@ -1,5 +1,6 @@
 package locomotor.components.types;
 
+import locomotor.components.logging.ErrorHandler;
 
 /**
  * A interval between two T (Comparable).
@@ -19,7 +20,6 @@ public abstract class CInterval<T extends Number> implements CUniverseType, CIte
 	 * @param  min the smaller endpoint
 	 * @param  max the larger endpoint
 	 * @throws IllegalArgumentException if the min endpoint is greater than the max endpoint
-	 * @todo handle error better
 	 */
 	public CInterval(T min, T max) {
 		if(min.doubleValue() < max.doubleValue()) {
@@ -27,9 +27,9 @@ public abstract class CInterval<T extends Number> implements CUniverseType, CIte
 			_max = max;
 		}
 		else {
-			// error
-			System.err.println("Error: Illegal interval");
-			System.exit(0);
+			String message = "Min: " + min.doubleValue() + " Max: " + max.doubleValue();
+			ErrorHandler.getInstance().push("CInterval", true, "The min bound is upper the max bound", message);
+			return;
 		}
 	}
 

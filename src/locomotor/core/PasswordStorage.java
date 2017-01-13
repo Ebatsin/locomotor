@@ -9,7 +9,7 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 /**
- * @todo.
+ * Utility class to hash and check password.
  */
 public class PasswordStorage {
 

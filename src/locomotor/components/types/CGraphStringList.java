@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import locomotor.components.Pair;
 
 /**
- * @todo .
+ * Represents a set of string value, identified by a unique integer, with a graph of relations.
  */
 public class CGraphStringList extends CSetGraph implements CUniverseType {
 

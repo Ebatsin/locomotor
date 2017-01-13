@@ -39,7 +39,9 @@ public class API {
 					if (data.isDefined("username") && data.isDefined("password")) {
 						
 						// check user exist and good password
-						Pair<String,Boolean> claims = DBH.getInstance().authUser(data.getAsString("username"), data.getAsString("password"));
+						String username = data.getAsString("username");
+						String password = data.getAsString("password");
+						Pair<String,Boolean> claims = DBH.getInstance().authUser(username, password);
 
 						// check error
 						if (claims == null) {
@@ -118,8 +120,9 @@ public class API {
 					
 					JWTH jwt = JWTH.getInstance();						
 					// check user exist
-					Pair<String,Boolean> claims = DBH.getInstance().registerUser(data.getAsString("username"),
-						data.getAsString("password"));
+					String username = data.getAsString("username");
+					String password = data.getAsString("password");
+					Pair<String,Boolean> claims = DBH.getInstance().registerUser(username, password);
 					
 					// check error
 					if (claims == null) {

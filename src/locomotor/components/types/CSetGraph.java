@@ -11,9 +11,9 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 /**
- * @todo .
+ * Encapusulate an undirected graph and provide a Floyd-Warshall shortest paths algorithm on that graph.
  */
-public class CSetGraph /*implements CUniverseType*/ {
+public class CSetGraph {
 	
 	/**
 	 * The graph of relations.
