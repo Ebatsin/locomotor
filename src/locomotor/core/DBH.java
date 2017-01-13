@@ -303,6 +303,20 @@ public class DBH {
 	}
 
 	/**
+	 * Check if the username is already taken by another user.
+	 *
+	 * @param      username  The username
+	 *
+	 * @return     True if username is taken, false otherwise.
+	 */
+	public static boolean usernameAlreadyTaken(String username) {
+		MongoCollection<Document> users = md.getCollection("users");
+		Document userAlreadyExists = users.find(eq("username", username)).first();
+		
+		return (userAlreadyExists != null);
+	}
+
+	/**
 	 * Register an user.
 	 *
 	 * @param      username  The username
@@ -312,11 +326,9 @@ public class DBH {
 	 */
 	public static Pair<String,Boolean> registerUser(String username, String password) {
 		MongoCollection<Document> users = md.getCollection("users");
-		Document userAlreadyExists = users.find(eq("username", username)).first();
 		
 		// check already exist
-		if (userAlreadyExists != null) {
-			// handle username already exists
+		if (DBH.getInstance().usernameAlreadyTaken(username)) {
 			ErrorHandler.getInstance().push("registerUser", true, "The username is already taken by another user", "");
 			return null;
 		}

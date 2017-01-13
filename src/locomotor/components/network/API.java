@@ -39,8 +39,8 @@ public class API {
 					if (data.isDefined("username") && data.isDefined("password")) {
 						
 						// check user exist and good password
-						Pair<String,Boolean> claims = DBH.getInstance().authUser(data.getAsString("username"), 
-							data.getAsString("password"));
+						Pair<String,Boolean> claims = DBH.getInstance().authUser(data.getAsString("username"), data.getAsString("password"));
+
 						// check error
 						if (claims == null) {
 							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
@@ -66,6 +66,14 @@ public class API {
 							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
 								log.getRight().toString());
+							return;
+						}
+
+						// check if the user still exist in the database
+						// before create the token
+						if(!DBH.getInstance().usernameAlreadyTaken(claims.getLeft())) {
+							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+								"The token is no longer valid");
 							return;
 						}
 
