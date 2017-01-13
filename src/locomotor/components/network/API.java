@@ -10,8 +10,8 @@ import java.lang.Thread;
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
-import locomotor.core.jwt.JWTH;
 import locomotor.core.DBH;
+import locomotor.core.jwt.JWTH;
 
 /**
  * Network interface shown to the client.
@@ -27,22 +27,25 @@ public class API {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				
 				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "The request must be in POST format to be read by the server");
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"The request must be in POST format to be read by the server");
 					return;
 				}			
 				
 				// all parameter, ok
-				if((data.isDefined("username") && data.isDefined("password")) || (data.isDefined("token"))){
+				if((data.isDefined("username") && data.isDefined("password")) || (data.isDefined("token"))) {
 					
 					JWTH jwt = JWTH.getInstance();
 					if (data.isDefined("username") && data.isDefined("password")) {
 						
 						// check user exist and good password
-						Pair<String,Boolean> claims = DBH.getInstance().authUser(data.getAsString("username"), data.getAsString("password"));
+						Pair<String,Boolean> claims = DBH.getInstance().authUser(data.getAsString("username"), 
+							data.getAsString("password"));
 						// check error
 						if (claims == null) {
 							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, log.getRight().toString());
+							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+								log.getRight().toString());
 							return;
 						}
 						String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
@@ -61,7 +64,8 @@ public class API {
 						// check error
 						if (claims == null) {
 							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, log.getRight().toString());
+							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+								log.getRight().toString());
 							return;
 						}
 
@@ -71,18 +75,21 @@ public class API {
 						
 					}
 
-				} else { // error
+				}
+				else { // error
 
 					String errorMessage = "";
-					if((!data.isDefined("username") && data.isDefined("password")) || 
-						(data.isDefined("username") && !data.isDefined("password")) || 
-						(!data.isDefined("username") && !data.isDefined("password"))) {
+					if((!data.isDefined("username") && data.isDefined("password"))
+						|| (data.isDefined("username") && !data.isDefined("password"))
+						|| (!data.isDefined("username") && !data.isDefined("password"))) {
 						// missing username or password
-						errorMessage = "At least, one of the following parameter is missing: `username`, `password`. Both of them are mandatory for this request.";
+						errorMessage = "At least, one of the following parameter is missing: `username`,"
+							+ " `password`. Both of them are mandatory for this request.";
 					}
 					else if (!data.isDefined("token")) {
 						// missing token
-						errorMessage = "The following parameter is missing: `token`. It is mandatory for this request.";
+						errorMessage = "The following parameter is missing: `token`."
+							+ " It is mandatory for this request.";
 					}
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
 				}
@@ -93,21 +100,24 @@ public class API {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				
 				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, "La requête doit être au format POST pour être lue par le serveur");
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
+						"La requête doit être au format POST pour être lue par le serveur");
 					return;
 				}			
 				
 				// all parameter, ok
-				if((data.isDefined("username") && data.isDefined("password"))){
+				if((data.isDefined("username") && data.isDefined("password"))) {
 					
 					JWTH jwt = JWTH.getInstance();						
 					// check user exist
-					Pair<String,Boolean> claims = DBH.getInstance().registerUser(data.getAsString("username"), data.getAsString("password"));
+					Pair<String,Boolean> claims = DBH.getInstance().registerUser(data.getAsString("username"),
+						data.getAsString("password"));
 					
 					// check error
 					if (claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, log.getRight().toString());
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS,
+							log.getRight().toString());
 						return;
 					}
 					
@@ -118,9 +128,11 @@ public class API {
 						.add("short-term-token", shortToken)
 						.add("long-term-token", longToken));
 
-				} else { // error
+				}
+				else { // error
 
-					String errorMessage = "At least, one of the following parameter is missing: `username`, `password`. Both of them are mandatory for this request.";
+					String errorMessage = "At least, one of the following parameter is missing:"
+						+ "`username`, `password`. Both of them are mandatory for this request.";
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
 				}
 			}

@@ -2,9 +2,9 @@ package locomotor.components;
 
 import java.lang.Math;
 import java.util.Set;
-import locomotor.core.Gaussian;
 import locomotor.components.types.CBoolean;
 import locomotor.components.types.CSetGraph;
+import locomotor.core.Gaussian;
 
 public class Compare {
 
@@ -38,7 +38,7 @@ public class Compare {
 	* @param itemHighBound The higher bound of the item's interval
 	* @return The mark generated for this criteria's interval value and this user given interval
 	*/
-	public static double intervalValue(double userLowBound, double userHighBound, double itemLowBound, double itemHightBound) {
+	public static double intervalValue(double userLowBound, double userHighBound, double itemLowBound, double itemHighBound) {
 		Gaussian gaussian = Gaussian.getInstance();
 		float mappedIntervalMax = 2; // the mapped interval is [-2; 2]
 
@@ -46,7 +46,7 @@ public class Compare {
 		double userOffset = (userLowBound * userFactor) + mappedIntervalMax;
 
 		double offsetedMinPoint = itemLowBound * userFactor - userOffset;
-		double offsetedMaxPoint = itemHightBound * userFactor - userOffset;
+		double offsetedMaxPoint = itemHighBound * userFactor - userOffset;
 
 		double factor = 1.0 / (gaussian.cdf(mappedIntervalMax) - gaussian.cdf(-mappedIntervalMax));
 
@@ -61,11 +61,13 @@ public class Compare {
 			mark = Math.min(1.0, (gaussian.cdf(offsetedMaxPoint) - gaussian.cdf(offsetedMinPoint)) * factor);
 
 			if(offsetedMaxPoint < mappedIntervalMax) { // penality application
-				double diff = Math.min(gaussian.cdf(-mappedIntervalMax), gaussian.cdf(mappedIntervalMax) - gaussian.cdf(offsetedMaxPoint)) * factor;
+				double diff = Math.min(gaussian.cdf(-mappedIntervalMax), 
+					gaussian.cdf(mappedIntervalMax) - gaussian.cdf(offsetedMaxPoint)) * factor;
 				mark -= diff;
 			}
 			if(offsetedMinPoint > -mappedIntervalMax) {
-				double diff = Math.min(gaussian.cdf(-mappedIntervalMax), gaussian.cdf(offsetedMinPoint) - gaussian.cdf(-mappedIntervalMax)) * factor;
+				double diff = Math.min(gaussian.cdf(-mappedIntervalMax), 
+					gaussian.cdf(offsetedMinPoint) - gaussian.cdf(-mappedIntervalMax)) * factor;
 				mark -= diff;
 			}
 
