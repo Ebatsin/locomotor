@@ -1,20 +1,16 @@
-package locomotor.core;
+package locomotor.front.component;
 
 import java.io.File;
 
-/*
-* Handles the resources versionning and allows the system to send a resource only when it's not up to date
-* client side.
-*/
 public class ResourceManager {
 	static ResourceManager _instance = null;
 	String _baseURL;
 
 	private ResourceManager() {
-		_baseURL = "resources/core/"
+		_baseURL = "resources/";
 	}
 
-	static public synchronized ResourceManager getInstance() {
+	public static synchronized ResourceManager getInstance() {
 		if(_instance == null) {
 			_instance = new ResourceManager();
 		}
@@ -51,5 +47,16 @@ public class ResourceManager {
 		}
 
 		return file;
+	}
+
+	/**
+	* Check wether the resource exists or not.
+	* @param resource The pathname of the resource needed (ex. "images/cat.png")
+	* @return true if the file exists, false otherwise
+	*/
+	public boolean exists(String resource) {
+		File file = new File(_baseURL + resource);
+
+		return file.exists() && !file.isDirectory();
 	}
 }
