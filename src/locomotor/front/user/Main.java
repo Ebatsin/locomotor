@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import locomotor.front.components.network.BinaryObject;
 import locomotor.front.components.network.ClientRequest;
 import locomotor.front.components.network.FileUpload;
+import locomotor.front.components.FrontResourceManager;
 
 public class Main extends Application {
 
@@ -28,6 +29,13 @@ public class Main extends Application {
 
 
 		System.out.println("Tentative de requête");
+
+		FrontResourceManager rm = FrontResourceManager.getInstance();
+		rm.getRemoteVersion("images/chat.png").thenAccept(new Consumer<Long>() {
+			public void accept(Long version) {
+				System.out.println("Version récupérée pour cat.png : " + version);
+			}
+		});
 
 		// ClientRequest cr = new ClientRequest("https://localhost:8000/");
 		// cr.addParam("username", "test");

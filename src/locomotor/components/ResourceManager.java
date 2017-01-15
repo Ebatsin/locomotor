@@ -1,12 +1,12 @@
-package locomotor.front.component;
+package locomotor.components;
 
 import java.io.File;
 
 public class ResourceManager {
-	static ResourceManager _instance = null;
-	String _baseURL;
+	protected static ResourceManager _instance = null;
+	protected String _baseURL;
 
-	private ResourceManager() {
+	protected ResourceManager() {
 		_baseURL = "resources/";
 	}
 

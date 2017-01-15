@@ -12,6 +12,7 @@ import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
 import locomotor.core.DBH;
 import locomotor.core.jwt.JWTH;
+import locomotor.core.CoreResourceManager;
 
 /**
  * Network interface shown to the client.
@@ -144,6 +145,33 @@ public class API {
 
 					String errorMessage = "At least, one of the following parameter is missing:"
 						+ "`username`, `password`. Both of them are mandatory for this request.";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+				}
+			}
+		});
+
+		nh.createEndpoint("/api/img/version", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {			
+				if(!data.isValid()) {
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
+						"La requête doit être au format POST pour être lue par le serveur");
+					return;
+				}			
+				
+				// all parameter, ok
+				if(data.isDefined("id")) {
+					String id = data.getAsString("id");
+					CoreResourceManager crm = CoreResourceManager.getInstance();
+					if(!crm.exists(id)) {
+						System.out.println("le fichier demandé n'existe pas");
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, "The image requested does not exist");
+					}
+					else {
+						response.getJsonContext().success(Json.object().add("version", crm.getVersion(id)));
+					}
+				}
+				else { // error
+					String errorMessage = "The parameter `id` is missing to complete this request.";
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
 				}
 			}
