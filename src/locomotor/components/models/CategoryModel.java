@@ -1,5 +1,9 @@
 package locomotor.components.models;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+
 import java.util.ArrayList;
 
 /**
@@ -64,6 +68,25 @@ public class CategoryModel {
 			str += c.toString();
 		}
 		return str;
+	}
+
+	/**
+	 * @todo.
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	public JsonObject toJSON() {
+		JsonObject obj = Json.object();
+		obj.add("_id", _identifier);
+		obj.add("name", _name);
+		// create criterias
+		JsonArray criterias = Json.array();
+		for (CriteriaModel cm : _criterias) {
+			JsonObject objCri = cm.toJSON();
+			criterias.add(objCri);
+		}
+		obj.add("criterias", criterias);
+		return obj;
 	}
 
 

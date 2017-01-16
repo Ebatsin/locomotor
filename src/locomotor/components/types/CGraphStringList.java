@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -52,6 +55,11 @@ public class CGraphStringList extends CSetGraph implements CUniverseType {
 	 */
 	public TreeMap<Integer, String> getMap() {
 		return _values;
+	}
+
+	public JsonObject toJSON() {
+		// @todo
+		return Json.object();
 	}
 	
 }

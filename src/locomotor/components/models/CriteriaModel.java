@@ -1,5 +1,8 @@
 package locomotor.components.models;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CEnumUniverseType;
 import locomotor.components.types.CEnumUserType;
@@ -111,5 +114,24 @@ public class CriteriaModel {
 			+ ") - " + "Item(" + _itemType + ") - " + "User(" + _userType + ")\n";
 		line += _universe.toString() + "\n";
 		return line;
-	}	
+	}
+
+	/**
+	 * @todo.
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	public JsonObject toJSON() {
+		JsonObject obj = Json.object();
+		obj.add("_id", _identifier);
+		obj.add("name", _name);
+		obj.add("question", _question);
+		obj.add("isComparable", _isComparable);
+		obj.add("itemType", _itemType.getID());
+		obj.add("userType", _userType.getID());
+		obj.add("universeType", _universeType.getID());
+		JsonObject universe = _universe.toJSON();
+		obj.add("universe", universe);
+		return obj;
+	}
 }

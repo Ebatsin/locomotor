@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import java.util.TreeMap;
 
 /**
@@ -35,5 +38,10 @@ public class CWeightedStringList extends CStringList {
 		super(values);
 		_min = min;
 		_max = max;
+	}
+
+	public JsonObject toJSON() {
+		// @todo
+		return Json.object();
 	}
 }

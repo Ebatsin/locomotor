@@ -66,14 +66,19 @@ public class Main {
 		NetworkHandler nh = NetworkHandler.getInstance();
 		nh.init(8000, "key.pfx", "motdepasse");
 
-		API.createHooks(nh);
-		nh.start();
+		// API.createHooks(nh);
+		// nh.start();
+		
+		ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+		for (CategoryModel cm : catModel) {
+			System.out.println(cm.toJSON());
+		}
 
-		// db.disconnect();
+		db.disconnect();
 		
 		// try {
 
-			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			
 			// ArrayList<Item> items = db.getItems(catModel);
 
 			// long startTime = System.nanoTime();

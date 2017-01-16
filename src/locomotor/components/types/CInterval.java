@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import locomotor.components.logging.ErrorHandler;
 
 /**
@@ -108,5 +111,10 @@ public abstract class CInterval<T extends Number> implements CUniverseType, CIte
 	 */
 	public final String toString() {
 		return "[" + _min + ", " + _max + "]";
+	}
+
+	public JsonObject toJSON() {
+		// @todo
+		return Json.object();
 	}
 }

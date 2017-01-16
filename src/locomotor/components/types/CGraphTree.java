@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+
 import java.util.ArrayList;
 
 import locomotor.components.Pair;
@@ -43,5 +46,10 @@ public class CGraphTree extends CSetGraph implements CUniverseType {
 		String str = "Tree: " + _universeTree.toString() + "\n";
 		str += super.toString();
 		return str;
+	}
+
+	public JsonObject toJSON() {
+		// @todo
+		return Json.object();
 	}
 }
