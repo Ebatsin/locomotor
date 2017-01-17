@@ -2,6 +2,7 @@ package locomotor.core;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.WriterConfig;
 
 import java.lang.Thread;
 import java.util.ArrayList;
@@ -71,14 +72,13 @@ public class Main {
 		
 		ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 		for (CategoryModel cm : catModel) {
-			System.out.println(cm.toJSON());
+			System.out.println(cm.toJSON().toString(WriterConfig.PRETTY_PRINT));
 		}
-
 		db.disconnect();
 		
 		// try {
 
-			
+			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 			// ArrayList<Item> items = db.getItems(catModel);
 
 			// long startTime = System.nanoTime();

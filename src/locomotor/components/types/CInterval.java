@@ -113,8 +113,15 @@ public abstract class CInterval<T extends Number> implements CUniverseType, CIte
 		return "[" + _min + ", " + _max + "]";
 	}
 
+	/**
+	 * Return the JSON value of the universe.
+	 *
+	 * @return     min and max bounds
+	 */
 	public JsonObject toJSON() {
-		// @todo
-		return Json.object();
+		JsonObject obj = Json.object();
+		obj.add("min", _min.doubleValue());
+		obj.add("max", _max.doubleValue());
+		return obj;
 	}
 }

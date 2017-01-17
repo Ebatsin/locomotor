@@ -1,7 +1,7 @@
 package locomotor.components.types;
 
 import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
 import locomotor.components.Compare;
 
@@ -52,9 +52,13 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 		return Compare.booleanValue(user, this);
 	}
 
-	public JsonObject toJSON() {
-		// @todo
-		return Json.object();
+	/**
+	 * Return the JSON value of the universe.
+	 *
+	 * @return     null
+	 */
+	public JsonValue toJSON() {
+		return Json.value(null);
 	}
 
 }

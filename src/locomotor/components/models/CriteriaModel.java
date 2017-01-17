@@ -2,6 +2,7 @@ package locomotor.components.models;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
 import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CEnumUniverseType;
@@ -130,7 +131,7 @@ public class CriteriaModel {
 		obj.add("itemType", _itemType.getID());
 		obj.add("userType", _userType.getID());
 		obj.add("universeType", _universeType.getID());
-		JsonObject universe = _universe.toJSON();
+		JsonValue universe = _universe.toJSON();
 		obj.add("universe", universe);
 		return obj;
 	}

@@ -1,6 +1,6 @@
 package locomotor.components;
 
-import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
 /**
  * @todo.
@@ -12,6 +12,6 @@ public interface JSONConvertissable {
 	 *
 	 * @return     { description_of_the_return_value }
 	 */
-	public JsonObject toJSON();
+	public JsonValue toJSON();
 
 }

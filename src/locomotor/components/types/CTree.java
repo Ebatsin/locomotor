@@ -1,9 +1,17 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+// @todo: remove when JSONConvertissable will be implemented in item & user
+import locomotor.components.JSONConvertissable;
 
 /**
  * Represent a N-ary tree, that handle an Integer (32-bit) and a String.
@@ -11,7 +19,7 @@ import java.util.Set;
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree> {
+public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree>, JSONConvertissable {
 	
 	/**
 	 * The identifier.
@@ -171,5 +179,24 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 		Set<Integer> itemKey = this.toSet();
 
 		return universe.compare(userKey, itemKey);
+	}
+
+	/**
+	 * Return the JSON value of the universe.
+	 *
+	 * @return     The nodes and the relations
+	 */
+	public JsonValue toJSON() {
+		JsonObject tree = Json.object();
+		tree.add("value", _data);
+		tree.add("id", _identifier);
+		if (!isLeaf()) {
+			JsonArray children = Json.array();
+			for (CTree child : _children) {
+				children.add(child.toJSON());
+			}
+			tree.add("children", children);
+		}
+		return tree;
 	}
 }

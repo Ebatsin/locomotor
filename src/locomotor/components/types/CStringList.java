@@ -1,7 +1,9 @@
 package locomotor.components.types;
 
 import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -51,9 +53,20 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 		return _values;
 	}
 
-	public JsonObject toJSON() {
-		// @todo
-		return Json.object();
+	/**
+	 * Return the JSON value of the universe.
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	public JsonValue toJSON() {
+		JsonArray values = Json.array();
+		for(Map.Entry<Integer, String> v : _values.entrySet()) {
+			JsonObject value = Json.object();
+			value.add("value", v.getKey());
+			value.add("name", v.getValue());
+			values.add(value);
+		}
+		return values;
 	}
 
 }

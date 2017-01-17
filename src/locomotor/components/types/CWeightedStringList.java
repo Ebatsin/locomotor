@@ -2,6 +2,7 @@ package locomotor.components.types;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
 import java.util.TreeMap;
 
@@ -40,8 +41,17 @@ public class CWeightedStringList extends CStringList {
 		_max = max;
 	}
 
-	public JsonObject toJSON() {
-		// @todo
-		return Json.object();
+	/**
+	 * Return the JSON value of the universe.
+	 *
+	 * @return     The values, min and max bound
+	 */
+	public JsonValue toJSON() {
+		JsonValue values = super.toJSON();
+		JsonObject obj = Json.object();
+		obj.add("values", values);
+		obj.add("min", _min);
+		obj.add("max", _max);
+		return obj;
 	}
 }

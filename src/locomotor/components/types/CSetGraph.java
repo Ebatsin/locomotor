@@ -1,9 +1,15 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+
 import java.util.ArrayList;
 import java.util.Set;
 
 import locomotor.components.Compare;
+import locomotor.components.JSONConvertissable;
 import locomotor.components.Pair;
 
 import org.jgrapht.alg.FloydWarshallShortestPaths;
@@ -13,7 +19,7 @@ import org.jgrapht.graph.SimpleGraph;
 /**
  * Encapusulate an undirected graph and provide a Floyd-Warshall shortest paths algorithm on that graph.
  */
-public class CSetGraph {
+public class CSetGraph implements JSONConvertissable {
 	
 	/**
 	 * The graph of relations.
@@ -79,7 +85,7 @@ public class CSetGraph {
 	}
 
 	/**
-	 * Compare the string list of the vehicle with the string list of the user
+	 * Compare the string list of the vehicle with the string list of the user.
 	 *
 	 * @param      userKey  The user key set
 	 * @param      itemKey  The item key set
@@ -88,6 +94,22 @@ public class CSetGraph {
 	 */
 	protected double compare(Set<Integer> userKey, Set<Integer> itemKey) {
 		return Compare.graphValue(userKey, itemKey, this);
+	}
+
+	/**
+	 * Return the JSON value of the universe.
+	 *
+	 * @return     The relations.
+	 */
+	public JsonValue toJSON() {
+		JsonArray relations = Json.array();
+		for(DefaultEdge value :  _graph.edgeSet()) {			
+			JsonObject relation = Json.object();
+			relation.add("start", _graph.getEdgeSource(value));
+			relation.add("end", _graph.getEdgeTarget(value));
+			relations.add(relation);
+		}
+		return relations;
 	}
 	
 }
