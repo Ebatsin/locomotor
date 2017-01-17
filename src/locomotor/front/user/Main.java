@@ -1,6 +1,7 @@
 package locomotor.front.user;
 
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.WriterConfig;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -75,33 +76,33 @@ public class Main extends Application {
 		// 	}
 		// });
 
-		// ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
-		// // this is the long term token for (test:motdepasse)
-		// String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
-		// cr6.addParam("token", longTerm);
-		// cr6.requestJson("api/user/auth").thenAccept(new Consumer<JsonObject>() {
+		ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
+		// this is the long term token for (test:motdepasse)
+		String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
+		cr6.addParam("token", longTerm);
+		cr6.requestJson("api/model/get").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString(WriterConfig.PRETTY_PRINT));
+			}
+		});
+
+		// ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
+		// cr7.addParam("username", "test");
+		// cr7.addParam("password", "motdepasse");
+		// cr7.requestJson("api/user/register").thenAccept(new Consumer<JsonObject>() {
 		// 	public void accept(JsonObject obj) {
 		// 		System.out.println(obj.toString());
 		// 	}
 		// });
 
-		ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
-		cr7.addParam("username", "test");
-		cr7.addParam("password", "motdepasse");
-		cr7.requestJson("api/user/register").thenAccept(new Consumer<JsonObject>() {
-			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-			}
-		});
-
-		ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
-		cr8.addParam("username", "test3");
-		cr8.addParam("password", "motdepasse");
-		cr8.requestJson("api/user/register").thenAccept(new Consumer<JsonObject>() {
-			public void accept(JsonObject obj) {
-				System.out.println(obj.toString());
-			}
-		});
+		// ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
+		// cr8.addParam("username", "test3");
+		// cr8.addParam("password", "motdepasse");
+		// cr8.requestJson("api/user/register").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println(obj.toString());
+		// 	}
+		// });
 
 		// ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
 		// cr7.addParam("name", "chat.png");

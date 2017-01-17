@@ -2,6 +2,7 @@ package locomotor.components.network;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonArray;
 
 import java.io.File;
 import java.lang.InterruptedException;
@@ -10,6 +11,7 @@ import java.lang.Thread;
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
+import locomotor.components.models.CategoryModel;
 import locomotor.core.DBH;
 import locomotor.core.jwt.JWTH;
 
@@ -144,6 +146,48 @@ public class API {
 
 					String errorMessage = "At least, one of the following parameter is missing:"
 						+ "`username`, `password`. Both of them are mandatory for this request.";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+				}
+			}
+		});
+
+		nh.createEndpoint("/api/model/get", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {
+				
+				if(!data.isValid()) {
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"The request must be in POST format to be read by the server");
+					return;
+				}			
+				
+				// all parameter, ok
+				if(data.isDefined("token")) {
+
+					// auth with token
+					String longToken = data.getAsString("token");
+					JWTH jwt = JWTH.getInstance();
+					Pair<String,Boolean> claims = jwt.checkToken(longToken);
+						
+					// check error
+					if (claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString());
+						return;
+					}
+					
+					JsonArray model = Json.array();
+					for (CategoryModel catM : DBH.getInstance().getCategoriesModel()) {
+						model.add(catM.toJSON());
+					}
+					
+					response.getJsonContext().success(Json.object()
+					.add("model", model));
+						
+				}
+				else { // error
+
+					String errorMessage = "The following parameter is missing: `token`. It is mandatory for this request.";
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
 				}
 			}
