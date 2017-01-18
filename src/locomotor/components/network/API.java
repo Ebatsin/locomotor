@@ -10,9 +10,9 @@ import java.lang.Thread;
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
+import locomotor.core.CoreResourceManager;
 import locomotor.core.DBH;
 import locomotor.core.jwt.JWTH;
-import locomotor.core.CoreResourceManager;
 
 /**
  * Network interface shown to the client.
@@ -150,7 +150,7 @@ public class API {
 			}
 		});
 
-		nh.createEndpoint("/api/img/version", new IEndpointHandler() {
+		nh.createEndpoint("/api/resource/version", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {			
 				if(!data.isValid()) {
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
@@ -164,7 +164,8 @@ public class API {
 					CoreResourceManager crm = CoreResourceManager.getInstance();
 					if(!crm.exists(id)) {
 						System.out.println("le fichier demandé n'existe pas");
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, "The image requested does not exist");
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND,
+							"The image requested does not exist");
 					}
 					else {
 						response.getJsonContext().success(Json.object().add("version", crm.getVersion(id)));
@@ -177,12 +178,12 @@ public class API {
 			}
 		});
 
-		nh.createEndpoint("/img/get", new IEndpointHandler() {
+		nh.createEndpoint("/api/resource/get", new IEndpointHandler() {
 			public void handle(NetworkData data, NetworkResponseFactory response) {
 				if(data.isValid()) {
-					if(!data.isDefined("name")) {
+					if(!data.isDefined("id")) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-							"Le paramètre `name` n'a pas été trouvé. Il est obligatoire pour cette requête");
+							"Le paramètre `id` n'a pas été trouvé. Il est obligatoire pour cette requête");
 						return;
 					}
 				}
@@ -192,8 +193,8 @@ public class API {
 					return;
 				}
 
-				File file = new File("resources/core/images/" + data.getAsString("name"));
-				System.out.print("Fichier demandé : " + data.getAsString("name"));
+				File file = new File("resources/core/" + data.getAsString("id"));
+				System.out.print("Fichier demandé : " + data.getAsString("id"));
 
 				if(file.exists() && !file.isDirectory()) {
 					System.out.println(", le fichier existe");
@@ -203,7 +204,7 @@ public class API {
 					System.out.println(", le fichier n'existe pas");
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						"L'image demandée n'a pas pu être trouvée : `" 
-						+ "resources/core/images/" + data.getAsString("name") + "`");
+						+ "resources/core/" + data.getAsString("id") + "`");
 				}
 			}
 		});

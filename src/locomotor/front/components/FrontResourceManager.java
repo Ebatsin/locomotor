@@ -1,9 +1,15 @@
 package locomotor.front.components;
 
+import java.util.function.Consumer;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import com.eclipsesource.json.JsonObject;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import locomotor.components.ResourceManager;
+import locomotor.front.components.network.BinaryObject;
 import locomotor.front.components.network.ClientRequest;
 
 public class FrontResourceManager extends ResourceManager {
@@ -25,7 +31,7 @@ public class FrontResourceManager extends ResourceManager {
 	public CompletableFuture<Long> getRemoteVersion(String resource) {
 		ClientRequest cr = new ClientRequest("https://localhost:8000/");
 		cr.addParam("id", resource);
-		return cr.requestJson("api/img/version").thenApply(new Function<JsonObject, Long>() {
+		return cr.requestJson("api/resource/version").thenApply(new Function<JsonObject, Long>() {
 			public Long apply(JsonObject obj) {
 				if(obj.get("success").asString().equals("true")) {
 					return obj.get("data").asObject().get("version").asLong();
@@ -37,5 +43,80 @@ public class FrontResourceManager extends ResourceManager {
 				return new Long(0);
 			}
 		});
+	}
+	/**
+	* Fetch a ressource from the server if the local version is not up to date. If the resource does not exist, returns null.
+	* @param resource The resource to get on the server
+	* @returns A promise containing the resource stored locally. When resolved, the promise contains either the resource as a File object 
+	* or null if the resource was not found on the server
+	*/
+	public CompletableFuture<File> getRemoteResource(String resource) {
+		// check if the ressource exists locally
+		if(!exists(resource)) {
+			System.out.println("fetching `" + resource + "`, the resource does not exist locally. Fetching from the server");
+			// get the remote resource
+			ClientRequest cr = new ClientRequest("https://localhost:8000/");
+			cr.addParam("id", resource);
+			return cr.requestBinary("api/resource/get").thenApply(new Function<BinaryObject, File>() {
+				public File apply(BinaryObject obj) {
+					if(obj.isSuccess()) {
+						ByteArrayOutputStream receivedResource = obj.getAsBinary();
+						try {
+							OutputStream outputStream = new FileOutputStream(_baseURL + resource);
+							receivedResource.writeTo(outputStream);
+						}
+						catch(Exception exception) {
+							System.out.println("unable to write the file");
+						}
+
+						return new File(_baseURL + resource);
+					}
+					
+					System.out.println("erreur : " + obj.getErrorMessage());
+					return null;
+				}
+			});
+		}
+		else {
+			CompletableFuture<File> file = new CompletableFuture<File>();
+
+			// get the remote version
+			getRemoteVersion(resource).thenAccept(new Consumer<Long>() {
+				public void accept(Long version) {
+					if(version > getVersion(resource)) { // update the local version
+						System.out.println("fetching `" + resource + "`, updating the local version");
+						ClientRequest crUpdate = new ClientRequest("https://localhost:8000/");
+						crUpdate.addParam("id", resource);
+						crUpdate.requestBinary("api/resource/get").thenAccept(new Consumer<BinaryObject>() {
+							public void accept(BinaryObject obj) {
+								if(obj.isSuccess()) {
+									ByteArrayOutputStream receivedResource = obj.getAsBinary();
+									try {
+										OutputStream outputStream = new FileOutputStream(_baseURL + resource);
+										receivedResource.writeTo(outputStream);
+									}
+									catch(Exception exception) {
+										System.out.println("unable to write the file");
+									}
+
+									file.complete(new File(_baseURL + resource));
+								}
+								else {
+									System.out.println("erreur : " + obj.getErrorMessage());
+									file.complete(null);
+								}
+							}
+						});
+					}
+					else {
+						System.out.println("fetching `" + resource + "`, local version up to date");
+						// return the local version
+						file.complete(new File(_baseURL + resource));
+					}
+				}
+			});
+
+			return file;
+		}
 	}
 }

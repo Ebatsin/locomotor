@@ -10,6 +10,10 @@ public class ResourceManager {
 		_baseURL = "resources/";
 	}
 
+	/**
+	* Returns a singleton on the ResourceManager object.
+	* @returns A singleton on the ResourceManager object
+	*/
 	public static synchronized ResourceManager getInstance() {
 		if(_instance == null) {
 			_instance = new ResourceManager();

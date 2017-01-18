@@ -3,6 +3,7 @@ package locomotor.front.user;
 import com.eclipsesource.json.JsonObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.Class;
@@ -34,6 +35,12 @@ public class Main extends Application {
 		rm.getRemoteVersion("images/chat.png").thenAccept(new Consumer<Long>() {
 			public void accept(Long version) {
 				System.out.println("Version récupérée pour cat.png : " + version);
+			}
+		});
+
+		rm.getRemoteResource("images/chat.png").thenAccept(new Consumer<File>() {
+			public void accept(File file) {
+				System.out.println("fichier récupéré : " + file);
 			}
 		});
 
@@ -113,7 +120,7 @@ public class Main extends Application {
 
 		// ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
 		// cr7.addParam("name", "chat.png");
-		// cr7.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
+		// cr7.requestBinary("api/img/get").thenAccept(new Consumer<BinaryObject>() {
 		// 	public void accept(BinaryObject obj) {
 		// 		if(obj.isSuccess()) {
 		// 			ByteArrayOutputStream img = obj.getAsBinary();
@@ -133,7 +140,7 @@ public class Main extends Application {
 
 		// ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
 		// cr8.addParam("name", "firefox.jpg");
-		// cr8.requestBinary("img/get").thenAccept(new Consumer<BinaryObject>() {
+		// cr8.requestBinary("api/img/get").thenAccept(new Consumer<BinaryObject>() {
 		// 	public void accept(BinaryObject obj) {
 		// 		if(obj.isSuccess()) {
 		// 			ByteArrayOutputStream img = obj.getAsBinary();
