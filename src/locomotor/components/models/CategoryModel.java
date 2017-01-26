@@ -85,7 +85,7 @@ public class CategoryModel {
 			JsonObject objCri = cm.toJSON();
 			criterias.add(objCri);
 		}
-		obj.add("criterias", criterias);
+		obj.add("criteria", criterias);
 		return obj;
 	}
 
