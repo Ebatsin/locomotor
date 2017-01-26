@@ -1,7 +1,6 @@
 package locomotor.components.types;
 
 import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import locomotor.components.Compare;
@@ -63,14 +62,14 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	}
 
 	/**
-	 * @todo.
+	 * Factory from representation JSON.
 	 *
 	 * @param      json  The json
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A new CBoolean object.
 	 */
 	public static CBoolean fromJSON(JsonValue json) {
-		return null;
+		return new CBoolean(json.asBoolean());
 	}
 
 }
