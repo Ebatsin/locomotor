@@ -1,5 +1,6 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import locomotor.components.Compare;
@@ -35,14 +36,17 @@ public class CIntervalInteger extends CInterval implements CComparable<CInterval
 	}
 
 	/**
-	 * @todo.
+	 * Factory from representation JSON.
 	 *
 	 * @param      json  The json
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A new CIntervalInteger object.
 	 */
 	public static CIntervalInteger fromJSON(JsonValue json) {
-		return null;
+		JsonObject interval = json.asObject();
+		long min = interval.get("min").asLong();
+		long max = interval.get("max").asLong();
+		return new CIntervalInteger(min, max);
 	}
 
 }

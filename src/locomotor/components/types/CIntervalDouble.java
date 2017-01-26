@@ -1,5 +1,6 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import java.lang.Math;
@@ -37,13 +38,16 @@ public class CIntervalDouble extends CInterval implements CComparable<CIntervalD
 	}
 
 	/**
-	 * @todo.
+	 * Factory from representation JSON.
 	 *
 	 * @param      json  The json
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A new CIntervalDouble object.
 	 */
 	public static CIntervalDouble fromJSON(JsonValue json) {
-		return null;
+		JsonObject interval = json.asObject();
+		double min = interval.get("min").asDouble();
+		double max = interval.get("max").asDouble();
+		return new CIntervalDouble(min, max);
 	}
 }
