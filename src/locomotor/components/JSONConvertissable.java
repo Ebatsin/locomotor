@@ -3,15 +3,17 @@ package locomotor.components;
 import com.eclipsesource.json.JsonValue;
 
 /**
- * @todo.
+ * The object can be generated from a JSON object.
  */
 public interface JSONConvertissable {
 
 	/**
-	 * @todo.
+	 * Factory current object from its JSON representation.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     The object.
 	 */
-	public JsonValue toJSON();
+	public static Object fromJSON(JsonValue json) {
+		return null;
+	}
 
 }
