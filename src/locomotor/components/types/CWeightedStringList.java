@@ -54,4 +54,15 @@ public class CWeightedStringList extends CStringList {
 		obj.add("max", _max);
 		return obj;
 	}
+
+	/**
+	 * @todo.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	public static CWeightedStringList fromJSON(JsonValue json) {
+		return null;
+	}
 }

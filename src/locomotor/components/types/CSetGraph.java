@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import locomotor.components.Compare;
-import locomotor.components.JSONConvertissable;
+import locomotor.components.JSONDisplayable;
 import locomotor.components.Pair;
 
 import org.jgrapht.alg.FloydWarshallShortestPaths;
@@ -19,7 +19,7 @@ import org.jgrapht.graph.SimpleGraph;
 /**
  * Encapusulate an undirected graph and provide a Floyd-Warshall shortest paths algorithm on that graph.
  */
-public class CSetGraph implements JSONConvertissable {
+public class CSetGraph implements JSONDisplayable {
 	
 	/**
 	 * The graph of relations.

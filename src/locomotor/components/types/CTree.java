@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// @todo: remove when JSONConvertissable will be implemented in item & user
-import locomotor.components.JSONConvertissable;
+// @todo: remove when JSONDisplayable will be implemented in item & user
+import locomotor.components.JSONDisplayable;
 
 /**
  * Represent a N-ary tree, that handle an Integer (32-bit) and a String.
@@ -19,7 +19,7 @@ import locomotor.components.JSONConvertissable;
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree>, JSONConvertissable {
+public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree>, JSONDisplayable {
 	
 	/**
 	 * The identifier.
@@ -198,5 +198,16 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 			tree.add("children", children);
 		}
 		return tree;
+	}
+
+	/**
+	 * @todo.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	public static CTree fromJSON(JsonValue json) {
+		return null;
 	}
 }

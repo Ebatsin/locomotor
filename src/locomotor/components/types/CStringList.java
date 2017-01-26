@@ -69,4 +69,15 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 		return values;
 	}
 
+	/**
+	 * @todo.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     { description_of_the_return_value }
+	 */
+	public static CStringList fromJSON(JsonValue json) {
+		return null;
+	}
+
 }

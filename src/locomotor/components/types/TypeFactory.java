@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.JsonValue;
+
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -137,6 +139,37 @@ public class TypeFactory {
 				System.err.println("Error: Illegal item type");
 				System.err.println(type);
 				System.err.println(object);
+				System.exit(0);
+			}
+		}
+		return null;
+	}
+
+	public CUserType getUser(CEnumUserType type, JsonValue json) {
+		switch(type) {
+			case BOOLEAN: {
+				return CBoolean.fromJSON(json);
+			}
+			case INTEGER_INTERVAL: {
+				return CIntervalInteger.fromJSON(json);
+			}
+			case FLOAT_INTERVAL: {
+				return CIntervalDouble.fromJSON(json);
+			}
+			case STRING_INTERVAL: {
+				return CMappedStringList.fromJSON(json);
+			}
+			case WEIGHTED_STRING_LIST: {
+				return CWeightedStringList.fromJSON(json);
+			}
+			case TREE: {
+				return CTree.fromJSON(json);
+			}
+			default: { 
+				// error
+				System.err.println("Error: Illegal user type");
+				System.err.println(type);
+				System.err.println(json);
 				System.exit(0);
 			}
 		}
