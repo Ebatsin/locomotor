@@ -142,4 +142,4 @@ linter-front-user:
 
 DATAJSON = $(shell echo $(DATA)/*.json)
 update-database:
-	$(foreach file, $(DATAJSON), mongoimport -d $(PACKAGE) -c $(shell basename $(file) .json) --drop --file $(file);)
+	$(foreach file, $(DATAJSON), mongoimport -d $(PACKAGE) -c $(shell basename $(file) .json) --jsonArray --drop --file $(file);)
