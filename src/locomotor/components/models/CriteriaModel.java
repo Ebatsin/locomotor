@@ -97,6 +97,15 @@ public class CriteriaModel {
 	}
 
 	/**
+	 * Gets the user type.
+	 *
+	 * @return     The user type.
+	 */
+	public CEnumUserType getUserType() {
+		return _userType;
+	}
+
+	/**
 	 * Gets the universe.
 	 *
 	 * @return     The universe.

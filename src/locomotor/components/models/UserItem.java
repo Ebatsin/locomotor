@@ -1,6 +1,11 @@
 package locomotor.components.models;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * An user item, described by a list of categories of criterias, is the perfect item wanted by the user.
@@ -19,6 +24,34 @@ public class UserItem {
 	 */
 	public UserItem(ArrayList<UserCategory> categories) {
 		_categories = categories;
+	}
+
+	/**
+	 * Create the perfect item (user perspective).
+	 *
+	 * @param      json       The json
+	 * @param      catsModel  The categories model
+	 *
+	 * @return     The perfect item.
+	 */
+	public static UserItem fromJSON(JsonValue json, ArrayList<CategoryModel> catsModel) {
+		JsonArray categories = Json.parse(json).asArray();
+
+		// map to retrieve easier (perf)
+		HashMap<String, CategoryModel> categoriesMap = new HashMap<String, CategoryModel>();
+		for (CategoryModel cm : catsModel) {
+			categoriesMap.put(cm.getID(), cm);
+		}
+
+		ArrayList<UserCategory> userCategories = new ArrayList<UserCategory>();
+
+		// delegate for each category
+		for (JsonValue category : categories) {
+			String identifier = category.get("categoryId").asString();
+			UserCategory uc = UserCategory.fromJSON(category, categoriesMap.get(identifier));
+			userCategories.add(uc);
+		}
+		return new UserItem(userCategories);
 	}
 
 }

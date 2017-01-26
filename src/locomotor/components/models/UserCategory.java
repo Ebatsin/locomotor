@@ -1,6 +1,11 @@
 package locomotor.components.models;
 
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * An user category, identified by his category model and containing a list of criterias.
@@ -25,5 +30,35 @@ public class UserCategory extends Category {
 	 */
 	public String toString() {
 		return "Category user: " + super.toString();
+	}
+
+	/**
+	 * Create the perfect item's category (user perspective).
+	 *
+	 * @param      json      The json
+	 * @param      catModel  The category model
+	 *
+	 * @return     The perfect item's category.
+	 */
+	public static UserCategory fromJSON(JsonValue json, CategoryModel catModel) {
+		JsonObject category = json.asObject();
+		String identifier = category.get("categoryId").asString();
+		JsonArray criterias = category.get("criteria").asArray();
+
+		// map to retrieve easier (perf)
+		HashMap<String, CriteriaModel> criteriasModel = new HashMap<String, CriteriaModel>();
+		for (CriteriaModel cm : catModel.getCriterias()) {
+			criteriasModel.put(cm.getID(), cm);
+		}
+
+		ArrayList<UserCriteria> userCriterias = new ArrayList<UserCriteria>();
+
+		// delegate for each criteria
+		for (JsonValue criteria : criterias) {
+			String identifier = criteria.get("criterionId").asString();
+			UserCriteria uc = UserCriteria.fromJSON(criteria, criteriasModel.get(identifier));
+			userCriterias.add(uc);
+		}
+		return new UserItem(identifier, userCriterias);
 	}
 }
