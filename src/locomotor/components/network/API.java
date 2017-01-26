@@ -1,8 +1,8 @@
 package locomotor.components.network;
 
 import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
 
 import java.io.File;
 import java.lang.InterruptedException;
