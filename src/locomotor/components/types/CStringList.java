@@ -70,14 +70,22 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 	}
 
 	/**
-	 * @todo.
+	 * Factory from representation JSON.
 	 *
 	 * @param      json  The json
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A new TreeMap object.
 	 */
-	public static CStringList fromJSON(JsonValue json) {
-		return null;
+	protected static TreeMap<Integer, String> treeFromJSON(JsonArray values) {
+		TreeMap<Integer, String> valuesTree = new TreeMap<Integer, String>();
+
+		for (JsonValue value : values) {
+			int val = value.asObject().get("value").asInt();
+			String name = value.asObject().get("name").asString();
+			valuesTree.put(val, name);
+		}
+
+		return valuesTree;
 	}
 
 }

@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
+
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -31,6 +34,21 @@ public class CMappedStringList extends CStringList implements CComparable<CMappe
 
 		return universe.compare(userKey, itemKey);
 
+	}
+
+	/**
+	 * Factory from representation JSON.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     A new CMappedStringList object.
+	 */
+	public static CMappedStringList fromJSON(JsonValue json) {
+		JsonArray values = json.asObject().get("values").asArray();
+		
+		TreeMap<Integer, String> valuesTree = treeFromJSON(values);
+
+		return new CMappedStringList(valuesTree);
 	}
 	
 }

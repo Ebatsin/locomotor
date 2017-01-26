@@ -1,6 +1,7 @@
 package locomotor.components.types;
 
 import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
@@ -56,13 +57,20 @@ public class CWeightedStringList extends CStringList {
 	}
 
 	/**
-	 * @todo.
+	 * Factory from representation JSON.
 	 *
 	 * @param      json  The json
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A new CWeightedStringList object.
 	 */
 	public static CWeightedStringList fromJSON(JsonValue json) {
-		return null;
+		JsonArray values = json.asObject().get("values").asArray();
+
+		long min = json.asObject().get("min").asLong();
+		long max = json.asObject().get("max").asLong();
+		
+		TreeMap<Integer, String> valuesTree = treeFromJSON(values);
+
+		return new CWeightedStringList(min, max, valuesTree);
 	}
 }
