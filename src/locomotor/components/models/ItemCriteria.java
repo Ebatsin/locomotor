@@ -27,4 +27,13 @@ public class ItemCriteria extends Criteria {
 		return super.toString();
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return     The value.
+	 */
+	public CItemType getValue() {
+		return (CItemType)super.getValue();
+	}
+
 }

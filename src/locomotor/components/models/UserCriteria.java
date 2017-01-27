@@ -47,6 +47,15 @@ public class UserCriteria extends Criteria {
 	}
 
 	/**
+	 * Gets the value.
+	 *
+	 * @return     The value.
+	 */
+	public CUserType getValue() {
+		return (CUserType)super.getValue();
+	}
+
+	/**
 	 * Create the perfect item's criteria (user perspective).
 	 *
 	 * @param      json       The json
