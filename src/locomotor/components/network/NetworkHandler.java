@@ -129,7 +129,7 @@ public class NetworkHandler {
 
 				if(handler == null) {
 					NetworkJsonResponse njr = new NetworkJsonResponse(exchange);
-					njr.failure(NetworkResponse.ErrorCode.BAD_REQUEST, "There is no API endpoint with this name.");
+					njr.failure(NetworkResponse.ErrorCode.BAD_REQUEST, "There is no API endpoint with this name.", API.ErrorCode.DEFAULT_ERROR_CODE);
 					return;
 				}
 				else {
