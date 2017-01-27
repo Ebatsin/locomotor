@@ -319,12 +319,13 @@ public class DBH {
 	/**
 	 * Register an user.
 	 *
-	 * @param      username  The username
-	 * @param      password  The password
+	 * @param      username     The username
+	 * @param      password     The password
+	 * @param      adminLevel   The admin level of the user (0 : no rights, 1 : admin, 2 : superadmin)
 	 *
 	 * @return     The ObjectID of the user and his role
 	 */
-	public static Pair<String,Boolean> registerUser(String username, String password) {		
+	public static Pair<String, Integer> registerUser(String username, String password, int adminLevel) {		
 		// check already exist
 		if (DBH.getInstance().usernameAlreadyTaken(username)) {
 			ErrorHandler.getInstance().push("registerUser", true, "The username is already taken by another user", "");
@@ -334,7 +335,7 @@ public class DBH {
 		Document user = new Document();
 		user.append("username", username.trim());
 		user.append("password", "");
-		user.append("isAdmin", false);
+		user.append("isAdmin", adminLevel);
 		user.append("notifications", new ArrayList<Document>());
 		MongoCollection<Document> users = md.getCollection("users");
 		users.insertOne(user);
@@ -360,7 +361,7 @@ public class DBH {
 		// add hashed password
 		users.updateOne(eq("_id", id), set("password", passwordHash));
 
-		return new Pair(id.toString(), user.getBoolean("isAdmin"));
+		return new Pair(id.toString(), user.getInteger("isAdmin"));
 	}
 
 	/**
@@ -371,7 +372,7 @@ public class DBH {
 	 *
 	 * @return     The ObjectID of the user and his role
 	 */
-	public static Pair<String,Boolean> authUser(String username, String password) {
+	public static Pair<String,Integer> authUser(String username, String password) {
 
 		MongoCollection<Document> users = md.getCollection("users");
 		Document user = users.find(eq("username", username)).first();
@@ -409,7 +410,7 @@ public class DBH {
 			return null;
 		}
 
-		return new Pair(id.toString(), user.getBoolean("isAdmin"));
+		return new Pair(id.toString(), user.getInteger("isAdmin"));
 
 	}
 

@@ -82,7 +82,7 @@ public class API {
 					// check user exist and good password
 					String username = data.getAsString("username");
 					String password = data.getAsString("password");
-					Pair<String,Boolean> claims = DBH.getInstance().authUser(username, password);
+					Pair<String,Integer> claims = DBH.getInstance().authUser(username, password);
 
 					// check error
 					if (claims == null) {
@@ -103,7 +103,7 @@ public class API {
 				else if(data.isDefined("token")) { // login with token
 					// auth with token
 					String longToken = data.getAsString("token");
-					Pair<String,Boolean> claims = jwt.checkToken(longToken);
+					Pair<String,Integer> claims = jwt.checkToken(longToken);
 					
 					// check error
 					if(claims == null) {
@@ -153,7 +153,7 @@ public class API {
 				// check user exist
 				String username = data.getAsString("username");
 				String password = data.getAsString("password");
-				Pair<String,Boolean> claims = DBH.getInstance().registerUser(username, password);
+				Pair<String,Integer> claims = DBH.getInstance().registerUser(username, password, 0);
 				
 				// check error
 				if (claims == null) {
@@ -189,7 +189,7 @@ public class API {
 				// auth with token
 				String longToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Boolean> claims = jwt.checkToken(longToken);
+				Pair<String,Integer> claims = jwt.checkToken(longToken);
 					
 				// check error
 				if(claims == null) {
