@@ -15,7 +15,10 @@ import locomotor.components.types.CItemType;
 import locomotor.components.types.CUniverseType;
 import locomotor.components.types.CUserType;
 
+import locomotor.components.Pair;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -61,48 +64,72 @@ public class Comparator {
 
 	// @todo.
 	public void computeGradeOfItems(ArrayList<Item> items) {
-		TreeMap<String, Double> gradesList = new TreeMap<String, Double>();
+
+		TreeMap<Double, ArrayList<Pair<String, Double>>> gradesList = new TreeMap<Double, ArrayList<Pair<String, Double>>>();
 		
-		TreeMap<String, TreeMap<String, Double>> criteriasGradeItem = new TreeMap<String, TreeMap<String, Double>>();
+		TreeMap<String, TreeMap<Double, ArrayList<Pair<String, Double>>>> criteriasGradeItem = new TreeMap<String, TreeMap<Double, ArrayList<Pair<String, Double>>>>();
 		
 		for (Item item : items) {
+			
 			// useful to display best criterias
-			TreeMap<String, Double> criteriasGrade = new TreeMap<String, Double>();
+			TreeMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade = new TreeMap<Double, ArrayList<Pair<String, Double>>>();
 
 			double grade = computeGradeOfItem(item, criteriasGrade);
 			
 			if (grade != -1.0) {
 
-				gradesList.put(item.getID(), grade);
+				// item grade
+				ArrayList<Pair<String, Double>> itemList = gradesList.get(grade);
+				
+				if (itemList == null) {
+				    itemList = new ArrayList<Pair<String, Double>>();
+				    gradesList.put(grade, itemList);
+				}
+				
+				itemList.add(new Pair(item.getID(), grade));
+
+				// item's criteria grade
 				criteriasGradeItem.put(item.getID(), criteriasGrade);
 			}
 		}
 
+		TreeMap<Double, ArrayList<Pair<String, Double>>> itemSortedByGrade = new TreeMap(Collections.reverseOrder());
+		itemSortedByGrade.putAll(gradesList);
+
 		// @todo just display, need to order and filter
-		for(Map.Entry<String, Double> item : gradesList.entrySet()) {
+		for(Map.Entry<Double, ArrayList<Pair<String, Double>>> item : itemSortedByGrade.entrySet()) {
 			
-			String key = item.getKey();
-			Double val = item.getValue();
+			ArrayList<Pair<String, Double>> listItems = item.getValue();
 
-			System.out.println(key + " => " + val);
+			for (Pair<String, Double> item2 : listItems) {
+				
+				System.out.println(item2.getLeft() + " => " + item2.getRight());
 
-			TreeMap<String, Double> gradeCrits = criteriasGradeItem.get(key);
-			for(Map.Entry<String, Double> crit : gradeCrits.entrySet()) {
+				TreeMap<Double, ArrayList<Pair<String, Double>>> critSortedByGrade = new TreeMap(Collections.reverseOrder());
+				critSortedByGrade.putAll(criteriasGradeItem.get(item2.getLeft()));
 
-				String keyCrits = crit.getKey();
-				String name = _modelCrits.get(keyCrits).getName();
-				Double valCrits = crit.getValue();
+				for(Map.Entry<Double, ArrayList<Pair<String, Double>>> crit : critSortedByGrade.entrySet()) {
+				
+					ArrayList<Pair<String, Double>> listCrits = crit.getValue();
 
-				System.out.println("\t" + name + " => " + valCrits);
+					for (Pair<String, Double> crit2 : listCrits) {
+
+						String name = _modelCrits.get(crit2.getLeft()).getName();
+				
+						System.out.println("\t" + name + " => " + crit2.getRight());
+
+					}
+
+				}
 
 			}
-		}
 
+		}
 
 	}
 
 	// @todo.
-	private double computeGradeOfItem(Item item, TreeMap<String, Double> criteriasGrade) {
+	private double computeGradeOfItem(Item item, TreeMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade) {
 		double grade = 0.0;
 		int numberOfCategories = 0;
 
@@ -128,7 +155,7 @@ public class Comparator {
 	}
 
 	// @todo.
-	private double computeGradeOfCategory(UserCategory userCategory, ItemCategory itemCategory, TreeMap<String, Double> criteriasGrade) {
+	private double computeGradeOfCategory(UserCategory userCategory, ItemCategory itemCategory, TreeMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade) {
 		double grade = 0.0;
 		int numberOfCriterias = 0;
 
@@ -147,7 +174,14 @@ public class Comparator {
 				return -1.0;
 			}
 
-			criteriasGrade.put(uc.getID(), currentGrade);
+			ArrayList<Pair<String, Double>> critList = criteriasGrade.get(currentGrade);
+				
+			if (critList == null) {
+			    critList = new ArrayList<Pair<String, Double>>();
+			    criteriasGrade.put(currentGrade, critList);
+			}
+			critList.add(new Pair(uc.getID(), currentGrade));
+
 			grade += currentGrade;
 			numberOfCriterias++;
 		}
