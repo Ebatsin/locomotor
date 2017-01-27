@@ -19,7 +19,7 @@ public class Compare {
 	public static double uniqueValue(double userLowBound, double userHighBound, double itemValue, boolean disableFlexibility) {
 		
 		if(disableFlexibility) {
-			return (userLowBound <= itemValue && itemValue >= userHighBound) ? 1.0: 0.0;
+			return (userLowBound <= itemValue && itemValue >= userHighBound) ? 1.0 : -1.0;
 		}
 
 		Gaussian gaussian = Gaussian.getInstance();
@@ -48,7 +48,7 @@ public class Compare {
 	public static double intervalValue(double userLowBound, double userHighBound, double itemLowBound, double itemHighBound, boolean disableFlexibility) {
 		
 		if(disableFlexibility) {
-			return (userLowBound <= itemLowBound && itemHighBound <= userHighBound) ? 1.0: 0.0;
+			return (userLowBound <= itemLowBound && itemHighBound <= userHighBound) ? 1.0 : -1.0;
 		}
 
 		Gaussian gaussian = Gaussian.getInstance();
