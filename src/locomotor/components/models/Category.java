@@ -37,6 +37,20 @@ public abstract class Category {
 		return _idCatModel;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return     The id.
+	 */
+	public String getID() {
+		return _idCatModel;
+	}
+
+	/**
+	 * Gets the criterias.
+	 *
+	 * @return     The criterias.
+	 */
 	public ArrayList<? extends Criteria> getCriterias() {
 		return _criterias;
 	}

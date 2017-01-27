@@ -34,6 +34,15 @@ public class UserCriteria extends Criteria {
 	}
 
 	/**
+	 * Gets the disable flexibility.
+	 *
+	 * @return     The disable flexibility.
+	 */
+	public boolean getDisableFlexibility() {
+		return _disableFlex;
+	}
+
+	/**
 	 * Create the perfect item's criteria (user perspective).
 	 *
 	 * @param      json       The json

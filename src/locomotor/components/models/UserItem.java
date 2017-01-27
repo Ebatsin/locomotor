@@ -27,6 +27,15 @@ public class UserItem {
 	}
 
 	/**
+	 * Gets the categories.
+	 *
+	 * @return     The categories.
+	 */
+	public ArrayList<UserCategory> getCategories() {
+		return _categories;
+	}
+
+	/**
 	 * Create the perfect item (user perspective).
 	 *
 	 * @param      json       The json
