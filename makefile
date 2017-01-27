@@ -74,7 +74,7 @@ build-front-user:
 	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIBALL):$(CLASS):$(RESOURCES):" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
 
 run-core:
-	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE)
+	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE) $(ARGS)
 
 run-front-user:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS):$(RESOURCES):" $(PACKAGE_FRONT_USER)
