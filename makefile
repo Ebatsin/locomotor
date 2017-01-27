@@ -74,7 +74,7 @@ build-front-user:
 	$(CC) -d $(CLASS) -sourcepath $(SRC) -classpath "$(LIBALL):$(CLASS):$(RESOURCES):" $(FLAGS_CC) $(SRC)/$(INT_USER)/$(MAIN)
 
 run-core:
-	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE)
+	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE) $(ARGS)
 
 run-front-user:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS):$(RESOURCES):" $(PACKAGE_FRONT_USER)
@@ -142,4 +142,4 @@ linter-front-user:
 
 DATAJSON = $(shell echo $(DATA)/*.json)
 update-database:
-	$(foreach file, $(DATAJSON), mongoimport -d $(PACKAGE) -c $(shell basename $(file) .json) --jsonArray --drop --file $(file);)
+	$(foreach file, $(DATAJSON), mongoimport -d $(PACKAGE) -c $(shell basename $(file) .json) --drop --file $(file);)
