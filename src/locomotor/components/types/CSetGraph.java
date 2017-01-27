@@ -85,15 +85,16 @@ public class CSetGraph implements JSONDisplayable {
 	}
 
 	/**
-	 * Compare the string list of the vehicle with the string list of the user.
+	 * Compare the string list of the vehicle with the string list of the user
 	 *
-	 * @param      userKey  The user key set
-	 * @param      itemKey  The item key set
+	 * @param      user                The user string list
+	 * @param      universe            The universe string list (containg the graph)
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (match), tend toward 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	protected double compare(Set<Integer> userKey, Set<Integer> itemKey) {
-		return Compare.graphValue(userKey, itemKey, this);
+	protected double compare(Set<Integer> userKey, Set<Integer> itemKey, boolean disableFlexibility) {
+		return Compare.graphValue(userKey, itemKey, this, disableFlexibility);
 	}
 
 	/**

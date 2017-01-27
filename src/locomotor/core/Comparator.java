@@ -62,9 +62,20 @@ public class Comparator {
 	// @todo.
 	public void computeGradeOfItems(ArrayList<Item> items) {
 		TreeMap<String, Double> gradesList = new TreeMap<String, Double>();
+		
+		TreeMap<String, TreeMap<String, Double>> criteriasGradeItem = new TreeMap<String, TreeMap<String, Double>>();
+		
 		for (Item item : items) {
-			double grade = computeGradeOfItem(item);
-			gradesList.put(item.getID(), grade);
+			// useful to display best criterias
+			TreeMap<String, Double> criteriasGrade = new TreeMap<String, Double>();
+
+			double grade = computeGradeOfItem(item, criteriasGrade);
+			
+			if (grade != -1.0) {
+
+				gradesList.put(item.getID(), grade);
+				criteriasGradeItem.put(item.getID(), criteriasGrade);
+			}
 		}
 
 		// @todo just display, need to order and filter
@@ -74,13 +85,24 @@ public class Comparator {
 			Double val = item.getValue();
 
 			System.out.println(key + " => " + val);
+
+			TreeMap<String, Double> gradeCrits = criteriasGradeItem.get(key);
+			for(Map.Entry<String, Double> crit : gradeCrits.entrySet()) {
+
+				String keyCrits = crit.getKey();
+				String name = _modelCrits.get(keyCrits).getName();
+				Double valCrits = crit.getValue();
+
+				System.out.println("\t" + name + " => " + valCrits);
+
+			}
 		}
 
 
 	}
 
 	// @todo.
-	private double computeGradeOfItem(Item item) {
+	private double computeGradeOfItem(Item item, TreeMap<String, Double> criteriasGrade) {
 		double grade = 0.0;
 		int numberOfCategories = 0;
 
@@ -92,14 +114,21 @@ public class Comparator {
 
 		// calculate the grade for each categories of the user perfect item
 		for (UserCategory uc : _userPerfectItem.getCategories()) {
-			grade += computeGradeOfCategory(uc, itemCats.get(uc.getID()));
+			
+			double currentGrade = computeGradeOfCategory(uc, itemCats.get(uc.getID()), criteriasGrade);
+			// flexibilty did not match for the criteria
+			if (currentGrade == -1.0) {
+				return -1.0;
+			}
+
+			grade += currentGrade;
 			numberOfCategories++;
 		}
 		return (numberOfCategories == 0) ? grade : grade/numberOfCategories;
 	}
 
 	// @todo.
-	private double computeGradeOfCategory(UserCategory userCategory, ItemCategory itemCategory) {
+	private double computeGradeOfCategory(UserCategory userCategory, ItemCategory itemCategory, TreeMap<String, Double> criteriasGrade) {
 		double grade = 0.0;
 		int numberOfCriterias = 0;
 
@@ -111,20 +140,35 @@ public class Comparator {
 
 		// calculate the grade for each criterias of the user perfect item's category
 		for (Criteria uc : userCategory.getCriterias()) {
-			grade += computeGradeOfCriteria(((UserCriteria)uc), itemCrits.get(uc.getID()));
+			double currentGrade = computeGradeOfCriteria(((UserCriteria)uc), itemCrits.get(uc.getID()));
+			
+			// flexibilty did not match for the criteria
+			if (currentGrade == -1.0) {
+				return -1.0;
+			}
+
+			criteriasGrade.put(uc.getID(), currentGrade);
+			grade += currentGrade;
 			numberOfCriterias++;
 		}
 		return (numberOfCriterias == 0) ? grade : grade/numberOfCriterias;
 	}
 
-	// @todo.
+	/**
+	 * Calculates the grade of criteria.
+	 *
+	 * @param      userCriteria  The user criteria
+	 * @param      itemCriteria  The item criteria
+	 *
+	 * @return     The grade of criteria, between -1 (flexibily disable) else between 0 and 1 (best).
+	 */
 	private double computeGradeOfCriteria(UserCriteria userCriteria, ItemCriteria itemCriteria) {
 		CUniverseType universe = _modelCrits.get(userCriteria.getID()).getUniverse();
 		CComparable item = (CComparable)itemCriteria.getValue();
 		CUserType user = userCriteria.getValue();
+		boolean disableFlexibility = userCriteria.getDisableFlexibility();
 
-		double grade = item.compare(user, universe);
-		return grade;
+		return item.compare(user, universe, disableFlexibility);
 	}
 
 }

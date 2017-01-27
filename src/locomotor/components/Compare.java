@@ -13,9 +13,15 @@ public class Compare {
 	* @param userLowBound The lower bound of the user's interval
 	* @param userHighBound The higher bound of the user's interval
 	* @param itemValue The item criteria's value
+	* @param disableFlexibility Disable the flexibility
 	* @return The mark generated for this criteria's value and this user given interval
 	*/
-	public static double uniqueValue(double userLowBound, double userHighBound, double itemValue) {
+	public static double uniqueValue(double userLowBound, double userHighBound, double itemValue, boolean disableFlexibility) {
+		
+		if(disableFlexibility) {
+			return (userLowBound <= itemValue && itemValue >= userHighBound) ? 1.0: 0.0;
+		}
+
 		Gaussian gaussian = Gaussian.getInstance();
 
 		double mappedIntervalMax = 0.66; // the mapped interval is [-0.66; 0.66]
@@ -36,9 +42,15 @@ public class Compare {
 	* @param userHighBound The higher bound of the user's interval
 	* @param itemLowBound The lower bound of the item's interval
 	* @param itemHighBound The higher bound of the item's interval
+	* @param disableFlexibility Disable the flexibility
 	* @return The mark generated for this criteria's interval value and this user given interval
 	*/
-	public static double intervalValue(double userLowBound, double userHighBound, double itemLowBound, double itemHighBound) {
+	public static double intervalValue(double userLowBound, double userHighBound, double itemLowBound, double itemHighBound, boolean disableFlexibility) {
+		
+		if(disableFlexibility) {
+			return (userLowBound <= itemLowBound && itemHighBound <= userHighBound) ? 1.0: 0.0;
+		}
+
 		Gaussian gaussian = Gaussian.getInstance();
 		float mappedIntervalMax = 2; // the mapped interval is [-2; 2]
 
@@ -84,16 +96,21 @@ public class Compare {
 	 * @param      userKey      The user key set
 	 * @param      itemKey      The item key set
 	 * @param      universeKey  The universe set
+	 * @param      disableFlexibility  The disable flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (best match), tend toward 0.0 otherwise, -1.0 if flexibility disable and no matching
 	 */
-	public static double graphValue(Set<Integer> userKey, Set<Integer> itemKey, CSetGraph universeKey) {
+	public static double graphValue(Set<Integer> userKey, Set<Integer> itemKey, CSetGraph universeKey, boolean disableFlexibility) {
 
 		boolean isUserSubsetOfItem = itemKey.containsAll(userKey);
 
 		// case 1: user is included or egal to item
 		if (itemKey.equals(userKey) || isUserSubsetOfItem) {
 			return 1.0;
+		}
+
+		if(disableFlexibility) {
+			return -1.0;
 		}
 		
 		boolean isItemSubsetOfUser = userKey.containsAll(itemKey);
@@ -121,7 +138,7 @@ public class Compare {
 		return (sumOfDistance == 0.0) ? sumOfDistance : (sumOfDistance / numberOfPaths);
 	}
 
-	public static double booleanValue(CBoolean user, CBoolean item) {		
-		return (item.value() == user.value()) ? 1.0 : 0.0;
+	public static double booleanValue(CBoolean user, CBoolean item, boolean disableFlexibility) {		
+		return (item.value() == user.value()) ? 1.0 : (disableFlexibility ? -1.0 : 0.0);
 	}
 }

@@ -19,13 +19,14 @@ public class CWeightedInteger extends CLong implements CComparable<CWeightedStri
 	/**
 	 * Compare the string list of the vehicle with the string list of the user
 	 *
-	 * @param      user      The user string list
-	 * @param      universe  The universe string list (containg the graph)
+	 * @param      user                The user string list
+	 * @param      universe            The universe string list (containg the graph)
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (match), 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	public double compare(CWeightedStringList user, CWeightedStringList universe) {
-		return Compare.uniqueValue(user.min(), user.max(), value());
+	public double compare(CWeightedStringList user, CWeightedStringList universe, boolean disableFlexibility) {
+		return Compare.uniqueValue(user.min(), user.max(), value(), disableFlexibility);
 	}
 	
 }

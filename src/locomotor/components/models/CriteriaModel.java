@@ -88,6 +88,15 @@ public class CriteriaModel {
 	}
 
 	/**
+	 * Gets the name.
+	 *
+	 * @return     The name.
+	 */
+	public String getName() {
+		return _name;
+	}
+
+	/**
 	 * Gets the item type.
 	 *
 	 * @return     The item type.

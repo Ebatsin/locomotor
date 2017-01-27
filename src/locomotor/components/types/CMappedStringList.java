@@ -23,16 +23,17 @@ public class CMappedStringList extends CStringList implements CComparable<CMappe
 	/**
 	 * Compare the string list of the vehicle with the string list of the user
 	 *
-	 * @param      user      The user string list
-	 * @param      universe  The universe string list (containg the graph)
+	 * @param      user                The user string list
+	 * @param      universe            The universe string list (containg the graph)
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (match), 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	public double compare(CMappedStringList user, CGraphStringList universe) {
+	public double compare(CMappedStringList user, CGraphStringList universe, boolean disableFlexibility) {
 		Set<Integer> userKey = user._values.keySet();
 		Set<Integer> itemKey = this._values.keySet();
 
-		return universe.compare(userKey, itemKey);
+		return universe.compare(userKey, itemKey, disableFlexibility);
 
 	}
 

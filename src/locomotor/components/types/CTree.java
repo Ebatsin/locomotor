@@ -168,17 +168,18 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 	/**
 	 * Compare the tree of the vehicle with the tree of the user
 	 *
-	 * @param      user      The user tree
-	 * @param      universe  The universe tree (containg the graph)
+	 * @param      user                The user criteria
+	 * @param      universe            The universe tree (containg the graph)
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (match), tend toward 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	public double compare(CTree user, CGraphTree universe) {
+	public double compare(CTree user, CGraphTree universe, boolean disableFlexibility) {
 		
 		Set<Integer> userKey = user.toSet();
 		Set<Integer> itemKey = this.toSet();
 
-		return universe.compare(userKey, itemKey);
+		return universe.compare(userKey, itemKey, disableFlexibility);
 	}
 
 	/**

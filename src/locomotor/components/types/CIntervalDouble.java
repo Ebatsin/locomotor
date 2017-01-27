@@ -26,15 +26,16 @@ public class CIntervalDouble extends CInterval implements CComparable<CIntervalD
 	}
 
 	/**
-	 * Compare the double interval value of the vehicle with the double interval value of the user
+	 * Compare boolean value
 	 *
-	 * @param      user      The user
-	 * @param      universe  The universe
+	 * @param      user                The user criteria
+	 * @param      universe            The universe
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (match), 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	public double compare(CIntervalDouble user, CIntervalDouble universe) {
-		return Compare.intervalValue(user.min().doubleValue(), user.max().doubleValue(), min().doubleValue(), max().doubleValue());
+	public double compare(CIntervalDouble user, CIntervalDouble universe, boolean disableFlexibility) {
+		return Compare.intervalValue(user.min().doubleValue(), user.max().doubleValue(), min().doubleValue(), max().doubleValue(), disableFlexibility);
 	}
 
 	/**

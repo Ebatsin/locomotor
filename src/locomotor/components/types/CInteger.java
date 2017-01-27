@@ -17,15 +17,16 @@ public class CInteger extends CLong implements CComparable<CIntervalInteger, CIn
 	}
 
 	/**
-	 * Compare the integer value of the vehicle with the integer interval value of the user
+	 * Compare boolean value
 	 *
-	 * @param      user      The user
-	 * @param      universe  The universe
+	 * @param      user                The user criteria
+	 * @param      universe            The universe
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (best match), tend toward 0.0 otherwise
+	 * @return     1.0 (match), 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	public double compare(CIntervalInteger user, CIntervalInteger universe) {
-		return Compare.uniqueValue(user.min().doubleValue(), user.max().doubleValue(), value().doubleValue());
+	public double compare(CIntervalInteger user, CIntervalInteger universe, boolean disableFlexibility) {
+		return Compare.uniqueValue(user.min().doubleValue(), user.max().doubleValue(), value().doubleValue(), disableFlexibility);
 	}
 	
 }
