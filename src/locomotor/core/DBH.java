@@ -83,7 +83,7 @@ public class DBH {
 			disconnect();
 			mc = new MongoClient();
 		}
-		System.out.println("Connected to the database");
+		// System.out.println("Connected to the database");
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class DBH {
 			disconnect();
 			mc = new MongoClient(ip, port);
 		}
-		System.out.println("Connected to the database");
+		// System.out.println("Connected to the database");
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class DBH {
 	public static synchronized void disconnect() {
 		mc.close();
 		mc = null;
-		System.out.println("Disconnected from the database");
+		// System.out.println("Disconnected from the database");
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class DBH {
 		
 		FindIterable<Document> catMod = md.getCollection("categoryModel").find();
 		
-		System.out.println("Retrieving the model categories");
+		// System.out.println("Retrieving the model categories");
 
 		catMod.forEach(new Block<Document>() {
 			@Override
@@ -144,13 +144,13 @@ public class DBH {
 
 				ArrayList<CriteriaModel> criteriasMod = new ArrayList<CriteriaModel>();
 
-				System.out.println("Retrieving the criterias of " + name);
+				// System.out.println("Retrieving the criterias of " + name);
 				
 				TypeFactory typeFactory = new TypeFactory();
 
 				for(Document crit : critIt) {
 
-					System.out.println("Retrieving the criteria " + crit.getString("name"));
+					// System.out.println("Retrieving the criteria " + crit.getString("name"));
 
 					CUniverseType universe = typeFactory.getUniverse(CEnumUniverseType.valueOf(
 						crit.getInteger("universeType")), crit.get("universe"));
@@ -168,7 +168,7 @@ public class DBH {
 
 					criteriasMod.add(criteria);
 
-					System.out.print(criteria);
+					// System.out.print(criteria);
 
 				}
 
@@ -195,7 +195,7 @@ public class DBH {
 		
 		FindIterable<Document> items = md.getCollection("items").find();
 		
-		System.out.println("Retrieving the items");
+		// System.out.println("Retrieving the items");
 
 		items.forEach(new Block<Document>() {
 			@Override
@@ -210,7 +210,7 @@ public class DBH {
 
 				ArrayList<ItemCategory> categories = new ArrayList<ItemCategory>();
 
-				System.out.println("Retrieving the categories of " + doc.getString("name"));
+				// System.out.println("Retrieving the categories of " + doc.getString("name"));
 				
 				TypeFactory typeFactory = new TypeFactory();
 
@@ -233,7 +233,7 @@ public class DBH {
 					}
 
 					String identifierCat = currentCat.getObjectId("categoryModel").toString();
-					System.out.println("Category " + identifierCat);
+					// System.out.println("Category " + identifierCat);
 
 					ArrayList<ItemCriteria> criterias = new ArrayList<ItemCriteria>();
 					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
@@ -264,7 +264,7 @@ public class DBH {
 						}
 
 						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
-						System.out.println("Criterion " + identifierCrit);
+						// System.out.println("Criterion " + identifierCrit);
 
 
 						// creation criteria
@@ -278,7 +278,7 @@ public class DBH {
 
 						criterias.add(criteria);
 
-						System.out.println(criteria);
+						// System.out.println(criteria);
 
 					}
 
