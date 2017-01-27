@@ -56,21 +56,10 @@ public class CWeightedStringList extends CStringList {
 		return obj;
 	}
 
-	/**
-	 * Factory from representation JSON.
-	 *
-	 * @param      json  The json
-	 *
-	 * @return     A new CWeightedStringList object.
+	/** 
+	 * @todo: to remove, not an user type only universe
 	 */
 	public static CWeightedStringList fromJSON(JsonValue json) {
-		JsonArray values = json.asObject().get("values").asArray();
-
-		long min = json.asObject().get("min").asLong();
-		long max = json.asObject().get("max").asLong();
-		
-		TreeMap<Integer, String> valuesTree = treeFromJSON(values);
-
-		return new CWeightedStringList(min, max, valuesTree);
+		return null;
 	}
 }

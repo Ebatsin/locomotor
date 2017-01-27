@@ -29,7 +29,11 @@ public class UserCategory extends Category {
 	 * @return     String representation of the object.
 	 */
 	public String toString() {
-		return "Category user: " + super.toString();
+		String display = "Category user: " + super.toString() + "\n";
+		for (Criteria uc : getCriterias()) {
+			display += ((UserCriteria)uc).toString() + "\n";
+		}
+		return display;
 	}
 
 	/**
@@ -55,8 +59,8 @@ public class UserCategory extends Category {
 
 		// delegate for each criteria
 		for (JsonValue criteria : criterias) {
-			String identifier = criteria.get("criterionId").asString();
-			UserCriteria uc = UserCriteria.fromJSON(criteria, criteriasModel.get(identifier));
+			String id = criteria.asObject().get("criterionId").asString();
+			UserCriteria uc = UserCriteria.fromJSON(criteria, criteriasModel.get(id));
 			userCriterias.add(uc);
 		}
 		return new UserCategory(identifier, userCriterias);

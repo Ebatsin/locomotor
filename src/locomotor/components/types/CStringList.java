@@ -80,9 +80,8 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 		TreeMap<Integer, String> valuesTree = new TreeMap<Integer, String>();
 
 		for (JsonValue value : values) {
-			int val = value.asObject().get("value").asInt();
-			String name = value.asObject().get("name").asString();
-			valuesTree.put(val, name);
+			int val = value.asInt();
+			valuesTree.put(val, "");
 		}
 
 		return valuesTree;

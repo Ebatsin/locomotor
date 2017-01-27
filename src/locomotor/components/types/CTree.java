@@ -209,11 +209,10 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 	 */
 	public static CTree fromJSON(JsonValue json) {
 		int id = json.asObject().get("id").asInt();
-		String value = json.asObject().get("value").asString();
-		CTree root = new CTree(id, value);
+		CTree root = new CTree(id, "");
 
 		// check children
-		if(json.asObject().get("children").asArray() != null) {
+		if(json.asObject().get("children") != null) {
 			JsonArray children = json.asObject().get("children").asArray();
 			
 			for (JsonValue childJSON : children) {

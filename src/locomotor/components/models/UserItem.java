@@ -36,6 +36,19 @@ public class UserItem {
 	}
 
 	/**
+	 * Returns a string representation of the object.
+	 *
+	 * @return     String representation of the object.
+	 */
+	public String toString() {
+		String display = "UserItem\n";
+		for (UserCategory uc : _categories) {
+			display += uc.toString() + "\n";
+		}
+		return display;
+	}
+
+	/**
 	 * Create the perfect item (user perspective).
 	 *
 	 * @param      json       The json
@@ -44,7 +57,7 @@ public class UserItem {
 	 * @return     The perfect item.
 	 */
 	public static UserItem fromJSON(JsonValue json, ArrayList<CategoryModel> catsModel) {
-		JsonArray categories = Json.parse(json).asArray();
+		JsonArray categories = json.asArray();
 
 		// map to retrieve easier (perf)
 		HashMap<String, CategoryModel> categoriesMap = new HashMap<String, CategoryModel>();
@@ -56,7 +69,7 @@ public class UserItem {
 
 		// delegate for each category
 		for (JsonValue category : categories) {
-			String identifier = category.get("categoryId").asString();
+			String identifier = category.asObject().get("categoryId").asString();
 			UserCategory uc = UserCategory.fromJSON(category, categoriesMap.get(identifier));
 			userCategories.add(uc);
 		}

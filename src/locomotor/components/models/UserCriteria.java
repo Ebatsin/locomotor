@@ -1,6 +1,10 @@
 package locomotor.components.models;
 
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+
 import locomotor.components.types.CUserType;
+import locomotor.components.types.TypeFactory;
 
 /**
  * An user criteria, identified by his criteria model and containing a value.
@@ -30,7 +34,7 @@ public class UserCriteria extends Criteria {
 	 * @return     String representation of the object.
 	 */
 	public String toString() {
-		return super.toString();
+		return "Criteria user:\n" + "Flexibility: " + (!_disableFlex) + "\n" + super.toString();
 	}
 
 	/**
@@ -54,7 +58,7 @@ public class UserCriteria extends Criteria {
 		JsonObject criteria = json.asObject();
 		String identifier = criteria.get("criterionId").asString();
 		boolean disableFlex = criteria.get("disableFlex").asBoolean();
-		JsonObject value = criteria.get("criteria").asObject();
+		JsonObject value = criteria.get("value").asObject();
 
 		// delegate instanciation to the factory
 		TypeFactory typeFactory = new TypeFactory();
