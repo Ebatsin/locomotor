@@ -201,13 +201,27 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 	}
 
 	/**
-	 * @todo.
+	 * Factory from representation JSON.
 	 *
 	 * @param      json  The json
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A new CTree object.
 	 */
 	public static CTree fromJSON(JsonValue json) {
-		return null;
+		int id = json.asObject().get("id").asInt();
+		String value = json.asObject().get("value").asString();
+		CTree root = new CTree(id, value);
+
+		// check children
+		if(json.asObject().get("children").asArray() != null) {
+			JsonArray children = json.asObject().get("children").asArray();
+			
+			for (JsonValue childJSON : children) {
+				CTree child = CTree.fromJSON(childJSON);
+				root.addChild(child);
+			}
+
+		}
+		return root;
 	}
 }

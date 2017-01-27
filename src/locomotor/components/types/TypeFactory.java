@@ -15,12 +15,12 @@ import org.bson.Document;
 public class TypeFactory {
 	
 	/**
-	 * Gets the universe.
+	 * Gets the universe criteria.
 	 *
 	 * @param      type    The type of universe to create
 	 * @param      object  The object containing the data of the universe to create
 	 *
-	 * @return     The universe.
+	 * @return     The universe criteria.
 	 */
 	public CUniverseType getUniverse(CEnumUniverseType type, Object object) {
 		switch(type) {
@@ -82,13 +82,13 @@ public class TypeFactory {
 	}
 
 	/**
-	 * Gets the item.
+	 * Gets the item criteria.
 	 *
 	 * @param      type      The type of item to create
 	 * @param      object    The object containing the data of the item to create
 	 * @param      universe  The universe containing the data of the universe
 	 *
-	 * @return     The item.
+	 * @return     The item criteria.
 	 */
 	public CItemType getItem(CEnumItemType type, Object object, CUniverseType universe) {
 		switch(type) {
@@ -145,6 +145,14 @@ public class TypeFactory {
 		return null;
 	}
 
+	/**
+	 * Gets the user criteria.
+	 *
+	 * @param      type  The type of the criteria
+	 * @param      json  The json
+	 *
+	 * @return     The user criteria
+	 */
 	public CUserType getUser(CEnumUserType type, JsonValue json) {
 		switch(type) {
 			case BOOLEAN: {

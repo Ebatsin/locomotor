@@ -172,7 +172,7 @@ public class API {
 					if (claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-						log.getRight().toString());
+							log.getRight().toString());
 						return;
 					}
 					
@@ -182,7 +182,7 @@ public class API {
 					}
 					
 					response.getJsonContext().success(Json.object()
-					.add("model", model));
+						.add("model", model));
 						
 				}
 				else { // error
