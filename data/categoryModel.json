@@ -102,7 +102,7 @@
 			"question": "Quelle classe de consommation désirez-vous pour votre véhicule ?",
 			"isComparable": true,
 			"itemType": 0,
-			"userType": 5,
+			"userType": 6,
 			"universeType": 6,
 			"unit": 0,
 			"universe": {
@@ -312,7 +312,7 @@
 			"question": "Quelle classe de confort désirez-vous pour votre véhicule ?",
 			"isComparable": true,
 			"itemType": 0,
-			"userType": 5,
+			"userType": 6,
 			"universeType": 6,
 			"unit": 0,
 			"universe": {
@@ -798,7 +798,7 @@
 			"question": "Va-t-on mourir durant ce trajet ? Votez chez vous par SMS",
 			"isComparable": true,
 			"itemType": 0,
-			"userType": 5,
+			"userType": 6,
 			"universeType": 6,
 			"unit": 0,
 			"universe": {
@@ -856,7 +856,7 @@
 			"question": "Quel type d'armement désirez-vous sur votre véhicule ?",
 			"isComparable": true,
 			"itemType": 0,
-			"userType": 5,
+			"userType": 6,
 			"universeType": 6,
 			"unit": 0,
 			"universe": {
