@@ -38,6 +38,20 @@ public abstract class Criteria {
 		return _value.toString() + "\n";
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return     The id.
+	 */
+	public String getID() {
+		return _idCritModel;
+	}
+
+	/**
+	 * Gets the value.
+	 *
+	 * @return     The value.
+	 */
 	public CComparableType getValue() {
 		return _value;
 	}

@@ -59,6 +59,6 @@ public class UserCategory extends Category {
 			UserCriteria uc = UserCriteria.fromJSON(criteria, criteriasModel.get(identifier));
 			userCriterias.add(uc);
 		}
-		return new UserItem(identifier, userCriterias);
+		return new UserCategory(identifier, userCriterias);
 	}
 }

@@ -28,6 +28,20 @@ public class Item {
 		_categories = categories;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return     The id.
+	 */
+	public String getID() {
+		return _identifier;
+	}
+
+	/**
+	 * Gets the categories.
+	 *
+	 * @return     The categories.
+	 */
 	public ArrayList<ItemCategory> getCategories() {
 		return _categories;
 	}
