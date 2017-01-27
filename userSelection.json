@@ -1,0 +1,113 @@
+[
+	{
+		"categoryId": "5842ccbf57ab9e689507bc13",
+		"criteria": [
+			{
+				"criterionId": "5842dffe57ab9e7e37048793",
+				"disableFlex": false,
+				"value": {
+					"values": [0,1,2,4]
+				}
+			},
+			{
+				"criterionId": "5842e19957ab9e7e37048794",
+				"disableFlex": true,
+				"value": {
+					"min": 0,
+					"max": 4
+				}
+			},
+			{
+				"criterionId": "58435bb857ab9e1127b9f105",
+				"disableFlex": false,
+				"value": {
+					"min": 12,
+					"max": 25
+				}
+			}
+		]
+	},
+	{
+		"categoryId": "5842d7a657ab9e6a5495f3ee",
+		"criteria": [
+			{
+				"criterionId": "5842e66a57ab9e83054cd9c0",
+				"disableFlex": false,
+				"value": {
+					"min": 12.4,
+					"max": 25.7
+				}
+			},
+			{
+				"criterionId": "5842e6db57ab9e83054cd9c1",
+				"disableFlex": false,
+				"value": {
+					"min": 12.4,
+					"max": 25.7
+				}
+			},
+			{
+				"criterionId": "5842e72e57ab9e83054cd9c2",
+				"disableFlex": false,
+				"value": {
+					"min": 12.4,
+					"max": 25.7
+				}
+			}
+		]
+	},
+	{
+		"categoryId": "5842d7be57ab9e6a5495f3f0",
+		"criteria": [
+			{
+				"criterionId": "5842f07057ab9e8ee0ed6c84",
+				"disableFlex": false,
+				"value": {
+					"bool": true
+				}
+			}
+		]
+	},
+	{
+		"categoryId": "5842f0b257ab9e8ee0ed6c86",
+		"criteria": [
+			{
+				"criterionId": "5842f0e057ab9e8ee0ed6c88",
+				"disableFlex": false,
+				"value": {
+					"id" : 31,
+                    "children" : [ 
+                        {
+                            "id" : 3,
+                            "children" : [ 
+                                {
+                                    "id" : 0
+                                }, 
+                                {
+                                    "id" : 1
+                                }, 
+                                {
+                                    "id" : 2
+                                }
+                            ]
+                        },
+                        {
+                            "id" : 7,
+                            "children" : [ 
+                                {
+                                    "id" : 4
+                                }, 
+                                {
+                                    "id" : 5
+                                }, 
+                                {
+                                    "id" : 6
+                                }
+                            ]
+                    	}
+                    ]
+				}
+			}
+		]
+	}
+]

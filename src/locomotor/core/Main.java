@@ -1,7 +1,6 @@
 package locomotor.core;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.*;
 
 import java.lang.Thread;
 import java.util.ArrayList;
@@ -12,19 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import locomotor.components.Compare;
-import locomotor.components.models.CategoryModel;
-import locomotor.components.models.CriteriaModel;
-import locomotor.components.models.Item;
-import locomotor.components.models.ItemCategory;
-import locomotor.components.models.ItemCriteria;
-import locomotor.components.network.API;
-import locomotor.components.network.IEndpointHandler;
-import locomotor.components.network.NetworkData;
-import locomotor.components.network.NetworkHandler;
-import locomotor.components.network.NetworkJsonResponse;
-import locomotor.components.network.NetworkResponse;
-import locomotor.components.network.NetworkResponseFactory;
+import locomotor.components.models.*;
+import locomotor.components.network.*;
 import locomotor.components.types.*;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Where all the magic happens.
@@ -45,18 +37,32 @@ public class Main {
 		db.connect("localhost", 27017);
 		db.connectToDatabase("locomotor");
 
-		NetworkHandler nh = NetworkHandler.getInstance();
-		nh.init(8000, "key.pfx", "motdepasse");
+		// NetworkHandler nh = NetworkHandler.getInstance();
+		// nh.init(8000, "key.pfx", "motdepasse");
 
-		API.createHooks(nh);
-		nh.start();
+		// API.createHooks(nh);
+		// nh.start();
+		try {
+			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
+			ArrayList<Item> items = db.getItems(catModel);
+			String content = new String(Files.readAllBytes(Paths.get("userSelection.json")));
+			JsonValue file = Json.parse(content);
+
+			UserItem ui = UserItem.fromJSON(file, catModel);
+
+			Comparator comp = new Comparator(catModel, ui);
+			comp.computeGradeOfItems(items);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
 		// for (CategoryModel cm : catModel) {
 		// 	System.out.println(cm.toJSON().toString(WriterConfig.PRETTY_PRINT));
 		// }
 
-		// db.disconnect();
+		db.disconnect();
 		
 		// try {
 

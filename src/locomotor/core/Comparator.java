@@ -1,12 +1,24 @@
 package locomotor.core;
 
 import locomotor.components.models.CategoryModel;
+import locomotor.components.models.Criteria;
+import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
 import locomotor.components.models.ItemCriteria;
 import locomotor.components.models.UserCategory;
 import locomotor.components.models.UserCriteria;
 import locomotor.components.models.UserItem;
+
+import locomotor.components.types.CComparable;
+import locomotor.components.types.CItemType;
+import locomotor.components.types.CUniverseType;
+import locomotor.components.types.CUserType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @todo.
@@ -23,7 +35,10 @@ public class Comparator {
 	 */
 	private UserItem _userPerfectItem;
 
-	private HashMap<String, CriteriaModel> modelCrits;
+	/**
+	 * The criterias mapped, easy retrieving.
+	 */
+	private HashMap<String, CriteriaModel> _modelCrits;
 
 	/**
 	 * Constructs the comparator.
@@ -36,13 +51,12 @@ public class Comparator {
 		_userPerfectItem = userItem;
 
 		// map to retrieve easier (perf)
-		HashMap<String, CriteriaModel> modelCrits = new HashMap<String, CriteriaModel>();
+		_modelCrits = new HashMap<String, CriteriaModel>();
 		for (CategoryModel cam : model) {
 			for (CriteriaModel crm : cam.getCriterias()) {
-				modelCrits.put(crm.getID(), crm);
+				_modelCrits.put(crm.getID(), crm);
 			}
 		}
-
 	}
 
 	// @todo.
@@ -52,6 +66,17 @@ public class Comparator {
 			double grade = computeGradeOfItem(item);
 			gradesList.put(item.getID(), grade);
 		}
+
+		// @todo just display, need to order and filter
+		for(Map.Entry<String, Double> item : gradesList.entrySet()) {
+			
+			String key = item.getKey();
+			Double val = item.getValue();
+
+			System.out.println(key + " => " + val);
+		}
+
+
 	}
 
 	// @todo.
@@ -80,13 +105,13 @@ public class Comparator {
 
 		// map to retrieve easier (perf)
 		HashMap<String, ItemCriteria> itemCrits = new HashMap<String, ItemCriteria>();
-		for (ItemCriteria ic : itemCategory.getCriterias()) {
-			itemCrits.put(ic.getID(), ic);
+		for (Criteria ic : itemCategory.getCriterias()) {
+			itemCrits.put(((ItemCriteria)ic).getID(), (ItemCriteria)ic);
 		}
 
 		// calculate the grade for each criterias of the user perfect item's category
-		for (UserCriteria uc : userCategory.getCriterias()) {
-			grade += computeGradeOfCriteria(uc, itemCrits.get(uc.getID()));
+		for (Criteria uc : userCategory.getCriterias()) {
+			grade += computeGradeOfCriteria(((UserCriteria)uc), itemCrits.get(uc.getID()));
 			numberOfCriterias++;
 		}
 		return (numberOfCriterias == 0) ? grade : grade/numberOfCriterias;
@@ -94,8 +119,12 @@ public class Comparator {
 
 	// @todo.
 	private double computeGradeOfCriteria(UserCriteria userCriteria, ItemCriteria itemCriteria) {
-		CriteriaModel universeCriteria = modelCrits.get(userCriteria.getID());
-		// @todo: use flexibility
-		double grade = itemCriteria.compare(userCriteria, universeCriteria);
+		CUniverseType universe = _modelCrits.get(userCriteria.getID()).getUniverse();
+		CComparable item = (CComparable)itemCriteria.getValue();
+		CUserType user = userCriteria.getValue();
+
+		double grade = item.compare(user, universe);
 		return grade;
 	}
+
+}
