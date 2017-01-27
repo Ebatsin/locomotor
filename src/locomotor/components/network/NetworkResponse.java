@@ -90,14 +90,15 @@ public abstract class NetworkResponse {
 
 	/**
 	 * Send the client an error message. The message is formatted in JSON.
-	 * @param error The HTTP error code to use
+	 * @param httpError The HTTP error code to use
 	 * @param message The message to send in the JSON object, describing the error to the user
+	 * @param code The code to send alongside the message for the client to handle
 	 */
-	public void failure(ErrorCode error, String message) {
-		JsonObject obj = Json.object().add("success", "false").add("message", message);
+	public void failure(ErrorCode httpError, String message, API.ErrorCode code) {
+		JsonObject obj = Json.object().add("success", "false").add("message", message).add("code", code.getValue());
 		MutableInteger length = new MutableInteger();
 		ByteArrayOutputStream out = toByteArrayOutputStream(obj, length);
-		sendAnswer(out, "application/json", error.getValue(), length.intValue());
+		sendAnswer(out, "application/json", httpError.getValue(), length.intValue());
 	}
 
 	/**

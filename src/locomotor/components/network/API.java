@@ -21,6 +21,50 @@ import locomotor.core.jwt.JWTH;
 public class API {
 
 	/**
+	 * Contains all the usefull error codes that the server can return in case of error.
+	 */
+	public enum ErrorCode {
+		/**
+		* This error code is used when the error message is enough informations to send the client.
+		* Wether the message is to be displayed or not to the user is let at the client's discretion.
+		*/
+		DEFAULT_ERROR_CODE(0),
+
+		/**
+		* This error code is used to notify the client that the error message must be displayed
+		*/
+		DISPLAY_MESSAGE(1),
+
+		/**
+		* The short token used with the request is not valid (or no longer valid).
+		*/
+		INVALID_SHORT_TOKEN(2);
+		
+		/**
+		 * The identifier.
+		 */
+		private final int _id;
+
+		/**
+		 * Constructs the object.
+		 *
+		 * @param      id    The identifier
+		 */
+		ErrorCode(int id) {
+			_id = id;
+		}
+
+		/**
+		 * Gets the value.
+		 *
+		 * @return     The value.
+		 */
+		public int getValue() {
+			return _id;
+		}
+	}
+
+	/**
 	* Adds all the endpoints defined in this method to a NetworkHandler.
 	* @param nh The NetworkHandler to which the endpoint will be attached
 	*/
@@ -30,7 +74,7 @@ public class API {
 				
 				if(!data.isValid()) {
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"The request must be in POST format to be read by the server");
+						"The request must be in POST format to be read by the server", ErrorCode.DEFAULT_ERROR_CODE);
 					return;
 				}			
 				
@@ -49,7 +93,7 @@ public class API {
 						if (claims == null) {
 							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-								log.getRight().toString());
+								log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
 							return;
 						}
 						String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
@@ -69,7 +113,7 @@ public class API {
 						if (claims == null) {
 							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-								log.getRight().toString());
+								log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
 							return;
 						}
 
@@ -77,7 +121,7 @@ public class API {
 						// before create the token
 						if(!DBH.getInstance().usernameAlreadyTaken(claims.getLeft())) {
 							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-								"The token is no longer valid");
+								"The token is no longer valid", ErrorCode.DEFAULT_ERROR_CODE);
 							return;
 						}
 
@@ -103,7 +147,7 @@ public class API {
 						errorMessage = "The following parameter is missing: `token`."
 							+ " It is mandatory for this request.";
 					}
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, ErrorCode.DISPLAY_MESSAGE);
 				}
 			}
 		});
@@ -113,7 +157,7 @@ public class API {
 				
 				if(!data.isValid()) {
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
-						"La requête doit être au format POST pour être lue par le serveur");
+						"La requête doit être au format POST pour être lue par le serveur", ErrorCode.DEFAULT_ERROR_CODE);
 					return;
 				}			
 				
@@ -130,7 +174,7 @@ public class API {
 					if (claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS,
-							log.getRight().toString());
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
 						return;
 					}
 					
@@ -146,7 +190,7 @@ public class API {
 
 					String errorMessage = "At least, one of the following parameter is missing:"
 						+ "`username`, `password`. Both of them are mandatory for this request.";
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, ErrorCode.DEFAULT_ERROR_CODE);
 				}
 			}
 		});
@@ -156,7 +200,7 @@ public class API {
 				
 				if(!data.isValid()) {
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"The request must be in POST format to be read by the server");
+						"The request must be in POST format to be read by the server", ErrorCode.DEFAULT_ERROR_CODE);
 					return;
 				}			
 				
@@ -172,7 +216,7 @@ public class API {
 					if (claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-							log.getRight().toString());
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
 						return;
 					}
 					
@@ -188,7 +232,7 @@ public class API {
 				else { // error
 
 					String errorMessage = "The following parameter is missing: `token`. It is mandatory for this request.";
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, ErrorCode.DEFAULT_ERROR_CODE);
 				}
 			}
 		});
@@ -198,13 +242,14 @@ public class API {
 				if(data.isValid()) {
 					if(!data.isDefined("name")) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-							"Le paramètre `name` n'a pas été trouvé. Il est obligatoire pour cette requête");
+							"Le paramètre `name` n'a pas été trouvé. Il est obligatoire pour cette requête",
+							ErrorCode.DEFAULT_ERROR_CODE);
 						return;
 					}
 				}
 				else {
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"La requête doit être au format POST pour être lue par le serveur");
+						"La requête doit être au format POST pour être lue par le serveur", ErrorCode.DEFAULT_ERROR_CODE);
 					return;
 				}
 
@@ -219,7 +264,7 @@ public class API {
 					System.out.println(", le fichier n'existe pas");
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						"L'image demandée n'a pas pu être trouvée : `" 
-						+ "resources/core/images/" + data.getAsString("name") + "`");
+						+ "resources/core/images/" + data.getAsString("name") + "`", ErrorCode.DEFAULT_ERROR_CODE);
 				}
 			}
 		});
