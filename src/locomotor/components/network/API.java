@@ -31,7 +31,7 @@ public class API {
 		DEFAULT_ERROR_CODE(0),
 
 		/**
-		* This error code is used to notify the client that the error message must be displayed
+		* This error code is used to notify the client that the error message must be displayed.
 		*/
 		DISPLAY_MESSAGE(1),
 
@@ -70,187 +70,157 @@ public class API {
 	*/
 	public static void createHooks(NetworkHandler nh) {
 		nh.createEndpoint("/api/user/auth", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				
-				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"The request must be in POST format to be read by the server", ErrorCode.DEFAULT_ERROR_CODE);
-					return;
-				}			
-				
-				// all parameter, ok
-				if((data.isDefined("username") && data.isDefined("password")) || (data.isDefined("token"))) {
-					
-					JWTH jwt = JWTH.getInstance();
-					if (data.isDefined("username") && data.isDefined("password")) {
-						
-						// check user exist and good password
-						String username = data.getAsString("username");
-						String password = data.getAsString("password");
-						Pair<String,Boolean> claims = DBH.getInstance().authUser(username, password);
-
-						// check error
-						if (claims == null) {
-							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-								log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
-							return;
-						}
-						String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
-						String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
-
-						response.getJsonContext().success(Json.object()
-							.add("short-term-token", shortToken)
-							.add("long-term-token", longToken));
-					}
-					else {
-						
-						// auth with token
-						String longToken = data.getAsString("token");
-						Pair<String,Boolean> claims = jwt.checkToken(longToken);
-						
-						// check error
-						if (claims == null) {
-							Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-								log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
-							return;
-						}
-
-						// check if the user still exist in the database
-						// before create the token
-						if(!DBH.getInstance().usernameAlreadyTaken(claims.getLeft())) {
-							response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-								"The token is no longer valid", ErrorCode.DEFAULT_ERROR_CODE);
-							return;
-						}
-
-						String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
-						response.getJsonContext().success(Json.object()
-							.add("short-term-token", shortToken));
-						
-					}
-
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
 				}
-				else { // error
 
-					String errorMessage = "";
-					if((!data.isDefined("username") && data.isDefined("password"))
-						|| (data.isDefined("username") && !data.isDefined("password"))
-						|| (!data.isDefined("username") && !data.isDefined("password"))) {
-						// missing username or password
-						errorMessage = "At least, one of the following parameter is missing: `username`,"
-							+ " `password`. Both of them are mandatory for this request.";
-					}
-					else if (!data.isDefined("token")) {
-						// missing token
-						errorMessage = "The following parameter is missing: `token`."
-							+ " It is mandatory for this request.";
-					}
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, ErrorCode.DISPLAY_MESSAGE);
-				}
-			}
-		});
+				JWTH jwt = JWTH.getInstance();
 
-		nh.createEndpoint("/api/user/register", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				
-				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
-						"La requête doit être au format POST pour être lue par le serveur", ErrorCode.DEFAULT_ERROR_CODE);
-					return;
-				}			
-				
-				// all parameter, ok
-				if((data.isDefined("username") && data.isDefined("password"))) {
-					
-					JWTH jwt = JWTH.getInstance();						
-					// check user exist
+				setExpectedParams("username", "password");
+				if(areAllParamsDefined()) { // login with username & password
+					// check user exist and good password
 					String username = data.getAsString("username");
 					String password = data.getAsString("password");
-					Pair<String,Boolean> claims = DBH.getInstance().registerUser(username, password);
-					
-					// check error
-					if (claims == null) {
-						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS,
-							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
-						return;
-					}
-					
-					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
-					String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+					Pair<String,Integer> claims = DBH.getInstance().authUser(username, password);
 
-					response.getJsonContext().success(Json.object()
-						.add("short-term-token", shortToken)
-						.add("long-term-token", longToken));
-
-				}
-				else { // error
-
-					String errorMessage = "At least, one of the following parameter is missing:"
-						+ "`username`, `password`. Both of them are mandatory for this request.";
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, ErrorCode.DEFAULT_ERROR_CODE);
-				}
-			}
-		});
-
-		nh.createEndpoint("/api/model/get", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				
-				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"The request must be in POST format to be read by the server", ErrorCode.DEFAULT_ERROR_CODE);
-					return;
-				}			
-				
-				// all parameter, ok
-				if(data.isDefined("token")) {
-
-					// auth with token
-					String longToken = data.getAsString("token");
-					JWTH jwt = JWTH.getInstance();
-					Pair<String,Boolean> claims = jwt.checkToken(longToken);
-						
 					// check error
 					if (claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
 							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
-						return;
+						return false;
 					}
-					
-					JsonArray model = Json.array();
-					for (CategoryModel catM : DBH.getInstance().getCategoriesModel()) {
-						model.add(catM.toJSON());
-					}
-					
-					response.getJsonContext().success(Json.object()
-						.add("model", model));
-						
-				}
-				else { // error
+					String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
 
-					String errorMessage = "The following parameter is missing: `token`. It is mandatory for this request.";
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, ErrorCode.DEFAULT_ERROR_CODE);
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken)
+						.add("long-term-token", longToken));
+
+					return true;
+				}
+				else if(data.isDefined("token")) { // login with token
+					// auth with token
+					String longToken = data.getAsString("token");
+					Pair<String,Integer> claims = jwt.checkToken(longToken);
+					
+					// check error
+					if(claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+
+					// check if the user still exist in the database
+					// before create the token
+					if(!DBH.getInstance().usernameAlreadyTaken(claims.getLeft())) {
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							"The token is no longer valid", ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken));
+
+					return false;
+				}
+				else {
+					String errorMessage = "This endpoint needs either the parameters `username` and `password`"
+						+ " to be defined or only the parameter `token`.";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, 
+						ErrorCode.DISPLAY_MESSAGE);
+					return false;
 				}
 			}
 		});
 
-		nh.createEndpoint("/img/get", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				if(data.isValid()) {
-					if(!data.isDefined("name")) {
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-							"Le paramètre `name` n'a pas été trouvé. Il est obligatoire pour cette requête",
-							ErrorCode.DEFAULT_ERROR_CODE);
-						return;
-					}
+		nh.createEndpoint("/api/user/register", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
 				}
-				else {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"La requête doit être au format POST pour être lue par le serveur", ErrorCode.DEFAULT_ERROR_CODE);
-					return;
+
+				setExpectedParams("username", "password");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				JWTH jwt = JWTH.getInstance();						
+				// check user exist
+				String username = data.getAsString("username");
+				String password = data.getAsString("password");
+				Pair<String,Integer> claims = DBH.getInstance().registerUser(username, password, 0);
+				
+				// check error
+				if (claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS,
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+				String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+
+				response.getJsonContext().success(Json.object()
+					.add("short-term-token", shortToken)
+					.add("long-term-token", longToken));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/model/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String longToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(longToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				JsonArray model = Json.array();
+				for(CategoryModel catM : DBH.getInstance().getCategoriesModel()) {
+					model.add(catM.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("model", model));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/img/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("name");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
 				}
 
 				File file = new File("resources/core/images/" + data.getAsString("name"));
@@ -266,6 +236,8 @@ public class API {
 						"L'image demandée n'a pas pu être trouvée : `" 
 						+ "resources/core/images/" + data.getAsString("name") + "`", ErrorCode.DEFAULT_ERROR_CODE);
 				}
+
+				return true;
 			}
 		});
 	}

@@ -57,12 +57,12 @@ public class JWTH {
 	 * Creates a token.
 	 *
 	 * @param      subject     The subject
-	 * @param      isAdmin     Indicates if admin
+	 * @param      isAdmin     Indicate the user's admin level (0, 1, 2)
 	 * @param      expiration  The expiration (milliseconds)
 	 *
 	 * @return     The token (serialized)
 	 */
-	private static String createToken(String subject, boolean isAdmin, long expiration) {
+	private static String createToken(String subject, int isAdmin, long expiration) {
 
 		// the JWT signature algorithm we will be using to sign the token (HMAC using SHA-512)
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
@@ -134,11 +134,11 @@ public class JWTH {
 	 * Creates a short-time token.
 	 *
 	 * @param      subject  The subject
-	 * @param      isAdmin  Indicates if admin
+	 * @param      isAdmin  Indicate the user's admin level (0, 1, 2)
 	 *
 	 * @return     The short-time token
 	 */
-	public static String createShortToken(String subject, boolean isAdmin) {
+	public static String createShortToken(String subject, int isAdmin) {
 		ErrorHandler.getInstance().push("createShortToken", false, "Create the short term token", "User " + subject);
 		// 2 hours
 		long duration = 7200000L;
@@ -149,11 +149,11 @@ public class JWTH {
 	 * Creates a long-time token.
 	 *
 	 * @param      subject  The subject
-	 * @param      isAdmin  Indicates if admin
+	 * @param      isAdmin  Indicate the user's admin level (0, 1, 2)
 	 *
 	 * @return     The long-time token
 	 */
-	public static String createLongToken(String subject, boolean isAdmin) {
+	public static String createLongToken(String subject, int isAdmin) {
 		ErrorHandler.getInstance().push("createLongToken", false, "Create the long term token", "User " + subject);
 		// 60 days
 		long duration = 5184000000L;
@@ -167,7 +167,7 @@ public class JWTH {
 	 *
 	 * @return     The subject and the isAdmin role
 	 */
-	public static Pair<String,Boolean> checkToken(String token) {
+	public static Pair<String,Integer> checkToken(String token) {
 		ErrorHandler.getInstance().push("checkToken", false, "Check the token", token);
 
 		Claims claims = verifyTokenSignature(token);
