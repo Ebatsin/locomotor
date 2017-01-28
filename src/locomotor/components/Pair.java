@@ -48,6 +48,24 @@ public class Pair<L, R> {
 	}
 
 	/**
+	 * Sets the left.
+	 *
+	 * @param      l     L
+	 */
+	public void setLeft(L l) {
+		_left = l;
+	}
+
+	/**
+	 * Sets the right.
+	 *
+	 * @param      r     R
+	 */
+	public void setRight(R r) {
+		_right = r;
+	}
+
+	/**
 	 * Returns a string representation of the object.
 	 *
 	 * @return     String representation of the object.
