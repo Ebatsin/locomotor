@@ -48,7 +48,12 @@ public class Main extends Application {
 		webView.setContextMenuEnabled(false);
 		
 		primaryStage.setScene(new Scene(webView));
-		primaryStage.setTitle("Locomotor");		
+		primaryStage.setTitle("Locomotor");	
+		primaryStage.setMaximized(true);
+
+		primaryStage.setMinWidth(680); // absolutely random value based on the look
+		primaryStage.setMinHeight(418); // absolutely not a random value. pixel perfect height of the 6 sidebar menu items
+
 		primaryStage.show();
 	}
 
