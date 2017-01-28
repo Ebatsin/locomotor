@@ -3,7 +3,6 @@ package locomotor.core;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.WriterConfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,7 +52,7 @@ public class Comparator {
 	/**
 	 * The minimum grade of the item to be valuable.
 	 */
-	private final double _minimumGrade = 0.10;
+	private final double _minimumGrade = 0.50;
 	
 	/**
 	 * The maximum number of items wanted.
@@ -84,8 +83,14 @@ public class Comparator {
 		}
 	}
 
-	// @todo.
-	public void computeGradeOfItems(ArrayList<Item> items) {
+	/**
+	 * Calculates the grade of items.
+	 *
+	 * @param      items  The items
+	 *
+	 * @return     A JsonArray of the best items and their best criterias.
+	 */
+	public JsonArray computeGradeOfItems(ArrayList<Item> items) {
 
 		// grade -> item map
 		SortedMap<Double, ArrayList<Pair<String, Double>>> gradesList = new TreeMap<Double, ArrayList<Pair<String, Double>>>(Collections.reverseOrder());
@@ -126,12 +131,15 @@ public class Comparator {
 
 		// get JSON representation
 		JsonArray json = toJSON(results);
-		System.out.println(json.toString(WriterConfig.PRETTY_PRINT));
-
+		return json;
 	}
 
 	/**
-	 * @todo
+	 * JSON representation of the results
+	 *
+	 * @param      results	The list of the best items and their best criterias.
+	 *
+	 * @return     A JsonArray.
 	 */
 	public JsonArray toJSON(ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> results) {
 		JsonArray obj = Json.array();
@@ -141,7 +149,12 @@ public class Comparator {
 			// item info
 			Pair<String, Double> item = result.getLeft();
 			JsonObject itemJSON = Json.object();
-			itemJSON.add("name", item.getLeft());
+
+			Pair<Pair<String, String>, String> partialInfo = DBH.getInstance().getPartialInfoOfItem(item.getLeft());
+
+			itemJSON.add("name", partialInfo.getLeft().getLeft());
+			itemJSON.add("image", partialInfo.getLeft().getRight());
+			itemJSON.add("universe", partialInfo.getRight());
 			itemJSON.add("grade", item.getRight());
 
 			JsonArray itemCriterias = Json.array();

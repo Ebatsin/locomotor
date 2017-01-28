@@ -420,9 +420,9 @@ public class DBH {
 	 *
 	 * @param      itemID  The item id
 	 *
-	 * @return     The partial information of item, name and universe name.
+	 * @return     The partial information of item, name, image (URL) and universe name.
 	 */
-	public static Pair<String,String> getPartialInfoOfItem(String itemID) {
+	public static Pair<Pair<String,String>,String> getPartialInfoOfItem(String itemID) {
 
 		MongoCollection<Document> items = md.getCollection("items");
 		MongoCollection<Document> universes = md.getCollection("universes");
@@ -437,7 +437,7 @@ public class DBH {
     	queryUniverse.put("_id", universeID);
     	Document universe = universes.find(queryUniverse).first();
 
-    	return(new Pair(item.get("name"), universe.get("name")));		
+    	return(new Pair(new Pair(item.get("name"), item.get("image")), universe.get("name")));		
 	}
 
 }
