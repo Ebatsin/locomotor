@@ -1,5 +1,10 @@
 package locomotor.core;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.WriterConfig;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -116,18 +121,70 @@ public class Comparator {
 			}
 		}
 
-		// filter part
-		filterResults(gradesList, criteriasGradeItem);
+		// filter the results
+		ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> results = filterResults(gradesList, criteriasGradeItem);
+
+		// get JSON representation
+		JsonArray json = toJSON(results);
+		System.out.println(json.toString(WriterConfig.PRETTY_PRINT));
 
 	}
 
-	public void filterResults(SortedMap<Double, ArrayList<Pair<String, Double>>> gradesList, TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>> criteriasGradeItem) {
+	/**
+	 * @todo
+	 */
+	public JsonArray toJSON(ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> results) {
+		JsonArray obj = Json.array();
 		
+		for (Pair<Pair<String, Double>, List<Pair<String, Double>>> result : results) {
+			
+			// item info
+			Pair<String, Double> item = result.getLeft();
+			JsonObject itemJSON = Json.object();
+			itemJSON.add("name", item.getLeft());
+			itemJSON.add("grade", item.getRight());
+
+			JsonArray itemCriterias = Json.array();
+
+			// criterias of the item
+			List<Pair<String, Double>> criterias = result.getRight();
+			for (Pair<String, Double> criteria : criterias) {
+				
+				JsonObject criteriaJSON = Json.object();
+				criteriaJSON.add("name", criteria.getLeft());
+				criteriaJSON.add("grade", criteria.getRight());
+				// add to the criterias array
+				itemCriterias.add(criteriaJSON);
+
+			}
+
+			// add the criterias to the item
+			itemJSON.add("criterias", itemCriterias);
+
+			// add to the final array
+			obj.add(itemJSON);
+		
+		}
+		return obj;
+	}
+
+	/**
+	 * Filter the results, best items and best criterias.
+	 *
+	 * @param      itemsList		The list of the items
+	 * @param      criteriasList  	The list of the criterias of each items
+	 *
+	 * @return     The list of the best items and their best criterias.
+	 */
+	public ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> filterResults(SortedMap<Double, ArrayList<Pair<String, Double>>> itemsList, TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>> criteriasList) {
+		
+		ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> results = new ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>>();
+
 		// keep the best items
-		gradesList = gradesList.headMap(_minimumGrade);
+		itemsList = itemsList.headMap(_minimumGrade);
 		
 		List<Pair<String, Double>> bestItems = new ArrayList<Pair<String, Double>>();
-		for(Map.Entry<Double, ArrayList<Pair<String, Double>>> listItemPerGrade : gradesList.entrySet()) {
+		for(Map.Entry<Double, ArrayList<Pair<String, Double>>> listItemPerGrade : itemsList.entrySet()) {
 			bestItems.addAll(listItemPerGrade.getValue());
 		}
 
@@ -141,7 +198,7 @@ public class Comparator {
 
 			// the list of best criterias
 			List<Pair<String, Double>> bestCriterias = new ArrayList<Pair<String, Double>>();
-			for(Map.Entry<Double, ArrayList<Pair<String, Double>>> listCriteriaPerGrade : criteriasGradeItem.get(item.getLeft()).entrySet()) {
+			for(Map.Entry<Double, ArrayList<Pair<String, Double>>> listCriteriaPerGrade : criteriasList.get(item.getLeft()).entrySet()) {
 				bestCriterias.addAll(listCriteriaPerGrade.getValue());
 			}
 
@@ -150,14 +207,18 @@ public class Comparator {
 				bestCriterias = bestCriterias.subList(0, maxCriteriasWished);
 			}
 
-			System.out.println(item.getLeft() + " => " + item.getRight());
-
+			// replace by the name of the criterias
 			for (Pair<String, Double> crit : bestCriterias) {
 				String name = _modelCrits.get(crit.getLeft()).getName();
-				System.out.println("\t" + name + " => " + crit.getRight());
+				crit.setLeft(name);
 			}
+			
+			// add to the results
+			results.add(new Pair(item, bestCriterias));
 
 		}
+
+		return results;
 	}
 
 	/**
