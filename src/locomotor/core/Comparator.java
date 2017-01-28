@@ -92,6 +92,8 @@ public class Comparator {
 	 */
 	public JsonArray computeGradeOfItems(ArrayList<Item> items) {
 
+		System.out.println("Searching best items matching the criterias");
+
 		// grade -> item map
 		SortedMap<Double, ArrayList<Pair<String, Double>>> gradesList = new TreeMap<Double, ArrayList<Pair<String, Double>>>(Collections.reverseOrder());
 		

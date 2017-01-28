@@ -84,7 +84,7 @@ public class DBH {
 			disconnect();
 			mc = new MongoClient();
 		}
-		// System.out.println("Connected to the database");
+		System.out.println("Connected to the database");
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class DBH {
 			disconnect();
 			mc = new MongoClient(ip, port);
 		}
-		// System.out.println("Connected to the database");
+		System.out.println("Connected to the database");
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class DBH {
 	public static synchronized void disconnect() {
 		mc.close();
 		mc = null;
-		// System.out.println("Disconnected from the database");
+		System.out.println("Disconnected from the database");
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class DBH {
 		
 		FindIterable<Document> catMod = md.getCollection("categoryModel").find();
 		
-		// System.out.println("Retrieving the model categories");
+		System.out.println("Retrieving the model categories");
 
 		catMod.forEach(new Block<Document>() {
 			@Override
@@ -196,7 +196,7 @@ public class DBH {
 		
 		FindIterable<Document> items = md.getCollection("items").find();
 		
-		// System.out.println("Retrieving the items");
+		System.out.println("Retrieving the items");
 
 		items.forEach(new Block<Document>() {
 			@Override
