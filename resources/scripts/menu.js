@@ -2,9 +2,44 @@
 	var menu = document.querySelector("#menu");
 	var toggle = menu.querySelector("#menu-toggle");
 	var isShown = true;
+	var width = menu.offsetWidth; // check the dimension when opened
+	var transitionDuration = 0.2;
+	menu.style.width = "4em"; // then close it
+
+	function slideOpen() {
+		if(menu.classList.contains('open')) return;
+
+		menu.classList.add("open");
+		YUI().use('node', 'transition', function(Y) {
+			Y.one(menu).transition({
+				easing: 'ease-in-out',
+				duration: transitionDuration,
+				width: width + 'px'
+			});
+		});
+	}
+
+	function slideClose() {
+		if(!menu.classList.contains('open')) return;
+
+		menu.classList.remove('open');
+		YUI().use('node', 'transition', function(Y) {
+			Y.one(menu).transition({
+				easing: 'ease-in-out',
+				duration: transitionDuration,
+				width: '4em'
+			});
+		});
+	}
 
 	toggle.addEventListener("click", function() {
-		menu.classList.toggle("open");
+		if(menu.classList.contains("open")) {
+			slideClose();
+		}
+		else {
+			slideOpen();
+		}
+
 	});
 
 	document.addEventListener("click", function(e) {
@@ -16,7 +51,11 @@
 			current = current.parentNode;
 		}
 
-		menu.classList.remove("open");
+		if(menu.classList.contains('open')) {
+			slideClose();
+		}
+
+
 	});
 
 	window.hideMenu = function() {

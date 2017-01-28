@@ -10,14 +10,10 @@ html, body {
 #menu {
 	position: absolute;
 	display: inline-block;
-	width: 4em;
+	width: auto;
 	height: 100%;
 	background-color: hsl(0, 0%, 11%);
 	overflow: hidden;
-}
-
-#menu.open {
-	width: auto;
 }
 
 #menu-bottom {
