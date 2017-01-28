@@ -3,6 +3,7 @@ package locomotor.core;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.set;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -412,6 +413,31 @@ public class DBH {
 
 		return new Pair(id.toString(), user.getInteger("isAdmin"));
 
+	}
+
+	/**
+	 * Gets the partial information of item.
+	 *
+	 * @param      itemID  The item id
+	 *
+	 * @return     The partial information of item, name and universe name.
+	 */
+	public static Pair<String,String> getPartialInfoOfItem(String itemID) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		MongoCollection<Document> universes = md.getCollection("universes");
+
+		BasicDBObject queryItem = new BasicDBObject();
+    	queryItem.put("_id", new ObjectId(itemID));
+    	Document item = items.find(queryItem).first();
+
+    	ObjectId universeID = (ObjectId)item.get("universe");
+
+    	BasicDBObject queryUniverse = new BasicDBObject();
+    	queryUniverse.put("_id", universeID);
+    	Document universe = universes.find(queryUniverse).first();
+
+    	return(new Pair(item.get("name"), universe.get("name")));		
 	}
 
 }
