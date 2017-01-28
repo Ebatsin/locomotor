@@ -1,0 +1,65 @@
+html, body {
+	margin: 0;
+	box-sizing: border-box;
+	height: 100%;
+	background-color: hsl(0, 0%, 90%);
+	user-select: none;
+	overflow: hidden;
+}
+
+#menu {
+	position: absolute;
+	display: inline-block;
+	width: 4em;
+	height: 100%;
+	background-color: hsl(0, 0%, 11%);
+	overflow: hidden;
+}
+
+#menu.open {
+	width: auto;
+}
+
+#menu-bottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#menu li {
+	line-height: 4em;
+	white-space: nowrap;
+	padding-right: 1em;
+	color: hsl(0, 0%, 85%);
+	cursor: pointer;
+	letter-spacing: 1px;
+}
+
+#menu li:hover {
+	color: white;
+	background-color: hsl(0, 0%, 18%);
+}
+
+.menu-icon img {
+	float: left;
+	width: 2em;
+	height: 2em;
+	margin: 1em;
+}
+
+.menu-text {	
+	font-size: 1.2em;
+}
+
+#main-page {
+	margin-left: 4em;
+	padding-left: 2em;
+	padding-right: 2em;
+}
