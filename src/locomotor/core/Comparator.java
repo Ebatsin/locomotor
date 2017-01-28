@@ -1,5 +1,13 @@
 package locomotor.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import locomotor.components.Pair;
+
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Criteria;
 import locomotor.components.models.CriteriaModel;
@@ -14,14 +22,6 @@ import locomotor.components.types.CComparable;
 import locomotor.components.types.CItemType;
 import locomotor.components.types.CUniverseType;
 import locomotor.components.types.CUserType;
-
-import locomotor.components.Pair;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * @todo.
@@ -82,8 +82,8 @@ public class Comparator {
 				ArrayList<Pair<String, Double>> itemList = gradesList.get(grade);
 				
 				if (itemList == null) {
-				    itemList = new ArrayList<Pair<String, Double>>();
-				    gradesList.put(grade, itemList);
+					itemList = new ArrayList<Pair<String, Double>>();
+					gradesList.put(grade, itemList);
 				}
 				
 				itemList.add(new Pair(item.getID(), grade));
@@ -128,7 +128,14 @@ public class Comparator {
 
 	}
 
-	// @todo.
+	/**
+	 * Calculates the grade of the item.
+	 *
+	 * @param      item			  	The item
+	 * @param      criteriasGrade  	The map to store the grade computed
+	 *
+	 * @return     The grade of the item, between -1 (flexibily disable) else between 0 and 1 (best).
+	 */
 	private double computeGradeOfItem(Item item, TreeMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade) {
 		double grade = 0.0;
 		int numberOfCategories = 0;
@@ -151,10 +158,18 @@ public class Comparator {
 			grade += currentGrade;
 			numberOfCategories++;
 		}
-		return (numberOfCategories == 0) ? grade : grade/numberOfCategories;
+		return (numberOfCategories == 0) ? grade : (grade / numberOfCategories);
 	}
 
-	// @todo.
+	/**
+	 * Calculates the grade of the category.
+	 *
+	 * @param      userCategory  	The user category
+	 * @param      itemCategory  	The item category
+	 * @param      criteriasGrade  	The map to store the grade computed
+	 *
+	 * @return     The grade of the category, between -1 (flexibily disable) else between 0 and 1 (best).
+	 */
 	private double computeGradeOfCategory(UserCategory userCategory, ItemCategory itemCategory, TreeMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade) {
 		double grade = 0.0;
 		int numberOfCriterias = 0;
@@ -177,15 +192,15 @@ public class Comparator {
 			ArrayList<Pair<String, Double>> critList = criteriasGrade.get(currentGrade);
 				
 			if (critList == null) {
-			    critList = new ArrayList<Pair<String, Double>>();
-			    criteriasGrade.put(currentGrade, critList);
+				critList = new ArrayList<Pair<String, Double>>();
+				criteriasGrade.put(currentGrade, critList);
 			}
 			critList.add(new Pair(uc.getID(), currentGrade));
 
 			grade += currentGrade;
 			numberOfCriterias++;
 		}
-		return (numberOfCriterias == 0) ? grade : grade/numberOfCriterias;
+		return (numberOfCriterias == 0) ? grade : (grade / numberOfCriterias);
 	}
 
 	/**
@@ -194,7 +209,7 @@ public class Comparator {
 	 * @param      userCriteria  The user criteria
 	 * @param      itemCriteria  The item criteria
 	 *
-	 * @return     The grade of criteria, between -1 (flexibily disable) else between 0 and 1 (best).
+	 * @return     The grade of the criteria, between -1 (flexibily disable) else between 0 and 1 (best).
 	 */
 	private double computeGradeOfCriteria(UserCriteria userCriteria, ItemCriteria itemCriteria) {
 		CUniverseType universe = _modelCrits.get(userCriteria.getID()).getUniverse();
