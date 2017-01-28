@@ -77,7 +77,7 @@ run-core:
 	$(RUN) -classpath "$(LIB)/*:$(CLASS)" $(PACKAGE_CORE) $(ARGS)
 
 run-front-user:
-	$(RUN) -classpath "$(LIB)/*:$(CLASS):$(RESOURCES):" $(PACKAGE_FRONT_USER)
+	$(RUN) -classpath "$(LIB)/*:$(CLASS):$(RESOURCES):" $(PACKAGE_FRONT_USER) $(ARGS)
 
 ###################################################
 # Doc:
