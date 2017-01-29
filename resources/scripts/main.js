@@ -12,6 +12,7 @@
 				window.modules[i].init();
 			}
 		}
+		
 		loadView('login', {
 			mode: 'login'
 		});

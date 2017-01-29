@@ -68,10 +68,9 @@
 						modules.login.showError('All the fields must be filled to continue.');
 					}
 					else {
-						// @todo send the request
 						console.log('send the login request');
 						API.auth(name.value, password.value).then(function(data) {
-							console.log("Authentifié avec succès");
+							modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
 						}).catch(function(data) {
 							modules.login.showError(data.message);
 						});
@@ -90,6 +89,11 @@
 					else {
 						// @todo send the request
 						console.log('send the register request');
+						API.register(name.value, password.value).then(function(data) {
+							modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
+						}).catch(function(data) {
+							modules.login.showError(data.message);
+						});
 						modules.login.emptyFields();
 					}
 				}
@@ -112,6 +116,22 @@
 			modules.menu.hide();
 			modules.menu.showOnlyHelp(true);
 			view.classList.remove('hide');
+
+			if(app.getLongToken() != null) {
+				console.log('local long token found. Using it');
+				console.log('"' + app.getLongToken() + '"');
+				// try to log with this token
+				API.auth(app.getLongToken()).then(function(data) {
+					console.log('successful token login');
+					modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
+				}).catch(function(data) {
+					console.log('failed token login : ' + data.message + "\nFalling back to normal login");
+					app.deleteLongToken(); // no longer valid or invalid
+					loadView('login', params); // reload the view
+				});
+				return;
+			}
+			// else no token. Normal log in
 
 			if(params && params.mode === 'register') {
 				modules.login.showRegister();
@@ -158,6 +178,12 @@
 		},
 		setFixingMethod: function(meth) {
 			fixingMethod = meth;
+		},
+		validAuth: function(shortToken, longToken) {
+			app.setShortToken(shortToken);
+			app.setLongToken(longToken);
+			// @todo save the tokens and process to the home view
+			hideAllViews();
 		}
 	};
 })();

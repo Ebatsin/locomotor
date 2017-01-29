@@ -15,7 +15,6 @@ function JPromises() {
 	var that = this;
 
 	this.resolve = function(data) {
-		console.log('received on js');
 		fullfilled = true;
 		success = true;
 		if(onSuccess != null) {
@@ -78,15 +77,21 @@ window.API = {
 	auth: function(name, password) {
 		var prom = new JPromises();
 
-		app.auth(name, password, prom.getId());
+		if(password) {
+			app.auth(name.trim().toLowerCase(), password, prom.getId());
+		}
+		else {
+			app.tokenAuth(name.trim(), prom.getId());
+		}
+
 
 		return prom;
 	},
 
 	register: function(name, password) {
 		var prom = new JPromises();
-		
-		app.register(name, password, prom.getId());
+
+		app.register(name.trim().toLowerCase(), password, prom.getId());
 
 		return prom;
 	}

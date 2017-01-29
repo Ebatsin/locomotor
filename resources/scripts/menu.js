@@ -8,9 +8,6 @@
 	var helpElem = menu.querySelector('#menu-help');
 	var disconnect = menu.querySelector('#menu-disconnect');
 
-	var isShown = true;
-	var isHelpShown = false;
-
 	var displayBackArrow = true;
 	var mode = 'user';
 
