@@ -13,6 +13,8 @@
 			}
 		}
 
+		document.body.style.fontFamily = 'Roboto';
+
 		loadView('login', {
 			mode: 'login'
 		});
