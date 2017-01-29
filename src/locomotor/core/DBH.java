@@ -224,15 +224,6 @@ public class DBH {
 					// not found yet
 					Document currentCat = categoriesItemMap.get(currentCatMod.getID());
 
-					// not found
-					if (currentCat == null) {
-						// @todo: error
-						System.err.println("Error: Category model does not match any category of the current item");
-						System.err.println(currentCatMod);
-						System.err.println(catIt);
-						System.exit(0);
-					}
-
 					String identifierCat = currentCat.getObjectId("categoryModel").toString();
 					// System.out.println("Category " + identifierCat);
 
@@ -254,19 +245,9 @@ public class DBH {
 						CriteriaModel currentCritMod = itCriMod.next();
 						// not found yet
 						Document currentCrit = criteriasItemMap.get(currentCritMod.getID());
-						
-						// not found
-						if(currentCrit == null) {
-							// @todo: error
-							System.err.println("Error: Criteria model does not match any criteria of the current category");
-							System.err.println(currentCritMod);
-							System.err.println(critIt);
-							System.exit(0);
-						}
 
 						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
 						// System.out.println("Criterion " + identifierCrit);
-
 
 						// creation criteria
 						CItemType value = typeFactory.getItem(currentCritMod.getItemType(),
@@ -426,22 +407,19 @@ public class DBH {
 
 		MongoCollection<Document> items = md.getCollection("items");
 		MongoCollection<Document> universes = md.getCollection("universes");
-		HashMap<String, Object> partialInfo = new HashMap();
-
+		
 		BasicDBObject queryItem = new BasicDBObject();
 		queryItem.put("_id", new ObjectId(itemID));
 		Document item = items.find(queryItem).first();
-
-		// name & image
-		partialInfo.put("itemName", item.get("name"));
-		partialInfo.put("itemImageURL", item.get("image"));
-
 		ObjectId universeID = (ObjectId)item.get("universe");
-
 		BasicDBObject queryUniverse = new BasicDBObject();
 		queryUniverse.put("_id", universeID);
 		Document universe = universes.find(queryUniverse).first();
 
+		HashMap<String, Object> partialInfo = new HashMap();
+		// name & image
+		partialInfo.put("itemName", item.get("name"));
+		partialInfo.put("itemImageURL", item.get("image"));
 		// universe
 		partialInfo.put("universeName", universe.get("name"));
 

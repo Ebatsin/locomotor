@@ -181,7 +181,6 @@ public class JWTH {
 		boolean isTokenStillValid = claims.getExpiration().after(new Date(System.currentTimeMillis()));
 
 		if (!isTokenStillValid) {
-			// @todo: tell user to disconnect and reconnect to regenerate long term token
 			String message = "Expiration date of the token is " + claims.getExpiration();
 			ErrorHandler.getInstance().push("checkToken", true, "The token is no longer valid", message);
 			return null;

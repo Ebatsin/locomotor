@@ -30,7 +30,7 @@ import locomotor.components.types.CUniverseType;
 import locomotor.components.types.CUserType;
 
 /**
- * @todo.
+ * The best comparator of all universes.
  */
 public class Comparator {
 

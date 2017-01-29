@@ -193,9 +193,9 @@ public class API {
 				}
 
 				// auth with token
-				String longToken = data.getAsString("token");
+				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(longToken);
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -231,9 +231,9 @@ public class API {
 				}
 
 				// auth with token
-				String longToken = data.getAsString("token");
+				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(longToken);
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
