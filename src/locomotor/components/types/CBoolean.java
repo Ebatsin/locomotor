@@ -59,7 +59,7 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	 * @return     null
 	 */
 	public JsonValue toJSON() {
-		return Json.value(null);
+		return (_value == null) ? Json.value(null) : Json.value(_value);
 	}
 
 	/**

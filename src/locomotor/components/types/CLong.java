@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+
 /**
  * Encapsulate a Long value.
  * @see CEnumItemType.
@@ -31,6 +34,15 @@ public abstract class CLong implements CItemType {
 	 */
 	public String toString() {
 		return "(" + _value + ")";
+	}
+
+	/**
+	 * Return the JSON value of the integer.
+	 *
+	 * @return     JSON representation
+	 */
+	public JsonArray toJSON() {
+		return Json.array().add(_value);
 	}
 	
 }

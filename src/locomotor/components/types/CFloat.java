@@ -1,5 +1,8 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+
 import locomotor.components.Compare;
 
 /**
@@ -42,6 +45,15 @@ public class CFloat implements CItemType, CComparable<CIntervalDouble, CInterval
 	 */
 	public double compare(CIntervalDouble user, CIntervalDouble universe, boolean disableFlexibility) {
 		return Compare.uniqueValue(user.min().doubleValue(), user.max().doubleValue(), _value.doubleValue(), disableFlexibility);
+	}
+
+	/**
+	 * Return the JSON value of the integer.
+	 *
+	 * @return     JSON representation
+	 */
+	public JsonArray toJSON() {
+		return Json.array().add(_value);
 	}
 
 }
