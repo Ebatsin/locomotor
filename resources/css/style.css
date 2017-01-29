@@ -1,4 +1,10 @@
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/Roboto/Roboto-Regular.ttf");
+}
+
 html, body {
+	font-family: "Roboto";
 	margin: 0;
 	box-sizing: border-box;
 	height: 100%;
@@ -50,12 +56,104 @@ html, body {
 	margin: 1em;
 }
 
+#menu-only-help {
+	width: 2em;
+	height: 2em;
+	margin: 1em;
+	position: absolute;
+	cursor: pointer;
+	display: none;
+}
+
 .menu-text {	
 	font-size: 1.2em;
 }
 
 #main-page {
 	margin-left: 4em;
-	padding-left: 2em;
-	padding-right: 2em;
+	overflow: hidden;
+	height: 100%;
+}
+
+#login-page {
+	text-align: center;
+	background-color: hsl(200, 5%, 80%);
+	height: 100%;
+	overflow: hidden;
+}
+
+#login-page h1 {
+	letter-spacing: 1px;
+	font-size: 4em;
+	font-weight: 100;
+	margin-top: 1.5em;
+	color: hsl(0, 0%, 20%);
+}
+
+#login-form {
+	display: inline-block;
+	margin-top: 2.5em;
+	background-color: hsl(207, 12%, 95%);
+	padding: 2em;
+	border: solid 1px hsl(0, 0%, 80%);
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
+}
+
+#login-form * {
+	display: block;
+}
+
+#login-form h2 {
+	margin: 1.5em 0;
+	font-size: 2em;
+}
+
+#login-form p {
+	width: 30rem;
+	color: hsl(0, 60%, 60%);
+	display: none;
+}
+
+#login-form input {
+	margin-bottom: 1em;
+	width: 30rem;
+	line-height: 3em;
+	font-size: 1.5em;
+	height: 1.8em;
+	padding: 0 0.5em;
+	border-radius: 0;
+	border: solid hsl(0, 0%, 85%) 1px;
+}
+
+#login-form button {
+	width: 100%;
+	height: 2.5em;
+	padding: 0 0.5em;
+	margin-top: 2em;
+	font-size: 1.5em;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#login-form button:hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+#login-form a {
+	color: hsl(0, 0%, 40%);
+	margin-top: 1em;
+	cursor: pointer;
+	display: inline-block;
+	text-decoration: none;
+}
+
+#login-form a:hover {
+	color: black;
+}
+
+#login-form-confirm.hide {
+	display: none;
 }

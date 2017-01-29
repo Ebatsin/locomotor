@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
+		<div id="menu-only-help"><img src="icons/help-black.svg"></div>
 		<div id="menu">
 			<ul id="menu-top">
 				<li id="menu-toggle"><span class="menu-icon"><img src="icons/sandwich.svg"/></span><span class="menu-text">MENU</span></li>
@@ -23,18 +24,23 @@
 		</div>
 
 		<div id="main-page">
-			<h1 class="selectable">Locomotor</h1>
-			<p class="selectable">À cet endroit sera affiché le contenu principal de l'application tels que la page d'authentification, la page de recherche, des résultats, en fait, je cherche juste à mettre du contenu et je suis en galère d'idée mais d'un autre coté j'ai la flemme d'ouvrir lorem ipsum</p>
-			<p class="selectable">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<div id="login-page" class="page">
+				<h1>Locomotor</h1>
+				<form id="login-form">
+					<h2>LOG IN</h2>
+					<p></p>
+					<input id="login-form-name" type="text" name="" placeholder="Name">
+					<input id="login-form-password" type="password" name="" placeholder="password">
+					<input id="login-form-confirm" class="hide" type="password" name="" placeholder="confirm password">
+					<button>Log in</button>
+					<a id="login-form-toggle" href="#">Register</a>
+				</form>
+			</div>
 		</div>
 
 		<script type="text/javascript" src="scripts/yui-min.js"></script>
 		<script type="text/javascript" src="scripts/menu.js"></script>
+		<script type="text/javascript" src="scripts/login.js"></script>
 		<script type="text/javascript">
 			console.log("Client initialisé.");
 
@@ -42,6 +48,9 @@
 			document.addEventListener("selectstart", function(e) {
 				e.preventDefault();
 			});
+
+			window.hideMenu();
+			window.showOnlyHelpMenu()
 		</script>
 	</body>
 </html>

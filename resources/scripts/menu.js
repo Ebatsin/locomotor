@@ -1,6 +1,7 @@
 (function() {
 	var menu = document.querySelector("#menu");
 	var toggle = menu.querySelector("#menu-toggle");
+	var onlyHelp = document.querySelector('#menu-only-help');
 	var isShown = true;
 	var width = menu.offsetWidth; // check the dimension when opened
 	var transitionDuration = 0.2;
@@ -60,10 +61,24 @@
 
 	window.hideMenu = function() {
 		menu.style.display = "none";
+		document.querySelector('#main-page').style.marginLeft = '0';
 	}
 
 	window.showMenu = function() {
 		menu.style.display = "inline-block";
+		document.querySelector('#main-page').style.marginLeft = '4em';
+	}
+
+	window.showOnlyHelpMenu = function() {
+		onlyHelp.style.display = 'block';
+	}
+
+	window.hideOnlyHelpMenu = function() {
+		onlyHelp.style.display = 'none';
+	}
+
+	function helpCallback() {
+		console.log('Affichage de l\'aide');
 	}
 
 	document.querySelector("#menu-back").addEventListener("click", function() {
@@ -78,9 +93,8 @@
 		console.log("Accès aux réservations");
 	});
 
-	document.querySelector("#menu-help").addEventListener("click", function() {
-		console.log("Affichage de l'aide");
-	});
+	document.querySelector("#menu-help").addEventListener("click", helpCallback);
+	onlyHelp.addEventListener("click", helpCallback);
 
 	document.querySelector("#menu-disconnect").addEventListener("click", function() {
 		console.log("Deconnexion");
