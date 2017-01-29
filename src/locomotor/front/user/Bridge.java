@@ -25,4 +25,9 @@ public class Bridge {
 	public void setTitle(String title) {
 		_stage.setTitle("Locomotor - " + title);
 	}
+
+	// API
+
+	public void auth(String name, String password, int promiseID) {
+	}
 }
