@@ -120,6 +120,7 @@ html, body {
 	line-height: 3em;
 	font-size: 1.5em;
 	height: 1.8em;
+	line-height: 1.8em;
 	padding: 0 0.5em;
 	border-radius: 0;
 	border: solid hsl(0, 0%, 85%) 1px;
