@@ -1,102 +1,136 @@
 (function() {
-	var menu = document.querySelector("#menu");
-	var toggle = menu.querySelector("#menu-toggle");
-	var onlyHelp = document.querySelector('#menu-only-help');
+	var menu = document.querySelector('#menu');
+	var help = document.querySelector('#menu-only-help');
+	var toggle = menu.querySelector('#menu-toggle');
+	var backArrow = menu.querySelector('#menu-back');
+	var settings = menu.querySelector('#menu-settings');
+	var booking = menu.querySelector('#menu-booking');
+	var helpElem = menu.querySelector('#menu-help');
+	var disconnect = menu.querySelector('#menu-disconnect');
+
 	var isShown = true;
-	var width = menu.offsetWidth; // check the dimension when opened
-	var transitionDuration = 0.2;
-	menu.style.width = "4em"; // then close it
+	var isHelpShown = false;
 
-	function slideOpen() {
-		if(menu.classList.contains('open')) return;
+	var displayBackArrow = true;
+	var mode = 'user';
 
-		menu.classList.add("open");
-		YUI().use('node', 'transition', function(Y) {
-			Y.one(menu).transition({
-				easing: 'ease-in-out',
-				duration: transitionDuration,
-				width: width + 'px'
-			});
-		});
+	var menuWidth = menu.offsetWidth; // needed for the animations
+	var animationDuration = 0.2; // length of the opening/closing animation in seconds
+
+	// close the menu after having read its width
+	menu.classList.remove('open');
+	menu.style.width = '4em';
+
+	function backItem() {
+		console.log('back item pressed');
 	}
 
-	function slideClose() {
-		if(!menu.classList.contains('open')) return;
-
-		menu.classList.remove('open');
-		YUI().use('node', 'transition', function(Y) {
-			Y.one(menu).transition({
-				easing: 'ease-in-out',
-				duration: transitionDuration,
-				width: '4em'
-			});
-		});
+	function settingsItem() {
+		console.log('settings item pressed');
 	}
 
-	toggle.addEventListener("click", function() {
-		if(menu.classList.contains("open")) {
-			slideClose();
-		}
-		else {
-			slideOpen();
-		}
+	function bookingItem() {
+		console.log('booking item pressed');
+	}
 
-	});
+	function helpItem() {
+		console.log('help item pressed');
+	}
 
-	document.addEventListener("click", function(e) {
-		var current = e.target;
-		while(current.parentNode != null) {
-			if(current === menu) {
+	function disconnectItem() {
+		console.log('disconnect item pressed');
+	}
+
+	if(!window.modules) {
+		window.modules = {};
+	}
+
+	window.modules['menu'] = {
+		init: function() {
+			console.log('Initalisation du module menu');
+			toggle.addEventListener('click', function() {
+				if(modules.menu.isOpen()) {
+					modules.menu.close();
+				}
+				else {
+					modules.menu.open();
+				}
+			});
+
+			document.addEventListener("click", function(e) {
+				var current = e.target;
+				while(current.parentNode != null) {
+					if(current === menu) {
+						return;
+					}
+					current = current.parentNode;
+				}
+
+				modules.menu.close();
+			});
+
+			// hooks des items
+			backArrow.addEventListener('click', backItem);
+			settings.addEventListener('click', settingsItem);
+			booking.addEventListener('click', bookingItem);
+			helpElem.addEventListener('click', helpItem);
+			disconnect.addEventListener('click', disconnectItem);
+		},
+		open: function() {
+			if(modules.menu.isOpen()) {
 				return;
 			}
-			current = current.parentNode;
+
+			menu.classList.add('open');
+			YUI().use('node', 'transition', function(Y) {
+				Y.one(menu).transition({
+					easing: 'ease-in-out',
+					duration: animationDuration,
+					width: menuWidth + 'px'
+				});
+			});
+		},
+		close: function() {
+			if(!modules.menu.isOpen()) {
+				return;
+			}
+
+			menu.classList.remove('open');
+			YUI().use('node', 'transition', function(Y) {
+				Y.one(menu).transition({
+					easing: 'ease-in-out',
+					duration: animationDuration,
+					width: '4em'
+				});
+			});
+		},
+		show: function() {
+			menu.style.display = "inline-block";
+			document.querySelector('#main-page').style.marginLeft = '4em';
+		},
+		hide: function() {
+			menu.style.display = "none";
+			document.querySelector('#main-page').style.marginLeft = '0';
+		},
+		isOpen: function() {
+			return menu.classList.contains('open');
+		},
+		setMode: function(m) { // 'admin' or 'user'
+			mode = m;
+		},
+		showBackArrow: function(show) { // wether or not to show the back arrow
+			backArrow.style.display = show ? 'block' : 'none';
+		},
+		showOnlyHelp: function(show) { // wether or not to show the help menu in the top left corner
+			modules.menu.hide();
+
+			if(show) {
+				help.style.display = 'block';
+			}
+			else {
+				help.style.display = 'none';
+			}
+
 		}
-
-		if(menu.classList.contains('open')) {
-			slideClose();
-		}
-
-
-	});
-
-	window.hideMenu = function() {
-		menu.style.display = "none";
-		document.querySelector('#main-page').style.marginLeft = '0';
-	}
-
-	window.showMenu = function() {
-		menu.style.display = "inline-block";
-		document.querySelector('#main-page').style.marginLeft = '4em';
-	}
-
-	window.showOnlyHelpMenu = function() {
-		onlyHelp.style.display = 'block';
-	}
-
-	window.hideOnlyHelpMenu = function() {
-		onlyHelp.style.display = 'none';
-	}
-
-	function helpCallback() {
-		console.log('Affichage de l\'aide');
-	}
-
-	document.querySelector("#menu-back").addEventListener("click", function() {
-		console.log("Retour arrière");
-	});
-
-	document.querySelector("#menu-settings").addEventListener("click", function() {
-		console.log("Accès aux options");
-	});
-
-	document.querySelector("#menu-booking").addEventListener("click", function() {
-		console.log("Accès aux réservations");
-	});
-
-	document.querySelector("#menu-help").addEventListener("click", helpCallback);
-	onlyHelp.addEventListener("click", helpCallback);
-
-	document.querySelector("#menu-disconnect").addEventListener("click", function() {
-		console.log("Deconnexion");
-	});
+	};
 })();

@@ -64,10 +64,9 @@ public class Main extends Application {
 		
 		// load html page
 		webView.getEngine().load(getClass().getResource(page).toExternalForm());
-		JSObject win = (JSObject)webView.getEngine().executeScript("window");
-		webView.getEngine().executeScript("console.log = function(message){app.log(message);};");
 
-		win.setMember("app", new Bridge());
+		JSObject win = (JSObject)webView.getEngine().executeScript("window");
+		win.setMember("app", new Bridge(webView));
 
 		return webView;
 	}

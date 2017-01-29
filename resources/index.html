@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<div id="menu-only-help"><img src="icons/help-black.svg"></div>
-		<div id="menu">
+		<div id="menu" class="open">
 			<ul id="menu-top">
 				<li id="menu-toggle"><span class="menu-icon"><img src="icons/sandwich.svg"/></span><span class="menu-text">MENU</span></li>
 				<li id="menu-back"><span class="menu-icon"><img src="icons/back.svg"/></span><span class="menu-text">Revenir en arrière</span></li>
@@ -39,18 +39,18 @@
 		</div>
 
 		<script type="text/javascript" src="scripts/yui-min.js"></script>
+		<script type="text/javascript" src="scripts/main.js"></script>
 		<script type="text/javascript" src="scripts/menu.js"></script>
 		<script type="text/javascript" src="scripts/login.js"></script>
 		<script type="text/javascript">
 			console.log("Client initialisé.");
 
+			YUI().use('node', 'transition', function(Y) {}); // init YUI one time
+
 			// prevent selection
 			document.addEventListener("selectstart", function(e) {
 				e.preventDefault();
 			});
-
-			window.hideMenu();
-			window.showOnlyHelpMenu()
 		</script>
 	</body>
 </html>
