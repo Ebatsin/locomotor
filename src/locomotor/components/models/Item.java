@@ -15,7 +15,7 @@ public class Item {
 	/**
 	 * The categories of criterias.
 	 */
-	private ArrayList<ItemCategory> _categories;
+	private ArrayList<? extends ItemCategory> _categories;
 
 	/**
 	 * Constructs the object.
@@ -42,7 +42,7 @@ public class Item {
 	 *
 	 * @return     The categories.
 	 */
-	public ArrayList<ItemCategory> getCategories() {
+	public ArrayList<? extends ItemCategory> getCategories() {
 		return _categories;
 	}
 
