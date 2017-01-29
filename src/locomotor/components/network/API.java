@@ -16,6 +16,7 @@ import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
+import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
 import locomotor.core.Comparator;
 import locomotor.core.DBH;
@@ -217,6 +218,50 @@ public class API {
 			}
 		});
 
+		nh.createEndpoint("/api/universe/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DISPLAY_MESSAGE);
+					return false;
+				}
+				
+				// get the universe
+				String universeID = data.getAsString("id");
+				Universe universe = DBH.getInstance().getUniverse(universeID);
+				
+				// check error
+				if(universe == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getJsonContext().success(Json.object()
+					.add("universe", universe.toJSON()));
+				return true;
+			}
+		});
+
 		nh.createEndpoint("/api/search", new IEndpointHandler() {
 			public boolean handle(NetworkData data, NetworkResponseFactory response) {
 				if(!super.handle(data, response)) {
@@ -238,7 +283,7 @@ public class API {
 				// check error
 				if(claims == null) {
 					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
 					return false;
 				}

@@ -24,6 +24,7 @@ import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
 import locomotor.components.models.ItemCriteria;
+import locomotor.components.models.Universe;
 
 import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CEnumUniverseType;
@@ -424,6 +425,31 @@ public class DBH {
 		partialInfo.put("universeName", universe.get("name"));
 
 		return partialInfo;
+	}
+
+	/**
+	 * Gets the universe.
+	 *
+	 * @param      universeID  The universe id
+	 *
+	 * @return     The universe.
+	 */
+	public static Universe getUniverse(String universeID) {
+			MongoCollection<Document> universes = md.getCollection("universes");
+			BasicDBObject queryUniverse = new BasicDBObject();
+		
+		try {
+			
+			queryUniverse.put("_id", new ObjectId(universeID));
+			Document universe = universes.find(queryUniverse).first();
+			return new Universe(universeID, universe.get("name").toString(), universe.get("description").toString(), universe.get("image").toString());
+
+		} catch (Exception e) {
+			String messageGen = "This universe does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
+			return null;
+		}
 	}
 
 }

@@ -88,13 +88,34 @@ public class Main extends Application {
 		// 	}
 		// });
 
+		// ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
+		// // this is the long term token for (test:motdepasse)
+		// String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
+		// cr7.addParam("token", longTerm);
+		// String content = new String(Files.readAllBytes(Paths.get("userSelection.json")));
+		// cr7.addParam("criterias", content);
+		// cr7.requestJson("api/search").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println(obj.toString(WriterConfig.PRETTY_PRINT));
+		// 	}
+		// });
+		
 		ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
 		// this is the long term token for (test:motdepasse)
 		String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
 		cr7.addParam("token", longTerm);
-		String content = new String(Files.readAllBytes(Paths.get("userSelection.json")));
-		cr7.addParam("criterias", content);
-		cr7.requestJson("api/search").thenAccept(new Consumer<JsonObject>() {
+		cr7.addParam("id", "584336b157ab9e1521a8bd9f"); // ok
+		cr7.requestJson("api/universe/get").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				System.out.println(obj.toString(WriterConfig.PRETTY_PRINT));
+			}
+		});
+
+		ClientRequest cr8 = new ClientRequest("https://localhost:8000/");
+		// this is the long term token for (test:motdepasse)
+		cr8.addParam("token", longTerm);
+		cr8.addParam("id", "58433aa157ab9e1f6f26334b"); // not ok
+		cr8.requestJson("api/universe/get").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				System.out.println(obj.toString(WriterConfig.PRETTY_PRINT));
 			}
