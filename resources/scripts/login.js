@@ -105,6 +105,12 @@
 			password.addEventListener('input', checkForFix);
 			confirm.addEventListener('input', checkForFix);
 
+			// bind the disconnect function to the menu
+			modules.menu.bind('disconnect', function() {
+				app.deleteLongToken();
+				loadView('login');
+			});
+
 		},
 		/**
 		* Load the login view.
@@ -119,11 +125,10 @@
 
 			if(app.getLongToken() != null) {
 				console.log('local long token found. Using it');
-				console.log('"' + app.getLongToken() + '"');
 				// try to log with this token
 				API.auth(app.getLongToken()).then(function(data) {
 					console.log('successful token login');
-					modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
+					modules.login.validAuth(data.data['short-term-token'], app.getLongToken());
 				}).catch(function(data) {
 					console.log('failed token login : ' + data.message + "\nFalling back to normal login");
 					app.deleteLongToken(); // no longer valid or invalid
@@ -131,7 +136,9 @@
 				});
 				return;
 			}
-			// else no token. Normal log in
+			else {
+				modules.splash.hide();
+			}
 
 			if(params && params.mode === 'register') {
 				modules.login.showRegister();
@@ -182,8 +189,16 @@
 		validAuth: function(shortToken, longToken) {
 			app.setShortToken(shortToken);
 			app.setLongToken(longToken);
-			// @todo save the tokens and process to the home view
-			hideAllViews();
+
+			console.log('sending modelRequest');
+			API.getModel().then(function(data) {
+				window.model = data.data;
+				// load the search view
+				loadView('search');
+			}).catch(function(data) {
+				// @TODO handle this case ? oO
+				console.log("Javascript : error while loading the model : " + data.message);
+			});
 		}
 	};
 })();

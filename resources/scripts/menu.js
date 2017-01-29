@@ -19,24 +19,42 @@
 	menu.style.width = '4em';
 
 	function backItem() {
-		console.log('back item pressed');
+		callbacks.back();
 	}
 
 	function settingsItem() {
-		console.log('settings item pressed');
+		callbacks.settings();
 	}
 
 	function bookingItem() {
-		console.log('booking item pressed');
+		callbacks.booking();
 	}
 
 	function helpItem() {
-		console.log('help item pressed');
+		callbacks.help();
 	}
 
 	function disconnectItem() {
-		console.log('disconnect item pressed');
+		callbacks.disconnect();
 	}
+
+	var callbacks = {
+		back: function() {
+			console.log('back item pressed');
+		},
+		settings: function() {
+			console.log('settings item pressed');
+		},
+		booking: function() {
+			console.log('booking item pressed');
+		},
+		help: function() {
+			console.log('help item pressed');
+		},
+		disconnect: function() {
+			console.log('disconnect item pressed');
+		}
+	};
 
 	if(!window.modules) {
 		window.modules = {};
@@ -154,6 +172,19 @@
 				help.style.display = 'none';
 			}
 
+		},
+		/**
+		* item : 
+		* back
+		* settings
+		* booking
+		* help
+		* disconnect
+		*/
+		bind: function(item, callback) {
+			if(callbacks[item]) {
+				callbacks[item] = callback;
+			}
 		}
 	};
 })();

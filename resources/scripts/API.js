@@ -94,5 +94,13 @@ window.API = {
 		app.register(name.trim().toLowerCase(), password, prom.getId());
 
 		return prom;
+	},
+
+	getModel: function() {
+		var prom = new JPromises();
+
+		app.getModel(app.getShortToken(), prom.getId());
+
+		return prom;
 	}
 };
