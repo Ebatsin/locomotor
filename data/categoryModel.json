@@ -2,14 +2,14 @@
 	"_id": {
 		"$oid": "5842ccbf57ab9e689507bc13"
 	},
-	"name": "consommation",
+	"name": "consumption",
 	"criteria": [
 		{
 			"_id": {
 				"$oid": "5842dffe57ab9e7e37048793"
 			},
-			"name": "carburant",
-			"question": "Quel type de carburant souhaitez-vous utiliser pour votre moyen de transport ?",
+			"name": "fuel",
+			"question": "What type of fuel do you want to use for your vehicle?",
 			"isComparable": true,
 			"itemType": 8,
 			"userType": 5,
@@ -19,11 +19,11 @@
 				"nodes": [
 					{
 						"id": 0,
-						"name": "électrique"
+						"name": "electric"
 					},
 					{
 						"id": 1,
-						"name": "essence"
+						"name": "gasoline"
 					},
 					{
 						"id": 2,
@@ -31,31 +31,31 @@
 					},
 					{
 						"id": 3,
-						"name": "foin"
+						"name": "hay"
 					},
 					{
 						"id": 4,
-						"name": "viande"
+						"name": "meat"
 					},
 					{
 						"id": 5,
-						"name": "vent"
+						"name": "wind"
 					},
 					{
 						"id": 6,
-						"name": "bois"
+						"name": "wood"
 					},
 					{
 						"id": 7,
-						"name": "nucléaire"
+						"name": "nuclear"
 					},
 					{
 						"id": 8,
-						"name": "magie"
+						"name": "magic"
 					},
 					{
 						"id": 9,
-						"name": "antimatière"
+						"name": "antimatter"
 					}
 				],
 				"relations": [
@@ -98,8 +98,8 @@
 			"_id": {
 				"$oid": "5842e19957ab9e7e37048794"
 			},
-			"name": "consommation",
-			"question": "Quelle classe de consommation désirez-vous pour votre véhicule ?",
+			"name": "consumption",
+			"question": "What energy efficiency class do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 6,
@@ -113,11 +113,11 @@
 					},
 					{
 						"value": 1,
-						"name": "désolant"
+						"name": "dreadful"
 					},
 					{
 						"value": 2,
-						"name": "piètre"
+						"name": "poor"
 					},
 					{
 						"value": 3,
@@ -125,11 +125,11 @@
 					},
 					{
 						"value": 4,
-						"name": "effort exceptionnel"
+						"name": "exceeds expectations"
 					},
 					{
 						"value": 5,
-						"name": "optimal"
+						"name": "outstanding"
 					}
 				],
 				"min": {
@@ -144,8 +144,8 @@
 			"_id": {
 				"$oid": "58435bb857ab9e1127b9f105"
 			},
-			"name": "distance nominale",
-			"question": "Quelle distance souhaitez-vous pouvoir parcourir ?",
+			"name": "nominal distance",
+			"question": "How far do you want to go?",
 			"isComparable": true,
 			"itemType": 3,
 			"userType": 3,
@@ -168,14 +168,14 @@
 	"_id": {
 		"$oid": "5842d7a657ab9e6a5495f3ee"
 	},
-	"name": "gabarit",
+	"name": "Size",
 	"criteria": [
 		{
 			"_id": {
 				"$oid": "5842e66a57ab9e83054cd9c0"
 			},
-			"name": "capacite de stockage",
-			"question": "Quelle capacité de stockage souhaitez-vous pouvoir disposer ?",
+			"name": "storage capacity",
+			"question": "What storage capacity would you like to have?",
 			"isComparable": true,
 			"itemType": 1,
 			"userType": 4,
@@ -192,8 +192,8 @@
 			"_id": {
 				"$oid": "5842e6db57ab9e83054cd9c1"
 			},
-			"name": "poids",
-			"question": "Quel poids total (à vide) souhaitez-vous pour votre véhicule ?",
+			"name": "weight",
+			"question": "What total weight (unladen) do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 1,
 			"userType": 4,
@@ -210,8 +210,8 @@
 			"_id": {
 				"$oid": "5842e72e57ab9e83054cd9c2"
 			},
-			"name": "longueur",
-			"question": "Quelle longueur désirez-vous pour votre véhicule ?",
+			"name": "length",
+			"question": "What length do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 1,
 			"userType": 4,
@@ -228,8 +228,8 @@
 			"_id": {
 				"$oid": "5842e80f57ab9e845efbe02c"
 			},
-			"name": "largeur",
-			"question": "Quelle largeur désirez-vous pour votre véhicule ?",
+			"name": "width",
+			"question": "What width do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 1,
 			"userType": 4,
@@ -246,8 +246,8 @@
 			"_id": {
 				"$oid": "5842e83357ab9e845efbe02d"
 			},
-			"name": "hauteur",
-			"question": "Quelle hauteur désirez-vous pour votre véhicule ?",
+			"name": "height",
+			"question": "What height do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 1,
 			"userType": 4,
@@ -266,14 +266,14 @@
 	"_id": {
 		"$oid": "5842d7b257ab9e6a5495f3ef"
 	},
-	"name": "tarification",
+	"name": "pricing",
 	"criteria": [
 		{
 			"_id": {
 				"$oid": "5842e9b057ab9e881b260712"
 			},
-			"name": "prix",
-			"question": "Quel prix désirez-vous pour votre véhicule ?",
+			"name": "price",
+			"question": "At what price do you want to rent your vehicle?",
 			"isComparable": true,
 			"itemType": 1,
 			"userType": 4,
@@ -290,8 +290,8 @@
 			"_id": {
 				"$oid": "5842ea4c57ab9e888ccd9378"
 			},
-			"name": "caution",
-			"question": "Quelle caution désirez-vous pour votre véhicule ?",
+			"name": "deposit",
+			"question": "What deposit do you require for your vehicle?",
 			"isComparable": false,
 			"itemType": 1,
 			"userType": 4,
@@ -308,8 +308,8 @@
 			"_id": {
 				"$oid": "5842ea7a57ab9e888ccd9379"
 			},
-			"name": "confort",
-			"question": "Quelle classe de confort désirez-vous pour votre véhicule ?",
+			"name": "comfort",
+			"question": "Which comfort class do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 6,
@@ -319,27 +319,27 @@
 				"values": [
 					{
 						"value": 0,
-						"name": "minimaliste"
+						"name": "Minimalist"
 					},
 					{
 						"value": 1,
-						"name": "c'est l'armée mon gars"
+						"name": "Army"
 					},
 					{
 						"value": 2,
-						"name": "inconfortable"
+						"name": "uncomfortable"
 					},
 					{
 						"value": 3,
-						"name": "gênant"
+						"name": "annoying"
 					},
 					{
 						"value": 4,
-						"name": "passable"
+						"name": "fair"
 					},
 					{
 						"value": 5,
-						"name": "simple"
+						"name": "basic"
 					},
 					{
 						"value": 6,
@@ -347,19 +347,19 @@
 					},
 					{
 						"value": 7,
-						"name": "confortable"
+						"name": "comfortable"
 					},
 					{
 						"value": 8,
-						"name": "luxueux"
+						"name": "luxurious"
 					},
 					{
 						"value": 9,
-						"name": "somptueux"
+						"name": "sumptuous"
 					},
 					{
 						"value": 10,
-						"name": "indécent"
+						"name": "indecent"
 					}
 				],
 				"min": {
@@ -376,14 +376,14 @@
 	"_id": {
 		"$oid": "5842d7be57ab9e6a5495f3f0"
 	},
-	"name": "personne",
+	"name": "people",
 	"criteria": [
 		{
 			"_id": {
 				"$oid": "5842ebfb57ab9e888ccd937a"
 			},
-			"name": "nombre de places",
-			"question": "À combien envisagez vous de voyager ?",
+			"name": "number of places",
+			"question": "With how many people (you include) do you plan to travel?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 3,
@@ -402,8 +402,8 @@
 			"_id": {
 				"$oid": "5842f07057ab9e8ee0ed6c84"
 			},
-			"name": "publique",
-			"question": "Désirez-vous voyager en transport en commun ?",
+			"name": "public",
+			"question": "Would you like to travel by public transportation?",
 			"isComparable": true,
 			"itemType": 2,
 			"userType": 2,
@@ -415,8 +415,9 @@
 			"_id": {
 				"$oid": "5842f08e57ab9e8ee0ed6c85"
 			},
-			"name": "equipage",
+			"name": "crew",
 			"question": "Combien de personnes (en plus de vous) sont requises pour opérer le véhicule ?",
+			"question": "How many people (you exclude) are require to operate the vehicle?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 3,
@@ -443,8 +444,8 @@
 			"_id": {
 				"$oid": "5842f0b857ab9e8ee0ed6c87"
 			},
-			"name": "vivant",
-			"question": "Êtes-vous un écolo casse couille qui a décidé que voyager à dos de dragon c'était de la crde la cruauté envers les dragons ?",
+			"name": "alive",
+			"question": "Do you want to have a living entity as vehicle?",
 			"isComparable": true,
 			"itemType": 2,
 			"userType": 2,
@@ -456,8 +457,8 @@
 			"_id": {
 				"$oid": "5842f0e057ab9e8ee0ed6c88"
 			},
-			"name": "environnement",
-			"question": "Quels sont les types d'environnement dans lequel le véhicule peut aller ?",
+			"name": "environment",
+			"question": "What are the types of environment in which the vehicle can go?",
 			"isComparable": true,
 			"itemType": 9,
 			"userType": 7,
@@ -465,99 +466,99 @@
 			"unit": 0,
 			"universe": {
 				"tree": {
-					"value": "tous",
+					"value": "all",
 					"id": 31,
 					"children": [
 						{
-							"value": "route",
+							"value": "road",
 							"id": 3,
 							"children": [
 								{
-									"value": "urbaine",
+									"value": "urban",
 									"id": 0
 								},
 								{
-									"value": "campagne",
+									"value": "campaign",
 									"id": 1
 								},
 								{
-									"value": "chemin",
+									"value": "trail",
 									"id": 2
 								}
 							]
 						},
 						{
-							"value": "aérien",
+							"value": "air",
 							"id": 7,
 							"children": [
 								{
-									"value": "hautes couches atmosphériques",
+									"value": "high atmospheric layers",
 									"id": 4
 								},
 								{
-									"value": "middle",
+									"value": "middle atmospheric layers",
 									"id": 5
 								},
 								{
-									"value": "proche du sol",
+									"value": "low atmospheric layers",
 									"id": 6
 								}
 							]
 						},
 						{
-							"value": "terrestre",
+							"value": "ground",
 							"id": 20,
 							"children": [
 								{
-									"value": "plat",
+									"value": "flat",
 									"id": 11,
 									"children": [
 										{
-											"value": "enneigé",
+											"value": "snowy",
 											"id": 8
 										},
 										{
-											"value": "désertique",
+											"value": "desert",
 											"id": 9
 										},
 										{
-											"value": "marécageux",
+											"value": "boggy",
 											"id": 10
 										}
 									]
 								},
 								{
-									"value": "accidenté",
+									"value": "hilly",
 									"id": 15,
 									"children": [
 										{
-											"value": "enneigé",
+											"value": "snowy",
 											"id": 12
 										},
 										{
-											"value": "désertique",
+											"value": "desert",
 											"id": 13
 										},
 										{
-											"value": "marécageux",
+											"value": "boggy",
 											"id": 14
 										}
 									]
 								},
 								{
-									"value": "montagneux",
+									"value": "mountainous",
 									"id": 19,
 									"children": [
 										{
-											"value": "enneigé",
+											"value": "snowy",
 											"id": 16
 										},
 										{
-											"value": "désertique",
+											"value": "desert",
 											"id": 17
 										},
 										{
-											"value": "marécageux",
+											"value": "boggy",
 											"id": 18
 										}
 									]
@@ -565,11 +566,11 @@
 							]
 						},
 						{
-							"value": "rails",
+							"value": "tracks",
 							"id": 21
 						},
 						{
-							"value": "marin",
+							"value": "marine",
 							"id": 26,
 							"children": [
 								{
@@ -577,35 +578,35 @@
 									"id": 22
 								},
 								{
-									"value": "pied",
+									"value": "under water",
 									"id": 23
 								},
 								{
-									"value": "peu profond",
+									"value": "shallow",
 									"id": 24
 								},
 								{
-									"value": "profond",
+									"value": "deep",
 									"id": 25
 								}
 							]
 						},
 						{
-							"value": "espace",
+							"value": "space",
 							"id": 29,
 							"children": [
 								{
-									"value": "peu profond",
+									"value": "shallow",
 									"id": 27
 								},
 								{
-									"value": "profond",
+									"value": "deep",
 									"id": 28
 								}
 							]
 						},
 						{
-							"value": "sous-terrain",
+							"value": "underground",
 							"id": 30
 						}
 					]
@@ -690,8 +691,8 @@
 			"_id": {
 				"$oid": "5842f3e257ab9e8ee0ed6c89"
 			},
-			"name": "permis",
-			"question": "Quels sont les permis que vous possédez ?",
+			"name": "license",
+			"question": "What licenses do you own?",
 			"isComparable": true,
 			"itemType": 8,
 			"userType": 5,
@@ -701,23 +702,23 @@
 				"nodes": [
 					{
 						"id": 0,
-						"name": "bateau"
+						"name": "boat"
 					},
 					{
 						"id": 1,
-						"name": "voiture"
+						"name": "car"
 					},
 					{
 						"id": 2,
-						"name": "avion"
+						"name": "airplane"
 					},
 					{
 						"id": 3,
-						"name": "véhicule supra luminique"
+						"name": "supra-luminous vehicle"
 					},
 					{
 						"id": 4,
-						"name": "vétérinaire"
+						"name": "veterinary"
 					},
 					{
 						"id": 5,
@@ -729,11 +730,11 @@
 					},
 					{
 						"id": 7,
-						"name": "license de pilote espace profond"
+						"name": "deep space pilot"
 					},
 					{
 						"id": 8,
-						"name": "petit engin volant"
+						"name": "small flying machine"
 					}
 				],
 				"relations": [
@@ -772,8 +773,8 @@
 			"_id": {
 				"$oid": "5842f6e557ab9e93bb852083"
 			},
-			"name": "vitesse maximale",
-			"question": "Quelle vitesse maximale désirez-vous pouvoir atteindre avec votre véhicule ?",
+			"name": "maximum speed",
+			"question": "What maximum speed do you want to reach with your vehicle?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 3,
@@ -794,8 +795,8 @@
 			"_id": {
 				"$oid": "5842f77457ab9e93bb852084"
 			},
-			"name": "fiabilité",
-			"question": "Va-t-on mourir durant ce trajet ? Votez chez vous par SMS",
+			"name": "reliability",
+			"question": "What safety class do you want for your vehicle?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 6,
@@ -809,35 +810,35 @@
 					},
 					{
 						"value": 1,
-						"name": "explosif"
+						"name": "explosive"
 					},
 					{
 						"value": 2,
-						"name": "dangereux"
+						"name": "dangerous"
 					},
 					{
 						"value": 3,
-						"name": "défaillant"
+						"name": "failing"
 					},
 					{
 						"value": 4,
-						"name": "peu fiable"
+						"name": "unreliable"
 					},
 					{
 						"value": 5,
-						"name": "fiable"
+						"name": "reliable"
 					},
 					{
 						"value": 6,
-						"name": "sécurisé"
+						"name": "secure"
 					},
 					{
 						"value": 7,
-						"name": "infaillible"
+						"name": "military"
 					},
 					{
 						"value": 8,
-						"name": "titanic"
+						"name": "infallible"
 					}
 				],
 				"min": {
@@ -852,8 +853,8 @@
 			"_id": {
 				"$oid": "5842f7f857ab9e93bb852085"
 			},
-			"name": "armement",
-			"question": "Quel type d'armement désirez-vous sur votre véhicule ?",
+			"name": "armament",
+			"question": "What type of armament do you want on your vehicle?",
 			"isComparable": true,
 			"itemType": 0,
 			"userType": 6,
@@ -863,23 +864,23 @@
 				"values": [
 					{
 						"value": 0,
-						"name": "inexistant"
+						"name": "none"
 					},
 					{
 						"value": 1,
-						"name": "léger"
+						"name": "light"
 					},
 					{
 						"value": 2,
-						"name": "lourd"
+						"name": "heavy"
 					},
 					{
 						"value": 3,
-						"name": "très lourd"
+						"name": "very heavy"
 					},
 					{
 						"value": 4,
-						"name": "cuirrassé"
+						"name": "battleship"
 					}
 				],
 				"min": {
