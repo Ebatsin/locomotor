@@ -66,7 +66,7 @@ public class Main extends Application {
 		webView.getEngine().load(getClass().getResource(page).toExternalForm());
 
 		JSObject win = (JSObject)webView.getEngine().executeScript("window");
-		win.setMember("app", new Bridge(webView));
+		win.setMember("app", new Bridge(webView, primaryStage));
 
 		return webView;
 	}

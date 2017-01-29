@@ -1,104 +1,158 @@
 (function() {
-	var onLogin = true; // whether the current page is login or register
+	var view = document.querySelector('#login-page');
 
-	var toggle = document.querySelector('#login-form-toggle');
-	var title = document.querySelector('#login-form h2');
-	var name = document.querySelector('#login-form-name');
-	var password = document.querySelector('#login-form-password');
-	var confirm = document.querySelector('#login-form-confirm');
-	var button = document.querySelector('#login-form button');
-	var form = document.querySelector('#login-form');
-	var error = document.querySelector('#login-form p');
+	// title
+	var title = view.querySelector('#login-form h2');
 
+	// fields
+	var name = view.querySelector('#login-form-name');
+	var password = view.querySelector('#login-form-password');
+	var confirm = view.querySelector('#login-form-confirm');
+
+	// buttons
+	var button = view.querySelector('#login-form button');
+	var toggle = view.querySelector('#login-form-toggle');
+
+	var form = view.querySelector('#login-form');
+
+	var error = view.querySelector('#login-form p');
+
+	var loginMode = true;
+
+	// error handling
 	var errorDisplayed = false;
-	var fixingMethod = function() {};
+	var fixingMethod = function(){};
 
-	function emptyFields() {
-		name.value = '';
-		password.value = '';
-		confirm.value = '';
-	}
-
-	toggle.addEventListener('click', function() {
-		if(onLogin) {
-			// now register view
-			onLogin = false;
-			toggle.innerHTML = 'Log-in';
-			title.innerHTML = 'REGISTER';
-			button.innerHTML = 'Register';
-			emptyFields();
-			confirm.classList.remove('hide');
-		}
-		else {
-			// now login view
-			onLogin = true;
-			toggle.innerHTML = "Register";
-			title.innerHTML = "LOG IN";
-			button.innerHTML = 'Log in';
-			emptyFields();
-			confirm.classList.add('hide');
-		}
-	});
-
-	form.addEventListener('submit', function(e) {
-		if(name.value.trim().length === 0 || password.value.length === 0) {
-			e.preventDefault();
-			return;
-		}
-		else if(!onLogin) { // the user is subscribing
-			if(confirm.value.length === 0) {
-				e.preventDefault();
-				return;
-			}
-			// check if the 2 passwords are the same
-			if(password.value === confirm.value) {
-				// @todo send the request
-				console.log('envoi de la requête de inscription');
-				emptyFields();
-			}
-			else {
-				showError('The password field and the password confirmation field do not match. Please try again.');
-				setErrorFixingMethod(mismatchingPasswordsFix);
-				e.preventDefault();
-			}
-		}
-		else {
-			// @todo send the request
-			console.log('envoie de la requête de connexion');
-			emptyFields();
-		}
-
-		e.preventDefault();
-	});
-
-	function showError(errorMessage) {
-		errorDisplayed = true;
-		error.innerHTML = errorMessage;
-		error.style.display = 'block';
-	}
-
-	function hideError() {
-		errorDisplayed = false;
-		error.style.display = 'none';
-	}
-
-	function setErrorFixingMethod(method) {
-		fixingMethod = method;
-	}
-
-	function mismatchingPasswordsFix() {
-		if(password.value === confirm.value) {
-			hideError();
-		}
-	}
-
-	function errorFixingHandler() {
+	function checkForFix() {
 		if(errorDisplayed) {
 			fixingMethod();
 		}
 	}
 
-	name.addEventListener('input', errorFixingHandler);
-	password.addEventListener('input', errorFixingHandler);
-	confirm.addEventListener('input', errorFixingHandler);
+	// default fixing methods
+	function fixMismatchingPasswords() {
+		if(password.value === confirm.value) {
+			modules.login.hideError();
+		}
+	}
+
+	function fixEmptyField() {
+		if(name.value.trim().length !== 0 && password.value.length !== 0 && (loginMode || confirm.value.length !== 0)) {
+			modules.login.hideError();
+		}
+	}
+
+	window.registerView('login');
+
+	if(!window.modules) {
+		window.modules = {};
+	}
+
+	window.modules['login'] = {
+		init: function() {
+			console.log('initialisation du module login');
+			toggle.addEventListener('click', function() {
+				if(loginMode) {
+					modules.login.showRegister();
+				}
+				else {
+					modules.login.showLogin();
+				}
+			});
+
+			form.addEventListener('submit', function(e) {
+				// check if all the fields are filled
+				if(loginMode) {
+					if(name.value.trim().length === 0 || password.value.length === 0) {
+						modules.login.setFixingMethod(fixEmptyField);
+						modules.login.showError('All the fields must be filled to continue.');
+					}
+					else {
+						// @todo send the request
+						console.log('send the login request');
+						modules.login.emptyFields();
+					}
+				}
+				else { // register
+					if(name.value.trim().length === 0 || password.value.length === 0 || confirm.value.length === 0) {
+						modules.login.setFixingMethod(fixEmptyField);
+						modules.login.showError('All the fields must be filled to continue.');
+					}
+					else if(confirm.value !== password.value) {
+						modules.login.setFixingMethod(fixMismatchingPasswords);
+						modules.login.showError('The password field and the password confirmation field do not match. Please try again.');
+					}
+					else {
+						// @todo send the request
+						console.log('send the register request');
+						modules.login.emptyFields();
+					}
+				}
+
+				e.preventDefault();
+			});
+
+			name.addEventListener('input', checkForFix);
+			password.addEventListener('input', checkForFix);
+			confirm.addEventListener('input', checkForFix);
+
+		},
+		/**
+		* Load the login view.
+		* @param params An object that contains the parameters
+		* mode: 'login' | 'register'
+		*/
+		load: function(params) {
+			hideAllViews();
+			modules.menu.hide();
+			modules.menu.showOnlyHelp(true);
+			view.classList.remove('hide');
+
+			if(params && params.mode === 'register') {
+				modules.login.showRegister();
+			}
+			else {
+				modules.login.showLogin();
+			}
+		},
+		showRegister: function() {
+			loginMode = false;
+
+			modules.login.hideError();
+			app.setTitle('Register');
+			toggle.innerHTML = 'Log-in';
+			title.innerHTML = 'REGISTER';
+			button.innerHTML = 'Register';
+			modules.login.emptyFields();
+			confirm.classList.remove('hide');
+		},
+		showLogin: function() {
+			loginMode = true;
+
+			modules.login.hideError();
+			app.setTitle('Log-in');
+			toggle.innerHTML = 'Register';
+			title.innerHTML = 'LOG IN';
+			button.innerHTML = 'Log in';
+			modules.login.emptyFields();
+			confirm.classList.add('hide');
+		},
+		emptyFields: function() {
+			name.value = '';
+			password.value = '';
+			confirm.value = '';
+		},
+		showError: function(message) {
+			errorDisplayed = true;
+			error.innerHTML = message;
+			error.style.display = 'block';
+		},
+		hideError: function() {
+			errorDisplayed = false;
+			error.style.display = 'none';
+		},
+		setFixingMethod: function(meth) {
+			fixingMethod = meth;
+		}
+	};
 })();

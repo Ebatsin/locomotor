@@ -74,8 +74,12 @@
 			settings.addEventListener('click', settingsItem);
 			booking.addEventListener('click', bookingItem);
 			helpElem.addEventListener('click', helpItem);
+			help.addEventListener('click', helpItem);
 			disconnect.addEventListener('click', disconnectItem);
 		},
+		/**
+		* Extends the menu to display the text
+		*/
 		open: function() {
 			if(modules.menu.isOpen()) {
 				return;
@@ -90,6 +94,9 @@
 				});
 			});
 		},
+		/**
+		* Furl the menu to show only the icons
+		*/
 		close: function() {
 			if(!modules.menu.isOpen()) {
 				return;
@@ -104,23 +111,42 @@
 				});
 			});
 		},
+		/**
+		* Show the menu on the left
+		*/
 		show: function() {
+			modules.menu.showOnlyHelp(false);
 			menu.style.display = "inline-block";
 			document.querySelector('#main-page').style.marginLeft = '4em';
 		},
+		/**
+		* Hide the menu on the left
+		*/
 		hide: function() {
 			menu.style.display = "none";
 			document.querySelector('#main-page').style.marginLeft = '0';
 		},
+		/**
+		* Check wether the menu is opened or closed
+		*/
 		isOpen: function() {
 			return menu.classList.contains('open');
 		},
+		/**
+		* Display the 'admin' mode of the menu or the 'user' mode
+		*/
 		setMode: function(m) { // 'admin' or 'user'
 			mode = m;
 		},
+		/**
+		* Show the back arrow in the menu or not
+		*/
 		showBackArrow: function(show) { // wether or not to show the back arrow
 			backArrow.style.display = show ? 'block' : 'none';
 		},
+		/**
+		* Closes the left menu and show only the help icon in the top left corner
+		*/
 		showOnlyHelp: function(show) { // wether or not to show the help menu in the top left corner
 			modules.menu.hide();
 
