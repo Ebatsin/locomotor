@@ -16,6 +16,7 @@ import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
+import locomotor.components.models.ItemFull;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
 import locomotor.core.Comparator;
@@ -258,6 +259,51 @@ public class API {
 
 				response.getJsonContext().success(Json.object()
 					.add("universe", universe.toJSON()));
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/item/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DISPLAY_MESSAGE);
+					return false;
+				}
+				
+				// get the item
+				String itemID = data.getAsString("id");
+				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
+				ItemFull itemFull = DBH.getInstance().getItem(itemID, catModel);
+				
+				// check error
+				if(itemFull == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getJsonContext().success(Json.object()
+					.add("item", itemFull.toJSON()));
 				return true;
 			}
 		});
