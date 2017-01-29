@@ -14,7 +14,7 @@ public class ItemCategory extends Category {
 	 * @param      id         The item category identifier
 	 * @param      criterias  The criterias
 	 */
-	public ItemCategory(String id, ArrayList<ItemCriteria> criterias) {
+	public ItemCategory(String id, ArrayList<? extends ItemCriteria> criterias) {
 		super(id, criterias);
 	}
 	

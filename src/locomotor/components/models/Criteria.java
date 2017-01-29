@@ -11,7 +11,7 @@ public abstract class Criteria {
 	 * Identify the criteria model.
 	 * It is possible to infer the type of the value.
 	 */
-	private String _idCritModel;
+	protected String _idCritModel;
 
 	/**
 	 * The value of the criteria.

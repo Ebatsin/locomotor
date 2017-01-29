@@ -1,24 +1,13 @@
 package locomotor.core;
 
-import com.eclipsesource.json.*;
-
-import java.lang.Thread;
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import locomotor.components.Compare;
-import locomotor.components.models.*;
-import locomotor.components.network.*;
 import locomotor.components.Pair;
-import locomotor.components.types.*;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import locomotor.components.network.API;
+import locomotor.components.network.NetworkHandler;
 
 /**
  * Where all the magic happens.
@@ -38,10 +27,19 @@ public class Main {
 		DBH db = DBH.getInstance();
 		db.connect("localhost", 27017);
 		db.connectToDatabase("locomotor");
+		
+		// long startTime = System.nanoTime();
+		// long estimatedTime = System.nanoTime() - startTime;
+		// System.out.println(TimeUnit.MILLISECONDS.convert(estimatedTime, TimeUnit.NANOSECONDS) + " ms");
 
 		NetworkHandler nh = NetworkHandler.getInstance();
 		nh.init(8000, "key.pfx", "motdepasse");
-		
+
+		// check the parameters given to the server. --create-superuser ask for the creation of an admin
+		for(String a : args) {
+			System.out.println(a);
+		}
+
 		if(args.length > 0) {
 			switch(args[0]) {
 				case "-h":
@@ -51,12 +49,14 @@ public class Main {
 					return;
 				case "--create-superuser":
 					String name;
-					String password, passwordCheck;
+					
 					Scanner sc = new Scanner(System.in);
 					System.out.print("Username (will be modifiable from the app) :\n> ");
 					name = sc.nextLine();
+					String password;
 					System.out.print("User password :\n> ");
 					password = sc.nextLine();
+					String passwordCheck;
 					System.out.print("Verify the user password :\n> ");
 					passwordCheck = sc.nextLine();
 
@@ -71,10 +71,10 @@ public class Main {
 						System.out.println("The username is already taken. Please try with another name.");
 					}
 					return;
+				default:
+					break;
 			}
 		}
-
-
 		API.createHooks(nh);
 		System.out.println("listening");
 		nh.start();		

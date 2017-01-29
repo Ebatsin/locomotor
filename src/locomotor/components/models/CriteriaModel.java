@@ -88,6 +88,15 @@ public class CriteriaModel {
 	}
 
 	/**
+	 * Gets the name.
+	 *
+	 * @return     The name.
+	 */
+	public String getName() {
+		return _name;
+	}
+
+	/**
 	 * Gets the item type.
 	 *
 	 * @return     The item type.
@@ -127,9 +136,9 @@ public class CriteriaModel {
 	}
 
 	/**
-	 * @todo.
+	 * JSON representation of the class.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A JsonObject.
 	 */
 	public JsonObject toJSON() {
 		JsonObject obj = Json.object();

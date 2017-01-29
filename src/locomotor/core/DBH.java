@@ -3,6 +3,7 @@ package locomotor.core;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.set;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
@@ -23,6 +24,10 @@ import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
 import locomotor.components.models.ItemCriteria;
+import locomotor.components.models.ItemFull;
+import locomotor.components.models.ItemCategoryFull;
+import locomotor.components.models.ItemCriteriaFull;
+import locomotor.components.models.Universe;
 
 import locomotor.components.types.CEnumItemType;
 import locomotor.components.types.CEnumUniverseType;
@@ -83,7 +88,7 @@ public class DBH {
 			disconnect();
 			mc = new MongoClient();
 		}
-		// System.out.println("Connected to the database");
+		System.out.println("Connected to the database");
 	}
 
 	/**
@@ -101,7 +106,7 @@ public class DBH {
 			disconnect();
 			mc = new MongoClient(ip, port);
 		}
-		// System.out.println("Connected to the database");
+		System.out.println("Connected to the database");
 	}
 
 	/**
@@ -110,7 +115,7 @@ public class DBH {
 	public static synchronized void disconnect() {
 		mc.close();
 		mc = null;
-		// System.out.println("Disconnected from the database");
+		System.out.println("Disconnected from the database");
 	}
 
 	/**
@@ -132,7 +137,7 @@ public class DBH {
 		
 		FindIterable<Document> catMod = md.getCollection("categoryModel").find();
 		
-		// System.out.println("Retrieving the model categories");
+		System.out.println("Retrieving the model categories");
 
 		catMod.forEach(new Block<Document>() {
 			@Override
@@ -195,7 +200,7 @@ public class DBH {
 		
 		FindIterable<Document> items = md.getCollection("items").find();
 		
-		// System.out.println("Retrieving the items");
+		System.out.println("Retrieving the items");
 
 		items.forEach(new Block<Document>() {
 			@Override
@@ -223,15 +228,6 @@ public class DBH {
 					// not found yet
 					Document currentCat = categoriesItemMap.get(currentCatMod.getID());
 
-					// not found
-					if (currentCat == null) {
-						// @todo: error
-						System.err.println("Error: Category model does not match any category of the current item");
-						System.err.println(currentCatMod);
-						System.err.println(catIt);
-						System.exit(0);
-					}
-
 					String identifierCat = currentCat.getObjectId("categoryModel").toString();
 					// System.out.println("Category " + identifierCat);
 
@@ -253,19 +249,9 @@ public class DBH {
 						CriteriaModel currentCritMod = itCriMod.next();
 						// not found yet
 						Document currentCrit = criteriasItemMap.get(currentCritMod.getID());
-						
-						// not found
-						if(currentCrit == null) {
-							// @todo: error
-							System.err.println("Error: Criteria model does not match any criteria of the current category");
-							System.err.println(currentCritMod);
-							System.err.println(critIt);
-							System.exit(0);
-						}
 
 						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
 						// System.out.println("Criterion " + identifierCrit);
-
 
 						// creation criteria
 						CItemType value = typeFactory.getItem(currentCritMod.getItemType(),
@@ -312,8 +298,22 @@ public class DBH {
 	public static boolean usernameAlreadyTaken(String username) {
 		MongoCollection<Document> users = md.getCollection("users");
 		Document userAlreadyExists = users.find(eq("username", username)).first();
-		
 		return (userAlreadyExists != null);
+	}
+
+	/**
+	 * Check if the user still exists
+	 *
+	 * @param      id    The identifier
+	 *
+	 * @return     True if exists, false otherwise.
+	 */
+	public static boolean userStillExists(String id) {
+		MongoCollection<Document> users = md.getCollection("users");
+		BasicDBObject queryUser = new BasicDBObject();
+		queryUser.put("_id", new ObjectId(id));
+		Document userExists = users.find(queryUser).first();
+		return (userExists != null);
 	}
 
 	/**
@@ -411,6 +411,130 @@ public class DBH {
 		}
 
 		return new Pair(id.toString(), user.getInteger("isAdmin"));
+
+	}
+
+	/**
+	 * Gets the partial information of item.
+	 *
+	 * @param      itemID  The item id
+	 *
+	 * @return     The partial information of item, name, image (URL) and universe name.
+	 */
+	public static HashMap<String, Object> getPartialInfoOfItem(String itemID) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		MongoCollection<Document> universes = md.getCollection("universes");
+		
+		BasicDBObject queryItem = new BasicDBObject();
+		queryItem.put("_id", new ObjectId(itemID));
+		Document item = items.find(queryItem).first();
+		ObjectId universeID = (ObjectId)item.get("universe");
+		BasicDBObject queryUniverse = new BasicDBObject();
+		queryUniverse.put("_id", universeID);
+		Document universe = universes.find(queryUniverse).first();
+
+		HashMap<String, Object> partialInfo = new HashMap();
+		// name & image
+		partialInfo.put("itemName", item.get("name"));
+		partialInfo.put("itemImageURL", item.get("image"));
+		// universe
+		partialInfo.put("universeName", universe.get("name"));
+
+		return partialInfo;
+	}
+
+	/**
+	 * Gets the universe.
+	 *
+	 * @param      universeID  The universe id
+	 *
+	 * @return     The universe.
+	 */
+	public static Universe getUniverse(String universeID) {
+			MongoCollection<Document> universes = md.getCollection("universes");
+			BasicDBObject queryUniverse = new BasicDBObject();
+		
+		try {
+			
+			queryUniverse.put("_id", new ObjectId(universeID));
+			Document universe = universes.find(queryUniverse).first();
+			return new Universe(universeID, universe.get("name").toString(), universe.get("description").toString(), universe.get("image").toString());
+
+		} catch (Exception e) {
+			String messageGen = "This universe does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
+			return null;
+		}
+	}
+
+	public static ItemFull getItem(String itemID, ArrayList<CategoryModel> catModel) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		BasicDBObject queryItem = new BasicDBObject();
+		Document item = null;
+
+		try {
+			
+			queryItem.put("_id", new ObjectId(itemID));
+			item = items.find(queryItem).first();
+
+		} catch (Exception e) {
+			String messageGen = "This item does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
+		String name = item.get("name").toString();
+		String universeID = item.get("universe").toString();
+		String description = item.get("description").toString();
+		String image = item.get("image").toString();
+		ArrayList<ItemCategoryFull> categories = new ArrayList();
+
+		// categories & criterias model map
+		HashMap<String, CategoryModel> categoriesModelMap = new HashMap();
+		HashMap<String, CriteriaModel> criteriasModelMap = new HashMap();
+		for (CategoryModel cm : catModel) {
+			categoriesModelMap.put(cm.getID(), cm);
+			for (CriteriaModel cmm : cm.getCriterias()) {
+				criteriasModelMap.put(cmm.getID(), cmm);
+			}
+		}
+		
+		TypeFactory typeFactory = new TypeFactory();
+		ArrayList<Document> catIt = (ArrayList<Document>)item.get("categories");
+		
+		// iterate over the categories
+		for (Document cat : catIt) {
+			
+			// create criterias of the category
+			ArrayList<ItemCriteriaFull> criterias = new ArrayList();
+			ArrayList<Document> critIt = (ArrayList<Document>)cat.get("criteria");
+
+			// iterate over the criterias
+			for (Document cri : critIt) {
+
+				String id = cri.get("criterionModel").toString();
+				CriteriaModel critMod = criteriasModelMap.get(id);
+				String nameCrit = critMod.getName();
+
+				// creation criteria
+				CItemType value = typeFactory.getItem(critMod.getItemType(),
+							cri.get("value"), critMod.getUniverse());
+
+				ItemCriteriaFull criteria = new ItemCriteriaFull(id, nameCrit, value);
+				criterias.add(criteria);
+			}
+
+			String id = cat.get("categoryModel").toString();
+			String nameCat = categoriesModelMap.get(id).getName();
+			ItemCategoryFull category = new ItemCategoryFull(id, nameCat, criterias);
+			categories.add(category);
+		}
+
+		return new ItemFull(itemID, name, universeID, description, image, categories);
 
 	}
 

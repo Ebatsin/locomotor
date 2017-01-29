@@ -10,12 +10,12 @@ public class Item {
 	/**
 	 * The identifier of the item.
 	 */
-	private String _identifier;
+	protected String _identifier;
 
 	/**
 	 * The categories of criterias.
 	 */
-	private ArrayList<ItemCategory> _categories;
+	protected ArrayList<? extends ItemCategory> _categories;
 
 	/**
 	 * Constructs the object.
@@ -23,7 +23,7 @@ public class Item {
 	 * @param      id          The item identifier
 	 * @param      categories  The categories
 	 */
-	public Item(String id, ArrayList<ItemCategory> categories) {
+	public Item(String id, ArrayList<? extends ItemCategory> categories) {
 		_identifier = id;
 		_categories = categories;
 	}
@@ -42,7 +42,7 @@ public class Item {
 	 *
 	 * @return     The categories.
 	 */
-	public ArrayList<ItemCategory> getCategories() {
+	public ArrayList<? extends ItemCategory> getCategories() {
 		return _categories;
 	}
 

@@ -57,6 +57,8 @@ public class UserItem {
 	 * @return     The perfect item.
 	 */
 	public static UserItem fromJSON(JsonValue json, ArrayList<CategoryModel> catsModel) {
+		System.out.println("Parsing user's criterias");
+
 		JsonArray categories = json.asArray();
 
 		// map to retrieve easier (perf)

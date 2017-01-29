@@ -49,6 +49,15 @@ public class CategoryModel {
 	}
 
 	/**
+	 * Gets the name.
+	 *
+	 * @return     The name.
+	 */
+	public String getName() {
+		return _name;
+	}
+
+	/**
 	 * Returns all the criteria of the category.
 	 *
 	 * @return The criteria of the category
@@ -71,9 +80,9 @@ public class CategoryModel {
 	}
 
 	/**
-	 * @todo.
+	 * JSON representation of the class.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A JsonObject.
 	 */
 	public JsonObject toJSON() {
 		JsonObject obj = Json.object();

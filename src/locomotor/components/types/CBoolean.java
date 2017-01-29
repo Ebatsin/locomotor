@@ -43,13 +43,14 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	/**
 	 * Compare boolean value
 	 *
-	 * @param      user      The user criteria
-	 * @param      universe  The universe
+	 * @param      user                The user criteria
+	 * @param      universe            The universe
+	 * @param      disableFlexibility  Disable the flexibility
 	 *
-	 * @return     1.0 (match), 0.0 otherwise
+	 * @return     1.0 (match), 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
-	public double compare(CBoolean user, CBoolean universe) {
-		return Compare.booleanValue(user, this);
+	public double compare(CBoolean user, CBoolean universe, boolean disableFlexibility) {
+		return Compare.booleanValue(user, this, disableFlexibility);
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	 * @return     null
 	 */
 	public JsonValue toJSON() {
-		return Json.value(null);
+		return (_value == null) ? Json.value(null) : Json.value(_value);
 	}
 
 	/**

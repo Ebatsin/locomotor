@@ -3,15 +3,23 @@ package locomotor.components.network;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
 import java.io.File;
 import java.lang.InterruptedException;
 import java.lang.Thread;
 
+import java.util.ArrayList;
+
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
 import locomotor.components.models.CategoryModel;
+import locomotor.components.models.Item;
+import locomotor.components.models.ItemFull;
+import locomotor.components.models.Universe;
+import locomotor.components.models.UserItem;
+import locomotor.core.Comparator;
 import locomotor.core.DBH;
 import locomotor.core.jwt.JWTH;
 
@@ -104,7 +112,7 @@ public class API {
 					// auth with token
 					String longToken = data.getAsString("token");
 					Pair<String,Integer> claims = jwt.checkToken(longToken);
-					
+						
 					// check error
 					if(claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
@@ -115,9 +123,9 @@ public class API {
 
 					// check if the user still exist in the database
 					// before create the token
-					if(!DBH.getInstance().usernameAlreadyTaken(claims.getLeft())) {
+					if(!DBH.getInstance().userStillExists(claims.getLeft())) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-							"The token is no longer valid", ErrorCode.DEFAULT_ERROR_CODE);
+							"The user does not exist", ErrorCode.DEFAULT_ERROR_CODE);
 						return false;
 					}
 
@@ -187,9 +195,9 @@ public class API {
 				}
 
 				// auth with token
-				String longToken = data.getAsString("token");
+				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(longToken);
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -206,6 +214,147 @@ public class API {
 				
 				response.getJsonContext().success(Json.object()
 					.add("model", model));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/universe/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DISPLAY_MESSAGE);
+					return false;
+				}
+				
+				// get the universe
+				String universeID = data.getAsString("id");
+				Universe universe = DBH.getInstance().getUniverse(universeID);
+				
+				// check error
+				if(universe == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getJsonContext().success(Json.object()
+					.add("universe", universe.toJSON()));
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/item/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DISPLAY_MESSAGE);
+					return false;
+				}
+				
+				// get the item
+				String itemID = data.getAsString("id");
+				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
+				ItemFull itemFull = DBH.getInstance().getItem(itemID, catModel);
+				
+				// check error
+				if(itemFull == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getJsonContext().success(Json.object()
+					.add("item", itemFull.toJSON()));
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/search", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("criterias");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get criterias
+				String criterias = data.getAsString("criterias");
+				JsonValue userCriterias = Json.parse(criterias);
+
+				// get model
+				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
+				
+				// create user criterias from json
+				UserItem ui = UserItem.fromJSON(userCriterias, catModel);
+
+				// retrieve all items
+				ArrayList<Item> items = DBH.getInstance().getItems(catModel);
+
+				// comparator
+				Comparator comp = new Comparator(catModel, ui);
+				JsonArray results = comp.computeGradeOfItems(items);
+
+				System.out.println("Sending results found");
+				
+				response.getJsonContext().success(Json.object()
+					.add("results", results));
 
 				return true;
 			}

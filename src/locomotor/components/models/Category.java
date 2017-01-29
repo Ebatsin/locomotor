@@ -10,7 +10,7 @@ public abstract class Category {
 	/**
 	 * The unique identifier of the category.
 	 */
-	private String _idCatModel;
+	protected String _idCatModel;
 
 	/**
 	 * The list of criterias.

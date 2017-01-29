@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.Class;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.function.Consumer;
 import java.util.List;
 
