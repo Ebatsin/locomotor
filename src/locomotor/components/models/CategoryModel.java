@@ -49,6 +49,15 @@ public class CategoryModel {
 	}
 
 	/**
+	 * Gets the name.
+	 *
+	 * @return     The name.
+	 */
+	public String getName() {
+		return _name;
+	}
+
+	/**
 	 * Returns all the criteria of the category.
 	 *
 	 * @return The criteria of the category
