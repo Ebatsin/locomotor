@@ -26,9 +26,17 @@ html, body {
 	pointer-events: none;
 }
 
+#main-page {
+	margin-left: 4em;
+	overflow: hidden;
+	height: 100%;
+}
+
 .page.hide {
 	display: none;
 }
+
+/* ------------------------------------------ MENU ---------------------------------------*/
 
 #menu {
 	position: absolute;
@@ -86,11 +94,7 @@ html, body {
 	font-size: 1.2em;
 }
 
-#main-page {
-	margin-left: 4em;
-	overflow: hidden;
-	height: 100%;
-}
+/* ------------------------------------------ LOGIN VIEW ---------------------------------------*/
 
 #login-page {
 	text-align: center;
@@ -174,4 +178,81 @@ html, body {
 
 #login-form-confirm.hide {
 	display: none;
+}
+
+/* ------------------------------------------ SEARCH VIEW ---------------------------------------*/
+
+#search-page {	
+	background-color: hsl(200, 5%, 90%);
+	height: 100%;
+	overflow: hidden;
+}
+
+#search-page h1 {
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.7em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#search-breadcrumb {
+	width: 80%;
+	margin-left: 10%;
+	height: 4em;
+	background-color: hsl(0, 0%, 95%);
+	border: solid 1px hsl(0, 0%, 70%);
+	margin-top: 2em;
+}
+
+#search-question {
+	margin-top: 3em;
+	width: 90%;
+	margin-left: 5%;
+	font-size: 1.5em;
+	color: hsl(0, 0%, 11%);
+}
+
+#search-not-used {
+	text-align: center;
+	height: 6rem;
+	font-size: 1.5em;
+	line-height: 6rem;
+}
+
+#search-page .option.selected {
+	cursor: default;
+	color: hsl(0, 0%, 0%);
+	border: solid 1px hsl(180, 60%, 40%);
+	background-color: hsl(180, 20%, 80%);	
+}
+
+#search-page .option {
+	cursor: pointer;
+	width: 90%;
+	margin-left: 5%;
+	border: solid 1px hsl(180, 60%, 40%);
+	background-color: hsl(200, 5%, 90%);
+	color: hsl(0, 0%, 60%);
+	margin-top: 3em;
+}
+
+#search-page .option:hover {
+	color: hsl(0, 0%, 0%);
+	margin-bottom: 5px;
+}
+
+#search-used:not(.selected) {
+	height: 6rem;
+	overflow: hidden;
+}
+
+#search-used p {
+	text-align: center;
+	font-size: 1.5em;
+	line-height: 6rem;
+	margin: 0;
 }

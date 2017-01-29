@@ -17,6 +17,7 @@
 				console.log('search loaded');
 				hideAllViews();
 				modules.menu.show();
+				modules.menu.showBackArrow(false);
 				view.classList.remove('hide');
 				app.setTitle('Search');
 
