@@ -422,14 +422,19 @@ public class DBH {
 	 *
 	 * @return     The partial information of item, name, image (URL) and universe name.
 	 */
-	public static Pair<Pair<String,String>,String> getPartialInfoOfItem(String itemID) {
+	public static HashMap<String, Object> getPartialInfoOfItem(String itemID) {
 
 		MongoCollection<Document> items = md.getCollection("items");
 		MongoCollection<Document> universes = md.getCollection("universes");
+		HashMap<String, Object> partialInfo = new HashMap();
 
 		BasicDBObject queryItem = new BasicDBObject();
 		queryItem.put("_id", new ObjectId(itemID));
 		Document item = items.find(queryItem).first();
+
+		// name & image
+		partialInfo.put("itemName", item.get("name"));
+		partialInfo.put("itemImageURL", item.get("image"));
 
 		ObjectId universeID = (ObjectId)item.get("universe");
 
@@ -437,7 +442,10 @@ public class DBH {
 		queryUniverse.put("_id", universeID);
 		Document universe = universes.find(queryUniverse).first();
 
-		return new Pair(new Pair(item.get("name"), item.get("image")), universe.get("name"));
+		// universe
+		partialInfo.put("universeName", universe.get("name"));
+
+		return partialInfo;
 	}
 
 }
