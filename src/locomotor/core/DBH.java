@@ -24,6 +24,9 @@ import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
 import locomotor.components.models.ItemCriteria;
+import locomotor.components.models.ItemFull;
+import locomotor.components.models.ItemCategoryFull;
+import locomotor.components.models.ItemCriteriaFull;
 import locomotor.components.models.Universe;
 
 import locomotor.components.types.CEnumItemType;
@@ -450,6 +453,75 @@ public class DBH {
 			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
 			return null;
 		}
+	}
+
+	public static ItemFull getItem(String itemID, ArrayList<CategoryModel> catModel) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		BasicDBObject queryItem = new BasicDBObject();
+		Document item = null;
+
+		try {
+			
+			queryItem.put("_id", new ObjectId(itemID));
+			item = items.find(queryItem).first();
+
+		} catch (Exception e) {
+			String messageGen = "This item does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
+		String name = item.get("name").toString();
+		String universeID = item.get("universe").toString();
+		String description = item.get("description").toString();
+		String image = item.get("image").toString();
+		ArrayList<ItemCategoryFull> categories = new ArrayList();
+
+		// categories & criterias model map
+		HashMap<String, CategoryModel> categoriesModelMap = new HashMap();
+		HashMap<String, CriteriaModel> criteriasModelMap = new HashMap();
+		for (CategoryModel cm : catModel) {
+			categoriesModelMap.put(cm.getID(), cm);
+			for (CriteriaModel cmm : cm.getCriterias()) {
+				criteriasModelMap.put(cmm.getID(), cmm);
+			}
+		}
+		
+		TypeFactory typeFactory = new TypeFactory();
+		ArrayList<Document> catIt = (ArrayList<Document>)item.get("categories");
+		
+		// iterate over the categories
+		for (Document cat : catIt) {
+			
+			// create criterias of the category
+			ArrayList<ItemCriteriaFull> criterias = new ArrayList();
+			ArrayList<Document> critIt = (ArrayList<Document>)cat.get("criteria");
+
+			// iterate over the criterias
+			for (Document cri : critIt) {
+
+				String id = cri.get("criterionModel").toString();
+				CriteriaModel critMod = criteriasModelMap.get(id);
+				String nameCrit = critMod.getName();
+
+				// creation criteria
+				CItemType value = typeFactory.getItem(critMod.getItemType(),
+							cri.get("value"), critMod.getUniverse());
+
+				ItemCriteriaFull criteria = new ItemCriteriaFull(id, nameCrit, value);
+				criterias.add(criteria);
+			}
+
+			String id = cat.get("categoryModel").toString();
+			String nameCat = categoriesModelMap.get(id).getName();
+			ItemCategoryFull category = new ItemCategoryFull(id, nameCat, criterias);
+			categories.add(category);
+		}
+
+		return new ItemFull(itemID, name, universeID, description, image, categories);
+
 	}
 
 }
