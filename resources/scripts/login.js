@@ -24,15 +24,15 @@
 			// now register view
 			onLogin = false;
 			toggle.innerHTML = 'Log-in';
-			title.innerHTML = 'SUBSCRIBE';
-			button.innerHTML = 'Subscribe';
+			title.innerHTML = 'REGISTER';
+			button.innerHTML = 'Register';
 			emptyFields();
 			confirm.classList.remove('hide');
 		}
 		else {
 			// now login view
 			onLogin = true;
-			toggle.innerHTML = "Subscribe";
+			toggle.innerHTML = "Register";
 			title.innerHTML = "LOG IN";
 			button.innerHTML = 'Log in';
 			emptyFields();
