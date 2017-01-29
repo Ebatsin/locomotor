@@ -7,6 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.Class;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.function.Consumer;
 
 import javafx.application.Application;
@@ -76,11 +78,23 @@ public class Main extends Application {
 		// 	}
 		// });
 
-		ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
+		// ClientRequest cr6 = new ClientRequest("https://localhost:8000/");
+		// // this is the long term token for (test:motdepasse)
+		// String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
+		// cr6.addParam("token", longTerm);
+		// cr6.requestJson("api/model/get").thenAccept(new Consumer<JsonObject>() {
+		// 	public void accept(JsonObject obj) {
+		// 		System.out.println(obj.toString(WriterConfig.PRETTY_PRINT));
+		// 	}
+		// });
+
+		ClientRequest cr7 = new ClientRequest("https://localhost:8000/");
 		// this is the long term token for (test:motdepasse)
 		String longTerm = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ODRkODI1NjU3YWI5ZTQ5Yzg3ODFiNjAiLCJpc3MiOiJMb2NvbW90b3JTZXJ2ZXIiLCJpYXQiOjE0ODQyNDQ2NzYsInJvbGUiOmZhbHNlLCJleHAiOjE0ODk0Mjg2NzZ9.WmPntGSZ_gOODZ-hCtXDvp015buI9lVxlNVkdLnvXf4mBIt87iIotgvLcJRzAViPXSk8BZ0_gZBzlyp0GwWMLw";
-		cr6.addParam("token", longTerm);
-		cr6.requestJson("api/model/get").thenAccept(new Consumer<JsonObject>() {
+		cr7.addParam("token", longTerm);
+		String content = new String(Files.readAllBytes(Paths.get("userSelection.json")));
+		cr7.addParam("criterias", content);
+		cr7.requestJson("api/search").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				System.out.println(obj.toString(WriterConfig.PRETTY_PRINT));
 			}

@@ -17,9 +17,6 @@ import locomotor.components.network.*;
 import locomotor.components.Pair;
 import locomotor.components.types.*;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 /**
  * Where all the magic happens.
  */
@@ -38,31 +35,13 @@ public class Main {
 		DBH db = DBH.getInstance();
 		db.connect("localhost", 27017);
 		db.connectToDatabase("locomotor");
+		
+		// long startTime = System.nanoTime();
+		// long estimatedTime = System.nanoTime() - startTime;
+		// System.out.println(TimeUnit.MILLISECONDS.convert(estimatedTime, TimeUnit.NANOSECONDS) + " ms");
 
-		// NetworkHandler nh = NetworkHandler.getInstance();
-		// nh.init(8000, "key.pfx", "motdepasse");
-
-		// API.createHooks(nh);
-		// nh.start();
-		try {
-			long startTime = System.nanoTime();
-
-			ArrayList<CategoryModel> catModel = db.getCategoriesModel();
-			ArrayList<Item> items = db.getItems(catModel);
-			String content = new String(Files.readAllBytes(Paths.get("userSelection.json")));
-			JsonValue file = Json.parse(content);
-
-			UserItem ui = UserItem.fromJSON(file, catModel);
-
-			Comparator comp = new Comparator(catModel, ui);
-			comp.computeGradeOfItems(items);
-
-			long estimatedTime = System.nanoTime() - startTime;
-			System.out.println(TimeUnit.MILLISECONDS.convert(estimatedTime, TimeUnit.NANOSECONDS) + " ms");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		NetworkHandler nh = NetworkHandler.getInstance();
+		nh.init(8000, "key.pfx", "motdepasse");
 
 		// check the parameters given to the server. --create-superuser ask for the creation of an admin
 		for(String a : args) {
@@ -100,30 +79,8 @@ public class Main {
 			}
 		}
 
-		// API.createHooks(nh);
-		// nh.start();
-		
-		// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
-		// for (CategoryModel cm : catModel) {
-		// 	System.out.println(cm.toJSON().toString(WriterConfig.PRETTY_PRINT));
-		// }
-
-		db.disconnect();
-		
-		// try {
-
-			// ArrayList<CategoryModel> catModel = db.getCategoriesModel();
-			// ArrayList<Item> items = db.getItems(catModel);
-
-			// db.createUser("test2", "motdepasse");
-			// db.authUser("test", "motdepasse");
-			// db.authUser("test2", "motdepasse");
-
-		// }
-		// catch(Exception exception) {
-		// 	System.err.println(exception.getClass().getName() + ": " + exception.getMessage());
-		// 	exception.printStackTrace();
-		// }		
+		API.createHooks(nh);
+		nh.start();
 		
 	}
 }
