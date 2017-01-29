@@ -12,7 +12,10 @@ function JPromises() {
 	var id = window.promises.length;
 	window.promises.push(this);
 
+	var that = this;
+
 	this.resolve = function(data) {
+		console.log('received on js');
 		fullfilled = true;
 		success = true;
 		if(onSuccess != null) {
@@ -34,6 +37,16 @@ function JPromises() {
 		}
 	};
 
+	// the data is of the form {success: boolean}
+	this.jsonResolve = function(data) {
+		if(data.success === "true") {
+			that.resolve(data);
+		}
+		else {
+			that.reject(data);
+		}
+	};
+
 	this.then = function(callback) {
 		if(fullfilled && success) {
 			callback(answer);
@@ -41,6 +54,8 @@ function JPromises() {
 		else if(!fullfilled) {
 			onSuccess = callback;
 		}
+
+		return this;
 	};
 
 	this.catch = function(callback) {
@@ -50,6 +65,8 @@ function JPromises() {
 		else if(!fullfilled) {
 			onFailure = callback;
 		}
+
+		return this;
 	}
 
 	this.getId = function() {
@@ -62,6 +79,14 @@ window.API = {
 		var prom = new JPromises();
 
 		app.auth(name, password, prom.getId());
+
+		return prom;
+	},
+
+	register: function(name, password) {
+		var prom = new JPromises();
+		
+		app.register(name, password, prom.getId());
 
 		return prom;
 	}

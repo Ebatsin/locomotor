@@ -70,6 +70,11 @@
 					else {
 						// @todo send the request
 						console.log('send the login request');
+						API.auth(name.value, password.value).then(function(data) {
+							console.log("Authentifié avec succès");
+						}).catch(function(data) {
+							modules.login.showError(data.message);
+						});
 						modules.login.emptyFields();
 					}
 				}

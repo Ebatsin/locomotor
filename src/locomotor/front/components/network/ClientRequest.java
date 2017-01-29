@@ -29,6 +29,8 @@ public class ClientRequest {
 	 */
 	FileUpload _params;
 
+	static String _genericHostname = "https://localhost:8000/";
+
 	/**
 	 * Constructs the object.
 	 *
@@ -37,6 +39,15 @@ public class ClientRequest {
 	public ClientRequest(String hostname) {
 		_hostname = hostname;
 		_params = new FileUpload();
+	}
+
+	public ClientRequest() {
+		_hostname = _genericHostname;
+		_params = new FileUpload();
+	}
+
+	public static void setGenericHostname(String hostname) {
+		_genericHostname = hostname;
 	}
 
 	/**

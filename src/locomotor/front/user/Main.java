@@ -24,13 +24,14 @@ import netscape.javascript.JSObject;
 public class Main extends Application {
 
 	public static void main(String[] args) throws Exception {
-
-
-		System.setProperty("prism.lcdtext", "false"); // enhance fonts		
-		launch(args);
+		System.setProperty("prism.lcdtext", "false"); // enhance fonts
 
 		System.setProperty("javax.net.ssl.trustStore", "clientKey.pfx");
 		System.setProperty("javax.net.ssl.trustStorePassword","motdepasse");
+
+		ClientRequest.setGenericHostname("https://localhost:8000/");
+
+		launch(args);
 	}
 
 	@Override
