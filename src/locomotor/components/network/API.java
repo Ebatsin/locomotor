@@ -112,7 +112,7 @@ public class API {
 					// auth with token
 					String longToken = data.getAsString("token");
 					Pair<String,Integer> claims = jwt.checkToken(longToken);
-					
+						
 					// check error
 					if(claims == null) {
 						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
@@ -123,9 +123,9 @@ public class API {
 
 					// check if the user still exist in the database
 					// before create the token
-					if(!DBH.getInstance().usernameAlreadyTaken(claims.getLeft())) {
+					if(!DBH.getInstance().userStillExists(claims.getLeft())) {
 						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-							"The token is no longer valid", ErrorCode.DEFAULT_ERROR_CODE);
+							"The user does not exist", ErrorCode.DEFAULT_ERROR_CODE);
 						return false;
 					}
 

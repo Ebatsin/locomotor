@@ -298,8 +298,22 @@ public class DBH {
 	public static boolean usernameAlreadyTaken(String username) {
 		MongoCollection<Document> users = md.getCollection("users");
 		Document userAlreadyExists = users.find(eq("username", username)).first();
-		
 		return (userAlreadyExists != null);
+	}
+
+	/**
+	 * Check if the user still exists
+	 *
+	 * @param      id    The identifier
+	 *
+	 * @return     True if exists, false otherwise.
+	 */
+	public static boolean userStillExists(String id) {
+		MongoCollection<Document> users = md.getCollection("users");
+		BasicDBObject queryUser = new BasicDBObject();
+		queryUser.put("_id", new ObjectId(id));
+		Document userExists = users.find(queryUser).first();
+		return (userExists != null);
 	}
 
 	/**
