@@ -57,12 +57,12 @@ public class Comparator {
 	/**
 	 * The maximum number of items wanted.
 	 */
-	private final int maxItemsWished = 10;
+	private final int _maxItemsWished = 10;
 
 	/**
 	 * The maximum number of criterias wanted.
 	 */
-	private final int maxCriteriasWished = 5;
+	private final int _maxCriteriasWished = 5;
 
 	/**
 	 * Constructs the comparator.
@@ -95,15 +95,15 @@ public class Comparator {
 		System.out.println("Searching best items matching the criterias");
 
 		// grade -> item map
-		SortedMap<Double, ArrayList<Pair<String, Double>>> gradesList = new TreeMap<Double, ArrayList<Pair<String, Double>>>(Collections.reverseOrder());
+		SortedMap<Double, ArrayList<Pair<String, Double>>> gradesList = new TreeMap(Collections.reverseOrder());
 		
 		// grade -> criteria map of an item, so for each item
-		TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>> criteriasGradeItem = new TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>>();
+		TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>> criteriasGradeItem = new TreeMap();
 		
 		for (Item item : items) {
 			
 			// store the grade of criterias to sort it easier later
-			SortedMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade = new TreeMap<Double, ArrayList<Pair<String, Double>>>(Collections.reverseOrder());
+			SortedMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade = new TreeMap(Collections.reverseOrder());
 
 			// compute, get the grade of the item
 			double grade = computeGradeOfItem(item, criteriasGrade);
@@ -191,9 +191,11 @@ public class Comparator {
 	 *
 	 * @return     The list of the best items and their best criterias.
 	 */
-	public ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> filterResults(SortedMap<Double, ArrayList<Pair<String, Double>>> itemsList, TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>> criteriasList) {
+	public ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> filterResults(
+		SortedMap<Double, ArrayList<Pair<String, Double>>> itemsList,
+		TreeMap<String, SortedMap<Double, ArrayList<Pair<String, Double>>>> criteriasList) {
 		
-		ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> results = new ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>>();
+		ArrayList<Pair<Pair<String, Double>, List<Pair<String, Double>>>> results = new ArrayList();
 
 		// keep the best items
 		itemsList = itemsList.headMap(_minimumGrade);
@@ -204,8 +206,8 @@ public class Comparator {
 		}
 
 		// keep the X first best
-		if (bestItems.size() > maxItemsWished) {
-			bestItems = bestItems.subList(0, maxItemsWished);
+		if (bestItems.size() > _maxItemsWished) {
+			bestItems = bestItems.subList(0, _maxItemsWished);
 		}
 
 		// retrieve the best criterias of each item
@@ -213,13 +215,14 @@ public class Comparator {
 
 			// the list of best criterias
 			List<Pair<String, Double>> bestCriterias = new ArrayList<Pair<String, Double>>();
-			for(Map.Entry<Double, ArrayList<Pair<String, Double>>> listCriteriaPerGrade : criteriasList.get(item.getLeft()).entrySet()) {
+			for(Map.Entry<Double, ArrayList<Pair<String, Double>>> listCriteriaPerGrade : 
+				criteriasList.get(item.getLeft()).entrySet()) {
 				bestCriterias.addAll(listCriteriaPerGrade.getValue());
 			}
 
 			// keep the X first best criterias
-			if (bestCriterias.size() > maxCriteriasWished) {
-				bestCriterias = bestCriterias.subList(0, maxCriteriasWished);
+			if (bestCriterias.size() > _maxCriteriasWished) {
+				bestCriterias = bestCriterias.subList(0, _maxCriteriasWished);
 			}
 
 			// replace by the name of the criterias
@@ -278,7 +281,11 @@ public class Comparator {
 	 *
 	 * @return     The grade of the category, between -1 (flexibily disable) else between 0 and 1 (best).
 	 */
-	private double computeGradeOfCategory(UserCategory userCategory, ItemCategory itemCategory, SortedMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade) {
+	private double computeGradeOfCategory(
+		UserCategory userCategory, 
+		ItemCategory itemCategory, 
+		SortedMap<Double, ArrayList<Pair<String, Double>>> criteriasGrade
+	) {
 		double grade = 0.0;
 		int numberOfCriterias = 0;
 

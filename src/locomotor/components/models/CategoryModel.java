@@ -71,9 +71,9 @@ public class CategoryModel {
 	}
 
 	/**
-	 * @todo.
+	 * JSON representation of the class.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     A JsonObject.
 	 */
 	public JsonObject toJSON() {
 		JsonObject obj = Json.object();

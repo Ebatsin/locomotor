@@ -50,19 +50,19 @@ public class Pair<L, R> {
 	/**
 	 * Sets the left.
 	 *
-	 * @param      l     L
+	 * @param      left     L
 	 */
-	public void setLeft(L l) {
-		_left = l;
+	public void setLeft(L left) {
+		_left = left;
 	}
 
 	/**
 	 * Sets the right.
 	 *
-	 * @param      r     R
+	 * @param      right     R
 	 */
-	public void setRight(R r) {
-		_right = r;
+	public void setRight(R right) {
+		_right = right;
 	}
 
 	/**

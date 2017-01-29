@@ -45,7 +45,12 @@ public class Compare {
 	* @param disableFlexibility Disable the flexibility
 	* @return The mark generated for this criteria's interval value and this user given interval
 	*/
-	public static double intervalValue(double userLowBound, double userHighBound, double itemLowBound, double itemHighBound, boolean disableFlexibility) {
+	public static double intervalValue(
+		double userLowBound, 
+		double userHighBound, 
+		double itemLowBound, 
+		double itemHighBound, 
+		boolean disableFlexibility) {
 		
 		if(disableFlexibility) {
 			return (userLowBound <= itemLowBound && itemHighBound <= userHighBound) ? 1.0 : -1.0;

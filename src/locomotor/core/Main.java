@@ -1,21 +1,13 @@
 package locomotor.core;
 
-import com.eclipsesource.json.*;
-
-import java.lang.Thread;
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import locomotor.components.Compare;
-import locomotor.components.models.*;
-import locomotor.components.network.*;
 import locomotor.components.Pair;
-import locomotor.components.types.*;
+import locomotor.components.network.API;
+import locomotor.components.network.NetworkHandler;
 
 /**
  * Where all the magic happens.
@@ -56,12 +48,14 @@ public class Main {
 					return;
 				case "--create-superuser":
 					String name;
-					String password, passwordCheck;
+					
 					Scanner sc = new Scanner(System.in);
 					System.out.print("Username (will be modifiable from the app) :\n> ");
 					name = sc.nextLine();
+					String password;
 					System.out.print("User password :\n> ");
 					password = sc.nextLine();
+					String passwordCheck;
 					System.out.print("Verify the user password :\n> ");
 					passwordCheck = sc.nextLine();
 
@@ -76,6 +70,8 @@ public class Main {
 						System.out.println("The username is already taken. Please try with another name.");
 					}
 					return;
+				default:
+					break;
 			}
 		}
 

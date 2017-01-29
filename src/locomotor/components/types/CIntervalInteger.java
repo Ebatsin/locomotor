@@ -33,7 +33,13 @@ public class CIntervalInteger extends CInterval implements CComparable<CInterval
 	 * @return     1.0 (match), 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)
 	 */
 	public double compare(CIntervalInteger user, CIntervalInteger universe, boolean disableFlexibility) {
-		return Compare.intervalValue(user.min().doubleValue(), user.max().doubleValue(), min().doubleValue(), max().doubleValue(), disableFlexibility);
+		return Compare.intervalValue(
+			user.min().doubleValue(), 
+			user.max().doubleValue(), 
+			min().doubleValue(), 
+			max().doubleValue(), 
+			disableFlexibility
+		);
 	}
 
 	/**
