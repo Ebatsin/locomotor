@@ -363,61 +363,85 @@ public class API {
 		});
 
 		nh.createEndpoint("/api/resource/version", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {			
-				if(!data.isValid()) {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
-						"La requête doit être au format POST pour être lue par le serveur");
-					return;
-				}			
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String id = data.getAsString("id");		
+				CoreResourceManager crm = CoreResourceManager.getInstance();
 				
-				// all parameter, ok
-				if(data.isDefined("id")) {
-					String id = data.getAsString("id");
-					CoreResourceManager crm = CoreResourceManager.getInstance();
-					if(!crm.exists(id)) {
-						System.out.println("le fichier demandé n'existe pas");
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND,
-							"The image requested does not exist");
-					}
-					else {
-						response.getJsonContext().success(Json.object().add("version", crm.getVersion(id)));
-					}
+				if(!crm.exists(id)) {
+					
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						"The file requested does not exist", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
 				}
-				else { // error
-					String errorMessage = "The parameter `id` is missing to complete this request.";
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
-				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("version", crm.getVersion(id)));
+				return true;
+				
 			}
 		});
 
 		nh.createEndpoint("/api/resource/get", new IEndpointHandler() {
-			public void handle(NetworkData data, NetworkResponseFactory response) {
-				if(data.isValid()) {
-					if(!data.isDefined("id")) {
-						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-							"Le paramètre `id` n'a pas été trouvé. Il est obligatoire pour cette requête");
-						return;
-					}
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
 				}
-				else {
-					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
-						"La requête doit être au format POST pour être lue par le serveur");
-					return;
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
 				}
 
 				File file = new File("resources/core/" + data.getAsString("id"));
-				System.out.print("Fichier demandé : " + data.getAsString("id"));
 
-				if(file.exists() && !file.isDirectory()) {
-					System.out.println(", le fichier existe");
-					response.getBinaryContext().success(file);
-				}
-				else {
-					System.out.println(", le fichier n'existe pas");
+				if(!file.exists() || file.isDirectory()) {
+
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
-						"L'image demandée n'a pas pu être trouvée : `" 
-						+ "resources/core/" + data.getAsString("id") + "`");
+						"The file requested does not exist", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
 				}
+
+				response.getBinaryContext().success(file);
+				return true;
 			}
 		});
 
