@@ -121,6 +121,7 @@
 			hideAllViews();
 			modules.menu.hide();
 			modules.menu.showOnlyHelp(true);
+			modules.help.setContext('login');
 			view.classList.remove('hide');
 
 			if(app.getLongToken() != null) {

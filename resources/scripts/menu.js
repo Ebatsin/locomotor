@@ -9,6 +9,7 @@
 	var disconnect = menu.querySelector('#menu-disconnect');
 
 	var displayBackArrow = true;
+	var displayOnlyHelp = false;
 	var mode = 'user';
 
 	var menuWidth = menu.offsetWidth; // needed for the animations
@@ -132,14 +133,16 @@
 		show: function() {
 			modules.menu.showOnlyHelp(false);
 			menu.style.display = "inline-block";
-			document.querySelector('#main-page').style.marginLeft = '4em';
+			//document.querySelector('#main-page').style.marginLeft = '4em';
+			document.querySelector('#help').style.marginLeft = '4em';
 		},
 		/**
 		* Hide the menu on the left
 		*/
 		hide: function() {
 			menu.style.display = "none";
-			document.querySelector('#main-page').style.marginLeft = '0';
+			//document.querySelector('#main-page').style.marginLeft = '0';
+			document.querySelector('#help').style.marginLeft = '0';
 		},
 		/**
 		* Check wether the menu is opened or closed
@@ -164,6 +167,7 @@
 		*/
 		showOnlyHelp: function(show) { // wether or not to show the help menu in the top left corner
 			modules.menu.hide();
+			displayOnlyHelp = show;
 
 			if(show) {
 				help.style.display = 'block';
@@ -172,6 +176,18 @@
 				help.style.display = 'none';
 			}
 
+		},
+		isOnlyHelpShown: function() {
+			return displayOnlyHelp;
+		},
+		// used to hide the icon when the help is opened while keeping the preference saved
+		tmpShowOnlyHelp: function(show) {
+			if(show) {
+				help.style.display = 'block';
+			}
+			else {
+				help.style.display = 'none';
+			}
 		},
 		/**
 		* item : 

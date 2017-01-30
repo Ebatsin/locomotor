@@ -18,6 +18,7 @@
 				hideAllViews();
 				modules.menu.show();
 				modules.menu.showBackArrow(false);
+				modules.help.setContext('search');
 				view.classList.remove('hide');
 				app.setTitle('Search');
 

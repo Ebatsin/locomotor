@@ -29,6 +29,7 @@
 
 	window.loadView = function(view, params) {
 		if(window.views.indexOf(view) != -1) {
+			modules.help.close();
 			window.modules[view].load(params);
 		}
 	};
