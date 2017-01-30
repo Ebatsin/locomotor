@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
+import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemFull;
@@ -385,6 +386,45 @@ public class API {
 						"L'image demandée n'a pas pu être trouvée : `" 
 						+ "resources/core/images/" + data.getAsString("name") + "`", ErrorCode.DEFAULT_ERROR_CODE);
 				}
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/booking/get-all", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				
+				JsonArray bookings = Json.array();
+				for(Booking booking : DBH.getInstance().getAllBooking(userID)) {
+					bookings.add(booking.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("bookings", bookings));
 
 				return true;
 			}
