@@ -451,7 +451,7 @@ public class DBH {
 	}
 
 	/**
-	 * Change the username of the user
+	 * Change the username of the user.
 	 *
 	 * @param      userID       The user id
 	 * @param      newUsername  The new username
@@ -486,6 +486,80 @@ public class DBH {
 
 		// update
 		Document update = new Document("$set", new Document("username", newUsername));
+		users.updateOne(filter, update);
+		return true;
+	}
+
+	/**
+	 * Change the password of the user.
+	 *
+	 * @param      userID       The user id
+	 * @param      oldPassword  The old password
+	 * @param      newPassword  The new password
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean changePassword(String userID, String oldPassword, String newPassword) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// check if old password is valid
+		String correctHash = user.getString("password");
+		Boolean isOldPasswordValid = null;
+
+		try {
+			
+			isOldPasswordValid = PasswordStorage.verifyPassword(oldPassword + userID, correctHash);
+		
+		}
+		catch(Exception ex) {
+			
+			// bad password
+			String message = "Error while hashing the password";
+			ErrorHandler.getInstance().push("changePassword", true, message, "");
+			return false;
+
+		}
+
+		if (!isOldPasswordValid) {
+			String messageGen = "The old password is not correct";
+			String messageCont = "The old password is not correct";
+			ErrorHandler.getInstance().push("changePassword", true, messageGen, messageCont);
+			return false;
+		}
+
+		// old password is ok, hash the new password and store it
+		String passwordHash = "";
+		try {
+
+			passwordHash = PasswordStorage.createHash(newPassword + userID);
+
+		}
+		catch(Exception ex) {
+	
+			// delete the user from the database
+			String message = "An error occurred while processing the modification of the new password. Please retry.";
+			ErrorHandler.getInstance().push("changePassword", true, message, "");
+			return false;
+
+		}
+
+		// update
+		Document update = new Document("$set", new Document("password", passwordHash));
 		users.updateOne(filter, update);
 		return true;
 	}

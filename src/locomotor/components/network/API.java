@@ -273,6 +273,52 @@ public class API {
 			}
 		});
 
+		nh.createEndpoint("/api/user/change/password", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("oldPassword");
+				setExpectedParams("newPassword");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				String oldPassword = data.getAsString("oldPassword");
+				String newPassword = data.getAsString("newPassword");
+
+				boolean result = DBH.getInstance().changePassword(userID, oldPassword, newPassword);
+
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+				return true;
+
+			}
+		});
+
 		nh.createEndpoint("/api/model/get", new IEndpointHandler() {
 			public boolean handle(NetworkData data, NetworkResponseFactory response) {
 				if(!super.handle(data, response)) {
