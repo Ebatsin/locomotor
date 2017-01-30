@@ -670,7 +670,49 @@ public class DBH {
 		Document update = new Document("$set", new Document("bookings", bookings));
 		users.updateOne(filter, update);
 	
-		return ((ObjectId)booking.get("_id")).toString();
+		return booking.getObjectId("_id").toString();
+	}
+
+	/**
+	 * Removes a booking.
+	 *
+	 * @param      userID     The user id
+	 * @param      bookingID  The booking id
+	 *
+	 * @return     True if remove succeed, false otherwise.
+	 */
+	public static boolean removeBooking(String userID, String bookingID) {
+		MongoCollection<Document> users = md.getCollection("users");
+
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user = users.find(filter).first();
+
+		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
+		if(bookings == null) {
+			return false;
+		}
+		
+		// search
+		int index = -1;
+		for (index = 0; index < bookings.size(); index++) {
+			Document current = bookings.get(index);
+			if(current.getObjectId("_id").toString().equals(bookingID)) {
+				break;
+			}
+		}
+
+		// match, then remove
+		if ((index != -1) && (index != bookings.size())) {
+			bookings.remove(index);
+		} else {
+			return false;
+		}
+
+		// update
+		Document update = new Document("$set", new Document("bookings", bookings));
+		users.updateOne(filter, update);
+		return true;
 	}
 
 }
