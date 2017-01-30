@@ -492,5 +492,50 @@ public class API {
 				return true;
 			}
 		});
+
+		nh.createEndpoint("/api/booking/remove", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				
+				boolean success = DBH.getInstance().removeBooking(userID, data.getAsString("id"));
+
+				// check error
+				if(!success) {
+					String message = "This booking does not exist";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						message, ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
 	}
 }
