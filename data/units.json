@@ -6,22 +6,22 @@
 	"alt": [
 		{
 			"name": "mm",
-			"long": "millimètre%s",
+			"long": "millimeter%s",
 			"factor": 0.00100000004749745
 		},
 		{
 			"name": "cm",
-			"long": "centimètre%s",
+			"long": "centimeter%s",
 			"factor": 0.00999999977648258
 		},
 		{
 			"name": "m",
-			"long": "mètre%s",
+			"long": "meter%s",
 			"factor": 1.0
 		},
 		{
 			"name": "km",
-			"long": "kilomètre%s",
+			"long": "kilometer%s",
 			"factor": 1000.0
 		},
 		{
@@ -30,13 +30,13 @@
 			"factor": 3.08567759262843e+16
 		},
 		{
-			"name": "al",
-			"long": "année%s-lumière",
+			"name": "ly",
+			"long": "light-year%s",
 			"factor": 9.46100013052723e+15
 		},
 		{
-			"name": "ua",
-			"long": "unité%s astronomique",
+			"name": "au",
+			"long": "astronomical unit%s",
 			"factor": 1.49597863936e+11
 		}
 	]
@@ -45,21 +45,21 @@
 	"_id": {
 		"$oid": "5842d42157ab9e6a5495f3ea"
 	},
-	"unitname": "masse",
+	"unitname": "mass",
 	"alt": [
 		{
 			"name": "kg",
-			"long": "kilogramme%s",
+			"long": "kilogram%s",
 			"factor": 1.0
 		},
 		{
 			"name": "g",
-			"long": "gramme%s",
+			"long": "gram%s",
 			"factor": 0.0010000000474974513
 		},
 		{
 			"name": "t",
-			"long": "tonne%s",
+			"long": "ton%s",
 			"factor": 1000.0
 		}
 	]
@@ -68,26 +68,26 @@
 	"_id": {
 		"$oid": "5842d53957ab9e6a5495f3eb"
 	},
-	"unitname": "volume",
+	"unitname": "volum",
 	"alt": [
 		{
 			"name": "m3",
-			"long": "mètre%s cube",
+			"long": "cubic metre%s",
 			"factor": 1.0
 		},
 		{
 			"name": "dam3",
-			"long": "décamètre%s cube",
+			"long": "cubic decameter%s",
 			"factor": 1000.0
 		},
 		{
 			"name": "hm3",
-			"long": "hectomètre%s cube",
+			"long": "cubic hectometer%s",
 			"factor": 1e+06
 		},
 		{
 			"name": "cm3",
-			"long": "centimètre%s cube",
+			"long": "cubic centimeter%s",
 			"factor": 9.999999974752427e-07
 		}
 	]
@@ -96,7 +96,7 @@
 	"_id": {
 		"$oid": "5842d5d857ab9e6a5495f3ec"
 	},
-	"unitname": "devise",
+	"unitname": "currency",
 	"alt": [
 		{
 			"name": "€",
@@ -109,21 +109,21 @@
 	"_id": {
 		"$oid": "5842d6a857ab9e6a5495f3ed"
 	},
-	"unitname": "vitesse",
+	"unitname": "speed",
 	"alt": [
 		{
 			"name": "m/s",
-			"long": "mètre%s par seconde",
+			"long": "meter%s per second",
 			"factor": 1.0
 		},
 		{
 			"name": "km/h",
-			"long": "kilomètre%s par heure",
+			"long": "kilometer%s per hour",
 			"factor": 3.5999999046325684
 		},
 		{
 			"name": "km/s",
-			"long": "kilomètre%s par seconde",
+			"long": "kilometer%s per second",
 			"factor": 0.0010000000474974513
 		}
 	]
