@@ -428,12 +428,66 @@ public class DBH {
 	public static HashMap<String, Object> getUserInfo(String userID) {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
+
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user = users.find(filter).first();
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
 		HashMap<String, Object> info = new HashMap();
 		info.put("username", user.getString("username"));
 		info.put("adminLevel", user.getInteger("isAdmin"));
 		return info;
+	}
+
+	/**
+	 * Change the username of the user
+	 *
+	 * @param      userID       The user id
+	 * @param      newUsername  The new username
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean changeUsername(String userID, String newUsername) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// check if username if available
+		if(usernameAlreadyTaken(newUsername)) {
+			String messageGen = "This username is not available";
+			String messageCont = "This username is not available";
+			ErrorHandler.getInstance().push("usernameNotAvailable", true, messageGen, messageCont);
+			return false;
+		}
+
+		// update
+		Document update = new Document("$set", new Document("username", newUsername));
+		users.updateOne(filter, update);
+		return true;
 	}
 
 	/**
