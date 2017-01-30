@@ -10,6 +10,7 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import locomotor.components.Pair;
 
 import locomotor.components.logging.ErrorHandler;
 
+import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
@@ -37,6 +39,7 @@ import locomotor.components.types.CUniverseType;
 import locomotor.components.types.TypeFactory;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -337,6 +340,7 @@ public class DBH {
 		user.append("password", "");
 		user.append("isAdmin", adminLevel);
 		user.append("notifications", new ArrayList<Document>());
+		user.append("bookings", new ArrayList<Document>());
 		MongoCollection<Document> users = md.getCollection("users");
 		users.insertOne(user);
 			
@@ -425,6 +429,8 @@ public class DBH {
 
 		MongoCollection<Document> items = md.getCollection("items");
 		MongoCollection<Document> universes = md.getCollection("universes");
+
+		// @todo: check items & universes still exists
 		
 		BasicDBObject queryItem = new BasicDBObject();
 		queryItem.put("_id", new ObjectId(itemID));
@@ -452,8 +458,8 @@ public class DBH {
 	 * @return     The universe.
 	 */
 	public static Universe getUniverse(String universeID) {
-			MongoCollection<Document> universes = md.getCollection("universes");
-			BasicDBObject queryUniverse = new BasicDBObject();
+		MongoCollection<Document> universes = md.getCollection("universes");
+		BasicDBObject queryUniverse = new BasicDBObject();
 		
 		try {
 			
@@ -469,6 +475,14 @@ public class DBH {
 		}
 	}
 
+	/**
+	 * Gets the item.
+	 *
+	 * @param      itemID    The item id
+	 * @param      catModel  The cat model
+	 *
+	 * @return     The item.
+	 */
 	public static ItemFull getItem(String itemID, ArrayList<CategoryModel> catModel) {
 
 		MongoCollection<Document> items = md.getCollection("items");
@@ -536,6 +550,101 @@ public class DBH {
 
 		return new ItemFull(itemID, name, universeID, description, image, categories);
 
+	}
+
+	/**
+	 * Gets all booking of the user.
+	 *
+	 * @param      userID  The user id
+	 *
+	 * @return     All booking.
+	 */
+	public static ArrayList<Booking> getAllBooking(String userID) {
+		MongoCollection<Document> users = md.getCollection("users");
+
+    	BasicDBObject queryUser = new BasicDBObject();
+		Document user = null;
+
+		try {
+			
+			queryUser.put("_id", new ObjectId(userID));
+			user = users.find(queryUser).first();
+
+		} catch (Exception e) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
+		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
+		ArrayList<Booking> bookingsFinal = new ArrayList<Booking>();
+
+		for (Document booking : bookings) {
+			
+			String id = booking.getObjectId("_id").toString();
+			String itemID = booking.getObjectId("itemID").toString();
+			HashMap<String, Object> itemInfo = getPartialInfoOfItem(itemID);
+			int qt = booking.getInteger("qt");
+			long startDate = booking.getLong("startDate");
+			long endDate = booking.getLong("endDate");
+
+			bookingsFinal.add(new Booking(id, itemID, itemInfo.get("itemName").toString(), itemInfo.get("itemImageURL").toString(), qt, startDate, endDate));
+		}
+
+    	return bookingsFinal;
+	}
+
+	/**
+	 * Adds a booking.
+	 *
+	 * @param      userID     The user id
+	 * @param      itemID     The item id
+	 * @param      qt         The quantity
+	 * @param      startDate  The start date
+	 * @param      endDate    The end date
+	 *
+	 * @return     The identifier of the booking
+	 */
+	public static String addBooking(String userID, String itemID, int qt, long startDate, long endDate) {
+		MongoCollection<Document> users = md.getCollection("users");
+
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user = null;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		} catch (Exception e) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
+		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
+		if(bookings == null) {
+			bookings = new ArrayList<Document>();
+		}
+
+		// new booking
+		Document booking = new Document();
+		booking.append("_id", new ObjectId());
+		booking.append("itemID", new ObjectId(itemID));
+		booking.append("qt", qt);
+		booking.append("startDate", startDate);
+		booking.append("endDate", endDate);
+		
+		// add to current list
+		bookings.add(booking);
+
+		// update data
+		Document update = new Document("$set", new Document("bookings", bookings));
+		users.updateOne(filter, update);
+	
+		return ((ObjectId)booking.get("_id")).toString();
 	}
 
 }
