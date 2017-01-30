@@ -565,6 +565,62 @@ public class DBH {
 	}
 
 	/**
+	 * Removes an user.
+	 *
+	 * @param      userID    The user id
+	 * @param      password  The password
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean removeUser(String userID, String password) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// check if password is valid
+		String correctHash = user.getString("password");
+		Boolean isPasswordValid = null;
+
+		try {
+			
+			isPasswordValid = PasswordStorage.verifyPassword(password + userID, correctHash);
+		
+		}
+		catch(Exception ex) {
+			
+			// bad password
+			String message = "Error while hashing the password";
+			ErrorHandler.getInstance().push("changePassword", true, message, "");
+			return false;
+
+		}
+
+		if (!isPasswordValid) {
+			String messageGen = "The password is not correct";
+			String messageCont = "The password is not correct";
+			ErrorHandler.getInstance().push("changePassword", true, messageGen, messageCont);
+			return false;
+		}
+
+		// old password is ok, then remove the user from the matrix
+		users.deleteOne(filter);
+		return true;
+	}
+
+	/**
 	 * Gets the partial information of item.
 	 *
 	 * @param      itemID  The item id
