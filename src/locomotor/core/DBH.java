@@ -419,6 +419,24 @@ public class DBH {
 	}
 
 	/**
+	 * Gets the user information.
+	 *
+	 * @param      userID  The user id
+	 *
+	 * @return     The user information.
+	 */
+	public static HashMap<String, Object> getUserInfo(String userID) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user = users.find(filter).first();
+		HashMap<String, Object> info = new HashMap();
+		info.put("username", user.getString("username"));
+		info.put("adminLevel", user.getInteger("isAdmin"));
+		return info;
+	}
+
+	/**
 	 * Gets the partial information of item.
 	 *
 	 * @param      itemID  The item id

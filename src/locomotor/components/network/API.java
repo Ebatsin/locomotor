@@ -10,6 +10,7 @@ import java.lang.InterruptedException;
 import java.lang.Thread;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
@@ -181,6 +182,43 @@ public class API {
 					.add("long-term-token", longToken));
 
 				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/user/info", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				HashMap<String, Object> info = DBH.getInstance().getUserInfo(userID);
+				
+				response.getJsonContext().success(Json.object()
+					.add("username", info.get("username").toString())
+					.add("adminLevel", (Integer)info.get("adminLevel")));
+
+				return true;
+
 			}
 		});
 
