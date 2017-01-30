@@ -2,6 +2,8 @@
 	var view = document.querySelector('#help');
 	var close = document.querySelector('#help-close');
 
+	var isOpened = false;
+
 
 	if(!window.modules) {
 		window.modules = {};
@@ -12,7 +14,12 @@
 			console.log('initialisation du module help');
 			modules.menu.bind('help', function() {
 				modules.menu.close();
-				modules.help.open();
+				if(isOpened) {
+					modules.help.close();
+				}
+				else {
+					modules.help.open();
+				}
 			});
 
 			close.addEventListener('click', function() {
@@ -24,20 +31,23 @@
 			if(modules.menu.isOnlyHelpShown()) {
 				modules.menu.tmpShowOnlyHelp(false);
 			}
+			isOpened = true;
 
 			YUI().use('node', 'transition', function(Y) {
 				Y.one(view).transition({
 					easing: 'ease-in-out',
-					duration: 0.7,
+					duration: 0.4,
 					width: '25em'
 				});
 			});
 		},
 		close: function() {
+			isOpened = false;
+
 			YUI().use('node', 'transition', function(Y) {
 				Y.one(view).transition({
 					easing: 'ease-in-out',
-					duration: 0.7,
+					duration: 0.4,
 					width: 0
 				});
 			});
