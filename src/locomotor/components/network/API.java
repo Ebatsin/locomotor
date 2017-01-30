@@ -21,6 +21,7 @@ import locomotor.components.models.ItemFull;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
 import locomotor.core.Comparator;
+import locomotor.core.CoreResourceManager;
 import locomotor.core.DBH;
 import locomotor.core.jwt.JWTH;
 
@@ -361,20 +362,51 @@ public class API {
 			}
 		});
 
-		nh.createEndpoint("/img/get", new IEndpointHandler() {
-			public boolean handle(NetworkData data, NetworkResponseFactory response) {
-				if(!super.handle(data, response)) {
-					return false;
+		nh.createEndpoint("/api/resource/version", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {			
+				if(!data.isValid()) {
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST,
+						"La requête doit être au format POST pour être lue par le serveur");
+					return;
+				}			
+				
+				// all parameter, ok
+				if(data.isDefined("id")) {
+					String id = data.getAsString("id");
+					CoreResourceManager crm = CoreResourceManager.getInstance();
+					if(!crm.exists(id)) {
+						System.out.println("le fichier demandé n'existe pas");
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND,
+							"The image requested does not exist");
+					}
+					else {
+						response.getJsonContext().success(Json.object().add("version", crm.getVersion(id)));
+					}
+				}
+				else { // error
+					String errorMessage = "The parameter `id` is missing to complete this request.";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage);
+				}
+			}
+		});
+
+		nh.createEndpoint("/api/resource/get", new IEndpointHandler() {
+			public void handle(NetworkData data, NetworkResponseFactory response) {
+				if(data.isValid()) {
+					if(!data.isDefined("id")) {
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+							"Le paramètre `id` n'a pas été trouvé. Il est obligatoire pour cette requête");
+						return;
+					}
+				}
+				else {
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"La requête doit être au format POST pour être lue par le serveur");
+					return;
 				}
 
-				setExpectedParams("name");
-				if(!areAllParamsDefined()) {
-					sendDefaultMissingParametersMessage();
-					return false;
-				}
-
-				File file = new File("resources/core/images/" + data.getAsString("name"));
-				System.out.print("Fichier demandé : " + data.getAsString("name"));
+				File file = new File("resources/core/" + data.getAsString("id"));
+				System.out.print("Fichier demandé : " + data.getAsString("id"));
 
 				if(file.exists() && !file.isDirectory()) {
 					System.out.println(", le fichier existe");
@@ -384,10 +416,8 @@ public class API {
 					System.out.println(", le fichier n'existe pas");
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						"L'image demandée n'a pas pu être trouvée : `" 
-						+ "resources/core/images/" + data.getAsString("name") + "`", ErrorCode.DEFAULT_ERROR_CODE);
+						+ "resources/core/" + data.getAsString("id") + "`");
 				}
-
-				return true;
 			}
 		});
 

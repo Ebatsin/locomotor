@@ -4,6 +4,7 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.WriterConfig;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.Class;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import locomotor.front.components.network.BinaryObject;
 import locomotor.front.components.network.ClientRequest;
 import locomotor.front.components.network.FileUpload;
+import locomotor.front.components.FrontResourceManager;
 
 import netscape.javascript.JSObject;
 
@@ -34,6 +36,21 @@ public class Main extends Application {
 		ClientRequest.setGenericHostname("https://localhost:8000/");
 
 		launch(args);
+
+		System.out.println("Tentative de requête");
+
+		FrontResourceManager rm = FrontResourceManager.getInstance();
+		rm.getRemoteVersion("images/chat.png").thenAccept(new Consumer<Long>() {
+			public void accept(Long version) {
+				System.out.println("Version récupérée pour cat.png : " + version);
+			}
+		});
+
+		rm.getRemoteResource("images/chat.png").thenAccept(new Consumer<File>() {
+			public void accept(File file) {
+				System.out.println("fichier récupéré : " + file);
+			}
+		});
 	}
 
 	@Override
