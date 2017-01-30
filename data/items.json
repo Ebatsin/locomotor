@@ -2,11 +2,11 @@
 	"_id": {
 		"$oid": "58433aa157ab9e1f6f26334b"
 	},
-	"name": "Magicobus",
+	"name": "Knight Bus",
 	"universe": {
 		"$oid": "584336b157ab9e1521a8bd9f"
 	},
-	"description": "Le Magicobus est un bus à triple impériale de couleur violette qui offre un « transport d’urgence pour sorcières et sorciers en perdition ». Il faut juste faire un signe avec sa baguette, et il apparaît. Il est aussi possible de réserver un siège dans le Magicobus pour effectuer des trajets à travers toute la Grande-Bretagne.",
+	"description": "The Knight Bus is a triple-decker, purple AEC Regent III RT that assists stranded individuals of the wizarding community through public transportation. It operates at a very fast speed and obstacles will jump out of its way. To hail the bus, a witch or wizard must stick their wand hand in the air in the same manner that a Muggle might do to hail a taxi, though it is possible to book tickets for travel on the bus in advance.",
 	"image": "url",
 	"categories": [
 		{
@@ -264,7 +264,7 @@
 	"universe": {
 		"$oid": "58433b6557ab9e238922b8cc"
 	},
-	"description": "Avec sa forme en pointe de flèche, son cockpit fuselé et ses puissant double propulseurs, le A-Wing Fighter respire la vitesse pure, même à l'arrêt dans un hangar de l'Alliance. Plus rapide que le TIE Interceptor, le A-Wing Fighter est spécialisé dans les frappes ou déplacement unipersonnels rapides. Il est de plus équipé de deux tourelles laser pour voyager en toute sécurité.",
+	"description": "With its sleek arrowhead shape, streamlined cockpit, and massive twin engines, the A-wing starfighter suggests raw speed even when parked within Alliance hangar bays. Faster than even the TIE interceptor, the A-wing is well suited for lightning strikes. It sports a pair of pivoting laser cannons on each wingtip. The starfighters of Green Squadron, which flew in the Battle of Endor, were made up of A-wing starfighter.",
 	"image": "url",
 	"categories": [
 		{
@@ -479,11 +479,11 @@
 	"_id": {
 		"$oid": "58717b167e37eaf5657984a9"
 	},
-	"name": "Éclair de Feu",
+	"name": "Firebolt",
 	"universe": {
 		"$oid": "584336b157ab9e1521a8bd9f"
 	},
-	"description": "Le balai volant est utilisé comme moyen de locomotion dans l'univers des sorciers. C'est également le moyen de transport légal le plus répandu, loin devant le tapis volant. Il est de plus en plus utilisé pour les loisirs et le sport, comme le Quidditch. De forme et de taille variables, le balai est généralement composé d'un manche en bois et d'un faisceau de brindilles fixé à son extrémité arrière. Rien ne le distingue d'un balai Moldu si ce n'est les sortilèges dont il est doté et qui lui permettent de voler.",
+	"description": "The Firebolt is a world-class broomstick. It was the fastest at the time of its production, and was released in 1993. In time the Firebolt broomstick was used by the Bulgarian and Irish International Quidditch Teams. The teams played on Firebolts during the 1994 Quidditch World Cup. By 2014, the Firebolt had been superseded by the Firebolt Supreme, apparently manufactured by the same makers.",
 	"image": "url",
 	"categories": [
 		{
@@ -691,7 +691,7 @@
 	"universe": {
 		"$oid": "58717def7e37eaf5657984aa"
 	},
-	"description": "La Batmobile est le véhicule du personnage de bande dessinée Batman. C'est un véhicule tout terrain, auto-alimenté, blindé, utilisé pour la poursuite de véhicules, le transport des prisonniers ou encore comme laboratoire mobile.",
+	"description": "The Batmobile is the primary vehicle driven by the superhero Batman in American comic books published by DC Comics. The Batmobile is a state of the art all-terrain, self-powered, armored fighting motor vehicle used for vehicular hot pursuit, prisoner transportation, anti-tank warfare, riot control, and as a mobile crime lab. Kept in the Batcave, which it accesses through a hidden entrance, the heavily armoured, gadget-laden vehicle is used by Batman in his crime-fighting activities.",
 	"image": "url",
 	"categories": [
 		{
