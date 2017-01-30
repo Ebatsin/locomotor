@@ -44,6 +44,7 @@ html, body {
 	height: 100%;
 	background-color: hsl(0, 0%, 11%);
 	overflow: hidden;
+	z-index: 1000
 }
 
 #menu-bottom {
@@ -290,8 +291,9 @@ html, body {
 #search-page .option.selected {
 	cursor: default;
 	color: hsl(0, 0%, 0%);
-	border: solid 1px hsl(180, 60%, 40%);
-	background-color: hsl(180, 20%, 80%);	
+	background-color: hsl(207, 12%, 95%);
+	border: solid 1px hsl(0, 0%, 80%);
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
 }
 
 #search-page .option {
@@ -319,4 +321,53 @@ html, body {
 	font-size: 1.5em;
 	line-height: 6rem;
 	margin: 0;
+	margin-bottom: 3em;
+}
+
+#search-really-important {
+	padding: 1em;
+	margin-top: 2em;
+	display: inline-block;
+}
+
+/* ------------------------------------------ SEARCH INPUTS ---------------------------------------*/
+
+.range-bar {
+	border: solid 1px hsl(0, 0%, 70%);
+	background-color: hsl(0, 0%, 90%);
+	border-radius: 3px;
+	height: 7px;
+	width: 90%;
+	margin-left: 5%;
+	position: relative;;
+}
+
+.range-knob {
+	width: 25px;
+	height: 25px;
+	border: solid 1px hsl(180, 60%, 30%);
+	background-color: hsl(0, 0%, 90%);
+	border-radius: 13px;
+	position: absolute;
+	margin-top: -9px;
+	cursor: pointer;
+}
+
+.range-knob:hover {
+	background-color: hsl(180, 40%, 50%);
+	border-color: hsl(0, 0%, 40%);
+}
+
+.range-subbar {
+	width: 80%;
+	height: 7px;
+	background-color: hsl(180, 40%, 50%);
+	position: absolute;
+	margin-left: 10%;
+}
+
+.range-label {
+	position: absolute;
+	display: inline-block;
+	margin-top: -30px;
 }

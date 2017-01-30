@@ -23,7 +23,6 @@
 			});
 
 			close.addEventListener('click', function() {
-				console.log('fermeture');
 				modules.help.close();
 			});
 		},
