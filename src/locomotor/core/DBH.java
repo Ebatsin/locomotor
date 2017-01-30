@@ -611,19 +611,45 @@ public class DBH {
 
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user = null;
+		Document user = users.find(filter).first();
+		
+		String messageGen = "";
+		String messageCont = "";
+		boolean isError = false;
+		// various check
+		if (qt < 1) {
+			isError = true;
+			messageGen = "The quantity is not valid";
+			messageCont = "The quantity is null or negative";
+		}
+
+		if ((startDate < 1) || (endDate < 1) || (endDate < startDate)) {
+			isError = true;
+			messageGen = "At least one date is not valid";
+			messageCont = "At least one date is either negative or end is before start";
+		}
+
+		MongoCollection<Document> items = md.getCollection("items");
+		BasicDBObject queryItem = new BasicDBObject();
+		Document item = null;
 
 		try {
 			
-			user = users.find(filter).first();
+			queryItem.put("_id", new ObjectId(itemID));
+			item = users.find(queryItem).first();
 
 		} catch (Exception e) {
-			String messageGen = "This user does not exist";
-			String messageCont = "The identifier is not valid";
-			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			isError = true;
+			messageGen = "This item does not exist";
+			messageCont = "The identifier is not valid";
+		}
+		
+		if (isError) {
+			ErrorHandler.getInstance().push("addBooking", true, messageGen, messageCont);
 			return null;
 		}
 
+		// alright
 		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
 		if(bookings == null) {
 			bookings = new ArrayList<Document>();

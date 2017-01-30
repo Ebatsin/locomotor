@@ -391,6 +391,69 @@ public class API {
 			}
 		});
 
+		nh.createEndpoint("/api/booking/add", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				setExpectedParams("startDate");
+				setExpectedParams("endDate");
+				setExpectedParams("quantity");
+
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check validity
+				int quantity;
+				long startDate;
+				long endDate;
+				try {
+					quantity = Integer.parseInt(data.getAsString("quantity"));
+					startDate = Long.parseLong(data.getAsString("startDate"));
+					endDate = Long.parseLong(data.getAsString("endDate"));
+				}
+				catch (Exception e) {
+					String message = "At least one of the following parameter is malformated: `quantity`, `startDate`, `endDate`";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						message, ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				String bookingID = DBH.getInstance().addBooking(userID, data.getAsString("id"), quantity, startDate, endDate);
+				
+				// check error
+				if(bookingID == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
 		nh.createEndpoint("/api/booking/get-all", new IEndpointHandler() {
 			public boolean handle(NetworkData data, NetworkResponseFactory response) {
 				if(!super.handle(data, response)) {
