@@ -30,6 +30,8 @@ public class FrontResourceManager extends ResourceManager {
 
 	public CompletableFuture<Long> getRemoteVersion(String resource) {
 		ClientRequest cr = new ClientRequest("https://localhost:8000/");
+		// @todo: retrieve short token
+		cr.addParam("token", "");
 		cr.addParam("id", resource);
 		return cr.requestJson("api/resource/version").thenApply(new Function<JsonObject, Long>() {
 			public Long apply(JsonObject obj) {
@@ -53,9 +55,10 @@ public class FrontResourceManager extends ResourceManager {
 	public CompletableFuture<File> getRemoteResource(String resource) {
 		// check if the ressource exists locally
 		if(!exists(resource)) {
-			System.out.println("fetching `" + resource + "`, the resource does not exist locally. Fetching from the server");
 			// get the remote resource
 			ClientRequest cr = new ClientRequest("https://localhost:8000/");
+			// @todo: retrieve short token
+			cr.addParam("token", "");
 			cr.addParam("id", resource);
 			return cr.requestBinary("api/resource/get").thenApply(new Function<BinaryObject, File>() {
 				public File apply(BinaryObject obj) {
@@ -66,13 +69,12 @@ public class FrontResourceManager extends ResourceManager {
 							receivedResource.writeTo(outputStream);
 						}
 						catch(Exception exception) {
-							System.out.println("unable to write the file");
+							System.out.println("Unable to write the file");
+							exception.printStackTrace();
 						}
 
 						return new File(_baseURL + resource);
 					}
-					
-					System.out.println("erreur : " + obj.getErrorMessage());
 					return null;
 				}
 			});
@@ -84,8 +86,9 @@ public class FrontResourceManager extends ResourceManager {
 			getRemoteVersion(resource).thenAccept(new Consumer<Long>() {
 				public void accept(Long version) {
 					if(version > getVersion(resource)) { // update the local version
-						System.out.println("fetching `" + resource + "`, updating the local version");
 						ClientRequest crUpdate = new ClientRequest("https://localhost:8000/");
+						// @todo: retrieve short token
+						crUpdate.addParam("token", "");
 						crUpdate.addParam("id", resource);
 						crUpdate.requestBinary("api/resource/get").thenAccept(new Consumer<BinaryObject>() {
 							public void accept(BinaryObject obj) {
@@ -96,7 +99,8 @@ public class FrontResourceManager extends ResourceManager {
 										receivedResource.writeTo(outputStream);
 									}
 									catch(Exception exception) {
-										System.out.println("unable to write the file");
+										System.out.println("Unable to write the file (1)");
+										exception.printStackTrace();
 									}
 
 									file.complete(new File(_baseURL + resource));
@@ -109,7 +113,6 @@ public class FrontResourceManager extends ResourceManager {
 						});
 					}
 					else {
-						System.out.println("fetching `" + resource + "`, local version up to date");
 						// return the local version
 						file.complete(new File(_baseURL + resource));
 					}
