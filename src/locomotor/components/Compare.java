@@ -6,6 +6,9 @@ import locomotor.components.types.CBoolean;
 import locomotor.components.types.CSetGraph;
 import locomotor.core.Gaussian;
 
+/**
+ * Utily class for comparison.
+ */
 public class Compare {
 
 	/**
@@ -96,7 +99,7 @@ public class Compare {
 	}
 
 	/**
-	 * Compare the string list of the vehicle with the string list of the user
+	 * Compare the string list of the vehicle with the string list of the user.
 	 *
 	 * @param      userKey      The user key set
 	 * @param      itemKey      The item key set
@@ -143,6 +146,15 @@ public class Compare {
 		return (sumOfDistance == 0.0) ? sumOfDistance : (sumOfDistance / numberOfPaths);
 	}
 
+	/**
+	 * Compare the boolean value of the vehicle with the boolean value of the user.
+	 *
+	 * @param      user                The user
+	 * @param      item                The item
+	 * @param      disableFlexibility  The disable flexibility
+	 *
+	 * @return     1.0 if match, 0.0 otherwise, -1.0 if flexibility disable and no matching
+	 */
 	public static double booleanValue(CBoolean user, CBoolean item, boolean disableFlexibility) {		
 		return (item.value() == user.value()) ? 1.0 : (disableFlexibility ? -1.0 : 0.0);
 	}

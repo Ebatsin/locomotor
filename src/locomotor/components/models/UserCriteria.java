@@ -20,8 +20,9 @@ public class UserCriteria extends Criteria {
 	/**
 	 * Constructs the object.
 	 *
-	 * @param      id     The user criteria identifier
-	 * @param      value  The value
+	 * @param      id           The user criteria identifier
+	 * @param      value        The value
+	 * @param      disableFlex  The disable flex
 	 */
 	public UserCriteria(String id, CUserType value, boolean disableFlex) {
 		super(id, value);

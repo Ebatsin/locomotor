@@ -10,6 +10,8 @@ public interface JSONConvertissable {
 	/**
 	 * Factory current object from its JSON representation.
 	 *
+	 * @param      json  The json
+	 *
 	 * @return     The object.
 	 */
 	public static Object fromJSON(JsonValue json) {
