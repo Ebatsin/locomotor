@@ -9,7 +9,7 @@ import locomotor.components.JSONDisplayable;
 import locomotor.components.types.CItemType;
 
 /**
- * @todo.
+ * Displayable form of an item's criteria.
  */
 public class ItemCriteriaFull extends ItemCriteria implements JSONDisplayable {
 
@@ -31,9 +31,9 @@ public class ItemCriteriaFull extends ItemCriteria implements JSONDisplayable {
 	}
 
 	/**
-	 * { function_description }
+	 * Return the JSON value of the item's criteria.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     The item's criteria.
 	 */
 	public JsonValue toJSON() {
 		JsonObject critFull = Json.object();

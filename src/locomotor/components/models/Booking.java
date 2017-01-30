@@ -7,7 +7,7 @@ import com.eclipsesource.json.JsonValue;
 import locomotor.components.JSONDisplayable;
 
 /**
- * @todo
+ * Represent a booking made by an user on a item for a range of time.
  */
 public class Booking implements JSONDisplayable {
 
@@ -46,7 +46,17 @@ public class Booking implements JSONDisplayable {
 	 */
 	private long _endDate;
 
-
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      id         The identifier
+	 * @param      itemID     The item id
+	 * @param      itemName   The item name
+	 * @param      itemImage  The item image
+	 * @param      qt         The quantity
+	 * @param      startDate  The start date
+	 * @param      endDate    The end date
+	 */
 	public Booking(String id, String itemID, String itemName, String itemImage, int qt, long startDate, long endDate) {
 		_identifier = id;
 		_itemID = itemID;
@@ -58,9 +68,9 @@ public class Booking implements JSONDisplayable {
 	}
 
 	/**
-	 * @todo.
+	 * Return the JSON value of the booking.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     The booking
 	 */
 	public JsonValue toJSON() {
 		JsonObject booking = Json.object();

@@ -430,15 +430,22 @@ public class API {
 					startDate = Long.parseLong(data.getAsString("startDate"));
 					endDate = Long.parseLong(data.getAsString("endDate"));
 				}
-				catch (Exception e) {
-					String message = "At least one of the following parameter is malformated: `quantity`, `startDate`, `endDate`";
+				catch (Exception ex) {
+					String message = "At least one of the following parameter is malformated: ";
+					message +=  "`quantity`, `startDate`, `endDate`";
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
 						message, ErrorCode.DEFAULT_ERROR_CODE);
 					return false;
 				}
 
 				String userID = claims.getLeft();
-				String bookingID = DBH.getInstance().addBooking(userID, data.getAsString("id"), quantity, startDate, endDate);
+				String bookingID = DBH.getInstance().addBooking(
+					userID, 
+					data.getAsString("id"), 
+					quantity, 
+					startDate, 
+					endDate
+				);
 				
 				// check error
 				if(bookingID == null) {

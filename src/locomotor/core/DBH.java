@@ -25,10 +25,10 @@ import locomotor.components.models.CategoryModel;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
-import locomotor.components.models.ItemCriteria;
-import locomotor.components.models.ItemFull;
 import locomotor.components.models.ItemCategoryFull;
+import locomotor.components.models.ItemCriteria;
 import locomotor.components.models.ItemCriteriaFull;
+import locomotor.components.models.ItemFull;
 import locomotor.components.models.Universe;
 
 import locomotor.components.types.CEnumItemType;
@@ -465,9 +465,15 @@ public class DBH {
 			
 			queryUniverse.put("_id", new ObjectId(universeID));
 			Document universe = universes.find(queryUniverse).first();
-			return new Universe(universeID, universe.get("name").toString(), universe.get("description").toString(), universe.get("image").toString());
+			return new Universe(
+				universeID,
+				universe.get("name").toString(),
+				universe.get("description").toString(),
+				universe.get("image").toString()
+			);
 
-		} catch (Exception e) {
+		}
+		catch (Exception ex) {
 			String messageGen = "This universe does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
@@ -494,7 +500,8 @@ public class DBH {
 			queryItem.put("_id", new ObjectId(itemID));
 			item = items.find(queryItem).first();
 
-		} catch (Exception e) {
+		}
+		catch (Exception ex) {
 			String messageGen = "This item does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
@@ -562,7 +569,7 @@ public class DBH {
 	public static ArrayList<Booking> getAllBooking(String userID) {
 		MongoCollection<Document> users = md.getCollection("users");
 
-    	BasicDBObject queryUser = new BasicDBObject();
+		BasicDBObject queryUser = new BasicDBObject();
 		Document user = null;
 
 		try {
@@ -570,7 +577,8 @@ public class DBH {
 			queryUser.put("_id", new ObjectId(userID));
 			user = users.find(queryUser).first();
 
-		} catch (Exception e) {
+		}
+		catch (Exception ex) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -589,10 +597,13 @@ public class DBH {
 			long startDate = booking.getLong("startDate");
 			long endDate = booking.getLong("endDate");
 
-			bookingsFinal.add(new Booking(id, itemID, itemInfo.get("itemName").toString(), itemInfo.get("itemImageURL").toString(), qt, startDate, endDate));
+			bookingsFinal.add(new Booking(
+				id, itemID, itemInfo.get("itemName").toString(), 
+				itemInfo.get("itemImageURL").toString(), qt, startDate, endDate)
+			);
 		}
 
-    	return bookingsFinal;
+		return bookingsFinal;
 	}
 
 	/**
@@ -606,13 +617,7 @@ public class DBH {
 	 *
 	 * @return     The identifier of the booking
 	 */
-	public static String addBooking(String userID, String itemID, int qt, long startDate, long endDate) {
-		MongoCollection<Document> users = md.getCollection("users");
-
-		// filter for query
-		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user = users.find(filter).first();
-		
+	public static String addBooking(String userID, String itemID, int qt, long startDate, long endDate) {		
 		String messageGen = "";
 		String messageCont = "";
 		boolean isError = false;
@@ -636,9 +641,10 @@ public class DBH {
 		try {
 			
 			queryItem.put("_id", new ObjectId(itemID));
-			item = users.find(queryItem).first();
+			item = items.find(queryItem).first();
 
-		} catch (Exception e) {
+		}
+		catch (Exception ex) {
 			isError = true;
 			messageGen = "This item does not exist";
 			messageCont = "The identifier is not valid";
@@ -648,6 +654,12 @@ public class DBH {
 			ErrorHandler.getInstance().push("addBooking", true, messageGen, messageCont);
 			return null;
 		}
+
+		MongoCollection<Document> users = md.getCollection("users");
+
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user = users.find(filter).first();
 
 		// alright
 		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
@@ -705,7 +717,8 @@ public class DBH {
 		// match, then remove
 		if ((index != -1) && (index != bookings.size())) {
 			bookings.remove(index);
-		} else {
+		}
+		else {
 			return false;
 		}
 

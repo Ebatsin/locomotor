@@ -53,9 +53,9 @@ public class ItemFull extends Item implements JSONDisplayable {
 	}
 
 	/**
-	 * @todo.
+	 * Return the JSON value of the item.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     The item.
 	 */
 	public JsonValue toJSON() {
 		JsonObject itemFull = Json.object();
