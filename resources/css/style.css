@@ -403,26 +403,14 @@ html, body {
 	height: calc(2.5em - 1px);
 	line-height: 2.5em;
 	cursor: pointer;
-	/*background-color: hsl(180, 10%, 90%);*/
-	background-color: rgba(0, 0, 0, 0.4);
 	border: solid 1px hsl(0, 0%, 70%);
 	background-color: transparent;
 	position: absolute;
+	pointer-events: none;
 }
 
 .boolean-option + .boolean-option {
 	margin-left: 56%;
-}
-
-.boolean-option:not(.checked):hover {
-	color: hsl(180, 60%, 30%);
-	background-color: hsl(180, 10%, 85%);
-}
-
-.boolean-option.checked {
-	/*border: none;*/
-	color: hsl(0, 0%, 95%);
-	/*background-color: transparent;*/
 }
 
 .boolean-trans {
@@ -431,5 +419,26 @@ html, body {
 	height: 2.5em;
 	background-color: hsl(180, 60%, 30%);
 	top: 0;
+	margin-left: 56%;
+}
+
+.boolean-dummy {
+	width: calc(30% - 1px);
+	margin-left: 13%;
+	display: inline-block;
+	text-align: center;
+	height: calc(2.5em - 1px);
+	line-height: 2.5em;
+	cursor: pointer;
+	color: hsl(180, 60%, 30%);
+	border: solid 1px hsl(0, 0%, 70%);
+	position: absolute;
+}
+
+.boolean-dummy:hover {
+	background-color: hsl(180, 10%, 85%);
+}
+
+.boolean-dummy + .boolean-dummy {
 	margin-left: 56%;
 }

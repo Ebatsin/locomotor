@@ -11,10 +11,17 @@ function Boolean(elem) {
 	var no = document.createElement('div');
 	var transfert = document.createElement('div');
 
+	var dummyYes = document.createElement('div');
+	var dummyNo = document.createElement('div');
+
 	parent.classList.add('boolean');
 	yes.classList.add('boolean-option');
 	no.classList.add('boolean-option');
 	transfert.classList.add('boolean-trans');
+	dummyYes.classList.add('boolean-dummy');
+	dummyNo.classList.add('boolean-dummy');
+	dummyYes.classList.add('boolean-yes');
+	dummyNo.classList.add('boolean-no');
 
 	yes.innerHTML = 'Yes';
 	no.innerHTML = 'No';
@@ -23,34 +30,46 @@ function Boolean(elem) {
 	no.classList.add('checked');
 
 	this.init = function() {
+		parent.appendChild(dummyYes);
+		parent.appendChild(dummyNo);
 		parent.appendChild(transfert);
 		parent.appendChild(yes);
 		parent.appendChild(no);
 
 		elem.appendChild(parent);
 
-		yes.addEventListener('click', function() {
+		dummyYes.addEventListener('click', function() {
 			if(checked) {
 				return;
 			}
 
+			no.style.color = 'hsl(180, 60%, 30%)';
 			$(transfert).animate({
-				'margin-left': '13%'
-			}, 200);
+				'margin-left': '13%',
+			}, 200, function() {
+				yes.style.color = 'hsl(0, 0%, 95%)';
+			});
+
+			$(yes).animate({
+				'color': 'hsl(0, 0%, 95%)'
+			})
 
 			checked = true;
 			yes.classList.add('checked');
 			no.classList.remove('checked');
 		});
 
-		no.addEventListener('click', function() {
+		dummyNo.addEventListener('click', function() {
 			if(!checked) {
 				return;
 			}
 
+			yes.style.color = 'hsl(180, 60%, 30%)';
 			$(transfert).animate({
 				'margin-left': '56%'
-			}, 200);
+			}, 200, function() {
+				no.style.color = 'hsl(0, 0%, 95%)';
+			});
 
 			checked = false;
 			yes.classList.remove('checked');
