@@ -19,6 +19,7 @@ import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemFull;
+import locomotor.components.models.Unit;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
 import locomotor.core.Comparator;
@@ -395,6 +396,43 @@ public class API {
 				
 				response.getJsonContext().success(Json.object()
 					.add("model", model));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/unit/get-all", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				JsonArray units = Json.array();
+				for(Unit unit : DBH.getInstance().getAllUnits()) {
+					units.add(unit.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("units", units));
 
 				return true;
 			}

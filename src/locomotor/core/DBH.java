@@ -29,6 +29,8 @@ import locomotor.components.models.ItemCategoryFull;
 import locomotor.components.models.ItemCriteria;
 import locomotor.components.models.ItemCriteriaFull;
 import locomotor.components.models.ItemFull;
+import locomotor.components.models.Unit;
+import locomotor.components.models.UnitAlt;
 import locomotor.components.models.Universe;
 
 import locomotor.components.types.CEnumItemType;
@@ -619,6 +621,42 @@ public class DBH {
 		// old password is ok, then remove the user from the matrix
 		users.deleteOne(filter);
 		return true;
+	}
+
+	public static ArrayList<Unit> getAllUnits() {
+		ArrayList<Unit> units = new ArrayList();
+
+		FindIterable<Document> unitsMod = md.getCollection("units").find();
+		unitsMod.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+				ArrayList<Document> unitAltMod = (ArrayList<Document>)doc.get("alt");
+
+				// create the alternate form unit
+				ArrayList<UnitAlt> unitAlt = new ArrayList();
+				for (Document alt : unitAltMod) {
+					
+					// construct the unit form & add to the list
+					UnitAlt ua = new UnitAlt(
+						alt.getString("name"),
+						alt.getString("long"),
+						alt.getDouble("factor")
+					);
+					unitAlt.add(ua);
+				}
+
+				// construct the unit & add to the list
+				Unit unit = new Unit(
+					doc.getObjectId("_id").toString(),
+					doc.getString("unitname"),
+					unitAlt
+				);
+				units.add(unit);
+
+			}
+		});
+
+		return units;
 	}
 
 	/**
