@@ -171,6 +171,7 @@ public class DBH {
 						CEnumUniverseType.valueOf(crit.getInteger("universeType")),
 						CEnumItemType.valueOf(crit.getInteger("itemType")),
 						CEnumUserType.valueOf(crit.getInteger("userType")),
+						crit.get("unit").toString(),
 						universe
 					);
 

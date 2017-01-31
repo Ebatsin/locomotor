@@ -49,6 +49,11 @@ public class CriteriaModel {
 	private CEnumUserType _userType;
 
 	/**
+	 * The unit unique identifier.
+	 */
+	private String _unitID;
+
+	/**
 	 * The universe of the values accepted for this criteria.
 	 */
 	private CUniverseType _universe;
@@ -67,7 +72,7 @@ public class CriteriaModel {
 	 */
 	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, 
 			CEnumUniverseType universeType, CEnumItemType itemType, 
-			CEnumUserType userType, CUniverseType universe) {
+			CEnumUserType userType, String unitID, CUniverseType universe) {
 		_identifier = identifier;
 		_name = name;
 		_question = question;
@@ -75,6 +80,7 @@ public class CriteriaModel {
 		_universeType = universeType;
 		_itemType = itemType;
 		_userType = userType;
+		_unitID = unitID;
 		_universe = universe;
 	}
 
@@ -149,6 +155,7 @@ public class CriteriaModel {
 		obj.add("itemType", _itemType.getID());
 		obj.add("userType", _userType.getID());
 		obj.add("universeType", _universeType.getID());
+		obj.add("unitID", _unitID);
 		JsonValue universe = _universe.toJSON();
 		obj.add("universe", universe);
 		return obj;
