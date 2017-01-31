@@ -22,6 +22,7 @@ import locomotor.components.models.ItemFull;
 import locomotor.components.models.Unit;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
+import locomotor.core.AccreditationLevel;
 import locomotor.core.Comparator;
 import locomotor.core.CoreResourceManager;
 import locomotor.core.DBH;
@@ -94,7 +95,7 @@ public class API {
 					// check user exist and good password
 					String username = data.getAsString("username");
 					String password = data.getAsString("password");
-					Pair<String,Integer> claims = DBH.getInstance().authUser(username, password);
+					Pair<String,AccreditationLevel> claims = DBH.getInstance().authUser(username, password);
 
 					// check error
 					if (claims == null) {
@@ -115,7 +116,7 @@ public class API {
 				else if(data.isDefined("token")) { // login with token
 					// auth with token
 					String longToken = data.getAsString("token");
-					Pair<String,Integer> claims = jwt.checkToken(longToken);
+					Pair<String,AccreditationLevel> claims = jwt.checkToken(longToken);
 						
 					// check error
 					if(claims == null) {
@@ -165,7 +166,7 @@ public class API {
 				// check user exist
 				String username = data.getAsString("username");
 				String password = data.getAsString("password");
-				Pair<String,Integer> claims = DBH.getInstance().registerUser(username, password, 0);
+				Pair<String, AccreditationLevel> claims = DBH.getInstance().registerUser(username, password, AccreditationLevel.MUNDANE);
 				
 				// check error
 				if (claims == null) {
@@ -201,7 +202,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -247,7 +248,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -291,7 +292,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -336,7 +337,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -379,7 +380,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -416,7 +417,9 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+
+				System.out.println(claims);
 					
 				// check error
 				if(claims == null) {
@@ -454,7 +457,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -498,7 +501,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -543,7 +546,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -595,7 +598,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -638,7 +641,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -682,7 +685,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -747,7 +750,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -788,7 +791,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {

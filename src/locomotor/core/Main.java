@@ -65,7 +65,7 @@ public class Main {
 						return;
 					}
 
-					Pair<String, Integer> user = db.registerUser(name, password, 2);
+					Pair<String, AccreditationLevel> user = db.registerUser(name, password, AccreditationLevel.GOD);
 
 					if(user == null) {
 						System.out.println("The username is already taken. Please try with another name.");
