@@ -10,16 +10,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// @todo: remove when JSONDisplayable will be implemented in item & user
-import locomotor.components.JSONDisplayable;
-
 /**
  * Represent a N-ary tree, that handle an Integer (32-bit) and a String.
  * @see CEnumUniverseType.
  * @see CEnumItemType.
  * @see CEnumUserType.
  */
-public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree>, JSONDisplayable {
+public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTree> {
 	
 	/**
 	 * The identifier.

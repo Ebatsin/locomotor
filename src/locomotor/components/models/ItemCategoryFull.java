@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import locomotor.components.JSONDisplayable;
 
 /**
- * @todo.
+ * Displayable form of an item's category.
  */
 public class ItemCategoryFull extends ItemCategory implements JSONDisplayable {
 
@@ -32,9 +32,9 @@ public class ItemCategoryFull extends ItemCategory implements JSONDisplayable {
 	}
 
 	/**
-	 * { function_description }
+	 * Return the JSON value of the item's category.
 	 *
-	 * @return     { description_of_the_return_value }
+	 * @return     The item's category and its criterias.
 	 */
 	public JsonValue toJSON() {
 		JsonObject catFull = Json.object();

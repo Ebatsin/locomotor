@@ -3,7 +3,7 @@
 		"$oid": "584336b157ab9e1521a8bd9f"
 	},
 	"name": "Harry Potter",
-	"description": "Dans l'univers de Harry Potter, les personnages utilisent de nombreux moyens de transport réservés aux sorciers, qu'il s'agisse de transports moldus détournés, de créatures fantastiques (hippogriffe, phénix, sombral, ou dragon), d'objets magiques inventés (balais, tapis volants, etc.) ou de techniques de téléportation.",
+	"description": "The fictional universe of Harry Potter comprises two distinct societies: the Wizarding World and the Muggle world. The Muggle world is for the world inhabited by the non-magical majority, with which the Wizarding World exists coextensively, albeit mostly remaining hidden from the non-magical humans.",
 	"image": "url"
 }
 {
@@ -11,7 +11,7 @@
 		"$oid": "58433b6557ab9e238922b8cc"
 	},
 	"name": "Star Wars",
-	"description": "L'histoire de Star Wars se déroule dans une galaxie qui se fait le théâtre d'affrontements entre les Chevaliers Jedi et les Seigneurs noirs des Sith, personnes sensibles à la Force, un champ énergétique mystérieux leur procurant des pouvoirs psychiques. Les Jedi maîtrisent le Côté lumineux de la Force, pouvoir bénéfique et défensif, pour maintenir la paix dans la galaxie. Les Sith utilisent le Côté obscur, pouvoir nuisible et destructeur, pour leurs usages personnels et pour dominer la galaxie.",
+	"description": "The events depicted in the Star Wars franchise take place in an unnamed fictional galaxy at an undetermined point in the distant past. Many species of alien creatures (often humanoid) are depicted. Robotic droids are also commonplace and are generally built to serve their owners. Space travel is common, and many planets in the galaxy are members of a single galactic government.",
 	"image": "url"
 }
 {
@@ -19,6 +19,6 @@
 		"$oid": "58717def7e37eaf5657984aa"
 	},
 	"name": "Batman",
-	"description": "Batman est l’alter-ego de Bruce Wayne, un riche milliardaire qui combat le crime sous les traits du justicier de la nuit. Il a sa disposition de nombreux moyens de transports sont pour l'aider dans son combat : la Batmobile, la Bat-Moto, le Bat-Wing ou Bat-Plane, le Bat-Boat ou encore le Bat-deltaplane (Jet Pack).",
+	"description": "Batman's secret identity is Bruce Wayne, an American billionaire, playboy, philanthropist, and owner of Wayne Enterprises. After witnessing the murder of his parents Thomas Wayne and Martha Wayne as a child, he swore vengeance against criminals, an oath tempered by a sense of justice. Wayne trains himself physically and intellectually and crafts a bat-inspired persona to fight crime.",
 	"image": "url"
 }

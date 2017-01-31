@@ -23,6 +23,9 @@ import org.apache.tika.Tika;
  */
 public abstract class NetworkResponse {	
 
+	/**
+	 * The exchange.
+	 */
 	HttpExchange _exchange;
 
 	/**

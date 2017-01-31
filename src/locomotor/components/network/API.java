@@ -10,16 +10,19 @@ import java.lang.InterruptedException;
 import java.lang.Thread;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
 import locomotor.components.logging.Logging;
+import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemFull;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
 import locomotor.core.Comparator;
+import locomotor.core.CoreResourceManager;
 import locomotor.core.DBH;
 import locomotor.core.jwt.JWTH;
 
@@ -179,6 +182,184 @@ public class API {
 					.add("long-term-token", longToken));
 
 				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/user/info", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				HashMap<String, Object> info = DBH.getInstance().getUserInfo(userID);
+
+				// check error
+				if(info == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("username", info.get("username").toString())
+					.add("adminLevel", (Integer)info.get("adminLevel")));
+
+				return true;
+
+			}
+		});
+
+		nh.createEndpoint("/api/user/change/username", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("newUsername");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				String newUsername = data.getAsString("newUsername");
+				boolean result = DBH.getInstance().changeUsername(userID, newUsername);
+
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+				return true;
+
+			}
+		});
+
+		nh.createEndpoint("/api/user/change/password", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("oldPassword");
+				setExpectedParams("newPassword");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				String oldPassword = data.getAsString("oldPassword");
+				String newPassword = data.getAsString("newPassword");
+
+				boolean result = DBH.getInstance().changePassword(userID, oldPassword, newPassword);
+
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+				return true;
+
+			}
+		});
+
+		nh.createEndpoint("/api/user/remove", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("password");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				String password = data.getAsString("password");
+
+				boolean result = DBH.getInstance().removeUser(userID, password);
+
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+				return true;
+
 			}
 		});
 
@@ -360,31 +541,238 @@ public class API {
 			}
 		});
 
-		nh.createEndpoint("/img/get", new IEndpointHandler() {
+		nh.createEndpoint("/api/resource/version", new IEndpointHandler() {
 			public boolean handle(NetworkData data, NetworkResponseFactory response) {
 				if(!super.handle(data, response)) {
 					return false;
 				}
 
-				setExpectedParams("name");
+				setExpectedParams("token");
+				setExpectedParams("id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
 				}
 
-				File file = new File("resources/core/images/" + data.getAsString("name"));
-				System.out.print("Fichier demandé : " + data.getAsString("name"));
-
-				if(file.exists() && !file.isDirectory()) {
-					System.out.println(", le fichier existe");
-					response.getBinaryContext().success(file);
-				}
-				else {
-					System.out.println(", le fichier n'existe pas");
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
-						"L'image demandée n'a pas pu être trouvée : `" 
-						+ "resources/core/images/" + data.getAsString("name") + "`", ErrorCode.DEFAULT_ERROR_CODE);
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
 				}
+
+				String id = data.getAsString("id");		
+				CoreResourceManager crm = CoreResourceManager.getInstance();
+				
+				if(!crm.exists(id)) {
+					
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						"The file requested does not exist", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("version", crm.getVersion(id)));
+				return true;
+				
+			}
+		});
+
+		nh.createEndpoint("/api/resource/get", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				File file = new File("resources/core/" + data.getAsString("id"));
+
+				if(!file.exists() || file.isDirectory()) {
+
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						"The file requested does not exist", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getBinaryContext().success(file);
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/booking/add", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+				setExpectedParams("startDate");
+				setExpectedParams("endDate");
+				setExpectedParams("quantity");
+
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check validity
+				int quantity;
+				long startDate;
+				long endDate;
+				try {
+					quantity = Integer.parseInt(data.getAsString("quantity"));
+					startDate = Long.parseLong(data.getAsString("startDate"));
+					endDate = Long.parseLong(data.getAsString("endDate"));
+				}
+				catch (Exception ex) {
+					String message = "At least one of the following parameter is malformated: ";
+					message +=  "`quantity`, `startDate`, `endDate`";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						message, ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				String bookingID = DBH.getInstance().addBooking(
+					userID, 
+					data.getAsString("id"), 
+					quantity, 
+					startDate, 
+					endDate
+				);
+				
+				// check error
+				if(bookingID == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/booking/get-all", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				
+				JsonArray bookings = Json.array();
+				for(Booking booking : DBH.getInstance().getAllBooking(userID)) {
+					bookings.add(booking.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("bookings", bookings));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/booking/remove", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("id");
+
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				String userID = claims.getLeft();
+				
+				boolean success = DBH.getInstance().removeBooking(userID, data.getAsString("id"));
+
+				// check error
+				if(!success) {
+					String message = "This booking does not exist";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						message, ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
 
 				return true;
 			}

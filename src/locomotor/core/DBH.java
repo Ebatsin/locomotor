@@ -10,6 +10,7 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +20,15 @@ import locomotor.components.Pair;
 
 import locomotor.components.logging.ErrorHandler;
 
+import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
-import locomotor.components.models.ItemCriteria;
-import locomotor.components.models.ItemFull;
 import locomotor.components.models.ItemCategoryFull;
+import locomotor.components.models.ItemCriteria;
 import locomotor.components.models.ItemCriteriaFull;
+import locomotor.components.models.ItemFull;
 import locomotor.components.models.Universe;
 
 import locomotor.components.types.CEnumItemType;
@@ -37,6 +39,7 @@ import locomotor.components.types.CUniverseType;
 import locomotor.components.types.TypeFactory;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -337,6 +340,7 @@ public class DBH {
 		user.append("password", "");
 		user.append("isAdmin", adminLevel);
 		user.append("notifications", new ArrayList<Document>());
+		user.append("bookings", new ArrayList<Document>());
 		MongoCollection<Document> users = md.getCollection("users");
 		users.insertOne(user);
 			
@@ -415,6 +419,208 @@ public class DBH {
 	}
 
 	/**
+	 * Gets the user information.
+	 *
+	 * @param      userID  The user id
+	 *
+	 * @return     The user information.
+	 */
+	public static HashMap<String, Object> getUserInfo(String userID) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
+		HashMap<String, Object> info = new HashMap();
+		info.put("username", user.getString("username"));
+		info.put("adminLevel", user.getInteger("isAdmin"));
+		return info;
+	}
+
+	/**
+	 * Change the username of the user.
+	 *
+	 * @param      userID       The user id
+	 * @param      newUsername  The new username
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean changeUsername(String userID, String newUsername) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// check if username if available
+		if(usernameAlreadyTaken(newUsername)) {
+			String messageGen = "This username is not available";
+			String messageCont = "This username is not available";
+			ErrorHandler.getInstance().push("usernameNotAvailable", true, messageGen, messageCont);
+			return false;
+		}
+
+		// update
+		Document update = new Document("$set", new Document("username", newUsername));
+		users.updateOne(filter, update);
+		return true;
+	}
+
+	/**
+	 * Change the password of the user.
+	 *
+	 * @param      userID       The user id
+	 * @param      oldPassword  The old password
+	 * @param      newPassword  The new password
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean changePassword(String userID, String oldPassword, String newPassword) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// check if old password is valid
+		String correctHash = user.getString("password");
+		Boolean isOldPasswordValid = null;
+
+		try {
+			
+			isOldPasswordValid = PasswordStorage.verifyPassword(oldPassword + userID, correctHash);
+		
+		}
+		catch(Exception ex) {
+			
+			// bad password
+			String message = "Error while hashing the password";
+			ErrorHandler.getInstance().push("changePassword", true, message, "");
+			return false;
+
+		}
+
+		if (!isOldPasswordValid) {
+			String messageGen = "The old password is not correct";
+			String messageCont = "The old password is not correct";
+			ErrorHandler.getInstance().push("changePassword", true, messageGen, messageCont);
+			return false;
+		}
+
+		// old password is ok, hash the new password and store it
+		String passwordHash = "";
+		try {
+
+			passwordHash = PasswordStorage.createHash(newPassword + userID);
+
+		}
+		catch(Exception ex) {
+	
+			// delete the user from the database
+			String message = "An error occurred while processing the modification of the new password. Please retry.";
+			ErrorHandler.getInstance().push("changePassword", true, message, "");
+			return false;
+
+		}
+
+		// update
+		Document update = new Document("$set", new Document("password", passwordHash));
+		users.updateOne(filter, update);
+		return true;
+	}
+
+	/**
+	 * Removes an user.
+	 *
+	 * @param      userID    The user id
+	 * @param      password  The password
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean removeUser(String userID, String password) {
+		MongoCollection<Document> users = md.getCollection("users");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user;
+
+		try {
+			
+			user = users.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// check if password is valid
+		String correctHash = user.getString("password");
+		Boolean isPasswordValid = null;
+
+		try {
+			
+			isPasswordValid = PasswordStorage.verifyPassword(password + userID, correctHash);
+		
+		}
+		catch(Exception ex) {
+			
+			// bad password
+			String message = "Error while hashing the password";
+			ErrorHandler.getInstance().push("changePassword", true, message, "");
+			return false;
+
+		}
+
+		if (!isPasswordValid) {
+			String messageGen = "The password is not correct";
+			String messageCont = "The password is not correct";
+			ErrorHandler.getInstance().push("changePassword", true, messageGen, messageCont);
+			return false;
+		}
+
+		// old password is ok, then remove the user from the matrix
+		users.deleteOne(filter);
+		return true;
+	}
+
+	/**
 	 * Gets the partial information of item.
 	 *
 	 * @param      itemID  The item id
@@ -425,6 +631,8 @@ public class DBH {
 
 		MongoCollection<Document> items = md.getCollection("items");
 		MongoCollection<Document> universes = md.getCollection("universes");
+
+		// @todo: check items & universes still exists
 		
 		BasicDBObject queryItem = new BasicDBObject();
 		queryItem.put("_id", new ObjectId(itemID));
@@ -452,16 +660,22 @@ public class DBH {
 	 * @return     The universe.
 	 */
 	public static Universe getUniverse(String universeID) {
-			MongoCollection<Document> universes = md.getCollection("universes");
-			BasicDBObject queryUniverse = new BasicDBObject();
+		MongoCollection<Document> universes = md.getCollection("universes");
+		BasicDBObject queryUniverse = new BasicDBObject();
 		
 		try {
 			
 			queryUniverse.put("_id", new ObjectId(universeID));
 			Document universe = universes.find(queryUniverse).first();
-			return new Universe(universeID, universe.get("name").toString(), universe.get("description").toString(), universe.get("image").toString());
+			return new Universe(
+				universeID,
+				universe.get("name").toString(),
+				universe.get("description").toString(),
+				universe.get("image").toString()
+			);
 
-		} catch (Exception e) {
+		}
+		catch (Exception ex) {
 			String messageGen = "This universe does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
@@ -469,6 +683,14 @@ public class DBH {
 		}
 	}
 
+	/**
+	 * Gets the item.
+	 *
+	 * @param      itemID    The item id
+	 * @param      catModel  The cat model
+	 *
+	 * @return     The item.
+	 */
 	public static ItemFull getItem(String itemID, ArrayList<CategoryModel> catModel) {
 
 		MongoCollection<Document> items = md.getCollection("items");
@@ -480,7 +702,8 @@ public class DBH {
 			queryItem.put("_id", new ObjectId(itemID));
 			item = items.find(queryItem).first();
 
-		} catch (Exception e) {
+		}
+		catch (Exception ex) {
 			String messageGen = "This item does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
@@ -536,6 +759,175 @@ public class DBH {
 
 		return new ItemFull(itemID, name, universeID, description, image, categories);
 
+	}
+
+	/**
+	 * Gets all booking of the user.
+	 *
+	 * @param      userID  The user id
+	 *
+	 * @return     All booking.
+	 */
+	public static ArrayList<Booking> getAllBooking(String userID) {
+		MongoCollection<Document> users = md.getCollection("users");
+
+		BasicDBObject queryUser = new BasicDBObject();
+		Document user = null;
+
+		try {
+			
+			queryUser.put("_id", new ObjectId(userID));
+			user = users.find(queryUser).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This user does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
+			return null;
+		}
+
+		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
+		ArrayList<Booking> bookingsFinal = new ArrayList<Booking>();
+
+		for (Document booking : bookings) {
+			
+			String id = booking.getObjectId("_id").toString();
+			String itemID = booking.getObjectId("itemID").toString();
+			HashMap<String, Object> itemInfo = getPartialInfoOfItem(itemID);
+			int qt = booking.getInteger("qt");
+			long startDate = booking.getLong("startDate");
+			long endDate = booking.getLong("endDate");
+
+			bookingsFinal.add(new Booking(
+				id, itemID, itemInfo.get("itemName").toString(), 
+				itemInfo.get("itemImageURL").toString(), qt, startDate, endDate)
+			);
+		}
+
+		return bookingsFinal;
+	}
+
+	/**
+	 * Adds a booking.
+	 *
+	 * @param      userID     The user id
+	 * @param      itemID     The item id
+	 * @param      qt         The quantity
+	 * @param      startDate  The start date
+	 * @param      endDate    The end date
+	 *
+	 * @return     The identifier of the booking
+	 */
+	public static String addBooking(String userID, String itemID, int qt, long startDate, long endDate) {		
+		String messageGen = "";
+		String messageCont = "";
+		boolean isError = false;
+		// various check
+		if (qt < 1) {
+			isError = true;
+			messageGen = "The quantity is not valid";
+			messageCont = "The quantity is null or negative";
+		}
+
+		if ((startDate < 1) || (endDate < 1) || (endDate < startDate)) {
+			isError = true;
+			messageGen = "At least one date is not valid";
+			messageCont = "At least one date is either negative or end is before start";
+		}
+
+		MongoCollection<Document> items = md.getCollection("items");
+		BasicDBObject queryItem = new BasicDBObject();
+		Document item = null;
+
+		try {
+			
+			queryItem.put("_id", new ObjectId(itemID));
+			item = items.find(queryItem).first();
+
+		}
+		catch (Exception ex) {
+			isError = true;
+			messageGen = "This item does not exist";
+			messageCont = "The identifier is not valid";
+		}
+		
+		if (isError) {
+			ErrorHandler.getInstance().push("addBooking", true, messageGen, messageCont);
+			return null;
+		}
+
+		MongoCollection<Document> users = md.getCollection("users");
+
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user = users.find(filter).first();
+
+		// alright
+		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
+		if(bookings == null) {
+			bookings = new ArrayList<Document>();
+		}
+
+		// new booking
+		Document booking = new Document();
+		booking.append("_id", new ObjectId());
+		booking.append("itemID", new ObjectId(itemID));
+		booking.append("qt", qt);
+		booking.append("startDate", startDate);
+		booking.append("endDate", endDate);
+		
+		// add to current list
+		bookings.add(booking);
+
+		// update data
+		Document update = new Document("$set", new Document("bookings", bookings));
+		users.updateOne(filter, update);
+	
+		return booking.getObjectId("_id").toString();
+	}
+
+	/**
+	 * Removes a booking.
+	 *
+	 * @param      userID     The user id
+	 * @param      bookingID  The booking id
+	 *
+	 * @return     True if remove succeed, false otherwise.
+	 */
+	public static boolean removeBooking(String userID, String bookingID) {
+		MongoCollection<Document> users = md.getCollection("users");
+
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(userID));
+		Document user = users.find(filter).first();
+
+		ArrayList<Document> bookings = (ArrayList<Document>)user.get("bookings");
+		if(bookings == null) {
+			return false;
+		}
+		
+		// search
+		int index = -1;
+		for (index = 0; index < bookings.size(); index++) {
+			Document current = bookings.get(index);
+			if(current.getObjectId("_id").toString().equals(bookingID)) {
+				break;
+			}
+		}
+
+		// match, then remove
+		if ((index != -1) && (index != bookings.size())) {
+			bookings.remove(index);
+		}
+		else {
+			return false;
+		}
+
+		// update
+		Document update = new Document("$set", new Document("bookings", bookings));
+		users.updateOne(filter, update);
+		return true;
 	}
 
 }

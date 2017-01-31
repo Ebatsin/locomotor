@@ -43,6 +43,8 @@ public class ErrorContext {
 
 	/**
 	 * Remove the last trace from the stacktrace.
+	 *
+	 * @return     The trace removed, or null if empty.
 	 */
 	public Pair<String, Logging> pop() {
 		if (!_stackTrace.isEmpty()) {

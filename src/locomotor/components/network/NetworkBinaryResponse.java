@@ -9,15 +9,23 @@ import java.io.File;
  */
 public class NetworkBinaryResponse extends NetworkResponse {
 	
+	/**
+	 * The exchange.
+	 */
 	HttpExchange _exchange;
 
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      exchange  The exchange
+	 */
 	public NetworkBinaryResponse(HttpExchange exchange) {
 		super(exchange);
 	}
 
 	/**
 	 * Send the file to the client along with a 200 success code.
-	 * @file The file to send to the client
+	 * @param The file to send to the client
 	 */
 	public void success(File file) {
 		sendAnswer(file, 200);

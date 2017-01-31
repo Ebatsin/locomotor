@@ -8,14 +8,31 @@ import java.util.Arrays;
  * from a client en send a response.
  */
 public abstract class IEndpointHandler {
+	
+	/**
+	 * Thx expected parameters.
+	 */
 	ArrayList<String> _expectedParams;
+	
+	/**
+	 * The data.
+	 */
 	NetworkData _data;
+
+	/**
+	 * The response.
+	 */
 	NetworkResponseFactory _response;
 
+	/**
+	 * The list of non-defined parameters.
+	 */
 	ArrayList<String> _nonDefinedParams;
 
-	public IEndpointHandler() {
-	}
+	/**
+	 * Constructs the object.
+	 */
+	public IEndpointHandler() {}
 
 	/**
 	 * The core of this method will contain all the handling of the client's request.
