@@ -43,10 +43,10 @@
 
 					// transitionning the title to the top
 					$(usedTitle).animate({
-						height: '6rem'
+						height: '4rem'
 					}, 200);
 					$(usedButton).animate({
-						height: '6rem'
+						height: '4rem'
 					}, 200);
 				});
 
@@ -59,8 +59,8 @@
 					$(usedButton).css('height', 'auto');
 					$(usedTitle).css('height', '0');
 					auto = $(usedButton).height();
-					$(usedButton).css('height', '6rem');
-					$(usedTitle).css('height', '6rem');
+					$(usedButton).css('height', '4rem');
+					$(usedTitle).css('height', '4rem');
 
 					notUsedButton.classList.remove('selected');
 					usedButton.classList.add('selected');

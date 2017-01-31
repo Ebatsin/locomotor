@@ -95,7 +95,7 @@ html, body {
 	font-size: 1.2em;
 }
 
-/* ------------------------------------------ LOGIN VIEW ---------------------------------------*/
+/* ------------------------------------------ HELP VIEW ---------------------------------------*/
 
 #help {
 	height: 100%;
@@ -123,7 +123,7 @@ html, body {
 
 #help h1 {
 	margin: 0;
-	padding: 0.7em;
+	padding: 0.5em;
 	padding-left: 0.5em;
 	letter-spacing: 2px;
 	font-size: 2em;
@@ -173,13 +173,12 @@ html, body {
 	letter-spacing: 1px;
 	font-size: 4em;
 	font-weight: 100;
-	margin-top: 1.5em;
+	margin: 1em !important;
 	color: hsl(0, 0%, 20%);
 }
 
 #login-form {
 	display: inline-block;
-	margin-top: 2.5em;
 	background-color: hsl(207, 12%, 95%);
 	padding: 2em;
 	border: solid 1px hsl(0, 0%, 80%);
@@ -192,6 +191,7 @@ html, body {
 
 #login-form h2 {
 	margin: 1.5em 0;
+	margin-top: 0.7em;
 	font-size: 2em;
 }
 
@@ -217,7 +217,7 @@ html, body {
 	width: 100%;
 	height: 2.5em;
 	padding: 0 0.5em;
-	margin-top: 2em;
+	margin-top: 1em;
 	font-size: 1.5em;
 	color: hsl(0, 0%, 95%);
 	border-radius: 0;
@@ -257,7 +257,7 @@ html, body {
 #search-page h1 {
 	background-color: hsl(0, 0%, 95%);
 	margin: 0;
-	padding: 0.7em;
+	padding: 0.5em;
 	padding-left: 1.2em;
 	letter-spacing: 2px;
 	font-size: 2em;
@@ -275,22 +275,23 @@ html, body {
 }
 
 #search-question {
-	margin-top: 3em;
+	margin-top: 2em;
 	width: 90%;
 	margin-left: 5%;
-	font-size: 1.5em;
+	font-size: 1.3em;
 	color: hsl(0, 0%, 11%);
 }
 
 #search-not-used {
 	text-align: center;
-	height: 6rem;
-	font-size: 1.5em;
-	line-height: 6rem;
+	height: 4rem;
+	font-size: 1.2em;
+	line-height: 4rem;
+	margin-top: 2em !important;
 }
 
 #search-used {
-	height: 6rem;
+	height: 4rem;
 	overflow: hidden;
 }
 
@@ -309,7 +310,7 @@ html, body {
 	border: solid 1px hsl(180, 60%, 40%);
 	background-color: hsl(200, 5%, 90%);
 	color: hsl(0, 0%, 60%);
-	margin-top: 3em;
+	margin-top: 1.5em;
 }
 
 #search-page .option:hover {
@@ -320,8 +321,8 @@ html, body {
 #search-used-title {
 	overflow: hidden;
 	text-align: center;
-	font-size: 1.5em;
-	line-height: 6rem;
+	font-size: 1.2em;
+	line-height: 4rem;
 	margin: 0;
 }
 
