@@ -43,7 +43,10 @@
 
 					// transitionning the title to the top
 					$(usedTitle).animate({
-						'line-height': '6rem'
+						height: '6rem'
+					}, 400);
+					$(usedButton).animate({
+						height: '6rem'
 					}, 400);
 				});
 
@@ -52,20 +55,33 @@
 						return;
 					}
 
+					var auto;
+					$(usedButton).css('height', 'auto');
+					$(usedTitle).css('height', '0');
+					auto = $(usedButton).height();
+					$(usedButton).css('height', '6rem');
+					$(usedTitle).css('height', '6rem');
+
 					notUsedButton.classList.remove('selected');
 					usedButton.classList.add('selected');
-					usedCriteria = true;
 
-					// transitionning the title to the top
 					$(usedTitle).animate({
-						'line-height': '4rem'
+						height: 0
 					}, 400);
+					$(usedButton).animate({
+						height: auto + 'px'
+					}, 400);
+
+					usedCriteria = true;
 
 				});
 
 				inputElem.innerHTML = '';
-				var range = new Range(inputElem, 0, 10, ['aucun', 'très peu', 'peu', 'moyen', 'beaucoup', 'énormément']);
-				range.init();
+				//var range = new Range(inputElem, 0, 10, ['aucun', 'très peu', 'peu', 'moyen', 'beaucoup', 'énormément']);
+				//range.init();
+
+				var boolean = new Boolean(inputElem);
+				boolean.init();
 			}
 
 			if(!modules.splash.isShown()) {

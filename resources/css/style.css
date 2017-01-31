@@ -289,6 +289,11 @@ html, body {
 	line-height: 6rem;
 }
 
+#search-used {
+	height: 6rem;
+	overflow: hidden;
+}
+
 #search-page .option.selected {
 	cursor: default;
 	color: hsl(0, 0%, 0%);
@@ -312,27 +317,27 @@ html, body {
 	margin-bottom: 5px;
 }
 
-#search-used:not(.selected) {
-	height: 6rem;
+#search-used-title {
 	overflow: hidden;
-}
-
-#search-used p {
 	text-align: center;
 	font-size: 1.5em;
 	line-height: 6rem;
 	margin: 0;
-	margin-bottom: 3em;
+}
+
+#search-input {
+	margin-top: 2em;
 }
 
 #search-really-important {
 	padding: 1em;
-	margin-top: 2em;
+	margin-top: 3em;
 	display: inline-block;
 }
 
 /* ------------------------------------------ SEARCH INPUTS ---------------------------------------*/
 
+/** range **/
 .range-bar {
 	border: solid 1px hsl(0, 0%, 70%);
 	background-color: hsl(0, 0%, 90%);
@@ -378,4 +383,52 @@ html, body {
 	width: 200px;
 	margin-left: -88px; /* calc(-100px + 12px )*/
 	text-align: center;
+}
+
+/** boolean **/
+
+.boolean {
+	position: relative;
+	width: 90%;
+	margin-left: 5%;
+	font-size: 1.3em;
+}
+
+.boolean-option {
+	width: calc(30% - 1px);
+	margin-left: 13%;
+	display: inline-block;
+	text-align: center;
+	height: calc(2.5em - 1px);
+	line-height: 2.5em;
+	cursor: pointer;
+	/*background-color: hsl(180, 10%, 90%);*/
+	background-color: rgba(0, 0, 0, 0.4);
+	border: solid 1px hsl(0, 0%, 70%);
+	background-color: transparent;
+	position: absolute;
+}
+
+.boolean-option + .boolean-option {
+	margin-left: 56%;
+}
+
+.boolean-option:not(.checked):hover {
+	color: hsl(180, 60%, 30%);
+	background-color: hsl(180, 10%, 85%);
+}
+
+.boolean-option.checked {
+	/*border: none;*/
+	color: hsl(0, 0%, 95%);
+	/*background-color: transparent;*/
+}
+
+.boolean-trans {
+	position: absolute;
+	width: 30%;
+	height: 2.5em;
+	background-color: hsl(180, 60%, 30%);
+	top: 0;
+	margin-left: 56%;
 }
