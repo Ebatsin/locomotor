@@ -422,6 +422,66 @@ public class DBH {
 	}
 
 	/**
+	 * Authentificate an admin with his username and password.
+	 *
+	 * @param      username  The username
+	 * @param      password  The password
+	 *
+	 * @return     The ObjectID of the user and his role
+	 */
+	public static Pair<String,AccreditationLevel> authAdmin(String username, String password) {
+		Pair<String,AccreditationLevel> claims = DBH.getInstance().authUser(username, password);
+		
+		// check error
+		if (claims == null) {
+			return null;
+		}
+
+		// check rights
+		AccreditationLevel level = claims.getRight();
+		if ((level != AccreditationLevel.ADMIN) && (level != AccreditationLevel.GOD)) {
+			String messageGen = "You don't have the rights";
+			String messageCont = "You don't have the rights";
+			ErrorHandler.getInstance().push("authAdmin", true, messageGen, messageCont);
+			return null;
+		}
+
+		return claims;
+	}
+
+	/**
+	 * Check if the admin still exists and have the rights.
+	 *
+	 * @param      id    The identifier
+	 *
+	 * @return     True if ok, false otherwise.
+	 */
+	public static boolean adminStillExists(String id) {
+		MongoCollection<Document> users = md.getCollection("users");
+		BasicDBObject queryUser = new BasicDBObject();
+		queryUser.put("_id", new ObjectId(id));
+		Document userExists = users.find(queryUser).first();
+
+		// check error
+		if(userExists == null) {
+			String messageGen = "The user does not exist";
+			String messageCont = "The user does not exist";
+			ErrorHandler.getInstance().push("authStillExists", true, messageGen, messageCont);
+			return false;
+		}
+
+		AccreditationLevel level = AccreditationLevel.valueOf(userExists.getInteger("isAdmin").intValue());
+		if ((level != AccreditationLevel.ADMIN) && (level != AccreditationLevel.GOD)) {
+			String messageGen = "You don't have the rights";
+			String messageCont = "You don't have the rights";
+			ErrorHandler.getInstance().push("authStillExists", true, messageGen, messageCont);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Gets the user information.
 	 *
 	 * @param      userID  The user id

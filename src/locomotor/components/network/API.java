@@ -418,8 +418,6 @@ public class API {
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
 				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
-
-				System.out.println(claims);
 					
 				// check error
 				if(claims == null) {
@@ -816,6 +814,77 @@ public class API {
 				response.getJsonContext().success(Json.object());
 
 				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/auth", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				JWTH jwt = JWTH.getInstance();
+
+				setExpectedParams("username", "password");
+				if(areAllParamsDefined()) { // login with username & password
+					// check user exist and good password
+					String username = data.getAsString("username");
+					String password = data.getAsString("password");
+					
+					Pair<String,AccreditationLevel> claims = DBH.getInstance().authAdmin(username, password);
+
+					// check error
+					if (claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+					String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken)
+						.add("long-term-token", longToken));
+
+					return true;
+				}
+				else if(data.isDefined("token")) { // login with token
+					// auth with token
+					String longToken = data.getAsString("token");
+					Pair<String,AccreditationLevel> claims = jwt.checkToken(longToken);
+						
+					// check error
+					if(claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+
+					// check if the user still exist in the database
+					// and have still the rights
+					// before create the token
+					if(!DBH.getInstance().adminStillExists(claims.getLeft())) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken));
+
+					return false;
+				}
+				else {
+					String errorMessage = "This endpoint needs either the parameters `username` and `password`"
+						+ " to be defined or only the parameter `token`.";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, 
+						ErrorCode.DISPLAY_MESSAGE);
+					return false;
+				}
 			}
 		});
 	}
