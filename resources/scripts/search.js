@@ -44,10 +44,10 @@
 					// transitionning the title to the top
 					$(usedTitle).animate({
 						height: '6rem'
-					}, 400);
+					}, 200);
 					$(usedButton).animate({
 						height: '6rem'
-					}, 400);
+					}, 200);
 				});
 
 				usedButton.addEventListener('click', function() {
@@ -67,10 +67,10 @@
 
 					$(usedTitle).animate({
 						height: 0
-					}, 400);
+					}, 200);
 					$(usedButton).animate({
 						height: auto + 'px'
-					}, 400);
+					}, 200);
 
 					usedCriteria = true;
 
