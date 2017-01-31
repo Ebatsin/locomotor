@@ -32,24 +32,17 @@
 			}
 			isOpened = true;
 
-			YUI().use('node', 'transition', function(Y) {
-				Y.one(view).transition({
-					easing: 'ease-in-out',
-					duration: 0.4,
-					width: '25em'
-				});
+			$(view).animate({
+				width: '25em'
 			});
 		},
 		close: function() {
 			isOpened = false;
-
-			YUI().use('node', 'transition', function(Y) {
-				Y.one(view).transition({
-					easing: 'ease-in-out',
-					duration: 0.4,
-					width: 0
-				});
+			
+			$(view).animate({
+				width: '0'
 			});
+			
 			setTimeout(function() {
 				if(modules.menu.isOnlyHelpShown()) {
 					modules.menu.tmpShowOnlyHelp(true);

@@ -12,27 +12,19 @@
 			splash.style.display = 'block';
 		},
 		hide: function(callback) {
-			YUI().use('node', 'transition', function(Y) {
-				Y.one(splash).transition({
-					easing: 'ease-in-out',
-					duration: 0.7,
-					opacity: 0
-				}, function() {
-					shown = false;
-					if(callback) callback();
-				});
+			$(splash).animate({
+				opacity: 0
+			}, 700, function() {
+				shown = false;
+				if(callback) callback();
 			});
 		},
 		show: function(callback) {
 			shown = true;
-			YUI().use('node', 'transition', function(Y) {
-				Y.one(splash).transition({
-					easing: 'ease',
-					duration: 0.7,
-					opacity: '1'
-				}, function() {
-					if(callback) callback();
-				});
+			$(splash).animate({
+				opacity: 1
+			}, 700, function() {
+				if(callback) callback();
 			});
 		},
 		isShown: function() {

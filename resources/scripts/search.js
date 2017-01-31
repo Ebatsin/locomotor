@@ -42,13 +42,9 @@
 					usedCriteria = false;
 
 					// transitionning the title to the top
-					YUI().use('node', 'transition', function(Y) {
-						Y.one(usedTitle).transition({
-							easing: 'ease',
-							duration: 0.4,
-							lineHeight: '6rem'
-						});
-					});
+					$(usedTitle).animate({
+						'line-height': '6rem'
+					}, 400);
 				});
 
 				usedButton.addEventListener('click', function() {
@@ -61,13 +57,9 @@
 					usedCriteria = true;
 
 					// transitionning the title to the top
-					YUI().use('node', 'transition', function(Y) {
-						Y.one(usedTitle).transition({
-							easing: 'ease',
-							duration: 0.4,
-							lineHeight: '4rem'
-						});
-					});
+					$(usedTitle).animate({
+						'line-height': '4rem'
+					}, 400);
 
 				});
 

@@ -102,13 +102,9 @@
 			}
 
 			menu.classList.add('open');
-			YUI().use('node', 'transition', function(Y) {
-				Y.one(menu).transition({
-					easing: 'ease-in-out',
-					duration: animationDuration,
-					width: menuWidth + 'px'
-				});
-			});
+			$(menu).animate({
+				width: menuWidth + 'px'
+			}, animationDuration * 1000);
 		},
 		/**
 		* Furl the menu to show only the icons
@@ -119,13 +115,9 @@
 			}
 
 			menu.classList.remove('open');
-			YUI().use('node', 'transition', function(Y) {
-				Y.one(menu).transition({
-					easing: 'ease-in-out',
-					duration: animationDuration,
-					width: '4em'
-				});
-			});
+			$(menu).animate({
+				width: '4em'
+			}, animationDuration * 1000);
 		},
 		/**
 		* Show the menu on the left
