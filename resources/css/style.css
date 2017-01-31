@@ -24,6 +24,7 @@ html, body {
 	background-color: hsl(200, 5%, 80%);
 	opacity: 1;
 	pointer-events: none;
+	z-index: 2000;
 }
 
 #main-page {

@@ -63,7 +63,7 @@
 
 	window.modules['menu'] = {
 		init: function() {
-			console.log('Initalisation du module menu');
+			console.log('initialisation du module menu');
 			toggle.addEventListener('click', function() {
 				if(modules.menu.isOpen()) {
 					modules.menu.close();

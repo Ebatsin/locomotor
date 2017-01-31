@@ -17,7 +17,7 @@
 
 	window.modules['search'] = {
 		init: function() {
-
+			console.log('initialisation du module search');
 		},
 		load: function() {
 			console.log('loading search');
@@ -72,7 +72,7 @@
 				});
 
 				inputElem.innerHTML = '';
-				var range = new Range(inputElem, 0, 10, 0.01, 2);
+				var range = new Range(inputElem, 0, 10, 0.1, 1);
 				range.init();
 			}
 
