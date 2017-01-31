@@ -371,4 +371,11 @@ html, body {
 	position: absolute;
 	display: inline-block;
 	margin-top: -30px;
+	width: 1px;
+}
+
+.range-label div {
+	width: 200px;
+	margin-left: -88px; /* calc(-100px + 12px )*/
+	text-align: center;
 }

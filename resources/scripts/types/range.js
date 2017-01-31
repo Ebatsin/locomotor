@@ -2,6 +2,11 @@
 /**
 * Use the elem given as a parameter to display the range. Does not change the elem, only its content
 * calling destroy() will give the elem as it was at the begining
+* @param elem the elem in which the input will be inserted
+* @param minBound The min bound of the input range
+* @param maxBoud The max bound of the input range
+* @param step The steps between the selectable values or an array containing the strings reprensting the values, each one beeing a step
+* @param signidigits optional, the number of digits after the point printed
 */
 function Range(elem, minBound, maxBound, step, signiDigits) {
 	var bar = document.createElement('div');
@@ -12,6 +17,8 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 
 	var minLabel = document.createElement('div');
 	var maxLabel = document.createElement('div');
+	var innerMinLabel = document.createElement('div');
+	var innerMaxLabel = document.createElement('div');
 
 	// styling
 	bar.classList.add('range-bar');
@@ -32,8 +39,17 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 	var posBegin = 0; // the position of the knob at the begining of the movement
 	var mouseBegin = 0; // the position of the mouse at the begining of the movement
 
+	var language = null;
+	if(step instanceof Array) {
+		language = step;
+		step = (maxBound - minBound) / (language.length - 1);
+	}
+
 
 	this.init = function() {
+		minLabel.appendChild(innerMinLabel);
+		maxLabel.appendChild(innerMaxLabel);
+
 		bar.appendChild(subBar);
 		bar.appendChild(minKnob);
 		bar.appendChild(maxKnob);
@@ -148,9 +164,15 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 		subBar.style.width = (maxPos - minPos) + '%';
 
 		minLabel.style.marginLeft = 'calc(' + minPos + '%' + ' - ' + (minKnob.offsetWidth/2) + 'px)';
-		minLabel.innerHTML = signiDigits ? min.toFixed(signiDigits) : min;
-
 		maxLabel.style.marginLeft = 'calc(' + maxPos + '%' + ' - ' + (maxKnob.offsetWidth/2) + 'px)';
-		maxLabel.innerHTML = signiDigits ? max.toFixed(signiDigits) : max;
+
+		if(language !== null) {
+			innerMinLabel.innerHTML = language[Math.floor(min / step)];
+			innerMaxLabel.innerHTML = language[Math.floor(max /step)];
+		}
+		else {
+			innerMinLabel.innerHTML = signiDigits ? min.toFixed(signiDigits) : min;
+			innerMaxLabel.innerHTML = signiDigits ? max.toFixed(signiDigits) : max;
+		}
 	}
 }

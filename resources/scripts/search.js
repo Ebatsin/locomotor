@@ -64,7 +64,7 @@
 				});
 
 				inputElem.innerHTML = '';
-				var range = new Range(inputElem, 0, 10, 0.1, 1);
+				var range = new Range(inputElem, 0, 10, ['aucun', 'très peu', 'peu', 'moyen', 'beaucoup', 'énormément']);
 				range.init();
 			}
 
