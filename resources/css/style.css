@@ -442,3 +442,35 @@ html, body {
 .boolean-dummy + .boolean-dummy {
 	margin-left: 56%;
 }
+
+/** string list **/
+
+.stringlist {
+	width: 90%;
+	margin-left: 5%;
+	list-style-type: none;
+	padding: 0;
+}
+
+.stringlist li {
+	width: 25%;
+	margin-left: 6.25%;
+	display: inline-block;
+	background-color: blue;
+	margin-top: 1em;
+	color: hsl(180, 60%, 30%);
+	border: solid 1px hsl(0, 0%, 70%);
+	background-color: hsl(180, 10%, 85%);
+	text-align: center;
+	padding: 0.4em 0;
+	cursor: pointer;
+}
+
+.stringlist li:not(.selected):hover {
+	background-color: hsl(180, 10%, 80%);
+}
+
+.stringlist li.selected {
+	background-color: hsl(180, 60%, 30%);
+	color: hsl(0, 0%, 90%);
+}

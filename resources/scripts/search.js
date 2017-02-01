@@ -80,8 +80,22 @@
 				//var range = new Range(inputElem, 0, 10, ['aucun', 'très peu', 'peu', 'moyen', 'beaucoup', 'énormément']);
 				//range.init();
 
-				var boolean = new Boolean(inputElem);
-				boolean.init();
+				//var boolean = new Boolean(inputElem);
+				//boolean.init();
+
+				var strli = new StringList(inputElem, {
+					'0': 'essence',
+					'1': 'diesel',
+					'2': 'électrique',
+					'3': 'magique',
+					'4': 'foin',
+					'5': 'vapeur',
+					'6': 'energie atomique',
+					'7': 'puissance divine' 
+				});
+
+				strli.init();
+				strli.setSelected([2, 3, 5, 7]);
 			}
 
 			if(!modules.splash.isShown()) {

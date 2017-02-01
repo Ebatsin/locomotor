@@ -84,8 +84,4 @@ function Boolean(elem) {
 	this.isChecked = function() {
 		return checked;
 	};
-
-	this.setChecked = function(ch) {
-		checked = ch;
-	};
 }
