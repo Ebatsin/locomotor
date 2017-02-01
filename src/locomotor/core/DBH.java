@@ -439,7 +439,7 @@ public class DBH {
 
 		// check rights
 		AccreditationLevel level = claims.getRight();
-		if ((level != AccreditationLevel.ADMIN) && (level != AccreditationLevel.GOD)) {
+		if (!AccreditationLevel.isAdmin(level)) {
 			String messageGen = "You don't have the rights";
 			String messageCont = "You don't have the rights";
 			ErrorHandler.getInstance().push("authAdmin", true, messageGen, messageCont);
@@ -471,9 +471,9 @@ public class DBH {
 		}
 
 		AccreditationLevel level = AccreditationLevel.valueOf(userExists.getInteger("isAdmin").intValue());
-		if ((level != AccreditationLevel.ADMIN) && (level != AccreditationLevel.GOD)) {
-			String messageGen = "You don't have the rights";
-			String messageCont = "You don't have the rights";
+		if (!AccreditationLevel.isAdmin(level)) {
+			String messageGen = "You don't have the rights anymore";
+			String messageCont = "You don't have the rights anymore";
 			ErrorHandler.getInstance().push("authStillExists", true, messageGen, messageCont);
 			return false;
 		}

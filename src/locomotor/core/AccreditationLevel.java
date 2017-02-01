@@ -71,4 +71,11 @@ public enum AccreditationLevel {
 	public static AccreditationLevel valueOf(int id) {
 		return _map.get(id);
 	}
+
+	public static boolean isAdmin(AccreditationLevel level) {
+		return (
+			(level == AccreditationLevel.ADMIN) ||
+			(level == AccreditationLevel.GOD)
+		);
+	} 
 }
