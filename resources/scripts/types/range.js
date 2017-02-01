@@ -9,6 +9,8 @@
 * @param signidigits optional, the number of digits after the point printed
 */
 function Range(elem, minBound, maxBound, step, signiDigits) {
+	var that = this;
+
 	var bar = document.createElement('div');
 	var subBar = document.createElement('div');
 
@@ -39,14 +41,43 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 	var posBegin = 0; // the position of the knob at the begining of the movement
 	var mouseBegin = 0; // the position of the mouse at the begining of the movement
 
+	// expo ?
+	var expoUsed = false;
+	var offset = 0;
+
+	if(!step) {
+		step = 1;
+	}
+
+	if(!signiDigits) {
+		signiDigits = 0;
+	}
+
 	var language = null;
 	if(step instanceof Array) {
 		language = step;
 		step = (maxBound - minBound) / (language.length - 1);
 	}
 
+	/**
+	* If expo is true, the expo function is used to show the data
+	*/
+	this.init = function(expo) {
+		if(expo && language == null) {
+			console.log('using expo');
+			offset = 1 - minBound;
+			expoUsed = true;
+			minBound = Math.log(minBound + offset);
+			maxBound = Math.log(maxBound + offset);
 
-	this.init = function() {
+			min = Math.log(min + offset);
+			max = Math.log(max + offset);
+
+			console.log('new values : ');
+			console.log('bounds : ' + minBound + ', ' + maxBound);
+			console.log('values : ' + min + ', ' + max);
+		}
+
 		minLabel.appendChild(innerMinLabel);
 		maxLabel.appendChild(innerMaxLabel);
 
@@ -112,18 +143,22 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 	};
 
 	this.destroy = function() {
-
+		bar.parentNode.removeChild(bar);
 	};
 
 	this.getMin = function() {
-		return min;
+		return expoUsed ? (Math.exp(min) - offset) : min;
 	};
 
 	this.getMax = function() {
-		return max;
+		return expoUsed ? (Math.exp(max) - offset) : max;
 	};
 
 	this.setMin = function(value) {
+		if(expoUsed) {
+			value = Math.log(value + offset)
+		}
+
 		if(value < minBound || value > maxBound) {
 			return;
 		}
@@ -135,9 +170,15 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 			min = value;
 			max = value;
 		}
+
+		updatePosition();
 	};
 
 	this.setMax = function(value) {
+		if(expoUsed) {
+			value = Math.log(value + offset)
+		}
+
 		if(value < minBound || value > maxBound) {
 			return;
 		}
@@ -149,6 +190,8 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 			min = value;
 			max = value;
 		}
+
+		updatePosition();
 	};
 
 	function updatePosition() {
@@ -170,9 +213,15 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 			innerMinLabel.innerHTML = language[Math.floor(min / step)];
 			innerMaxLabel.innerHTML = language[Math.floor(max /step)];
 		}
+		else if(expoUsed) {
+			var minUsed = Math.exp(min) - offset;
+			var maxUsed = Math.exp(max) - offset;
+			innerMinLabel.innerHTML = minUsed.toFixed(signiDigits);
+			innerMaxLabel.innerHTML = maxUsed.toFixed(signiDigits);
+		}
 		else {
-			innerMinLabel.innerHTML = signiDigits ? min.toFixed(signiDigits) : min;
-			innerMaxLabel.innerHTML = signiDigits ? max.toFixed(signiDigits) : max;
+			innerMinLabel.innerHTML = min.toFixed(signiDigits);
+			innerMaxLabel.innerHTML = max.toFixed(signiDigits);
 		}
 	}
 }

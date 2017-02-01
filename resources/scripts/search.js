@@ -9,6 +9,9 @@
 
 	var usedCriteria = false;
 
+	// model datas
+	var categories = [];
+
 	window.registerView('search');
 
 	if(!window.modules) {
@@ -77,11 +80,27 @@
 				});
 
 				inputElem.innerHTML = '';
-				//var range = new Range(inputElem, 0, 10, ['aucun', 'très peu', 'peu', 'moyen', 'beaucoup', 'énormément']);
+
+				// Integer interval
+				//var range = new Range(inputElem, 0, 1000);
 				//range.init();
 
-				//var boolean = new Boolean(inputElem);
-				//boolean.init();
+				// Float interval
+				//var range = new Range(inputElem, 0, 100, 0.1, 1);
+				//range.init();
+
+				// String interval
+				//var range = new Range(inputElem, 0, 5, ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']);
+				//range.init();
+
+				// Integer interval with exponential function
+				//var range = new Range(inputElem, 0, 1000000000, 0.0001, 0);
+				//range.init(true);	
+
+
+				/*var boolean = new Boolean(inputElem);
+				boolean.init();
+				boolean.setChecked(true);*/
 
 				var strli = new StringList(inputElem, {
 					'0': 'essence',
@@ -96,6 +115,8 @@
 
 				strli.init();
 				strli.setSelected([2, 3, 5, 7]);
+
+				modules.search.initBreadcrumb();
 			}
 
 			if(!modules.splash.isShown()) {
@@ -106,6 +127,9 @@
 				console.log('shown');
 				init();
 			}
+		},
+		initBreadcrumb: function() {
+			
 		}
 	};
 })();

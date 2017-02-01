@@ -6,6 +6,8 @@
 */
 function Boolean(elem) {
 
+	var that = this;
+
 	var parent = document.createElement('div');
 	var yes = document.createElement('div');
 	var no = document.createElement('div');
@@ -39,10 +41,30 @@ function Boolean(elem) {
 		elem.appendChild(parent);
 
 		dummyYes.addEventListener('click', function() {
-			if(checked) {
-				return;
-			}
+			that.setChecked(true);
+			console.log(that.isChecked());
+		});
 
+		dummyNo.addEventListener('click', function() {
+			that.setChecked(false);
+			console.log(that.isChecked());
+		});
+	};
+
+	this.destroy = function() {
+		parent.parentNode.removeChild(parent);
+	};
+
+	this.isChecked = function() {
+		return checked;
+	};
+
+	this.setChecked = function(ch) {
+		if(ch === checked) {
+			return;
+		}
+
+		if(ch) { // check. Active yes
 			no.style.color = 'hsl(180, 60%, 30%)';
 			$(transfert).animate({
 				'margin-left': '13%',
@@ -57,13 +79,8 @@ function Boolean(elem) {
 			checked = true;
 			yes.classList.add('checked');
 			no.classList.remove('checked');
-		});
-
-		dummyNo.addEventListener('click', function() {
-			if(!checked) {
-				return;
-			}
-
+		}
+		else {
 			yes.style.color = 'hsl(180, 60%, 30%)';
 			$(transfert).animate({
 				'margin-left': '56%'
@@ -74,14 +91,6 @@ function Boolean(elem) {
 			checked = false;
 			yes.classList.remove('checked');
 			no.classList.add('checked');
-		});
-	};
-
-	this.destroy = function() {
-
-	};
-
-	this.isChecked = function() {
-		return checked;
+		}
 	};
 }

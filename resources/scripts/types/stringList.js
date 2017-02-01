@@ -21,7 +21,6 @@ function StringList(elem, list) {
 
 					item.addEventListener('click', function() {
 						item.classList.toggle('selected');
-						console.log(JSON.stringify(that.getIDs()));
 					});
 
 					parent.appendChild(item);
@@ -33,7 +32,7 @@ function StringList(elem, list) {
 	};
 
 	this.destroy = function() {
-
+		parent.parentNode.removeChild(parent);
 	};
 
 	/**
