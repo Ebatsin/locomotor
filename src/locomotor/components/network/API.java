@@ -19,6 +19,7 @@ import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemFull;
+import locomotor.components.models.ItemSoft;
 import locomotor.components.models.Unit;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
@@ -885,6 +886,51 @@ public class API {
 						ErrorCode.DISPLAY_MESSAGE);
 					return false;
 				}
+			}
+		});
+
+		nh.createEndpoint("/api/admin/item/get-all", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the right", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				JsonArray items = Json.array();
+				for(ItemSoft item : DBH.getInstance().getAllItemsQuick()) {
+					items.add(item.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("items", items));
+
+				return true;
 			}
 		});
 	}

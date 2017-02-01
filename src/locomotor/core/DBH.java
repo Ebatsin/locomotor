@@ -29,6 +29,7 @@ import locomotor.components.models.ItemCategoryFull;
 import locomotor.components.models.ItemCriteria;
 import locomotor.components.models.ItemCriteriaFull;
 import locomotor.components.models.ItemFull;
+import locomotor.components.models.ItemSoft;
 import locomotor.components.models.Unit;
 import locomotor.components.models.UnitAlt;
 import locomotor.components.models.Universe;
@@ -206,7 +207,7 @@ public class DBH {
 		
 		FindIterable<Document> items = md.getCollection("items").find();
 		
-		System.out.println("Retrieving the items");
+		// System.out.println("Retrieving the items");
 
 		items.forEach(new Block<Document>() {
 			@Override
@@ -295,6 +296,44 @@ public class DBH {
 	}
 
 	/**
+	 * Gets all items quick.
+	 *
+	 * @return     All items quick.
+	 */
+	public static ArrayList<ItemSoft> getAllItemsQuick() {
+
+		ArrayList<ItemSoft> listItems = new ArrayList();
+		
+		FindIterable<Document> items = md.getCollection("items").find();
+		
+		MongoCollection<Document> universes = md.getCollection("universes");
+		HashMap<ObjectId,String> universeMap = new HashMap();
+
+		items.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+
+				String id = doc.getObjectId("_id").toString();
+				String name = doc.getString("name");
+				String image = doc.getString("image");
+				ObjectId universeID = doc.getObjectId("universe");
+
+				// check if already retrieve the name, else get it
+				String universeName = universeMap.get(universeID);
+				if (universeName == null) {
+					BasicDBObject queryUniverse = new BasicDBObject();
+					queryUniverse.put("_id", universeID);
+					universeName = universes.find(queryUniverse).first().getString("name");
+				}
+
+				listItems.add(new ItemSoft(id, name, image, universeName));
+
+			}
+		});
+		return listItems;
+	}
+
+	/**
 	 * Check if the username is already taken by another user.
 	 *
 	 * @param      username  The username
@@ -347,7 +386,7 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		users.insertOne(user);
 			
-		ObjectId id = (ObjectId)user.get("_id");
+		ObjectId id = user.getObjectId("_id");
 		String passwordHash = "";
 			
 		try {
@@ -392,7 +431,7 @@ public class DBH {
 			return null;
 		}
 		
-		ObjectId id = (ObjectId)user.get("_id");
+		ObjectId id = user.getObjectId("_id");
 		String correctHash = user.getString("password");
 		Boolean isPasswordValid = null;
 
