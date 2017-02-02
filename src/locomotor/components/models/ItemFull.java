@@ -55,6 +55,42 @@ public class ItemFull extends Item implements JSONDisplayable {
 	}
 
 	/**
+	 * Gets the name.
+	 *
+	 * @return     The name.
+	 */
+	public String getName() {
+		return _name;
+	}
+
+	/**
+	 * Gets the universe.
+	 *
+	 * @return     The universe.
+	 */
+	public String getUniverse() {
+		return _universe;
+	}
+
+	/**
+	 * Gets the description.
+	 *
+	 * @return     The description.
+	 */
+	public String getDescription() {
+		return _description;
+	}
+
+	/**
+	 * Gets the image.
+	 *
+	 * @return     The image.
+	 */
+	public String getImage() {
+		return _image;
+	}
+
+	/**
 	 * Return the JSON value of the item.
 	 *
 	 * @return     The item.
