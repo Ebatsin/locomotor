@@ -5,9 +5,7 @@
 			{
 				"criterionId": "5842dffe57ab9e7e37048793",
 				"disableFlex": false,
-				"value": {
-					"values": [0,1,2,4]
-				}
+				"value": [0,1,2,4]
 			},
 			{
 				"criterionId": "5842e19957ab9e7e37048794",
@@ -107,9 +105,7 @@
 			{
 				"criterionId": "5842f07057ab9e8ee0ed6c84",
 				"disableFlex": false,
-				"value": {
-					"bool": true
-				}
+				"value": true
 			},
 			{
 				"criterionId": "5842f08e57ab9e8ee0ed6c85",
@@ -127,9 +123,7 @@
 			{
 				"criterionId": "5842f0b857ab9e8ee0ed6c87",
 				"disableFlex": false,
-				"value": {
-					"bool": false
-				}
+				"value": false
 			},
 			{
 				"criterionId": "5842f0e057ab9e8ee0ed6c88",
@@ -171,9 +165,7 @@
 			{
 				"criterionId": "5842f3e257ab9e8ee0ed6c89",
 				"disableFlex": false,
-				"value": {
-					"values": [1,6]
-				}
+				"value": [1,6]
 			},
 			{
 				"criterionId": "5842f6e557ab9e93bb852083",

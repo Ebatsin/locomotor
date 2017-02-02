@@ -20,6 +20,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import locomotor.components.Pair;
 import locomotor.components.logging.ErrorHandler;
+import locomotor.core.AccreditationLevel;
 
 /**
  * JSON Web Token class handler: create and check token.
@@ -56,13 +57,13 @@ public class JWTH {
 	/**
 	 * Creates a token.
 	 *
-	 * @param      subject     The subject
-	 * @param      isAdmin     Indicate the user's admin level (0, 1, 2)
-	 * @param      expiration  The expiration (milliseconds)
+	 * @param      subject      The subject
+	 * @param      level     	Indicate the accreditation's level
+	 * @param      expiration	The expiration (milliseconds)
 	 *
 	 * @return     The token (serialized)
 	 */
-	private static String createToken(String subject, int isAdmin, long expiration) {
+	private static String createToken(String subject, AccreditationLevel level, long expiration) {
 
 		// the JWT signature algorithm we will be using to sign the token (HMAC using SHA-512)
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
@@ -80,7 +81,7 @@ public class JWTH {
 							.setSubject(subject)
 							.setIssuer("LocomotorServer")
 							.setIssuedAt(now)
-							.claim("role", isAdmin)
+							.claim("role", new Integer(level.getValue()).toString())
 							.signWith(signatureAlgorithm, signingKey);
 
 		// add the expiration if specified
@@ -134,30 +135,30 @@ public class JWTH {
 	 * Creates a short-time token.
 	 *
 	 * @param      subject  The subject
-	 * @param      isAdmin  Indicate the user's admin level (0, 1, 2)
+	 * @param      level    Indicate the accreditation's level
 	 *
 	 * @return     The short-time token
 	 */
-	public static String createShortToken(String subject, int isAdmin) {
+	public static String createShortToken(String subject, AccreditationLevel level) {
 		ErrorHandler.getInstance().push("createShortToken", false, "Create the short term token", "User " + subject);
 		// 2 hours
 		long duration = 7200000L;
-		return createToken(subject, isAdmin, duration);
+		return createToken(subject, level, duration);
 	}
 
 	/**
 	 * Creates a long-time token.
 	 *
 	 * @param      subject  The subject
-	 * @param      isAdmin  Indicate the user's admin level (0, 1, 2)
+	 * @param      level    Indicate the accreditation's level
 	 *
 	 * @return     The long-time token
 	 */
-	public static String createLongToken(String subject, int isAdmin) {
+	public static String createLongToken(String subject, AccreditationLevel level) {
 		ErrorHandler.getInstance().push("createLongToken", false, "Create the long term token", "User " + subject);
 		// 60 days
 		long duration = 5184000000L;
-		return createToken(subject, isAdmin, duration);
+		return createToken(subject, level, duration);
 	}
 
 	/**
@@ -165,9 +166,9 @@ public class JWTH {
 	 *
 	 * @param      token  The token
 	 *
-	 * @return     The subject and the isAdmin role
+	 * @return     The subject and the role
 	 */
-	public static Pair<String,Integer> checkToken(String token) {
+	public static Pair<String,AccreditationLevel> checkToken(String token) {
 		ErrorHandler.getInstance().push("checkToken", false, "Check the token", token);
 
 		Claims claims = verifyTokenSignature(token);
@@ -186,6 +187,6 @@ public class JWTH {
 			return null;
 		}
 
-		return new Pair(claims.getSubject(), claims.get("role"));
+		return new Pair(claims.getSubject(), AccreditationLevel.valueOf(Integer.parseInt(claims.get("role").toString())));
 	}
 }

@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.JsonValue;
+
 import locomotor.components.Compare;
 
 /**
@@ -27,6 +29,18 @@ public class CInteger extends CLong implements CComparable<CIntervalInteger, CIn
 	 */
 	public double compare(CIntervalInteger user, CIntervalInteger universe, boolean disableFlexibility) {
 		return Compare.uniqueValue(user.min().doubleValue(), user.max().doubleValue(), value().doubleValue(), disableFlexibility);
+	}
+
+	/**
+	 * Factory from representation JSON.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     A new CInteger object.
+	 */
+	public static CInteger fromJSON(JsonValue json) {
+		long value = json.asLong();
+		return new CInteger(value);
 	}
 	
 }

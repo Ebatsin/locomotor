@@ -19,9 +19,11 @@ import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemFull;
+import locomotor.components.models.ItemSoft;
 import locomotor.components.models.Unit;
 import locomotor.components.models.Universe;
 import locomotor.components.models.UserItem;
+import locomotor.core.AccreditationLevel;
 import locomotor.core.Comparator;
 import locomotor.core.CoreResourceManager;
 import locomotor.core.DBH;
@@ -94,7 +96,7 @@ public class API {
 					// check user exist and good password
 					String username = data.getAsString("username");
 					String password = data.getAsString("password");
-					Pair<String,Integer> claims = DBH.getInstance().authUser(username, password);
+					Pair<String,AccreditationLevel> claims = DBH.getInstance().authUser(username, password);
 
 					// check error
 					if (claims == null) {
@@ -115,7 +117,7 @@ public class API {
 				else if(data.isDefined("token")) { // login with token
 					// auth with token
 					String longToken = data.getAsString("token");
-					Pair<String,Integer> claims = jwt.checkToken(longToken);
+					Pair<String,AccreditationLevel> claims = jwt.checkToken(longToken);
 						
 					// check error
 					if(claims == null) {
@@ -165,7 +167,11 @@ public class API {
 				// check user exist
 				String username = data.getAsString("username");
 				String password = data.getAsString("password");
-				Pair<String,Integer> claims = DBH.getInstance().registerUser(username, password, 0);
+				Pair<String, AccreditationLevel> claims = DBH.getInstance().registerUser(
+					username, 
+					password, 
+					AccreditationLevel.MUNDANE
+				);
 				
 				// check error
 				if (claims == null) {
@@ -201,7 +207,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -247,7 +253,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -291,7 +297,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -336,7 +342,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -379,7 +385,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -416,7 +422,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -454,7 +460,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -498,7 +504,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -543,7 +549,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -561,7 +567,15 @@ public class API {
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
 				
 				// create user criterias from json
-				UserItem ui = UserItem.fromJSON(userCriterias, catModel);
+				UserItem ui;
+				try {
+					ui = UserItem.fromJSON(userCriterias, catModel);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing user criterias", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
 
 				// retrieve all items
 				ArrayList<Item> items = DBH.getInstance().getItems(catModel);
@@ -595,7 +609,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -638,7 +652,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -682,7 +696,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -747,7 +761,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -788,7 +802,7 @@ public class API {
 				// auth with token
 				String shortToken = data.getAsString("token");
 				JWTH jwt = JWTH.getInstance();
-				Pair<String,Integer> claims = jwt.checkToken(shortToken);
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
 					
 				// check error
 				if(claims == null) {
@@ -807,6 +821,260 @@ public class API {
 					String message = "This booking does not exist";
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						message, ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/auth", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				JWTH jwt = JWTH.getInstance();
+
+				setExpectedParams("username", "password");
+				if(areAllParamsDefined()) { // login with username & password
+					// check user exist and good password
+					String username = data.getAsString("username");
+					String password = data.getAsString("password");
+					
+					Pair<String,AccreditationLevel> claims = DBH.getInstance().authAdmin(username, password);
+
+					// check error
+					if (claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+					String longToken = jwt.createLongToken(claims.getLeft(), claims.getRight());
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken)
+						.add("long-term-token", longToken));
+
+					return true;
+				}
+				else if(data.isDefined("token")) { // login with token
+					// auth with token
+					String longToken = data.getAsString("token");
+					Pair<String,AccreditationLevel> claims = jwt.checkToken(longToken);
+						
+					// check error
+					if(claims == null) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+
+					// check if the user still exist in the database
+					// and have still the rights
+					// before create the token
+					if(!DBH.getInstance().adminStillExists(claims.getLeft())) {
+						Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+						response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+							log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+						return false;
+					}
+
+					String shortToken = jwt.createShortToken(claims.getLeft(), claims.getRight());
+					response.getJsonContext().success(Json.object()
+						.add("short-term-token", shortToken));
+
+					return false;
+				}
+				else {
+					String errorMessage = "This endpoint needs either the parameters `username` and `password`"
+						+ " to be defined or only the parameter `token`.";
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, errorMessage, 
+						ErrorCode.DISPLAY_MESSAGE);
+					return false;
+				}
+			}
+		});
+
+		nh.createEndpoint("/api/admin/item/get-all", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				JsonArray items = Json.array();
+				for(ItemSoft item : DBH.getInstance().getAllItemsQuick()) {
+					items.add(item.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("items", items));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/item/add", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("item");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get item
+				String item = data.getAsString("item");
+				JsonValue itemJSON = Json.parse(item);
+
+				// get model
+				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
+				
+				// create item from json
+				ItemFull itemF;
+				try {
+					itemF = ItemFull.fromJSON(itemJSON, catModel);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item data", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// add the item to the DB
+				boolean result = DBH.getInstance().addItem(itemF);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/item/update", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("item");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get item
+				String item = data.getAsString("item");
+				JsonValue itemJSON = Json.parse(item);
+
+				// get model
+				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
+				
+				// create item from json
+				ItemFull itemF;
+				try {
+					itemF = ItemFull.fromJSON(itemJSON, catModel);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item data", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// update the item in the DB
+				boolean result = DBH.getInstance().updateItem(itemF);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
 					return false;
 				}
 				

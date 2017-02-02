@@ -1,6 +1,7 @@
 package locomotor.core;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.ne;
 import static com.mongodb.client.model.Updates.set;
 
 import com.mongodb.BasicDBObject;
@@ -22,6 +23,7 @@ import locomotor.components.logging.ErrorHandler;
 
 import locomotor.components.models.Booking;
 import locomotor.components.models.CategoryModel;
+import locomotor.components.models.Criteria;
 import locomotor.components.models.CriteriaModel;
 import locomotor.components.models.Item;
 import locomotor.components.models.ItemCategory;
@@ -29,6 +31,7 @@ import locomotor.components.models.ItemCategoryFull;
 import locomotor.components.models.ItemCriteria;
 import locomotor.components.models.ItemCriteriaFull;
 import locomotor.components.models.ItemFull;
+import locomotor.components.models.ItemSoft;
 import locomotor.components.models.Unit;
 import locomotor.components.models.UnitAlt;
 import locomotor.components.models.Universe;
@@ -194,107 +197,6 @@ public class DBH {
 	}
 
 	/**
-	 * Gets the items.
-	 *
-	 * @param      catModel  The categories model
-	 *
-	 * @return     The items.
-	 */
-	public static ArrayList<Item> getItems(ArrayList<CategoryModel> catModel) {
-	
-		ArrayList<Item> listItems = new ArrayList<Item>();
-		
-		FindIterable<Document> items = md.getCollection("items").find();
-		
-		System.out.println("Retrieving the items");
-
-		items.forEach(new Block<Document>() {
-			@Override
-			public void apply(final Document doc) {
-
-				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
-
-				HashMap<String, Document> categoriesItemMap = new HashMap<String, Document>();
-				for (Document d : catIt) {
-					categoriesItemMap.put(d.getObjectId("categoryModel").toString(), d);
-				}
-
-				ArrayList<ItemCategory> categories = new ArrayList<ItemCategory>();
-
-				// System.out.println("Retrieving the categories of " + doc.getString("name"));
-				
-				TypeFactory typeFactory = new TypeFactory();
-
-				// iterator
-				ListIterator<CategoryModel> itCatMod = catModel.listIterator();
-
-				while(itCatMod.hasNext()) {
-
-					CategoryModel currentCatMod = itCatMod.next();
-					// not found yet
-					Document currentCat = categoriesItemMap.get(currentCatMod.getID());
-
-					String identifierCat = currentCat.getObjectId("categoryModel").toString();
-					// System.out.println("Category " + identifierCat);
-
-					ArrayList<ItemCriteria> criterias = new ArrayList<ItemCriteria>();
-					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
-
-					HashMap<String, Document> criteriasItemMap = new HashMap<String, Document>();
-					for (Document d : critIt) {
-						criteriasItemMap.put(d.getObjectId("criterionModel").toString(), d);
-					}
-
-					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
-
-					// iterator to iterate simultaneously
-					ListIterator<CriteriaModel> itCriMod = critModIt.listIterator();
-
-					while(itCriMod.hasNext()) {
-
-						CriteriaModel currentCritMod = itCriMod.next();
-						// not found yet
-						Document currentCrit = criteriasItemMap.get(currentCritMod.getID());
-
-						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
-						// System.out.println("Criterion " + identifierCrit);
-
-						// creation criteria
-						CItemType value = typeFactory.getItem(currentCritMod.getItemType(),
-							currentCrit.get("value"), currentCritMod.getUniverse());
-
-						ItemCriteria criteria = new ItemCriteria(
-							identifierCrit,
-							value
-						);
-
-						criterias.add(criteria);
-
-						// System.out.println(criteria);
-
-					}
-
-					ItemCategory category = new ItemCategory(
-						identifierCat, criterias
-					);
-
-					categories.add(category);
-
-				}
-
-				String id = doc.getObjectId("_id").toString();
-				Item item = new Item(id, categories);
-
-				listItems.add(item);
-
-			}
-		});
-
-		return listItems;
-
-	}
-
-	/**
 	 * Check if the username is already taken by another user.
 	 *
 	 * @param      username  The username
@@ -325,13 +227,16 @@ public class DBH {
 	/**
 	 * Register an user.
 	 *
-	 * @param      username     The username
-	 * @param      password     The password
-	 * @param      adminLevel   The admin level of the user (0 : no rights, 1 : admin, 2 : superadmin)
+	 * @param      username       The username
+	 * @param      password       The password
+	 * @param      accreditation  The accreditation level
 	 *
-	 * @return     The ObjectID of the user and his role
+	 * @return     The ObjectID of the user and his accreditation level
 	 */
-	public static Pair<String, Integer> registerUser(String username, String password, int adminLevel) {		
+	public static Pair<String, AccreditationLevel> registerUser(
+		String username, 
+		String password, 
+		AccreditationLevel accreditation) {		
 		// check already exist
 		if (DBH.getInstance().usernameAlreadyTaken(username)) {
 			ErrorHandler.getInstance().push("registerUser", true, "The username is already taken by another user", "");
@@ -341,13 +246,13 @@ public class DBH {
 		Document user = new Document();
 		user.append("username", username.trim());
 		user.append("password", "");
-		user.append("isAdmin", adminLevel);
+		user.append("isAdmin", accreditation.getValue());
 		user.append("notifications", new ArrayList<Document>());
 		user.append("bookings", new ArrayList<Document>());
 		MongoCollection<Document> users = md.getCollection("users");
 		users.insertOne(user);
 			
-		ObjectId id = (ObjectId)user.get("_id");
+		ObjectId id = user.getObjectId("_id");
 		String passwordHash = "";
 			
 		try {
@@ -368,7 +273,7 @@ public class DBH {
 		// add hashed password
 		users.updateOne(eq("_id", id), set("password", passwordHash));
 
-		return new Pair(id.toString(), user.getInteger("isAdmin"));
+		return new Pair(id.toString(), AccreditationLevel.valueOf(user.getInteger("isAdmin").intValue()));
 	}
 
 	/**
@@ -379,7 +284,7 @@ public class DBH {
 	 *
 	 * @return     The ObjectID of the user and his role
 	 */
-	public static Pair<String,Integer> authUser(String username, String password) {
+	public static Pair<String,AccreditationLevel> authUser(String username, String password) {
 
 		MongoCollection<Document> users = md.getCollection("users");
 		Document user = users.find(eq("username", username)).first();
@@ -392,7 +297,7 @@ public class DBH {
 			return null;
 		}
 		
-		ObjectId id = (ObjectId)user.get("_id");
+		ObjectId id = user.getObjectId("_id");
 		String correctHash = user.getString("password");
 		Boolean isPasswordValid = null;
 
@@ -417,7 +322,7 @@ public class DBH {
 			return null;
 		}
 
-		return new Pair(id.toString(), user.getInteger("isAdmin"));
+		return new Pair(id.toString(), AccreditationLevel.valueOf(user.getInteger("isAdmin").intValue()));
 
 	}
 
@@ -623,6 +528,11 @@ public class DBH {
 		return true;
 	}
 
+	/**
+	 * Gets all units.
+	 *
+	 * @return     All units.
+	 */
 	public static ArrayList<Unit> getAllUnits() {
 		ArrayList<Unit> units = new ArrayList();
 
@@ -657,69 +567,6 @@ public class DBH {
 		});
 
 		return units;
-	}
-
-	/**
-	 * Gets the partial information of item.
-	 *
-	 * @param      itemID  The item id
-	 *
-	 * @return     The partial information of item, name, image (URL) and universe name.
-	 */
-	public static HashMap<String, Object> getPartialInfoOfItem(String itemID) {
-
-		MongoCollection<Document> items = md.getCollection("items");
-		MongoCollection<Document> universes = md.getCollection("universes");
-
-		// @todo: check items & universes still exists
-		
-		BasicDBObject queryItem = new BasicDBObject();
-		queryItem.put("_id", new ObjectId(itemID));
-		Document item = items.find(queryItem).first();
-		ObjectId universeID = (ObjectId)item.get("universe");
-		BasicDBObject queryUniverse = new BasicDBObject();
-		queryUniverse.put("_id", universeID);
-		Document universe = universes.find(queryUniverse).first();
-
-		HashMap<String, Object> partialInfo = new HashMap();
-		// name & image
-		partialInfo.put("itemName", item.get("name"));
-		partialInfo.put("itemImageURL", item.get("image"));
-		// universe
-		partialInfo.put("universeName", universe.get("name"));
-
-		return partialInfo;
-	}
-
-	/**
-	 * Gets the universe.
-	 *
-	 * @param      universeID  The universe id
-	 *
-	 * @return     The universe.
-	 */
-	public static Universe getUniverse(String universeID) {
-		MongoCollection<Document> universes = md.getCollection("universes");
-		BasicDBObject queryUniverse = new BasicDBObject();
-		
-		try {
-			
-			queryUniverse.put("_id", new ObjectId(universeID));
-			Document universe = universes.find(queryUniverse).first();
-			return new Universe(
-				universeID,
-				universe.get("name").toString(),
-				universe.get("description").toString(),
-				universe.get("image").toString()
-			);
-
-		}
-		catch (Exception ex) {
-			String messageGen = "This universe does not exist";
-			String messageCont = "The identifier is not valid";
-			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
-			return null;
-		}
 	}
 
 	/**
@@ -798,6 +645,374 @@ public class DBH {
 
 		return new ItemFull(itemID, name, universeID, description, image, categories);
 
+	}
+
+	/**
+	 * Gets all items quick.
+	 *
+	 * @return     All items quick.
+	 */
+	public static ArrayList<ItemSoft> getAllItemsQuick() {
+
+		ArrayList<ItemSoft> listItems = new ArrayList();
+		
+		FindIterable<Document> items = md.getCollection("items").find();
+		
+		MongoCollection<Document> universes = md.getCollection("universes");
+		HashMap<ObjectId,String> universeMap = new HashMap();
+
+		items.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+
+				String id = doc.getObjectId("_id").toString();
+				String name = doc.getString("name");
+				String image = doc.getString("image");
+				ObjectId universeID = doc.getObjectId("universe");
+
+				// check if already retrieve the name, else get it
+				String universeName = universeMap.get(universeID);
+				if (universeName == null) {
+					BasicDBObject queryUniverse = new BasicDBObject();
+					queryUniverse.put("_id", universeID);
+					universeName = universes.find(queryUniverse).first().getString("name");
+				}
+
+				listItems.add(new ItemSoft(id, name, image, universeName));
+
+			}
+		});
+		return listItems;
+	}
+
+	/**
+	 * Gets the items.
+	 *
+	 * @param      catModel  The categories model
+	 *
+	 * @return     The items.
+	 */
+	public static ArrayList<Item> getItems(ArrayList<CategoryModel> catModel) {
+	
+		ArrayList<Item> listItems = new ArrayList<Item>();
+		
+		FindIterable<Document> items = md.getCollection("items").find();
+		
+		// System.out.println("Retrieving the items");
+
+		items.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+
+				ArrayList<Document> catIt = (ArrayList<Document>)doc.get("categories");
+
+				HashMap<String, Document> categoriesItemMap = new HashMap<String, Document>();
+				for (Document d : catIt) {
+					categoriesItemMap.put(d.getObjectId("categoryModel").toString(), d);
+				}
+
+				ArrayList<ItemCategory> categories = new ArrayList<ItemCategory>();
+
+				// System.out.println("Retrieving the categories of " + doc.getString("name"));
+				
+				TypeFactory typeFactory = new TypeFactory();
+
+				// iterator
+				ListIterator<CategoryModel> itCatMod = catModel.listIterator();
+
+				while(itCatMod.hasNext()) {
+
+					CategoryModel currentCatMod = itCatMod.next();
+					// not found yet
+					Document currentCat = categoriesItemMap.get(currentCatMod.getID());
+
+					String identifierCat = currentCat.getObjectId("categoryModel").toString();
+					// System.out.println("Category " + identifierCat);
+
+					ArrayList<ItemCriteria> criterias = new ArrayList<ItemCriteria>();
+					ArrayList<Document> critIt = (ArrayList<Document>)currentCat.get("criteria");
+
+					HashMap<String, Document> criteriasItemMap = new HashMap<String, Document>();
+					for (Document d : critIt) {
+						criteriasItemMap.put(d.getObjectId("criterionModel").toString(), d);
+					}
+
+					ArrayList<CriteriaModel> critModIt = currentCatMod.getCriterias();
+
+					// iterator to iterate simultaneously
+					ListIterator<CriteriaModel> itCriMod = critModIt.listIterator();
+
+					while(itCriMod.hasNext()) {
+
+						CriteriaModel currentCritMod = itCriMod.next();
+						// not found yet
+						Document currentCrit = criteriasItemMap.get(currentCritMod.getID());
+
+						String identifierCrit = currentCrit.getObjectId("criterionModel").toString();
+						// System.out.println("Criterion " + identifierCrit);
+
+						// creation criteria
+						CItemType value = typeFactory.getItem(currentCritMod.getItemType(),
+							currentCrit.get("value"), currentCritMod.getUniverse());
+
+						ItemCriteria criteria = new ItemCriteria(
+							identifierCrit,
+							value
+						);
+
+						criterias.add(criteria);
+
+						// System.out.println(criteria);
+
+					}
+
+					ItemCategory category = new ItemCategory(
+						identifierCat, criterias
+					);
+
+					categories.add(category);
+
+				}
+
+				String id = doc.getObjectId("_id").toString();
+				Item item = new Item(id, categories);
+
+				listItems.add(item);
+
+			}
+		});
+
+		return listItems;
+
+	}
+
+	/**
+	 * Gets the partial information of item.
+	 *
+	 * @param      itemID  The item id
+	 *
+	 * @return     The partial information of item, name, image (URL) and universe name.
+	 */
+	public static HashMap<String, Object> getPartialInfoOfItem(String itemID) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		MongoCollection<Document> universes = md.getCollection("universes");
+
+		// @todo: check items & universes still exists
+		
+		BasicDBObject queryItem = new BasicDBObject();
+		queryItem.put("_id", new ObjectId(itemID));
+		Document item = items.find(queryItem).first();
+		ObjectId universeID = (ObjectId)item.get("universe");
+		BasicDBObject queryUniverse = new BasicDBObject();
+		queryUniverse.put("_id", universeID);
+		Document universe = universes.find(queryUniverse).first();
+
+		HashMap<String, Object> partialInfo = new HashMap();
+		// name & image
+		partialInfo.put("itemName", item.get("name"));
+		partialInfo.put("itemImageURL", item.get("image"));
+		// universe
+		partialInfo.put("universeName", universe.get("name"));
+
+		return partialInfo;
+	}
+
+	/**
+	 * Adds an item.
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     True if added, false otherwise.
+	 */
+	public static boolean addItem(ItemFull item) {
+		System.out.println("Adding the item");
+		Document itemToAdd = DBH.getInstance().checkingParsingItem(item);
+
+		// check error
+		if(itemToAdd == null) {
+			return false;
+		}
+
+		MongoCollection<Document> items = md.getCollection("items");
+		items.insertOne(itemToAdd);
+		System.out.println("Item added");
+		return true;
+	}
+
+	public static boolean updateItem(ItemFull item) {
+		System.out.println("Updating the item");
+		Document itemToUpdate = DBH.getInstance().checkingParsingItem(item);
+
+		// check error
+		if(itemToUpdate == null) {
+			return false;
+		}
+
+		String itemID = item.getID();
+		Bson filter = Filters.eq("_id", new ObjectId(itemID));
+		Document update = new Document("$set", itemToUpdate);
+		MongoCollection<Document> items = md.getCollection("items");
+		items.updateOne(filter, update);
+		System.out.println("Item updated");
+		return true;
+	}
+
+	/**
+	 * Checking and parsing item before add/update
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     The document parsed/checked
+	 */
+	private Document checkingParsingItem(ItemFull item) {
+
+		String messageGen = "";
+		String messageCont = "";
+		boolean isError = false;
+		
+		// check universe exists
+		String universeID = item.getUniverse();
+		if(!DBH.getInstance().universeStillExists(universeID)) {
+			messageGen = "The universe does not exist";
+			messageCont = "The universe is not valid";
+			isError = true;
+		}
+
+		// check name if not taken yet
+		// @todo: if update check id
+		String id = item.getID();
+		String name = item.getName();
+		if (DBH.getInstance().itemNameAlreadyTaken(id, name)) {
+			messageGen = "The name of the item is already taken";
+			messageCont = "The name of the item is already taken";
+			isError = true;
+		}
+		
+		// check if error
+		if (isError) {
+			ErrorHandler.getInstance().push("checkingParsingItem", true, messageGen, messageCont);
+			return null;
+		}
+
+		// create the item
+		Document itemToAdd = new Document();
+		itemToAdd.append("name", name);
+		itemToAdd.append("universe", new ObjectId(universeID));
+		itemToAdd.append("description", item.getDescription());
+		itemToAdd.append("image", item.getImage());
+		// the categories to add
+		ArrayList<Document> categoriesToAdd = new ArrayList();
+
+		ArrayList<CategoryModel> catMod = DBH.getInstance().getCategoriesModel();
+		
+		// map criterias for easy retrieve
+		HashMap<String, CriteriaModel> criteriasModMap = new HashMap();
+		for (CategoryModel cm : catMod) {
+			for (CriteriaModel cmm : cm.getCriterias()) {
+				criteriasModMap.put(cmm.getID(), cmm);
+			}
+		}
+
+		TypeFactory typeFactory = new TypeFactory();
+
+		for (ItemCategory category : item.getCategories()) {
+			ItemCategoryFull icf = (ItemCategoryFull)category;
+
+			// the criterias of the current category
+			ArrayList<Document> criteriasToAdd = new ArrayList();
+
+			for (Criteria criteria : icf.getCriterias()) {
+				ItemCriteriaFull icrf = (ItemCriteriaFull)criteria;
+				CriteriaModel cmCurr = criteriasModMap.get(icrf.getID());
+
+				// get the value
+				Object value = typeFactory.getItem(cmCurr.getItemType(), icrf.getValue(), cmCurr.getUniverse());
+				
+				Document criteriaToAdd = new Document();
+				criteriaToAdd.append("criterionModel", new ObjectId(icrf.getID()));
+				criteriaToAdd.append("value", value);
+				criteriasToAdd.add(criteriaToAdd);
+
+			}
+
+			Document categoryToAdd = new Document();
+			categoryToAdd.append("categoryModel", new ObjectId(icf.getID()));
+			categoryToAdd.append("criteria", criteriasToAdd);
+			categoriesToAdd.add(categoryToAdd);
+		}
+
+		itemToAdd.append("categories", categoriesToAdd);
+		return itemToAdd;
+	}
+
+	/**
+	 * Check if the name is already taken by another item.
+	 *
+	 * @param      id    The identifier
+	 * @param      name  The name
+	 *
+	 * @return     True if name is taken, false otherwise.
+	 */
+	public static boolean itemNameAlreadyTaken(String id, String name) {
+		MongoCollection<Document> items = md.getCollection("items");
+
+		Bson filter = Filters.eq("name", name);
+		
+		// with id too
+		if (id != "") {
+			Bson filterID = Filters.ne("_id", new ObjectId(id));
+			filter = Filters.and(filter, filterID);
+		}
+
+		Document itemAlreadyExists = items.find(filter).first();;
+		return (itemAlreadyExists != null);
+	}
+
+	/**
+	 * Gets the universe.
+	 *
+	 * @param      universeID  The universe id
+	 *
+	 * @return     The universe.
+	 */
+	public static Universe getUniverse(String universeID) {
+		MongoCollection<Document> universes = md.getCollection("universes");
+		BasicDBObject queryUniverse = new BasicDBObject();
+		
+		try {
+			
+			queryUniverse.put("_id", new ObjectId(universeID));
+			Document universe = universes.find(queryUniverse).first();
+			return new Universe(
+				universeID,
+				universe.get("name").toString(),
+				universe.get("description").toString(),
+				universe.get("image").toString()
+			);
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This universe does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
+			return null;
+		}
+	}
+
+	/**
+	 * Check if the universe still exists.
+	 *
+	 * @param      id    The identifier
+	 *
+	 * @return     True if exists, false otherwise.
+	 */
+	public static boolean universeStillExists(String id) {
+		MongoCollection<Document> universes = md.getCollection("universes");
+		BasicDBObject queryUniverse = new BasicDBObject();
+		queryUniverse.put("_id", new ObjectId(id));
+		Document universeExists = universes.find(queryUniverse).first();
+		return (universeExists != null);
 	}
 
 	/**
@@ -966,6 +1181,66 @@ public class DBH {
 		// update
 		Document update = new Document("$set", new Document("bookings", bookings));
 		users.updateOne(filter, update);
+		return true;
+	}
+
+	/**
+	 * Authentificate an admin with his username and password.
+	 *
+	 * @param      username  The username
+	 * @param      password  The password
+	 *
+	 * @return     The ObjectID of the user and his role
+	 */
+	public static Pair<String,AccreditationLevel> authAdmin(String username, String password) {
+		Pair<String,AccreditationLevel> claims = DBH.getInstance().authUser(username, password);
+		
+		// check error
+		if (claims == null) {
+			return null;
+		}
+
+		// check rights
+		AccreditationLevel level = claims.getRight();
+		if (!AccreditationLevel.isAdmin(level)) {
+			String messageGen = "You don't have the rights";
+			String messageCont = "You don't have the rights";
+			ErrorHandler.getInstance().push("authAdmin", true, messageGen, messageCont);
+			return null;
+		}
+
+		return claims;
+	}
+
+	/**
+	 * Check if the admin still exists and have the rights.
+	 *
+	 * @param      id    The identifier
+	 *
+	 * @return     True if ok, false otherwise.
+	 */
+	public static boolean adminStillExists(String id) {
+		MongoCollection<Document> users = md.getCollection("users");
+		BasicDBObject queryUser = new BasicDBObject();
+		queryUser.put("_id", new ObjectId(id));
+		Document userExists = users.find(queryUser).first();
+
+		// check error
+		if(userExists == null) {
+			String messageGen = "The user does not exist";
+			String messageCont = "The user does not exist";
+			ErrorHandler.getInstance().push("authStillExists", true, messageGen, messageCont);
+			return false;
+		}
+
+		AccreditationLevel level = AccreditationLevel.valueOf(userExists.getInteger("isAdmin").intValue());
+		if (!AccreditationLevel.isAdmin(level)) {
+			String messageGen = "You don't have the rights anymore";
+			String messageCont = "You don't have the rights anymore";
+			ErrorHandler.getInstance().push("authStillExists", true, messageGen, messageCont);
+			return false;
+		}
+
 		return true;
 	}
 

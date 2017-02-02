@@ -27,6 +27,11 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 		_value = value;
 	}
 
+	/**
+	 * Get the value.
+	 *
+	 * @return     The boolean value
+	 */
 	public Boolean value() {
 		return _value;
 	}
@@ -70,7 +75,7 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 	 * @return     A new CBoolean object.
 	 */
 	public static CBoolean fromJSON(JsonValue json) {
-		return new CBoolean(json.asObject().get("bool").asBoolean());
+		return new CBoolean(json.asBoolean());
 	}
 
 }

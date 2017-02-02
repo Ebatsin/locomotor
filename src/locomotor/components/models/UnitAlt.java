@@ -22,7 +22,7 @@ public class UnitAlt implements JSONDisplayable {
 	private String _longName;
 
 	/**
-	 * The factor (multiple), regarding to the base unit
+	 * The factor (multiple), regarding to the base unit.
 	 */
 	private double _factor;
 

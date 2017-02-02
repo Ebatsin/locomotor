@@ -3,9 +3,11 @@ package locomotor.components.types;
 import com.eclipsesource.json.JsonValue;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeMap;
 
 import locomotor.components.Pair;
+import locomotor.components.models.ItemCriteriaFull;
 
 import org.bson.Document;
 
@@ -146,6 +148,113 @@ public class TypeFactory {
 	}
 
 	/**
+	 * Gets the item value representation, to store in DB.
+	 *
+	 * @param      type      The type
+	 * @param      value     The value
+	 * @param      universe  The universe
+	 *
+	 * @return     The item value representation.
+	 */
+	public Object getItem(CEnumItemType type, CItemType value, CUniverseType universe) {
+		switch(type) {
+			case INTEGER: {
+				if (universe.getClass() == CIntervalInteger.class) {
+					return ((CInteger)value).value();
+				}
+				else {
+					return ((CWeightedInteger)value).value();
+				}
+			}
+			case FLOAT: {
+				return ((CFloat)value).value();
+			}
+			case BOOLEAN: {
+				return ((CBoolean)value).value();
+			}
+			case INTEGER_INTERVAL: {
+				CIntervalInteger cii = (CIntervalInteger)value;
+				Document interval = new Document();
+				interval.append("min", (long)cii.min());
+				interval.append("max", (long)cii.max());
+				return interval;
+			}
+			case FLOAT_INTERVAL: {
+				CIntervalDouble cid = (CIntervalDouble)value;
+				Document interval = new Document();
+				interval.append("min", (double)cid.min());
+				interval.append("max", (double)cid.max());
+				return interval;
+			}		
+			case INTEGER_LIST: {
+				CMappedStringList cmsl = (CMappedStringList)value;
+				Set<Integer> values = cmsl.getMap().keySet();
+				ArrayList<Integer> list = new ArrayList<>(values);
+				return list;
+			}
+			case INTEGER_TREE: {
+				CTree tree = (CTree)value;
+				return getTree(tree);
+			}	
+			default: { 
+				// error
+				System.err.println("Error: Illegal item type");
+				System.err.println(type);
+				System.exit(0);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the item from json.
+	 *
+	 * @param      type      The type
+	 * @param      json      The json
+	 * @param      universe  The universe
+	 *
+	 * @return     The item from json.
+	 */
+	public CItemType getItemFromJson(CEnumItemType type, JsonValue json, CUniverseType universe) {
+		switch(type) {
+			case INTEGER: {
+				if (universe.getClass() == CIntervalInteger.class) {
+					return CInteger.fromJSON(json);
+				}
+				else {
+					return CWeightedInteger.fromJSON(json);
+				}
+			}
+			case FLOAT: {
+				return CFloat.fromJSON(json);
+			}
+			case BOOLEAN: {
+				return CBoolean.fromJSON(json);
+			}
+			case INTEGER_INTERVAL: {
+				return CIntervalInteger.fromJSON(json);
+			}
+			case FLOAT_INTERVAL: {
+				return CIntervalDouble.fromJSON(json);
+			}		
+			case INTEGER_LIST: {
+				return CMappedStringList.fromJSON(json);
+			}
+			case INTEGER_TREE: {
+				return CTree.fromJSON(json);
+			}	
+			default: { 
+				// error
+				System.err.println("Error: Illegal item type");
+				System.err.println(type);
+				System.err.println(json);
+				System.exit(0);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the user criteria.
 	 *
 	 * @param      type  The type of the criteria
@@ -237,5 +346,25 @@ public class TypeFactory {
 			}
 		}
 		return root;
+	}
+
+	/**
+	 * Gets the tree.
+	 *
+	 * @param      tree  The tree
+	 *
+	 * @return     The tree.
+	 */
+	private Document getTree(CTree tree) {
+		Document treeDoc = new Document();
+		treeDoc.append("value", tree.getID());
+		if (!tree.isLeaf()) {
+			ArrayList<Document> childrenDoc = new ArrayList<Document>();
+			for (CTree child : tree.getChildren()) {
+				childrenDoc.add(getTree(child));
+			}
+			treeDoc.append("children", childrenDoc);
+		}
+		return treeDoc;
 	}
 }

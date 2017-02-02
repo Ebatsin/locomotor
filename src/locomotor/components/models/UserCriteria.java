@@ -68,7 +68,7 @@ public class UserCriteria extends Criteria {
 		JsonObject criteria = json.asObject();
 		String identifier = criteria.get("criterionId").asString();
 		boolean disableFlex = criteria.get("disableFlex").asBoolean();
-		JsonObject value = criteria.get("value").asObject();
+		JsonValue value = criteria.get("value");
 
 		// delegate instanciation to the factory
 		TypeFactory typeFactory = new TypeFactory();

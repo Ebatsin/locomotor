@@ -2,6 +2,7 @@ package locomotor.components.types;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
 
 import locomotor.components.Compare;
 
@@ -23,6 +24,15 @@ public class CFloat implements CItemType, CComparable<CIntervalDouble, CInterval
 	 */
 	public CFloat(Double value) {
 		_value = value;
+	}
+
+	/**
+	 * Get the value.
+	 *
+	 * @return     The double value;
+	 */
+	public Double value() {
+		return _value;
 	}
 
 	/**
@@ -54,6 +64,18 @@ public class CFloat implements CItemType, CComparable<CIntervalDouble, CInterval
 	 */
 	public JsonArray toJSON() {
 		return Json.array().add(_value);
+	}
+
+	/**
+	 * Factory from representation JSON.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     A new CFloat object.
+	 */
+	public static CFloat fromJSON(JsonValue json) {
+		double value = json.asDouble();
+		return new CFloat(value);
 	}
 
 }
