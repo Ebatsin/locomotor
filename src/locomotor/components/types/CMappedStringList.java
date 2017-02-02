@@ -45,7 +45,7 @@ public class CMappedStringList extends CStringList implements CComparable<CMappe
 	 * @return     A new CMappedStringList object.
 	 */
 	public static CMappedStringList fromJSON(JsonValue json) {
-		JsonArray values = json.asObject().get("values").asArray();
+		JsonArray values = json.asArray();
 		
 		TreeMap<Integer, String> valuesTree = treeFromJSON(values);
 
