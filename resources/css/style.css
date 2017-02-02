@@ -95,7 +95,7 @@ html, body {
 	font-size: 1.2em;
 }
 
-/* ------------------------------------------ LOGIN VIEW ---------------------------------------*/
+/* ------------------------------------------ HELP VIEW ---------------------------------------*/
 
 #help {
 	height: 100%;
@@ -123,7 +123,7 @@ html, body {
 
 #help h1 {
 	margin: 0;
-	padding: 0.7em;
+	padding: 0.5em;
 	padding-left: 0.5em;
 	letter-spacing: 2px;
 	font-size: 2em;
@@ -173,13 +173,12 @@ html, body {
 	letter-spacing: 1px;
 	font-size: 4em;
 	font-weight: 100;
-	margin-top: 1.5em;
+	margin: 1em !important;
 	color: hsl(0, 0%, 20%);
 }
 
 #login-form {
 	display: inline-block;
-	margin-top: 2.5em;
 	background-color: hsl(207, 12%, 95%);
 	padding: 2em;
 	border: solid 1px hsl(0, 0%, 80%);
@@ -192,6 +191,7 @@ html, body {
 
 #login-form h2 {
 	margin: 1.5em 0;
+	margin-top: 0.7em;
 	font-size: 2em;
 }
 
@@ -217,7 +217,7 @@ html, body {
 	width: 100%;
 	height: 2.5em;
 	padding: 0 0.5em;
-	margin-top: 2em;
+	margin-top: 1em;
 	font-size: 1.5em;
 	color: hsl(0, 0%, 95%);
 	border-radius: 0;
@@ -251,13 +251,13 @@ html, body {
 #search-page {	
 	background-color: hsl(200, 5%, 90%);
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 }
 
 #search-page h1 {
 	background-color: hsl(0, 0%, 95%);
 	margin: 0;
-	padding: 0.7em;
+	padding: 0.5em;
 	padding-left: 1.2em;
 	letter-spacing: 2px;
 	font-size: 2em;
@@ -275,18 +275,24 @@ html, body {
 }
 
 #search-question {
-	margin-top: 3em;
+	margin-top: 2em;
 	width: 90%;
 	margin-left: 5%;
-	font-size: 1.5em;
+	font-size: 1.3em;
 	color: hsl(0, 0%, 11%);
 }
 
 #search-not-used {
 	text-align: center;
-	height: 6rem;
-	font-size: 1.5em;
-	line-height: 6rem;
+	height: 4rem;
+	font-size: 1.2em;
+	line-height: 4rem;
+	margin-top: 2em !important;
+}
+
+#search-used {
+	height: 4rem;
+	overflow: hidden;
 }
 
 #search-page .option.selected {
@@ -304,7 +310,7 @@ html, body {
 	border: solid 1px hsl(180, 60%, 40%);
 	background-color: hsl(200, 5%, 90%);
 	color: hsl(0, 0%, 60%);
-	margin-top: 3em;
+	margin-top: 1.5em;
 }
 
 #search-page .option:hover {
@@ -312,27 +318,27 @@ html, body {
 	margin-bottom: 5px;
 }
 
-#search-used:not(.selected) {
-	height: 6rem;
+#search-used-title {
 	overflow: hidden;
+	text-align: center;
+	font-size: 1.2em;
+	line-height: 4rem;
+	margin: 0;
 }
 
-#search-used p {
-	text-align: center;
-	font-size: 1.5em;
-	line-height: 6rem;
-	margin: 0;
-	margin-bottom: 3em;
+#search-input {
+	margin-top: 2em;
 }
 
 #search-really-important {
 	padding: 1em;
-	margin-top: 2em;
+	margin-top: 3em;
 	display: inline-block;
 }
 
 /* ------------------------------------------ SEARCH INPUTS ---------------------------------------*/
 
+/** range **/
 .range-bar {
 	border: solid 1px hsl(0, 0%, 70%);
 	background-color: hsl(0, 0%, 90%);
@@ -371,4 +377,131 @@ html, body {
 	position: absolute;
 	display: inline-block;
 	margin-top: -30px;
+	width: 1px;
+}
+
+.range-label div {
+	width: 200px;
+	margin-left: -88px; /* calc(-100px + 12px )*/
+	text-align: center;
+}
+
+/** boolean **/
+
+.boolean {
+	position: relative;
+	width: 90%;
+	margin-left: 5%;
+	font-size: 1.3em;
+}
+
+.boolean-option {
+	width: calc(30% - 1px);
+	margin-left: 13%;
+	display: inline-block;
+	text-align: center;
+	height: calc(2.5em - 1px);
+	line-height: 2.5em;
+	cursor: pointer;
+	border: solid 1px hsl(0, 0%, 70%);
+	background-color: transparent;
+	position: absolute;
+	pointer-events: none;
+}
+
+.boolean-option + .boolean-option {
+	margin-left: 56%;
+}
+
+.boolean-trans {
+	position: absolute;
+	width: 30%;
+	height: 2.5em;
+	background-color: hsl(180, 60%, 30%);
+	top: 0;
+	margin-left: 56%;
+}
+
+.boolean-dummy {
+	width: calc(30% - 1px);
+	margin-left: 13%;
+	display: inline-block;
+	text-align: center;
+	height: calc(2.5em - 1px);
+	line-height: 2.5em;
+	cursor: pointer;
+	color: hsl(180, 60%, 30%);
+	border: solid 1px hsl(0, 0%, 70%);
+	position: absolute;
+}
+
+.boolean-dummy:hover {
+	background-color: hsl(180, 10%, 85%);
+}
+
+.boolean-dummy + .boolean-dummy {
+	margin-left: 56%;
+}
+
+/** string list **/
+
+.stringlist {
+	width: 90%;
+	margin-left: 5%;
+	list-style-type: none;
+	padding: 0;
+}
+
+.stringlist li {
+	width: 25%;
+	margin-left: 6.25%;
+	display: inline-block;
+	background-color: blue;
+	margin-top: 1em;
+	color: hsl(180, 60%, 30%);
+	border: solid 1px hsl(0, 0%, 70%);
+	background-color: hsl(180, 10%, 85%);
+	text-align: center;
+	padding: 0.4em 0;
+	cursor: pointer;
+}
+
+.stringlist li:not(.selected):hover {
+	background-color: hsl(180, 10%, 80%);
+}
+
+.stringlist li.selected {
+	background-color: hsl(180, 60%, 30%);
+	color: hsl(0, 0%, 90%);
+}
+
+
+/** string list **/
+
+.tree-node {
+	margin-bottom: 10px;
+}
+
+.tree-value {
+	background-color: hsl(180, 10%, 85%);
+	text-align: center;
+	padding: 0.4em 0;
+	cursor: pointer;
+	display: inline-block;
+	width: 20%;
+}
+
+.tree-children {
+	margin: 0;
+	padding: 0;
+	margin-left: calc(20% + 10px);
+	list-style-type: none;
+	margin-top: calc(-1.8em - 2px);
+}
+
+.tree-root {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	margin-top: calc(-1.8em - 2px);
 }
