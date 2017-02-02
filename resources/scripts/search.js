@@ -73,7 +73,9 @@
 					}, 200);
 					$(usedButton).animate({
 						height: auto + 'px'
-					}, 200);
+					}, 200, function() {
+						$(usedButton).css('height', 'auto');
+					});
 
 					usedCriteria = true;
 

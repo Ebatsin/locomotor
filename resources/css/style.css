@@ -483,8 +483,7 @@ html, body {
 }
 
 .tree-value {
-	background-color: hsl(180, 60%, 30%);
-	color: hsl(0, 0%, 90%);
+	background-color: hsl(180, 10%, 85%);
 	text-align: center;
 	padding: 0.4em 0;
 	cursor: pointer;
