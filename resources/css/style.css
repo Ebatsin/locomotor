@@ -500,7 +500,8 @@ html, body {
 }
 
 .tree-root {
-	margin: 0;
+	margin-left: 2em;
+	margin-top: 1em !important;
 	padding: 0;
 	list-style-type: none;
 	margin-top: calc(-1.8em - 2px);
