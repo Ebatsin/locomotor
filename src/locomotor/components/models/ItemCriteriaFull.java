@@ -72,7 +72,7 @@ public class ItemCriteriaFull extends ItemCriteria implements JSONDisplayable {
 			return null;
 		}
 
-		return new ItemCriteriaFull(identifier, "", null);
+		return new ItemCriteriaFull(identifier, "", itemValue);
 	}
 
 }

@@ -23,6 +23,11 @@ public abstract class CLong implements CItemType {
 		_value = value;
 	}
 
+	/**
+	 * Get the value.
+	 *
+	 * @return     The value.
+	 */
 	public Long value() {
 		return _value;
 	}

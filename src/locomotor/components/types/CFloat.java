@@ -27,6 +27,15 @@ public class CFloat implements CItemType, CComparable<CIntervalDouble, CInterval
 	}
 
 	/**
+	 * Get the value.
+	 *
+	 * @return     The double value;
+	 */
+	public Double value() {
+		return _value;
+	}
+
+	/**
 	 * Returns a string representation of the object.
 	 *
 	 * @return     String representation of the object.

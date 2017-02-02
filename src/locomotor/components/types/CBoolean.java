@@ -27,6 +27,11 @@ public class CBoolean implements CUniverseType, CItemType, CUserType, CComparabl
 		_value = value;
 	}
 
+	/**
+	 * Get the value.
+	 *
+	 * @return     The boolean value
+	 */
 	public Boolean value() {
 		return _value;
 	}

@@ -871,10 +871,10 @@ public class DBH {
 
 			for (Criteria criteria : icf.getCriterias()) {
 				ItemCriteriaFull icrf = (ItemCriteriaFull)criteria;
+				CriteriaModel cmCurr = criteriasModMap.get(icrf.getID());
 
 				// get the value
-				// Object value = typeFactory.getItem(icrf, criteriasModMap.get(icrf.getID()));
-				Object value = null;
+				Object value = typeFactory.getItem(cmCurr.getItemType(), icrf.getValue(), cmCurr.getUniverse());
 				
 				Document criteriaToAdd = new Document();
 				criteriaToAdd.append("criterionModel", new ObjectId(icrf.getID()));
@@ -888,8 +888,6 @@ public class DBH {
 			categoryToAdd.append("criteria", criteriasToAdd);
 			categoriesToAdd.add(categoryToAdd);
 		}
-
-		// check to do
 
 		itemToAdd.append("categories", categoriesToAdd);
 		MongoCollection<Document> items = md.getCollection("items");
