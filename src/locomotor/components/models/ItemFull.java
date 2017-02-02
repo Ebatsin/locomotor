@@ -6,9 +6,11 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import locomotor.components.JSONDisplayable;
-
+import locomotor.components.logging.ErrorHandler;
 /**
  * Full item containing all information.
  */
@@ -71,6 +73,67 @@ public class ItemFull extends Item implements JSONDisplayable {
 		}
 		itemFull.add("categories", categories);
 		return itemFull;
+	}
+
+	/**
+	 * Factory from representation JSON.
+	 *
+	 * @param      json  		The json
+	 * @param      catsModel  	The model
+	 *
+	 * @return     A new ItemFull object.
+	 */
+	public static ItemFull fromJSON(JsonValue json, ArrayList<CategoryModel> catsModel) {
+		System.out.println("Parsing item");
+		
+		JsonObject itemJSON = json.asObject();
+
+		JsonArray categories = itemJSON.get("categories").asArray();
+		ArrayList<ItemCategoryFull> itemCategories = new ArrayList<ItemCategoryFull>();
+
+		// map to retrieve easier (perf)
+		HashMap<String, CategoryModel> categoriesMap = new HashMap<String, CategoryModel>();
+		for (CategoryModel cm : catsModel) {
+			categoriesMap.put(cm.getID(), cm);
+		}
+
+		HashSet<String> categoriesFound = new HashSet();
+
+		// delegate for each category
+		for (JsonValue category : categories) {
+			String identifier = category.asObject().get("categoryId").asString();
+
+			// already found
+			if(categoriesFound.contains(identifier)) {
+				String message = "The categories " + categoriesMap.get(identifier).getName();
+				message += " is present twice.";
+				ErrorHandler.getInstance().push("fromJSON", true, message, message);
+				return null;
+			}
+			categoriesFound.add(identifier);
+
+			ItemCategoryFull ucf = ItemCategoryFull.fromJSON(category, categoriesMap.get(identifier));
+			
+			// error found
+			if(ucf == null) {
+				return null;
+			}
+
+			itemCategories.add(ucf);
+		}
+
+		// not same count, miss one category at least
+		if(categoriesFound.size() != categoriesMap.size()) {
+			String message = "At least one category is missing";
+			ErrorHandler.getInstance().push("fromJSON", true, message, message);
+			return null;
+		}
+
+		String name = itemJSON.get("name").asString();
+		String universe = itemJSON.get("universe").asString();
+		String description = itemJSON.get("description").asString();
+		String image = itemJSON.get("image").asString();
+		return new ItemFull("", name, universe, description, image, itemCategories);
 	}
 
 }

@@ -1,0 +1,148 @@
+{
+    "name" : "Nouveau item",
+    "universe" : "584336b157ab9e1521a8bd9f",
+    "description" : "blablacar blablacar",
+    "image" : "url",
+    "categories" : [ 
+		{
+			"categoryId": "5842ccbf57ab9e689507bc13",
+			"criteria": [
+				{
+					"criterionId": "5842dffe57ab9e7e37048793",
+					"value": [0,1,2,4]
+				},
+				{
+					"criterionId": "5842e19957ab9e7e37048794",
+					"value": 0
+				},
+				{
+					"criterionId": "58435bb857ab9e1127b9f105",
+					"value": {
+						"min": 10000,
+						"max": 1500000
+					}
+				}
+			]
+		},
+		{
+			"categoryId": "5842d7a657ab9e6a5495f3ee",
+			"criteria": [
+				{
+					"criterionId": "5842e66a57ab9e83054cd9c0",
+					"value": 20.0
+				},
+				{
+					"criterionId": "5842e6db57ab9e83054cd9c1",
+					"value": 1234.8
+				},
+				{
+					"criterionId": "5842e72e57ab9e83054cd9c2",
+					"value": 76543.4
+				},
+				{
+					"criterionId": "5842e80f57ab9e845efbe02c",
+					"value": 654345.3
+				},
+				{
+					"criterionId": "5842e83357ab9e845efbe02d",
+					"value": 12323.4
+				}			
+			]
+		},
+		{
+			"categoryId": "5842d7b257ab9e6a5495f3ef",
+			"criteria": [
+				{
+					"criterionId": "5842e9b057ab9e881b260712",
+					"value": 234.0
+				},
+				{
+					"criterionId": "5842ea4c57ab9e888ccd9378",
+					"value": 234.0
+				},
+				{
+					"criterionId": "5842ea7a57ab9e888ccd9379",
+					"value": 2
+				}
+			]
+		},
+		{
+			"categoryId": "5842d7be57ab9e6a5495f3f0",
+			"criteria": [
+				{
+					"criterionId": "5842ebfb57ab9e888ccd937a",
+					"value": 50
+				},
+				{
+					"criterionId": "5842f07057ab9e8ee0ed6c84",
+					"value": true
+				},
+				{
+					"criterionId": "5842f08e57ab9e8ee0ed6c85",
+					"value": 1
+				}
+			]
+		},
+		{
+			"categoryId": "5842f0b257ab9e8ee0ed6c86",
+			"criteria": [
+				{
+					"criterionId": "5842f0b857ab9e8ee0ed6c87",
+					"value": false
+				},
+				{
+					"criterionId": "5842f0e057ab9e8ee0ed6c88",
+					"value": {
+						"id" : 31,
+	                    "children" : [ 
+	                        {
+	                            "id" : 3,
+	                            "children" : [ 
+	                                {
+	                                    "id" : 0
+	                                }, 
+	                                {
+	                                    "id" : 1
+	                                }, 
+	                                {
+	                                    "id" : 2
+	                                }
+	                            ]
+	                        },
+	                        {
+	                            "id" : 7,
+	                            "children" : [ 
+	                                {
+	                                    "id" : 4
+	                                }, 
+	                                {
+	                                    "id" : 5
+	                                }, 
+	                                {
+	                                    "id" : 6
+	                                }
+	                            ]
+	                    	}
+	                    ]
+					}
+				},
+				{
+					"criterionId": "5842f3e257ab9e8ee0ed6c89",
+					"value": [6]
+				},
+				{
+					"criterionId": "5842f6e557ab9e93bb852083",
+					"value": 40
+				},
+				{
+					"criterionId": "5842f77457ab9e93bb852084",
+					"value": 2
+				},
+				{
+					"criterionId": "5842f7f857ab9e93bb852085",
+					"value": 0
+				}
+			]
+		}
+	]
+}

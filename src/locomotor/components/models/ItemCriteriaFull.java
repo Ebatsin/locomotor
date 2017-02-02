@@ -6,7 +6,9 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 
 import locomotor.components.JSONDisplayable;
+import locomotor.components.logging.ErrorHandler;
 import locomotor.components.types.CItemType;
+import locomotor.components.types.TypeFactory;
 
 /**
  * Displayable form of an item's criteria.
@@ -42,6 +44,35 @@ public class ItemCriteriaFull extends ItemCriteria implements JSONDisplayable {
 		JsonValue value = ((CItemType)_value).toJSON();
 		critFull.add("value", value);
 		return critFull;
+	}
+
+	/**
+	 * Factory from representation JSON.
+	 *
+	 * @param      json       The json
+	 * @param      critModel  The criteria model
+	 *
+	 * @return     A new ItemCriteriaFull object.
+	 */
+	public static ItemCriteriaFull fromJSON(JsonValue json, CriteriaModel critModel) {
+
+		// System.out.println("Parsing criteria's item: " + critModel.getName());
+
+		JsonObject criteria = json.asObject();
+		String identifier = criteria.get("criterionId").asString();
+		JsonValue value = criteria.get("value");
+
+		// delegate instanciation to the factory
+		TypeFactory typeFactory = new TypeFactory();
+		CItemType itemValue = typeFactory.getItemFromJson(critModel.getItemType(), value, critModel.getUniverse());
+		
+		if (itemValue == null) {
+			String message = "Error while parsing the criteria";
+			ErrorHandler.getInstance().push("fromJSON", true, message, message);
+			return null;
+		}
+
+		return new ItemCriteriaFull(identifier, "", null);
 	}
 
 }
