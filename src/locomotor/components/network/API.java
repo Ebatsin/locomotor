@@ -563,7 +563,15 @@ public class API {
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
 				
 				// create user criterias from json
-				UserItem ui = UserItem.fromJSON(userCriterias, catModel);
+				UserItem ui;
+				try {
+					ui = UserItem.fromJSON(userCriterias, catModel);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing user criterias", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
 
 				// retrieve all items
 				ArrayList<Item> items = DBH.getInstance().getItems(catModel);
@@ -918,7 +926,7 @@ public class API {
 				if(!AccreditationLevel.isAdmin(claims.getRight())) {
 					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
-						"You don't have the right", ErrorCode.DEFAULT_ERROR_CODE);
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
 					return false;
 				}
 				
@@ -929,6 +937,75 @@ public class API {
 				
 				response.getJsonContext().success(Json.object()
 					.add("items", items));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/item/add", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("item");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get item
+				String item = data.getAsString("item");
+				JsonValue itemJSON = Json.parse(item);
+
+				// get model
+				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
+				
+				// create item from json
+				ItemFull itemF;
+				try {
+					itemF = ItemFull.fromJSON(itemJSON, catModel);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item data", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// add the item to the DB
+				boolean result = DBH.getInstance().addItem(itemF);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
 
 				return true;
 			}

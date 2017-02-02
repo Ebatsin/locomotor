@@ -248,7 +248,6 @@ public class TypeFactory {
 				// error
 				System.err.println("Error: Illegal item type");
 				System.err.println(type);
-				System.err.println(json);
 				System.exit(0);
 			}
 		}
