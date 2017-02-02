@@ -251,7 +251,7 @@ html, body {
 #search-page {	
 	background-color: hsl(200, 5%, 90%);
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 }
 
 #search-page h1 {
@@ -473,4 +473,36 @@ html, body {
 .stringlist li.selected {
 	background-color: hsl(180, 60%, 30%);
 	color: hsl(0, 0%, 90%);
+}
+
+
+/** string list **/
+
+.tree-node {
+	margin-bottom: 10px;
+}
+
+.tree-value {
+	background-color: hsl(180, 60%, 30%);
+	color: hsl(0, 0%, 90%);
+	text-align: center;
+	padding: 0.4em 0;
+	cursor: pointer;
+	display: inline-block;
+	width: 20%;
+}
+
+.tree-children {
+	margin: 0;
+	padding: 0;
+	margin-left: calc(20% + 10px);
+	list-style-type: none;
+	margin-top: calc(-1.8em - 2px);
+}
+
+.tree-root {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	margin-top: calc(-1.8em - 2px);
 }
