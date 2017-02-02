@@ -1,5 +1,7 @@
 package locomotor.components.types;
 
+import com.eclipsesource.json.JsonValue;
+
 import locomotor.components.Compare;
 
 /**
@@ -27,6 +29,18 @@ public class CWeightedInteger extends CLong implements CComparable<CWeightedStri
 	 */
 	public double compare(CWeightedStringList user, CWeightedStringList universe, boolean disableFlexibility) {
 		return Compare.uniqueValue(user.min(), user.max(), value(), disableFlexibility);
+	}
+
+	/**
+	 * Factory from representation JSON.
+	 *
+	 * @param      json  The json
+	 *
+	 * @return     A new CWeightedInteger object.
+	 */
+	public static CWeightedInteger fromJSON(JsonValue json) {
+		long value = json.asLong();
+		return new CWeightedInteger(value);
 	}
 	
 }
