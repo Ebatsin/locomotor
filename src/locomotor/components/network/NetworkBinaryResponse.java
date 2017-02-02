@@ -25,7 +25,7 @@ public class NetworkBinaryResponse extends NetworkResponse {
 
 	/**
 	 * Send the file to the client along with a 200 success code.
-	 * @param The file to send to the client
+	 * @param file The file to send to the client
 	 */
 	public void success(File file) {
 		sendAnswer(file, 200);

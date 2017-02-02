@@ -2,16 +2,27 @@ package locomotor.core;
 
 import locomotor.components.ResourceManager;
 
+/**
+ * Class for core resource manager.
+ */
 public class CoreResourceManager extends ResourceManager {
+	
+	/**
+	 * The singleton.
+	 */
 	protected static CoreResourceManager _instance = null;
 
+	/**
+	 * Constructs the object.
+	 */
 	protected CoreResourceManager() {
 		super();
 		_baseURL = "resources/core/";
 	}
+	
 	/**
 	* Returns a singleton on the CoreResourceManager object.
-	* @returns A singleton on the CoreResourceManager object
+	* @return A singleton on the CoreResourceManager object
 	*/
 	public static synchronized CoreResourceManager getInstance() {
 		if(_instance == null) {

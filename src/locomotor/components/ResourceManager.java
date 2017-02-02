@@ -2,17 +2,31 @@ package locomotor.components;
 
 import java.io.File;
 
+/**
+ * Class for resource manager.
+ */
 public class ResourceManager {
+	
+	/**
+	 * The singleton.
+	 */
 	protected static ResourceManager _instance = null;
+	
+	/**
+	 * Base path where are located the resources.
+	 */
 	protected String _baseURL;
 
+	/**
+	 * Constructs the object.
+	 */
 	protected ResourceManager() {
 		_baseURL = "resources/";
 	}
 
 	/**
 	* Returns a singleton on the ResourceManager object.
-	* @returns A singleton on the ResourceManager object
+	* @return A singleton on the ResourceManager object
 	*/
 	public static synchronized ResourceManager getInstance() {
 		if(_instance == null) {

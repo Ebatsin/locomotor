@@ -11,6 +11,7 @@ import java.util.HashSet;
 
 import locomotor.components.JSONDisplayable;
 import locomotor.components.logging.ErrorHandler;
+
 /**
  * Full item containing all information.
  */

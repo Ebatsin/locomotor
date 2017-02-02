@@ -167,7 +167,11 @@ public class API {
 				// check user exist
 				String username = data.getAsString("username");
 				String password = data.getAsString("password");
-				Pair<String, AccreditationLevel> claims = DBH.getInstance().registerUser(username, password, AccreditationLevel.MUNDANE);
+				Pair<String, AccreditationLevel> claims = DBH.getInstance().registerUser(
+					username, 
+					password, 
+					AccreditationLevel.MUNDANE
+				);
 				
 				// check error
 				if (claims == null) {

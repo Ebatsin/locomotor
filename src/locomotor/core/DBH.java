@@ -232,7 +232,10 @@ public class DBH {
 	 *
 	 * @return     The ObjectID of the user and his accreditation level
 	 */
-	public static Pair<String, AccreditationLevel> registerUser(String username, String password, AccreditationLevel accreditation) {		
+	public static Pair<String, AccreditationLevel> registerUser(
+		String username, 
+		String password, 
+		AccreditationLevel accreditation) {		
 		// check already exist
 		if (DBH.getInstance().usernameAlreadyTaken(username)) {
 			ErrorHandler.getInstance().push("registerUser", true, "The username is already taken by another user", "");
@@ -814,6 +817,13 @@ public class DBH {
 		return partialInfo;
 	}
 
+	/**
+	 * Adds an item.
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     True if added, false otherwise.
+	 */
 	public static boolean addItem(ItemFull item) {
 
 		String messageGen = "";

@@ -72,10 +72,18 @@ public enum AccreditationLevel {
 		return _map.get(id);
 	}
 
+	/**
+	 * Determines if the level is admin.
+	 *
+	 * @param      level  The level
+	 *
+	 * @return     True if admin, False otherwise.
+	 */
 	public static boolean isAdmin(AccreditationLevel level) {
 		return (
-			(level == AccreditationLevel.ADMIN) ||
+			(level == AccreditationLevel.ADMIN)
+			||
 			(level == AccreditationLevel.GOD)
-		);
+			);
 	} 
 }

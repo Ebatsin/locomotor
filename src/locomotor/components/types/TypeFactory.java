@@ -148,54 +148,6 @@ public class TypeFactory {
 	}
 
 	/**
-	 * Gets the item from json.
-	 *
-	 * @param      type      The type
-	 * @param      json      The json
-	 * @param      universe  The universe
-	 *
-	 * @return     The item from json.
-	 */
-	public CItemType getItemFromJson(CEnumItemType type, JsonValue json, CUniverseType universe) {
-		switch(type) {
-			case INTEGER: {
-				if (universe.getClass() == CIntervalInteger.class) {
-					return CInteger.fromJSON(json);
-				}
-				else {
-					return CWeightedInteger.fromJSON(json);
-				}
-			}
-			case FLOAT: {
-				return CFloat.fromJSON(json);
-			}
-			case BOOLEAN: {
-				return CBoolean.fromJSON(json);
-			}
-			case INTEGER_INTERVAL: {
-				return CIntervalInteger.fromJSON(json);
-			}
-			case FLOAT_INTERVAL: {
-				return CIntervalDouble.fromJSON(json);
-			}		
-			case INTEGER_LIST: {
-				return CMappedStringList.fromJSON(json);
-			}
-			case INTEGER_TREE: {
-				return CTree.fromJSON(json);
-			}	
-			default: { 
-				// error
-				System.err.println("Error: Illegal item type");
-				System.err.println(type);
-				System.err.println(json);
-				System.exit(0);
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Gets the item value representation, to store in DB.
 	 *
 	 * @param      type      The type
@@ -248,6 +200,54 @@ public class TypeFactory {
 				// error
 				System.err.println("Error: Illegal item type");
 				System.err.println(type);
+				System.exit(0);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the item from json.
+	 *
+	 * @param      type      The type
+	 * @param      json      The json
+	 * @param      universe  The universe
+	 *
+	 * @return     The item from json.
+	 */
+	public CItemType getItemFromJson(CEnumItemType type, JsonValue json, CUniverseType universe) {
+		switch(type) {
+			case INTEGER: {
+				if (universe.getClass() == CIntervalInteger.class) {
+					return CInteger.fromJSON(json);
+				}
+				else {
+					return CWeightedInteger.fromJSON(json);
+				}
+			}
+			case FLOAT: {
+				return CFloat.fromJSON(json);
+			}
+			case BOOLEAN: {
+				return CBoolean.fromJSON(json);
+			}
+			case INTEGER_INTERVAL: {
+				return CIntervalInteger.fromJSON(json);
+			}
+			case FLOAT_INTERVAL: {
+				return CIntervalDouble.fromJSON(json);
+			}		
+			case INTEGER_LIST: {
+				return CMappedStringList.fromJSON(json);
+			}
+			case INTEGER_TREE: {
+				return CTree.fromJSON(json);
+			}	
+			default: { 
+				// error
+				System.err.println("Error: Illegal item type");
+				System.err.println(type);
+				System.err.println(json);
 				System.exit(0);
 			}
 		}
