@@ -1,6 +1,7 @@
 package locomotor.core;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.ne;
 import static com.mongodb.client.model.Updates.set;
 
 import com.mongodb.BasicDBObject;
@@ -825,6 +826,46 @@ public class DBH {
 	 * @return     True if added, false otherwise.
 	 */
 	public static boolean addItem(ItemFull item) {
+		System.out.println("Adding the item");
+		Document itemToAdd = DBH.getInstance().checkingParsingItem(item);
+
+		// check error
+		if(itemToAdd == null) {
+			return false;
+		}
+
+		MongoCollection<Document> items = md.getCollection("items");
+		items.insertOne(itemToAdd);
+		System.out.println("Item added");
+		return true;
+	}
+
+	public static boolean updateItem(ItemFull item) {
+		System.out.println("Updating the item");
+		Document itemToUpdate = DBH.getInstance().checkingParsingItem(item);
+
+		// check error
+		if(itemToUpdate == null) {
+			return false;
+		}
+
+		String itemID = item.getID();
+		Bson filter = Filters.eq("_id", new ObjectId(itemID));
+		Document update = new Document("$set", itemToUpdate);
+		MongoCollection<Document> items = md.getCollection("items");
+		items.updateOne(filter, update);
+		System.out.println("Item updated");
+		return true;
+	}
+
+	/**
+	 * Checking and parsing item before add/update
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     The document parsed/checked
+	 */
+	private Document checkingParsingItem(ItemFull item) {
 
 		String messageGen = "";
 		String messageCont = "";
@@ -839,8 +880,10 @@ public class DBH {
 		}
 
 		// check name if not taken yet
+		// @todo: if update check id
+		String id = item.getID();
 		String name = item.getName();
-		if (DBH.getInstance().itemNameAlreadyTaken(name)) {
+		if (DBH.getInstance().itemNameAlreadyTaken(id, name)) {
 			messageGen = "The name of the item is already taken";
 			messageCont = "The name of the item is already taken";
 			isError = true;
@@ -848,8 +891,8 @@ public class DBH {
 		
 		// check if error
 		if (isError) {
-			ErrorHandler.getInstance().push("addItem", true, messageGen, messageCont);
-			return false;
+			ErrorHandler.getInstance().push("checkingParsingItem", true, messageGen, messageCont);
+			return null;
 		}
 
 		// create the item
@@ -900,21 +943,29 @@ public class DBH {
 		}
 
 		itemToAdd.append("categories", categoriesToAdd);
-		MongoCollection<Document> items = md.getCollection("items");
-		items.insertOne(itemToAdd);
-		return true;
+		return itemToAdd;
 	}
 
 	/**
 	 * Check if the name is already taken by another item.
 	 *
+	 * @param      id    The identifier
 	 * @param      name  The name
 	 *
 	 * @return     True if name is taken, false otherwise.
 	 */
-	public static boolean itemNameAlreadyTaken(String name) {
+	public static boolean itemNameAlreadyTaken(String id, String name) {
 		MongoCollection<Document> items = md.getCollection("items");
-		Document itemAlreadyExists = items.find(eq("name", name)).first();
+
+		Bson filter = Filters.eq("name", name);
+		
+		// with id too
+		if (id != "") {
+			Bson filterID = Filters.ne("_id", new ObjectId(id));
+			filter = Filters.and(filter, filterID);
+		}
+
+		Document itemAlreadyExists = items.find(filter).first();;
 		return (itemAlreadyExists != null);
 	}
 

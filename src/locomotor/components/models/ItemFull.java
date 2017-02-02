@@ -166,11 +166,20 @@ public class ItemFull extends Item implements JSONDisplayable {
 			return null;
 		}
 
+		// either add (no id yet) or update (id already)
+		String id;
+		try {
+			id = itemJSON.get("id").asString();
+		}
+		catch (Exception ex) {
+			id = "";
+		}
+
 		String name = itemJSON.get("name").asString();
 		String universe = itemJSON.get("universe").asString();
 		String description = itemJSON.get("description").asString();
 		String image = itemJSON.get("image").asString();
-		return new ItemFull("", name, universe, description, image, itemCategories);
+		return new ItemFull(id, name, universe, description, image, itemCategories);
 	}
 
 }
