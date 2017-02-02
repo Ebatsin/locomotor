@@ -19,7 +19,7 @@ CCD = doxygen
 LIB = lib
 SRC = src
 CLASS = class
-DOC = doc
+DOC = docs
 RESOURCES = resources
 DATA = data
 
