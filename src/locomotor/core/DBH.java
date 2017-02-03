@@ -335,17 +335,12 @@ public class DBH {
 	 */
 	public static HashMap<String, Object> getUserInfo(String userID) {
 		MongoCollection<Document> users = md.getCollection("users");
+		
 		// filter for query
-
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if (user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -370,14 +365,9 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -411,14 +401,9 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -484,14 +469,9 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -983,17 +963,13 @@ public class DBH {
 	 * @return     True if succeed, false otherwise.
 	 */
 	public static boolean removeItem(String itemID) {
+		System.out.println("Removing the item");
 		MongoCollection<Document> items = md.getCollection("items");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(itemID));
-		Document item;
+		Document item = items.find(filter).first();
 
-		try {
-			
-			item = items.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(item == null) {
 			String messageGen = "This item does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
@@ -1005,6 +981,7 @@ public class DBH {
 
 		// remove the item from the matrix
 		items.deleteOne(filter);
+		System.out.println("Item removed");
 		return true;
 	}
 
@@ -1140,14 +1117,6 @@ public class DBH {
 	}
 
 	/**
-	 * Update values of an item.
-	 *
-	 * @param      item  The item
-	 *
-	 * @return     True if succeed, else otherwise.
-	 */
-
-	/**
 	 * Update values of an universe.
 	 *
 	 * @param      universe  The universe
@@ -1230,6 +1199,65 @@ public class DBH {
 
 		Document universeAlreadyExists = universes.find(filter).first();;
 		return (universeAlreadyExists != null);
+	}
+
+	/**
+	 * Removes an universe.
+	 *
+	 * @param      universeID  The universe id
+	 *
+	 * @return     True if succeed, false otherwise.}
+	 */
+	public static boolean removeUniverse(String universeID) {
+		System.out.println("Removing the universe");
+		MongoCollection<Document> universes = md.getCollection("universes");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		Document universe = universes.find(filter).first();
+
+		if(universe == null) {
+			String messageGen = "This universe does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// delete related items
+		DBH.getInstance().deleteItemWith(universeID);
+
+		// remove the universe from the matrix
+		universes.deleteOne(filter);
+		System.out.println("Universe removed");
+		return true;
+	}
+
+	/**
+	 * Delete item with the specified ID.
+	 *
+	 * @param      universeID  The item id
+	 */
+	private static void deleteItemWith(String universeID) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		FindIterable<Document> item = items.find(filter);
+
+		// for each item that belongs to the universe
+		item.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+				ObjectId idIdem = doc.getObjectId("_id");
+
+				// delete booking of that item
+				DBH.getInstance().deleteBookingWith(idIdem.toString());
+
+				// delete the item
+				Bson filterItem = Filters.eq("_id", idIdem);
+				items.deleteOne(filterItem);
+			}
+
+		});
+
 	}
 
 	/**
