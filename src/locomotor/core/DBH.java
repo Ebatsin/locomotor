@@ -970,6 +970,75 @@ public class DBH {
 	}
 
 	/**
+	 * Removes an item.
+	 *
+	 * @param      itemID  The item id
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean removeItem(String itemID) {
+		MongoCollection<Document> items = md.getCollection("items");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(itemID));
+		Document item;
+
+		try {
+			
+			item = items.find(filter).first();
+
+		}
+		catch (Exception ex) {
+			String messageGen = "This item does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// delete related bookings
+		DBH.getInstance().deleteBookingWith(itemID);
+
+		// remove the item from the matrix
+		items.deleteOne(filter);
+		return true;
+	}
+
+	/**
+	 * Delete booking with the specified ID.
+	 *
+	 * @param      itemID  The item id
+	 */
+	private static void deleteBookingWith(String itemID) {
+
+		MongoCollection<Document> users = md.getCollection("users");
+		Bson filter = Filters.eq("bookings.itemID", new ObjectId(itemID));
+		FindIterable<Document> user = users.find(filter);
+
+		// for each user that have this item booked
+		user.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+				ArrayList<Document> bookings = (ArrayList<Document>)doc.get("bookings");
+				ArrayList<Document> toDelete = new ArrayList();
+
+				// delete them
+				for (int i = 0; i < bookings.size(); i++) {
+					Document booking = bookings.get(i);
+					if(booking.getObjectId("itemID").toString().equals(itemID)) {
+						bookings.remove(booking);
+					}
+				}
+
+				// update it
+				Bson filterUser = Filters.eq("_id", doc.getObjectId("_id"));
+				Document update = new Document("$set", new Document("bookings", bookings));
+				users.updateOne(filterUser, update);
+			}
+
+		});
+
+	}
+
+	/**
 	 * Gets the universe.
 	 *
 	 * @param      universeID  The universe id
