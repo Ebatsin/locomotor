@@ -1248,5 +1248,71 @@ public class API {
 				return true;
 			}
 		});
+
+		nh.createEndpoint("/api/admin/universe/update", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				setExpectedParams("universe");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get universe
+				String universe = data.getAsString("universe");
+				JsonValue universeJSON = Json.parse(universe);
+
+				// create universe from json
+				Universe universeObj;
+				try {
+					universeObj = Universe.fromJSON(universeJSON);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe data", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// update the universe in the DB
+				boolean result = DBH.getInstance().updateUniverse(universeObj);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
 	}
 }

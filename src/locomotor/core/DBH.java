@@ -1140,6 +1140,39 @@ public class DBH {
 	}
 
 	/**
+	 * Update values of an item.
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     True if succeed, else otherwise.
+	 */
+
+	/**
+	 * Update values of an universe.
+	 *
+	 * @param      universe  The universe
+	 *
+	 * @return     True if succeed, else otherwise.
+	 */
+	public static boolean updateUniverse(Universe universe) {
+		System.out.println("Updating the universe");
+		Document universeToUpdate = DBH.getInstance().checkingParsingUniverse(universe);
+
+		// check error
+		if(universeToUpdate == null) {
+			return false;
+		}
+
+		String universeID = universe.getID();
+		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		Document update = new Document("$set", universeToUpdate);
+		MongoCollection<Document> universes = md.getCollection("universes");
+		universes.updateOne(filter, update);
+		System.out.println("Universe updated");
+		return true;
+	}
+
+	/**
 	 * Checking and parsing universe before add/update
 	 *
 	 * @param      universe  The universe
