@@ -840,6 +840,13 @@ public class DBH {
 		return true;
 	}
 
+	/**
+	 * Update values of an item.
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     True if succeed, else otherwise.
+	 */
 	public static boolean updateItem(ItemFull item) {
 		System.out.println("Updating the item");
 		Document itemToUpdate = DBH.getInstance().checkingParsingItem(item);
@@ -1082,6 +1089,33 @@ public class DBH {
 		queryUniverse.put("_id", new ObjectId(id));
 		Document universeExists = universes.find(queryUniverse).first();
 		return (universeExists != null);
+	}
+
+	/**
+	 * Gets all universes quick.
+	 *
+	 * @return     All universes quick.
+	 */
+	public static ArrayList<Universe> getAllUniversesQuick() {
+
+		ArrayList<Universe> listUniverses = new ArrayList();
+		
+		FindIterable<Document> universes = md.getCollection("universes").find();
+		
+		universes.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+
+				String id = doc.getObjectId("_id").toString();
+				String name = doc.getString("name");
+				String description = doc.getString("description");
+				String image = doc.getString("image");
+
+				listUniverses.add(new Universe(id, name, description, image));
+
+			}
+		});
+		return listUniverses;
 	}
 
 	/**
