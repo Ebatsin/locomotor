@@ -887,7 +887,6 @@ public class DBH {
 		}
 
 		// check name if not taken yet
-		// @todo: if update check id
 		String id = item.getID();
 		String name = item.getName();
 		if (DBH.getInstance().itemNameAlreadyTaken(id, name)) {
@@ -1116,6 +1115,88 @@ public class DBH {
 			}
 		});
 		return listUniverses;
+	}
+
+	/**
+	 * Adds an universe.
+	 *
+	 * @param      universe  The universe
+	 *
+	 * @return     True if added, false otherwise.
+	 */
+	public static boolean addUniverse(Universe universe) {
+		System.out.println("Adding the universe");
+		Document universeToAdd = DBH.getInstance().checkingParsingUniverse(universe);
+
+		// check error
+		if(universeToAdd == null) {
+			return false;
+		}
+
+		MongoCollection<Document> universes = md.getCollection("universes");
+		universes.insertOne(universeToAdd);
+		System.out.println("Universe added");
+		return true;
+	}
+
+	/**
+	 * Checking and parsing universe before add/update
+	 *
+	 * @param      universe  The universe
+	 *
+	 * @return     The document parsed/checked
+	 */
+	private Document checkingParsingUniverse(Universe universe) {
+
+		String messageGen = "";
+		String messageCont = "";
+		boolean isError = false;
+
+		// check name if not taken yet
+		String id = universe.getID();
+		String name = universe.getName();
+		if (DBH.getInstance().universeNameAlreadyTaken(id, name)) {
+			messageGen = "The name of the universe is already taken";
+			messageCont = "The name of the universe is already taken";
+			isError = true;
+		}
+		
+		// check if error
+		if (isError) {
+			ErrorHandler.getInstance().push("checkingParsingUniverse", true, messageGen, messageCont);
+			return null;
+		}
+
+		// create the item
+		Document universeToAdd = new Document();
+		universeToAdd.append("name", name);
+		universeToAdd.append("description", universe.getDescription());
+		universeToAdd.append("image", universe.getImage());
+		
+		return universeToAdd;
+	}
+
+	/**
+	 * Check if the name is already taken by another universe.
+	 *
+	 * @param      id    The identifier
+	 * @param      name  The name
+	 *
+	 * @return     True if name is taken, false otherwise.
+	 */
+	public static boolean universeNameAlreadyTaken(String id, String name) {
+		MongoCollection<Document> universes = md.getCollection("universes");
+
+		Bson filter = Filters.eq("name", name);
+		
+		// with id too
+		if (id != "") {
+			Bson filterID = Filters.ne("_id", new ObjectId(id));
+			filter = Filters.and(filter, filterID);
+		}
+
+		Document universeAlreadyExists = universes.find(filter).first();;
+		return (universeAlreadyExists != null);
 	}
 
 	/**
