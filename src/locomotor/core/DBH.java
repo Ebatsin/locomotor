@@ -846,7 +846,7 @@ public class DBH {
 	}
 
 	/**
-	 * Checking and parsing item before add/update
+	 * Checking and parsing item before add/update.
 	 *
 	 * @param      item  The item
 	 *
@@ -1142,7 +1142,7 @@ public class DBH {
 	}
 
 	/**
-	 * Checking and parsing universe before add/update
+	 * Checking and parsing universe before add/update.
 	 *
 	 * @param      universe  The universe
 	 *
