@@ -948,3 +948,537 @@
 		}
 	]
 }
+{
+	"_id": {
+		"$oid": "5895100b674f569e65fbfc3e"
+	},
+	"name": "Catbus",
+	"universe": {
+		"$oid": "58950cde674f568f496d0bce"
+	},
+	"description": "It is a large creature, depicted as a grinning, twelve legged cat with a hollow body that serves as a bus, complete with windows and seats coated with fur, and a large, bushy tail.",
+	"image": "url",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						3,
+						4
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "1000"
+						},
+						"max": {
+							"$numberLong": "100000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 0.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 2500.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 15.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 3.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 7.0
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 50.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 500.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "7"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "15"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": true
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": true
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											},
+											{
+												"value": 14
+											}
+										]
+									},
+									{
+										"value": 19,
+										"children": [
+											{
+												"value": 16
+											},
+											{
+												"value": 17
+											},
+											{
+												"value": 18
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						6
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "16"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "589512aa674f56a86708e809"
+	},
+	"name": "Ghost",
+	"universe": {
+		"$oid": "589510a5674f56a09af3db78"
+	},
+	"description": "Fast and maneuverable, the Ghost could be used for everything from deep reconnaissance to assault runs. A testament to its field success, the T-32 has remained largely unchanged for centuries. This perfected design utilizes a single-mount rear-positioned seat and twin-linked plasma cannons; it maintains excellent mobility, regardless of the terrain it finds itself deployed in.",
+	"image": "url",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						10
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "3"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "10000"
+						},
+						"max": {
+							"$numberLong": "950000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 0.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 559.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 4.2
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 3.9
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 1.8
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 75.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 300.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											},
+											{
+												"value": 14
+											}
+										]
+									},
+									{
+										"value": 19,
+										"children": [
+											{
+												"value": 16
+											},
+											{
+												"value": 17
+											},
+											{
+												"value": 18
+											}
+										]
+									}
+								]
+							},
+							{
+								"value": 7,
+								"children": [
+									{
+										"value": 6
+									}
+								]
+							},
+							{
+								"value": 26,
+								"children": [
+									{
+										"value": 22
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						0,
+						1
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "36"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				}
+			]
+		}
+	]
+}

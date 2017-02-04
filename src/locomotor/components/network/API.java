@@ -243,8 +243,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("newUsername");
+				setExpectedParams("token", "newUsername");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -286,9 +285,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("oldPassword");
-				setExpectedParams("newPassword");
+				setExpectedParams("token", "oldPassword", "newPassword");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -332,8 +329,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("password");
+				setExpectedParams("token", "password");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -450,8 +446,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -494,8 +489,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -539,8 +533,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("criterias");
+				setExpectedParams("token", "criterias");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -561,7 +554,18 @@ public class API {
 				
 				// get criterias
 				String criterias = data.getAsString("criterias");
-				JsonValue userCriterias = Json.parse(criterias);
+				JsonValue userCriterias;
+				try {
+					userCriterias = Json.parse(criterias);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing criterias, the JSON is malformated.", 
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// get model
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
@@ -599,8 +603,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -642,8 +645,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -682,11 +684,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
-				setExpectedParams("startDate");
-				setExpectedParams("endDate");
-				setExpectedParams("quantity");
+				setExpectedParams("token", "id", "startDate", "endDate", "quantity");
 
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
@@ -791,8 +789,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
@@ -952,8 +949,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("item");
+				setExpectedParams("token", "item");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -982,7 +978,18 @@ public class API {
 				
 				// get item
 				String item = data.getAsString("item");
-				JsonValue itemJSON = Json.parse(item);
+				JsonValue itemJSON;
+				try {
+					itemJSON = Json.parse(item);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// get model
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
@@ -1021,8 +1028,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("item");
+				setExpectedParams("token", "item");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -1051,7 +1057,18 @@ public class API {
 				
 				// get item
 				String item = data.getAsString("item");
-				JsonValue itemJSON = Json.parse(item);
+				JsonValue itemJSON;
+				try {
+					itemJSON = Json.parse(item);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// get model
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
@@ -1069,6 +1086,309 @@ public class API {
 
 				// update the item in the DB
 				boolean result = DBH.getInstance().updateItem(itemF);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/item/remove", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token", "id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get item
+				String itemID = data.getAsString("id");
+
+				// delete the item in the DB
+				boolean result = DBH.getInstance().removeItem(itemID);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/universe/get-all", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				JsonArray universes = Json.array();
+				for(Universe universe : DBH.getInstance().getAllUniversesQuick()) {
+					universes.add(universe.toJSON());
+				}
+				
+				response.getJsonContext().success(Json.object()
+					.add("universes", universes));
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/universe/add", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token", "universe");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get universe
+				String universe = data.getAsString("universe");
+				JsonValue universeJSON;
+				try {
+					universeJSON = Json.parse(universe);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
+				
+				// create universe from json
+				Universe universeObj;
+				try {
+					universeObj = Universe.fromJSON(universeJSON);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe data", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// add the universe to the DB
+				boolean result = DBH.getInstance().addUniverse(universeObj);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/universe/update", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token", "universe");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get universe
+				String universe = data.getAsString("universe");
+				JsonValue universeJSON;
+				try {
+					universeJSON = Json.parse(universe);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
+
+				// create universe from json
+				Universe universeObj;
+				try {
+					universeObj = Universe.fromJSON(universeJSON);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe data", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// update the universe in the DB
+				boolean result = DBH.getInstance().updateUniverse(universeObj);
+
+				// check error
+				if(!result) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				response.getJsonContext().success(Json.object());
+
+				return true;
+			}
+		});
+
+		nh.createEndpoint("/api/admin/universe/remove", new IEndpointHandler() {
+			public boolean handle(NetworkData data, NetworkResponseFactory response) {
+				if(!super.handle(data, response)) {
+					return false;
+				}
+
+				setExpectedParams("token", "id");
+				if(!areAllParamsDefined()) {
+					sendDefaultMissingParametersMessage();
+					return false;
+				}
+
+				// auth with token
+				String shortToken = data.getAsString("token");
+				JWTH jwt = JWTH.getInstance();
+				Pair<String,AccreditationLevel> claims = jwt.checkToken(shortToken);
+					
+				// check error
+				if(claims == null) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						log.getRight().toString(), ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+
+				// check rights
+				if(!AccreditationLevel.isAdmin(claims.getRight())) {
+					Pair<String, Logging> log = ErrorHandler.getInstance().pop();
+					response.getJsonContext().failure(NetworkResponse.ErrorCode.UNAUTHORIZED_ACCESS, 
+						"You don't have the rights", ErrorCode.DEFAULT_ERROR_CODE);
+					return false;
+				}
+				
+				// get universe
+				String universeID = data.getAsString("id");
+
+				// delete the universe in the DB
+				boolean result = DBH.getInstance().removeUniverse(universeID);
 
 				// check error
 				if(!result) {

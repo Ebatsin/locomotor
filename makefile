@@ -141,5 +141,8 @@ linter-front-user:
 ###################################################
 
 DATAJSON = $(shell echo $(DATA)/*.json)
-update-database:
+import-database:
 	$(foreach file, $(DATAJSON), mongoimport -d $(PACKAGE) -c $(shell basename $(file) .json) --drop --file $(file);)
+
+export-database:
+	$(foreach file, $(DATAJSON), mongoexport -d $(PACKAGE) -c $(shell basename $(file) .json) --out $(file) --pretty;)

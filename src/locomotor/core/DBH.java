@@ -335,17 +335,12 @@ public class DBH {
 	 */
 	public static HashMap<String, Object> getUserInfo(String userID) {
 		MongoCollection<Document> users = md.getCollection("users");
+		
 		// filter for query
-
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if (user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -370,14 +365,9 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -411,14 +401,9 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -484,14 +469,9 @@ public class DBH {
 		MongoCollection<Document> users = md.getCollection("users");
 		// filter for query
 		Bson filter = Filters.eq("_id", new ObjectId(userID));
-		Document user;
+		Document user = users.find(filter).first();
 
-		try {
-			
-			user = users.find(filter).first();
-
-		}
-		catch (Exception ex) {
+		if(user == null) {
 			String messageGen = "This user does not exist";
 			String messageCont = "The identifier is not valid";
 			ErrorHandler.getInstance().push("userNotExist", true, messageGen, messageCont);
@@ -840,6 +820,13 @@ public class DBH {
 		return true;
 	}
 
+	/**
+	 * Update values of an item.
+	 *
+	 * @param      item  The item
+	 *
+	 * @return     True if succeed, else otherwise.
+	 */
 	public static boolean updateItem(ItemFull item) {
 		System.out.println("Updating the item");
 		Document itemToUpdate = DBH.getInstance().checkingParsingItem(item);
@@ -859,7 +846,7 @@ public class DBH {
 	}
 
 	/**
-	 * Checking and parsing item before add/update
+	 * Checking and parsing item before add/update.
 	 *
 	 * @param      item  The item
 	 *
@@ -880,7 +867,6 @@ public class DBH {
 		}
 
 		// check name if not taken yet
-		// @todo: if update check id
 		String id = item.getID();
 		String name = item.getName();
 		if (DBH.getInstance().itemNameAlreadyTaken(id, name)) {
@@ -970,6 +956,72 @@ public class DBH {
 	}
 
 	/**
+	 * Removes an item.
+	 *
+	 * @param      itemID  The item id
+	 *
+	 * @return     True if succeed, false otherwise.
+	 */
+	public static boolean removeItem(String itemID) {
+		System.out.println("Removing the item");
+		MongoCollection<Document> items = md.getCollection("items");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(itemID));
+		Document item = items.find(filter).first();
+
+		if(item == null) {
+			String messageGen = "This item does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("itemNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// delete related bookings
+		DBH.getInstance().deleteBookingWith(itemID);
+
+		// remove the item from the matrix
+		items.deleteOne(filter);
+		System.out.println("Item removed");
+		return true;
+	}
+
+	/**
+	 * Delete booking with the specified ID.
+	 *
+	 * @param      itemID  The item id
+	 */
+	private static void deleteBookingWith(String itemID) {
+
+		MongoCollection<Document> users = md.getCollection("users");
+		Bson filter = Filters.eq("bookings.itemID", new ObjectId(itemID));
+		FindIterable<Document> user = users.find(filter);
+
+		// for each user that have this item booked
+		user.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+				ArrayList<Document> bookings = (ArrayList<Document>)doc.get("bookings");
+				ArrayList<Document> toDelete = new ArrayList();
+
+				// delete them
+				for (int i = 0; i < bookings.size(); i++) {
+					Document booking = bookings.get(i);
+					if(booking.getObjectId("itemID").toString().equals(itemID)) {
+						bookings.remove(booking);
+					}
+				}
+
+				// update it
+				Bson filterUser = Filters.eq("_id", doc.getObjectId("_id"));
+				Document update = new Document("$set", new Document("bookings", bookings));
+				users.updateOne(filterUser, update);
+			}
+
+		});
+
+	}
+
+	/**
 	 * Gets the universe.
 	 *
 	 * @param      universeID  The universe id
@@ -1013,6 +1065,199 @@ public class DBH {
 		queryUniverse.put("_id", new ObjectId(id));
 		Document universeExists = universes.find(queryUniverse).first();
 		return (universeExists != null);
+	}
+
+	/**
+	 * Gets all universes quick.
+	 *
+	 * @return     All universes quick.
+	 */
+	public static ArrayList<Universe> getAllUniversesQuick() {
+
+		ArrayList<Universe> listUniverses = new ArrayList();
+		
+		FindIterable<Document> universes = md.getCollection("universes").find();
+		
+		universes.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+
+				String id = doc.getObjectId("_id").toString();
+				String name = doc.getString("name");
+				String description = doc.getString("description");
+				String image = doc.getString("image");
+
+				listUniverses.add(new Universe(id, name, description, image));
+
+			}
+		});
+		return listUniverses;
+	}
+
+	/**
+	 * Adds an universe.
+	 *
+	 * @param      universe  The universe
+	 *
+	 * @return     True if added, false otherwise.
+	 */
+	public static boolean addUniverse(Universe universe) {
+		System.out.println("Adding the universe");
+		Document universeToAdd = DBH.getInstance().checkingParsingUniverse(universe);
+
+		// check error
+		if(universeToAdd == null) {
+			return false;
+		}
+
+		MongoCollection<Document> universes = md.getCollection("universes");
+		universes.insertOne(universeToAdd);
+		System.out.println("Universe added");
+		return true;
+	}
+
+	/**
+	 * Update values of an universe.
+	 *
+	 * @param      universe  The universe
+	 *
+	 * @return     True if succeed, else otherwise.
+	 */
+	public static boolean updateUniverse(Universe universe) {
+		System.out.println("Updating the universe");
+		Document universeToUpdate = DBH.getInstance().checkingParsingUniverse(universe);
+
+		// check error
+		if(universeToUpdate == null) {
+			return false;
+		}
+
+		String universeID = universe.getID();
+		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		Document update = new Document("$set", universeToUpdate);
+		MongoCollection<Document> universes = md.getCollection("universes");
+		universes.updateOne(filter, update);
+		System.out.println("Universe updated");
+		return true;
+	}
+
+	/**
+	 * Checking and parsing universe before add/update.
+	 *
+	 * @param      universe  The universe
+	 *
+	 * @return     The document parsed/checked
+	 */
+	private Document checkingParsingUniverse(Universe universe) {
+
+		String messageGen = "";
+		String messageCont = "";
+		boolean isError = false;
+
+		// check name if not taken yet
+		String id = universe.getID();
+		String name = universe.getName();
+		if (DBH.getInstance().universeNameAlreadyTaken(id, name)) {
+			messageGen = "The name of the universe is already taken";
+			messageCont = "The name of the universe is already taken";
+			isError = true;
+		}
+		
+		// check if error
+		if (isError) {
+			ErrorHandler.getInstance().push("checkingParsingUniverse", true, messageGen, messageCont);
+			return null;
+		}
+
+		// create the item
+		Document universeToAdd = new Document();
+		universeToAdd.append("name", name);
+		universeToAdd.append("description", universe.getDescription());
+		universeToAdd.append("image", universe.getImage());
+		
+		return universeToAdd;
+	}
+
+	/**
+	 * Check if the name is already taken by another universe.
+	 *
+	 * @param      id    The identifier
+	 * @param      name  The name
+	 *
+	 * @return     True if name is taken, false otherwise.
+	 */
+	public static boolean universeNameAlreadyTaken(String id, String name) {
+		MongoCollection<Document> universes = md.getCollection("universes");
+
+		Bson filter = Filters.eq("name", name);
+		
+		// with id too
+		if (id != "") {
+			Bson filterID = Filters.ne("_id", new ObjectId(id));
+			filter = Filters.and(filter, filterID);
+		}
+
+		Document universeAlreadyExists = universes.find(filter).first();;
+		return (universeAlreadyExists != null);
+	}
+
+	/**
+	 * Removes an universe.
+	 *
+	 * @param      universeID  The universe id
+	 *
+	 * @return     True if succeed, false otherwise.}
+	 */
+	public static boolean removeUniverse(String universeID) {
+		System.out.println("Removing the universe");
+		MongoCollection<Document> universes = md.getCollection("universes");
+		// filter for query
+		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		Document universe = universes.find(filter).first();
+
+		if(universe == null) {
+			String messageGen = "This universe does not exist";
+			String messageCont = "The identifier is not valid";
+			ErrorHandler.getInstance().push("universeNotExist", true, messageGen, messageCont);
+			return false;
+		}
+
+		// delete related items
+		DBH.getInstance().deleteItemWith(universeID);
+
+		// remove the universe from the matrix
+		universes.deleteOne(filter);
+		System.out.println("Universe removed");
+		return true;
+	}
+
+	/**
+	 * Delete item with the specified ID.
+	 *
+	 * @param      universeID  The item id
+	 */
+	private static void deleteItemWith(String universeID) {
+
+		MongoCollection<Document> items = md.getCollection("items");
+		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		FindIterable<Document> item = items.find(filter);
+
+		// for each item that belongs to the universe
+		item.forEach(new Block<Document>() {
+			@Override
+			public void apply(final Document doc) {
+				ObjectId idIdem = doc.getObjectId("_id");
+
+				// delete booking of that item
+				DBH.getInstance().deleteBookingWith(idIdem.toString());
+
+				// delete the item
+				Bson filterItem = Filters.eq("_id", idIdem);
+				items.deleteOne(filterItem);
+			}
+
+		});
+
 	}
 
 	/**
