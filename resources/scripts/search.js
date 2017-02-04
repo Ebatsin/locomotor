@@ -6,6 +6,11 @@
 	var usedButton = view.querySelector('#search-used');
 
 	var usedTitle = usedButton.querySelector('#search-used-title');
+	var question = view.querySelector('#search-question');
+
+	var breadcrumb = document.querySelector('#search-breadcrumb');
+	var breadcrumbCat = document.querySelector('#search-breadcrumb-cat');
+	var breadcrumbCrit = document.querySelector('#search-breadcrumb-crit');
 
 	var usedCriteria = false;
 
@@ -90,8 +95,6 @@
 
 				});
 
-				inputElem.innerHTML = '';
-
 				// Integer interval
 				//var range = new Range(inputElem, 0, 1000);
 				//range.init();
@@ -144,12 +147,92 @@
 				init();
 			}
 		},
+		selectCategory: function(id) {
+
+		},
+		selectCriterion: function(catId, criterionId) {
+
+		},
+		setCriteria: function(criteria) {
+			breadcrumbCrit.innerHTML = '';
+			for(var i = 0; i < criteria.length; ++i) {
+				(function(i) {
+					var item = document.createElement('li');
+					item.innerHTML = criteria[i].name;
+
+					breadcrumbCrit.appendChild(item);
+
+					item.addEventListener('click', function() {
+						var toRemove = breadcrumbCrit.querySelector('.selected');
+						if(toRemove) {
+							toRemove.classList.remove('selected');
+						}
+						item.classList.add('selected');
+						question.innerHTML = criteria[i].question;
+
+
+						inputElem.innerHTML = '';
+
+						console.log("type : " + criteria[i].type);
+						console.log(types[criteria[i].type]);
+
+						switch(types[criteria[i].type]) {
+							case 'boolean':
+								var boolean = new Boolean(inputElem);
+								boolean.init();
+								break;
+							case 'integer-interval': 
+								var range;
+								if(criteria[i].universe.max - criteria[i].universe.min > 1000) {
+									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.0001, 0);
+									range.init(true);
+								}
+								else {
+									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max);								
+									range.init();
+								}
+								break;
+							case 'float-interval':
+								if(criteria[i].universe.max - criteria[i].universe.min > 1000) {
+									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.0001, 2);
+									range.init(true);
+								}
+								else {
+									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.01, 2);								
+									range.init();
+								}
+								break;
+							case 'string-list':
+								console.log('handling list');
+								var list = [];
+								for(var j = 0; j < criteria[i].universe.nodes.length; ++j) {
+									list[criteria[i].universe.nodes[j].id] = criteria[i].universe.nodes[j].name;
+								}
+								console.log(list);
+								var strli = new StringList(inputElem, list);
+
+								strli.init();
+								break;
+							case 'weighted-string-list':
+								var list = [];
+								for(var j = 0; j < criteria[i].universe.values.length; ++j) {
+									list[criteria[i].universe.values[j].value] = criteria[i].universe.values[j].name;
+								}
+								var range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, list);
+								range.init();
+								break;
+							case 'tree':
+								var tree = new Tree(inputElem, criteria[i].universe.tree);
+								tree.init();
+						}
+					});
+				})(i);
+			}
+		},
 		initBreadcrumb: function() {
 			var catOpen = false;
 			var topOffset = 0;
 
-			var breadcrumb = document.querySelector('#search-breadcrumb');
-			var breadcrumbCat = document.querySelector('#search-breadcrumb-cat');
 			breadcrumbCat.innerHTML = '';
 
 			for(var i = 0; i < model.model.length; ++i) {
@@ -158,16 +241,38 @@
 						categories.push({
 							name: model.model[i].criteria[j].name,
 							oldName: model.model[i].name,
-							id: model.model[i].criteria[j].name,
-							oldId: model.model[i].id
+							id: model.model[i].criteria[j]['_id'],
+							oldId: model.model[i]['_id'],
+							criteria: [{
+								name: model.model[i].criteria[j].name,
+								id: model.model[i].criteria[j]['_id'],
+								question: model.model[i].criteria[j].question,
+								type: model.model[i].criteria[j].userType,
+								universe: model.model[i].criteria[j].universe
+							}]
 						});
 					}
 				}
 				else {
+					var criteria = [];
+					for(var j = 0; j < model.model[i].criteria.length; ++j) {
+						if(!model.model[i].criteria[j].isComparable) {
+							continue;
+						}
+						criteria.push({
+							name: model.model[i].criteria[j].name,
+							id: model.model[i].criteria[j]['id'],
+							question: model.model[i].criteria[j].question,
+							type: model.model[i].criteria[j].userType,
+							universe: model.model[i].criteria[j].universe
+						});
+					}
+
 					categories.push({
 						name: model.model[i].name,
 						oldName : model.model[i].name,
-						id: model.model[i]['_id']
+						id: model.model[i]['_id'],
+						criteria: criteria
 					});
 				}
 	
@@ -186,6 +291,9 @@
 							$(breadcrumbCat).animate({
 								'margin-top': topOffset + 'em'
 							}, 200);
+
+							// set the criterias
+							modules.search.setCriteria(categories[i].criteria);
 						}
 					});
 				})(i);

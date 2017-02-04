@@ -326,6 +326,21 @@ html, body {
 	display: block;
 	height: 4em;
 	margin-left: 14em;
+	list-style-type: none;
+}
+
+#search-breadcrumb-crit li {
+	display: inline-block;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	padding: 0 2em;
+	border-right: solid 1px hsl(0, 0%, 80%);
+	font-size: 1.2em;
+	color: hsl(0, 0%, 20%);
+}
+
+#search-breadcrumb-crit li:hover, #search-breadcrumb-crit li.selected {
+	background-color: hsl(0, 0%, 90%);
 }
 
 #search-question {
