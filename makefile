@@ -19,9 +19,10 @@ CCD = doxygen
 LIB = lib
 SRC = src
 CLASS = class
-DOC = doc
+DOC = docs
 RESOURCES = resources
 DATA = data
+PRESENTATION = presentation
 
 FLAGS_CC = -Xdiags:verbose
 RM = rm -rf
@@ -108,7 +109,9 @@ clean-front:
 
 .PHONY: clean-doc
 clean-doc:
+	mv $(DOC)/$(PRESENTATION) $(PRESENTATION)
 	$(RM) $(DOC)/*
+	mv $(PRESENTATION) $(DOC)/$(PRESENTATION)
 
 ###################################################
 # Lintering:
