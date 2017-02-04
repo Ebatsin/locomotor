@@ -12,6 +12,9 @@
 	var breadcrumbCat = document.querySelector('#search-breadcrumb-cat');
 	var breadcrumbCrit = document.querySelector('#search-breadcrumb-crit');
 
+	var back = document.querySelector('#search-back');
+	var next = document.querySelector('#search-next');
+
 	var usedCriteria = false;
 
 	var types = {
@@ -25,6 +28,8 @@
 
 	// model datas
 	var categories = [];
+	var currentCat = 0;
+	var currentCrit = 0;
 
 	window.registerView('search');
 
@@ -147,12 +152,6 @@
 				init();
 			}
 		},
-		selectCategory: function(id) {
-
-		},
-		selectCriterion: function(catId, criterionId) {
-
-		},
 		setCriteria: function(criteria) {
 			breadcrumbCrit.innerHTML = '';
 			for(var i = 0; i < criteria.length; ++i) {
@@ -162,7 +161,8 @@
 
 					breadcrumbCrit.appendChild(item);
 
-					item.addEventListener('click', function() {
+					criteria[i].select = function() {
+						currentCrit = i;
 						var toRemove = breadcrumbCrit.querySelector('.selected');
 						if(toRemove) {
 							toRemove.classList.remove('selected');
@@ -225,6 +225,10 @@
 								var tree = new Tree(inputElem, criteria[i].universe.tree);
 								tree.init();
 						}
+					};
+
+					item.addEventListener('click', function() {
+						criteria[i].select();
 					});
 				})(i);
 			}
@@ -278,22 +282,29 @@
 	
 			}
 
+			// creating the category dropdown list
 			for(var i = 0; i < categories.length; ++i) {
 				(function(i) {
 					var item = document.createElement('li');
 					item.innerHTML = categories[i].name;
 					breadcrumbCat.appendChild(item);
 
+					categories[i].select = function() {
+						topOffset = -i*4;
+						$(breadcrumbCat).stop();
+						$(breadcrumbCat).animate({
+							'margin-top': topOffset + 'em'
+						}, 200);
+						currentCat = i;
+
+						// set the criterias
+						modules.search.setCriteria(categories[i].criteria);
+						categories[i].criteria[0].select();
+					};
+
 					item.addEventListener('click', function() {
 						if(catOpen) {
-							topOffset = -i*4;
-							$(breadcrumbCat).stop();
-							$(breadcrumbCat).animate({
-								'margin-top': topOffset + 'em'
-							}, 200);
-
-							// set the criterias
-							modules.search.setCriteria(categories[i].criteria);
+							categories[i].select();
 						}
 					});
 				})(i);
@@ -326,6 +337,28 @@
 					$(breadcrumbCat).animate({
 						'margin-top': topOffset + 'em'
 					}, 200);
+				}
+			});
+
+			categories[0].select();
+
+			back.addEventListener('click', function() {
+				if(currentCrit > 0) {
+					categories[currentCat].criteria[currentCrit - 1].select();
+				}
+				else if(currentCat > 0) {
+					categories[currentCat - 1].select();
+					categories[currentCat].criteria[categories[currentCat].criteria.length - 1].select();
+				}
+			});
+
+			next.addEventListener('click', function() {
+				if(currentCrit < categories[currentCat].criteria.length - 1) {
+					categories[currentCat].criteria[currentCrit + 1].select();
+				}
+				else if(currentCat < categories.length - 1) {
+					categories[currentCat + 1].select();
+					categories[currentCat].criteria[0].select();
 				}
 			});
 		}
