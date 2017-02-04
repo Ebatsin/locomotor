@@ -6,13 +6,14 @@
 * @param an array of nodes [{value: "...", id: n, ?children: []}]
 */
 function Tree(elem, tree) {
-	console.log('meeeeeeeeeeeeeeeeeeh');
 	var parent = document.createElement('ul');
 	parent.classList.add('tree-root');
 
 	var that = this;
 	var treeBackup = tree;
 	tree = tree.children;
+
+	var onChangeEvent = function() {};
 
 	
 	this.init = function() {
@@ -75,6 +76,7 @@ function Tree(elem, tree) {
 				else {
 					node.select();
 				}
+				onChangeEvent(that.getTree());
 			});
 
 			name.addEventListener("mouseover", function() {
@@ -113,7 +115,6 @@ function Tree(elem, tree) {
 		}
 
 		return {
-			value: treeBackup.value,
 			id: treeBackup.id,
 			children: nodes
 		};
@@ -136,7 +137,6 @@ function Tree(elem, tree) {
 			}
 
 			return {
-				value: node.value,
 				id: node.id,
 				children: nodes
 			};
@@ -159,7 +159,6 @@ function Tree(elem, tree) {
 			}
 
 			return {
-				value: node.value,
 				id: node.id,
 				children: nodes
 			};
@@ -187,5 +186,9 @@ function Tree(elem, tree) {
 				}
 			}
 		}			
+	};
+
+	this.onChange = function(callback) {
+		onChangeEvent = callback;
 	};
 }

@@ -31,6 +31,8 @@ function Boolean(elem) {
 	var checked = false;
 	no.classList.add('checked');
 
+	var onChangeEvent = function() {};
+
 	this.init = function() {
 		parent.appendChild(dummyYes);
 		parent.appendChild(dummyNo);
@@ -92,5 +94,11 @@ function Boolean(elem) {
 			yes.classList.remove('checked');
 			no.classList.add('checked');
 		}
+
+		onChangeEvent(checked);
 	};
+
+	this.onChange = function(callback) {
+		onChangeEvent = callback;
+	}
 }

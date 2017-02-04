@@ -45,6 +45,8 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 	var expoUsed = false;
 	var offset = 0;
 
+	var onChangeEvent = function(){};
+
 	if(!step) {
 		step = 1;
 	}
@@ -64,7 +66,6 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 	*/
 	this.init = function(expo) {
 		if(expo && language == null) {
-			console.log('using expo');
 			offset = 1 - minBound;
 			expoUsed = true;
 			minBound = Math.log(minBound + offset);
@@ -72,10 +73,6 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 
 			min = Math.log(min + offset);
 			max = Math.log(max + offset);
-
-			console.log('new values : ');
-			console.log('bounds : ' + minBound + ', ' + maxBound);
-			console.log('values : ' + min + ', ' + max);
 		}
 
 		minLabel.appendChild(innerMinLabel);
@@ -194,6 +191,10 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 		updatePosition();
 	};
 
+	this.onChange = function(callback) {
+		onChangeEvent = callback;
+	};
+
 	function updatePosition() {
 		// do the rounding
 		min = Math.round(min / step) * step;
@@ -212,16 +213,31 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 		if(language !== null) {
 			innerMinLabel.innerHTML = language[Math.floor(min / step)];
 			innerMaxLabel.innerHTML = language[Math.floor(max /step)];
+
+			onChangeEvent({
+				min: min,
+				max: max
+			});
 		}
 		else if(expoUsed) {
 			var minUsed = Math.exp(min) - offset;
 			var maxUsed = Math.exp(max) - offset;
 			innerMinLabel.innerHTML = minUsed.toFixed(signiDigits);
 			innerMaxLabel.innerHTML = maxUsed.toFixed(signiDigits);
+
+			onChangeEvent({
+				'min': (signiDigits == 0 ? Math.round(minUsed) : minUsed),
+				'max': (signiDigits == 0 ? Math.round(maxUsed) : maxUsed)
+			});
 		}
 		else {
 			innerMinLabel.innerHTML = min.toFixed(signiDigits);
 			innerMaxLabel.innerHTML = max.toFixed(signiDigits);
+
+			onChangeEvent({
+				min: signiDigits == 0 ? Math.round(min) : min,
+				max: signiDigits == 0 ? Math.round(max) : max
+			});
 		}
 	}
 }
