@@ -124,7 +124,6 @@ function Tree(elem, tree) {
 
 		if(!node.children) {
 			return {
-				value: node.value,
 				id: node.id
 			};
 		}

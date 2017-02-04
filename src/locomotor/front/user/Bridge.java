@@ -166,4 +166,20 @@ public class Bridge {
 			}
 		});
 	}
+
+	public void search(String token, String criteria, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.addParam("criterias", criteria);
+		c.requestJson("api/search").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
 }

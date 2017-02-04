@@ -102,5 +102,12 @@ window.API = {
 		app.getModel(app.getShortToken(), prom.getId());
 
 		return prom;
+	},
+	search: function(criteria) {
+		var prom = new JPromises();
+
+		app.search(app.getShortToken(), criteria, prom.getId());
+
+		return prom;
 	}
 };

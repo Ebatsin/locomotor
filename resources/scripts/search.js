@@ -14,6 +14,9 @@
 
 	var back = document.querySelector('#search-back');
 	var next = document.querySelector('#search-next');
+	var start = document.querySelector('#search-start');
+
+	var reallyImportant = document.querySelector('#search-really-important');
 
 	var usedCriteria = false;
 
@@ -60,6 +63,14 @@
 
 				usedButton.addEventListener('click', function() {
 					modules.search.setUsed();
+				});
+
+				reallyImportant.addEventListener('change', function() {
+					categories[currentCat].criteria[currentCrit].isCritical = !!(reallyImportant.checked);
+				});
+
+				start.addEventListener('click', function() {
+					modules.search.start();
 				});
 
 				modules.search.initBreadcrumb();
@@ -315,7 +326,7 @@
 							used: false,
 							isCritical: false,
 							name: model.model[i].criteria[j].name,
-							id: model.model[i].criteria[j]['id'],
+							id: model.model[i].criteria[j]['_id'],
 							question: model.model[i].criteria[j].question,
 							type: model.model[i].criteria[j].userType,
 							universe: model.model[i].criteria[j].universe
@@ -325,7 +336,7 @@
 					categories.push({
 						name: model.model[i].name,
 						oldName : model.model[i].name,
-						id: model.model[i]['_id'],
+						oldId: model.model[i]['_id'],
 						criteria: criteria
 					});
 				}
@@ -410,6 +421,87 @@
 					categories[currentCat + 1].select();
 					categories[currentCat].criteria[0].select();
 				}
+			});
+		},
+		start: function() { // start a research
+			console.log('building the output');
+			var obj = [];
+			var tmpSelf = [];
+			var tmpId;
+
+			for(var i = 0; i < categories.length; ++i) {
+				console.log('category : ' + categories[i].name);
+				console.log('category id : ' + categories[i].oldId);
+				if(categories[i].oldName !== '_self_') {
+					if(tmpSelf.length !== 0) {
+						obj.push({
+							categoryId: tmpId,
+							criteria: tmpSelf
+						});
+						tmpSelf = [];
+					}
+
+					console.log('before criterion add');
+					// normal category
+					var crits = [];
+					for(var j = 0; j < categories[i].criteria.length; ++j) {
+						if(!categories[i].criteria[j].used) {
+							continue;
+						}
+
+						console.log('criterion : ' + categories[i].criteria[j].name);
+						console.log('value : ' + JSON.stringify(categories[i].criteria[j].userValue));
+						console.log('id : ' + JSON.stringify(categories[i].criteria[j].id));
+
+						crits.push({
+							criterionId: categories[i].criteria[j].id,
+							disableFlex: categories[i].criteria[j].isCritical,
+							value: categories[i].criteria[j].userValue
+						});
+					}
+					console.log('after criterion add');
+
+					if(crits.length == 0) {
+						continue;
+					}
+
+					obj.push({
+						categoryId: categories[i].oldId,
+						criteria: crits
+					});
+				}
+				else {
+					console.log('here');
+					tmpId = categories[i].id;
+					console.log('added the tmpid');
+
+					if(!categories[i].criteria[0].used) {
+						continue;
+					}
+					// each criteria of this category is on the _self_ category
+					// we know there is only one criterion in this category
+					tmpSelf.push({
+						criterionId: categories[i].criteria[0].id,
+						disableFlex: categories[i].criteria[0].isCritical,
+						value: categories[i].criteria[0].userValue
+					});
+				}
+			}
+
+			if(tmpSelf.length !== 0) {
+				obj.push({
+					categoryId: tmpId,
+					criteria: tmpSelf
+				});
+				tmpSelf = [];
+			}
+
+			console.log(JSON.stringify(obj));
+
+			API.search(JSON.stringify(obj)).then(function(data) {
+				console.log(JSON.stringify(data));
+			}).catch(function(data) {
+				console.log('Javascript : error while starting the search : ' + data.message);
 			});
 		}
 	};
