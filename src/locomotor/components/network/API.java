@@ -243,8 +243,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("newUsername");
+				setExpectedParams("token", "newUsername");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -286,9 +285,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("oldPassword");
-				setExpectedParams("newPassword");
+				setExpectedParams("token", "oldPassword", "newPassword");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -332,8 +329,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("password");
+				setExpectedParams("token", "password");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -450,8 +446,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -494,8 +489,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -539,8 +533,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("criterias");
+				setExpectedParams("token", "criterias");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -561,7 +554,18 @@ public class API {
 				
 				// get criterias
 				String criterias = data.getAsString("criterias");
-				JsonValue userCriterias = Json.parse(criterias);
+				JsonValue userCriterias;
+				try {
+					userCriterias = Json.parse(criterias);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing criterias, the JSON is malformated.", 
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// get model
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
@@ -599,8 +603,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -642,8 +645,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -682,11 +684,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
-				setExpectedParams("startDate");
-				setExpectedParams("endDate");
-				setExpectedParams("quantity");
+				setExpectedParams("token", "id", "startDate", "endDate", "quantity");
 
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
@@ -791,8 +789,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
@@ -952,8 +949,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("item");
+				setExpectedParams("token", "item");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -982,7 +978,18 @@ public class API {
 				
 				// get item
 				String item = data.getAsString("item");
-				JsonValue itemJSON = Json.parse(item);
+				JsonValue itemJSON;
+				try {
+					itemJSON = Json.parse(item);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// get model
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
@@ -1021,8 +1028,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("item");
+				setExpectedParams("token", "item");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -1051,7 +1057,18 @@ public class API {
 				
 				// get item
 				String item = data.getAsString("item");
-				JsonValue itemJSON = Json.parse(item);
+				JsonValue itemJSON;
+				try {
+					itemJSON = Json.parse(item);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing item, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// get model
 				ArrayList<CategoryModel> catModel = DBH.getInstance().getCategoriesModel();
@@ -1090,8 +1107,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -1189,8 +1205,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("universe");
+				setExpectedParams("token", "universe");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -1219,7 +1234,18 @@ public class API {
 				
 				// get universe
 				String universe = data.getAsString("universe");
-				JsonValue universeJSON = Json.parse(universe);
+				JsonValue universeJSON;
+				try {
+					universeJSON = Json.parse(universe);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 				
 				// create universe from json
 				Universe universeObj;
@@ -1255,8 +1281,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("universe");
+				setExpectedParams("token", "universe");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
@@ -1285,7 +1310,18 @@ public class API {
 				
 				// get universe
 				String universe = data.getAsString("universe");
-				JsonValue universeJSON = Json.parse(universe);
+				JsonValue universeJSON;
+				try {
+					universeJSON = Json.parse(universe);
+				}
+				catch (Exception ex) { // error
+					response.getJsonContext().failure(
+						NetworkResponse.ErrorCode.BAD_REQUEST, 
+						"An error occured while parsing universe, the JSON is malformated.",
+						ErrorCode.DEFAULT_ERROR_CODE
+					);
+					return false;
+				}
 
 				// create universe from json
 				Universe universeObj;
@@ -1321,8 +1357,7 @@ public class API {
 					return false;
 				}
 
-				setExpectedParams("token");
-				setExpectedParams("id");
+				setExpectedParams("token", "id");
 				if(!areAllParamsDefined()) {
 					sendDefaultMissingParametersMessage();
 					return false;
