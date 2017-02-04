@@ -11,6 +11,8 @@ function Tree(elem, tree) {
 	parent.classList.add('tree-root');
 
 	var that = this;
+	var treeBackup = tree;
+	tree = tree.children;
 
 	
 	this.init = function() {
@@ -32,7 +34,7 @@ function Tree(elem, tree) {
 		return (function() {
 			var elem = document.createElement('li');
 			var name = document.createElement('div');
-			var open = false;
+			node.open = false;
 
 			elem.classList.add('tree-node');
 			name.classList.add('tree-value');
@@ -50,31 +52,40 @@ function Tree(elem, tree) {
 				elem.appendChild(children);
 			}
 
+			node.select = function() {
+				$(name).css('background', 'hsl(180, 60%, 30%)');
+				$(name).css('color', 'hsl(0, 0%, 90%)');
+				$(children).slideDown(200);
+				node.open = true;
+			};
+
+			node.unselect = function() {
+				$(children).slideUp(200);
+				$(name).css('color', 'hsl(0, 0%, 0%)');
+				$(name).css('background', 'hsl(180, 10%, 80%)');
+				node.open = false;
+			};
+
 			$(children).slideUp(0);
 
 			name.addEventListener('click', function() {
-				if(open) {
-					$(children).slideUp(200);
-					$(name).css('color', 'hsl(0, 0%, 0%)');
-					$(name).css('background', 'hsl(180, 10%, 80%)');
+				if(node.open) {
+					node.unselect();
 				}
 				else {
-					$(name).css('background', 'hsl(180, 60%, 30%)');
-					$(name).css('color', 'hsl(0, 0%, 90%)');
-					$(children).slideDown(200);
+					node.select();
 				}
-				open = !open;
 			});
 
 			name.addEventListener("mouseover", function() {
-				if(!open) {
+				if(!node.open) {
 					$(name).css('background', 'hsl(180, 10%, 80%)');
 				}
 				//$(elem).find('.tree-children > .tree-node > .tree-value').css('background', 'hsl(180, 60%, 15%)');
 			});
 
 			name.addEventListener('mouseout', function() {
-				if(!open) {
+				if(!node.open) {
 					$(name).css('background', 'hsl(180, 10%, 85%)');
 				}
 				//$(elem).find('.tree-children > .tree-node > .tree-value').css('background', 'hsl(180, 60%, 30%)');
@@ -82,5 +93,99 @@ function Tree(elem, tree) {
 
 			return elem;
 		})();
+	};
+
+	this.getTree = function() {
+		var nodes = [];
+		var oneSelected = false;
+
+		for(var i = 0; i < tree.length; ++i) {
+			if(tree[i].open) {
+				oneSelected = true;
+				break;
+			}
+		}
+
+		for(var i = 0; i < tree.length; ++i) {
+			if(tree[i].open || !oneSelected) {
+				nodes.push(that.getNode(tree[i], !oneSelected));
+			}
+		}
+
+		return {
+			value: treeBackup.value,
+			id: treeBackup.id,
+			children: nodes
+		};
+	};
+
+	this.getNode = function(node, force) {
+
+		if(!node.children) {
+			return {
+				value: node.value,
+				id: node.id
+			};
+		}
+
+		if(force) { // add the node no matter what
+			var nodes = [];
+
+			for(var i = 0; i < node.children.length; ++i) {
+				nodes.push(that.getNode(node.children[i], true));
+			}
+
+			return {
+				value: node.value,
+				id: node.id,
+				children: nodes
+			};
+		}
+		else {
+			var nodes = [];
+			var oneSelected = false;
+
+			for(var i = 0; i < node.children.length; ++i) {
+				if(node.children[i].open) {
+					oneSelected = true;
+					break;
+				}
+			}
+
+			for(var i = 0; i < node.children.length; ++i) {
+				if(node.children[i].open || !oneSelected) {
+					nodes.push(that.getNode(node.children[i], !oneSelected));
+				}
+			}
+
+			return {
+				value: node.value,
+				id: node.id,
+				children: nodes
+			};
+		}
+	};
+
+	this.selectTree = function(t, equivalentNode) {
+		if(!equivalentNode) {
+			equivalentNode = treeBackup;
+		}
+
+		if(!t.children) {
+			equivalentNode.select();
+		}
+		else {
+			var j = 0;
+			for(var i = 0; i < t.children.length; ++i) {
+				while(t.children[i].id !== equivalentNode.children[j].id && j < equivalentNode.children.length) {
+					++j;
+				}
+
+				if(t.children[i].id === equivalentNode.children[j].id) {
+					equivalentNode.children[j].select();
+					that.selectTree(t.children[i], equivalentNode.children[j]);
+				}
+			}
+		}			
 	};
 }

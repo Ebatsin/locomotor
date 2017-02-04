@@ -118,11 +118,11 @@
 				strli.init();
 				strli.setSelected([2, 3, 5, 7]);*/
 
+
 				console.log('init tree');
-				var tree = new Tree(inputElem, [{"value":"road","id":3,"children":[{"value":"urban","id":0},{"value":"campaign","id":1},{"value":"trail","id":2}]},{"value":"air","id":7,"children":[{"value":"high atmospheric layers","id":4},{"value":"middle atmospheric layers","id":5},{"value":"low atmospheric layers","id":6}]},{"value":"ground","id":20,"children":[{"value":"flat","id":11,"children":[{"value":"snowy","id":8},{"value":"desert","id":9},{"value":"boggy","id":10}]},{"value":"hilly","id":15,"children":[{"value":"snowy","id":12},{"value":"desert","id":13},{"value":"boggy","id":14}]},{"value":"mountainous","id":19,"children":[{"value":"snowy","id":16},{"value":"desert","id":17},{"value":"boggy","id":18}]}]},{"value":"tracks","id":21},{"value":"marine","id":26,"children":[{"value":"surface","id":22},{"value":"under water","id":23},{"value":"shallow","id":24},{"value":"deep","id":25}]},{"value":"space","id":29,"children":[{"value":"shallow","id":27},{"value":"deep","id":28}]},{"value":"underground","id":30}]);
-				console.log('not crase=hed');
+				var tree = new Tree(inputElem, {"value":"all","id":31,"children":[{"value":"road","id":3,"children":[{"value":"urban","id":0},{"value":"campaign","id":1},{"value":"trail","id":2}]},{"value":"air","id":7,"children":[{"value":"high atmospheric layers","id":4},{"value":"middle atmospheric layers","id":5},{"value":"low atmospheric layers","id":6}]},{"value":"ground","id":20,"children":[{"value":"flat","id":11,"children":[{"value":"snowy","id":8},{"value":"desert","id":9},{"value":"boggy","id":10}]},{"value":"hilly","id":15,"children":[{"value":"snowy","id":12},{"value":"desert","id":13},{"value":"boggy","id":14}]},{"value":"mountainous","id":19,"children":[{"value":"snowy","id":16},{"value":"desert","id":17},{"value":"boggy","id":18}]}]},{"value":"tracks","id":21},{"value":"marine","id":26,"children":[{"value":"surface","id":22},{"value":"under water","id":23},{"value":"shallow","id":24},{"value":"deep","id":25}]},{"value":"space","id":29,"children":[{"value":"shallow","id":27},{"value":"deep","id":28}]},{"value":"underground","id":30}]});
 				tree.init();
-				console.log('inited');
+				tree.selectTree({"value":"all","id":"all","children":[{"value":"road","id":3,"children":[{"value":"trail","id":2}]},{"value":"ground","id":20,"children":[{"value":"hilly","id":15,"children":[{"value":"snowy","id":12},{"value":"desert","id":13}]}]}]});
 
 				modules.search.initBreadcrumb();
 			}
