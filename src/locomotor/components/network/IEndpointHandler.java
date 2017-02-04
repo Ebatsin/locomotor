@@ -81,15 +81,19 @@ public abstract class IEndpointHandler {
 	}
 
 	/**
-	* Returns all the parameters expected for the request but not defined.
-	*/
+	 * Returns all the parameters expected for the request but not defined.
+	 *
+	 * @return     The non defined parameters.
+	 */
 	public ArrayList<String> getNonDefinedParams() {
 		return _expectedParams == null ? new ArrayList<String>() : _nonDefinedParams;
 	}
 
 	/**
-	* Create a default message listing all the missing parameters.
-	*/
+	 * Create a default message listing all the missing parameters.
+	 *
+	 * @return     The default missing parameters message.
+	 */
 	public String getDefaultMissingParametersMessage() {
 		if(_nonDefinedParams.size() == 0) {
 			return "All the parameters are defined";

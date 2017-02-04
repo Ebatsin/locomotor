@@ -87,8 +87,8 @@ public class CSetGraph implements JSONDisplayable {
 	/**
 	 * Compare the string list of the vehicle with the string list of the user
 	 *
-	 * @param      user                The user string list
-	 * @param      universe            The universe string list (containg the graph)
+	 * @param      userKey             The user string list
+	 * @param      itemKey             The item string list
 	 * @param      disableFlexibility  Disable the flexibility
 	 *
 	 * @return     1.0 (match), tend toward 0.0 otherwise or -1.0 if does not match perfectly (flexibility disable)

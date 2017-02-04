@@ -31,6 +31,8 @@ public class NetworkData {
 	/**
 	 * Builds a new data holder. Before using its methods, check with {@link #isValid() isValid} 
 	 * that no error happened during the generation.
+	 *
+	 * @param      exchange  The exchange
 	 */
 	public NetworkData(HttpExchange exchange) {
 		_params = new TreeMap<String, ByteArrayOutputStream>();

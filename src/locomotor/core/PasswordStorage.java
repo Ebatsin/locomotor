@@ -19,10 +19,21 @@ public class PasswordStorage {
 	@SuppressWarnings("serial")
 	public static class InvalidHashException extends Exception {
 		
+		/**
+		 * Constructs the object.
+		 *
+		 * @param      message  The message
+		 */
 		public InvalidHashException(String message) {
 			super(message);
 		}
 		
+		/**
+		 * Constructs the object.
+		 *
+		 * @param      message  The message
+		 * @param      source   The source
+		 */
 		public InvalidHashException(String message, Throwable source) {
 			super(message, source);
 		}
@@ -34,10 +45,21 @@ public class PasswordStorage {
 	@SuppressWarnings("serial")
 	public static class CannotPerformOperationException extends Exception {
 		
+		/**
+		 * Constructs the object.
+		 *
+		 * @param      message  The message
+		 */
 		public CannotPerformOperationException(String message) {
 			super(message);
 		}
 		
+		/**
+		 * Constructs the object.
+		 *
+		 * @param      message  The message
+		 * @param      source   The source
+		 */
 		public CannotPerformOperationException(String message, Throwable source) {
 			super(message, source);
 		}
@@ -46,17 +68,21 @@ public class PasswordStorage {
 	public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
 	// These constants may be changed without breaking existing hashes.
+	//! \{
 	public static final int SALT_BYTE_SIZE = 24;
 	public static final int HASH_BYTE_SIZE = 18;
 	public static final int PBKDF2_ITERATIONS = 64000;
+	//! \}
 
 	// These constants define the encoding and may not be changed.
+	//! \{
 	public static final int HASH_SECTIONS = 5;
 	public static final int HASH_ALGORITHM_INDEX = 0;
 	public static final int ITERATION_INDEX = 1;
 	public static final int HASH_SIZE_INDEX = 2;
 	public static final int SALT_INDEX = 3;
 	public static final int PBKDF2_INDEX = 4;
+	//! \}
 
 	/**
 	* Creates a hash.

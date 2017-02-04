@@ -34,7 +34,8 @@ public class CTree implements CItemType, CUserType, CComparable<CTree, CGraphTre
 	/**
 	 * Constructs the CTree.
 	 *
-	 * @param      data  The string
+	 * @param      id    The string
+	 * @param      data  The data
 	 */
 	public CTree(Integer id, String data) {
 		_children = new ArrayList<CTree>();

@@ -68,6 +68,7 @@ public class CriteriaModel {
 	 * @param      universeType  The universe type
 	 * @param      itemType      The item type
 	 * @param      userType      The user type
+	 * @param      unitID        The unit id
 	 * @param      universe      The universe
 	 */
 	public CriteriaModel(String identifier, String name, String question, Boolean isComparable, 

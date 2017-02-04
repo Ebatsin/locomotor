@@ -6,13 +6,35 @@ import java.util.TreeMap;
 * Gives some methods to work with Standard Gaussian.
 */
 public class Gaussian {
+
+	/**
+	 * @todo.
+	 */
 	TreeMap<Double, Double> _pdfLookUp;
+
+	/**
+	 * @todo.
+	 */
 	TreeMap<Double, Double> _cdfLookUp;
 
+	/**
+	 * @todo.
+	 */
 	static Gaussian _instance = null;
+
+	/**
+	 * @todo.
+	 */
 	int _steps;
+
+	/**
+	 * @todo.
+	 */
 	double _stepsLength;
 
+	/**
+	 * Constructs the object.
+	 */
 	private Gaussian() {
 		_pdfLookUp = new TreeMap<Double, Double>();
 		_cdfLookUp = new TreeMap<Double, Double>();
@@ -55,6 +77,13 @@ public class Gaussian {
 		}
 	}
 
+	/**
+	 * Gets the nearest step.
+	 *
+	 * @param      value  The value
+	 *
+	 * @return     The nearest step.
+	 */
 	private double getNearestStep(double value) {
 		return Math.round(value / _stepsLength) * _stepsLength;
 	}

@@ -7,6 +7,9 @@ import com.sun.net.httpserver.HttpExchange;
  */
 public class NetworkResponseFactory {
 	
+	/**
+	 * The exchange.
+	 */
 	HttpExchange _exchange;
 
 	/**

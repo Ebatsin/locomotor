@@ -13,6 +13,11 @@ import locomotor.components.MutableInteger;
  */
 public class NetworkJsonResponse extends NetworkResponse {
 
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      exchange  The exchange
+	 */
 	public NetworkJsonResponse(HttpExchange exchange) {
 		super(exchange);
 	}

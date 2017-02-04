@@ -14,7 +14,14 @@ import locomotor.components.logging.ErrorHandler;
 public abstract class CInterval<T extends Number> implements CUniverseType, CItemType,
 	CUserType {
 
+	/**
+	 * The lower bound.
+	 */
 	private T _min;
+
+	/**
+	 * The higher bound.
+	 */
 	private T _max;
 
 	/**

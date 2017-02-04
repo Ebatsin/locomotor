@@ -72,7 +72,7 @@ public abstract class CStringList implements CUniverseType, CItemType, CUserType
 	/**
 	 * Factory from representation JSON.
 	 *
-	 * @param      json  The json
+	 * @param      values  The json
 	 *
 	 * @return     A new TreeMap object.
 	 */

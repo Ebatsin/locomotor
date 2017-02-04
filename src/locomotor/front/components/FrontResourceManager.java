@@ -12,14 +12,29 @@ import locomotor.components.ResourceManager;
 import locomotor.front.components.network.BinaryObject;
 import locomotor.front.components.network.ClientRequest;
 
+/**
+ * The resource manager of the frontend.
+ */
 public class FrontResourceManager extends ResourceManager {
+	
+	/**
+	 * The singleton.
+	 */
 	protected static FrontResourceManager _instance = null;
 
+	/**
+	 * Constructs the object.
+	 */
 	protected FrontResourceManager() {
 		super();
 		_baseURL = "resources/front/";
 	}
 
+	/**
+	 * Gets the instance.
+	 *
+	 * @return     The instance.
+	 */
 	public static synchronized FrontResourceManager getInstance() {
 		if(_instance == null) {
 			_instance = new FrontResourceManager();
@@ -28,6 +43,13 @@ public class FrontResourceManager extends ResourceManager {
 		return _instance;
 	}
 
+	/**
+	 * Gets the remote version.
+	 *
+	 * @param      resource  The resource
+	 *
+	 * @return     The remote version.
+	 */
 	public CompletableFuture<Long> getRemoteVersion(String resource) {
 		ClientRequest cr = new ClientRequest("https://localhost:8000/");
 		// @todo: retrieve short token

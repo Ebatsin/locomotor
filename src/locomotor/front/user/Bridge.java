@@ -19,16 +19,42 @@ import javafx.stage.Stage;
 
 import locomotor.front.components.network.ClientRequest;
 
+/**
+ * The bridge between Java and JavaScript.
+ */
 public class Bridge {
+	
+	/**
+	 * The WebView.
+	 */
 	WebView _view;
+
+	/**
+	 * The Stage.
+	 */
 	Stage _stage;
 
-	// tokens
+	/**
+	 * The long token.
+	 */
 	String _longToken;
+
+	/**
+	 * The short token.
+	 */
 	String _shortToken;
 
+	/**
+	 * The name where the token is stored.
+	 */
 	static String tokenFileName = ".token";
 
+	/**
+	 * Constructs the object.
+	 *
+	 * @param      view   The view
+	 * @param      stage  The stage
+	 */
 	public Bridge(WebView view, Stage stage) {
 		_view = view;
 		_stage = stage;
@@ -40,16 +66,29 @@ public class Bridge {
 		view.getEngine().executeScript("window.initWhenReady = true;"); // say to the client that everything is ready
 	}
 
+	/**
+	 * Print the log in the standard output.
+	 *
+	 * @param      text  The text
+	 */
 	public void log(String text) {
 		System.out.println(text);
 	}
 
+	/**
+	 * Sets the title.
+	 *
+	 * @param      title  The title
+	 */
 	public void setTitle(String title) {
 		_stage.setTitle("Locomotor - " + title);
 	}
 
-
-
+	/**
+	 * Sets the long token.
+	 *
+	 * @param      token  The token
+	 */
 	public void setLongToken(String token) {
 		_longToken = token;
 		try {
@@ -62,10 +101,20 @@ public class Bridge {
 		}
 	}
 
+	/**
+	 * Sets the short token.
+	 *
+	 * @param      token  The token
+	 */
 	public void setShortToken(String token) {
 		_shortToken = token;
 	}
 
+	/**
+	 * Gets the long token.
+	 *
+	 * @return     The long token.
+	 */
 	public String getLongToken() {
 		if(_longToken != null) {
 			return _longToken;
@@ -93,18 +142,33 @@ public class Bridge {
 		return str;
 	}
 
+	/**
+	 * Delete the long token.
+	 */
 	public void deleteLongToken() {
 		_longToken = null;
 		File f = new File(tokenFileName);
 		f.delete();
 	}
 
+	/**
+	 * Gets the short token.
+	 *
+	 * @return     The short token.
+	 */
 	public String getShortToken() {
 		return _shortToken;
 	}
 
 	// API
 
+	/**
+	 * Authentification with the username and password.
+	 *
+	 * @param      name       The name
+	 * @param      password   The password
+	 * @param      promiseID  The promise id
+	 */
 	public void auth(String name, String password, int promiseID) {
 		ClientRequest c = new ClientRequest();
 		c.addParam("username", name);
@@ -121,6 +185,12 @@ public class Bridge {
 		});
 	}
 
+	/**
+	 * Authentification with the token.
+	 *
+	 * @param      token      The token
+	 * @param      promiseID  The promise id
+	 */
 	public void tokenAuth(String token, int promiseID) {
 		ClientRequest c = new ClientRequest();
 		c.addParam("token", token);
@@ -136,6 +206,13 @@ public class Bridge {
 		});
 	}
 
+	/**
+	 * Register with the username and password.
+	 *
+	 * @param      name       The name
+	 * @param      password   The password
+	 * @param      promiseID  The promise id
+	 */
 	public void register(String name, String password, int promiseID) {
 		ClientRequest c = new ClientRequest();
 		c.addParam("username", name);
@@ -152,6 +229,12 @@ public class Bridge {
 		});
 	}
 
+	/**
+	 * Gets the model.
+	 *
+	 * @param      token      The token
+	 * @param      promiseID  The promise id
+	 */
 	public void getModel(String token, int promiseID) {
 		ClientRequest c = new ClientRequest();
 		c.addParam("token", token);
