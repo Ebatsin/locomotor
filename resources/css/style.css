@@ -251,6 +251,12 @@ html, body {
 #search-page {	
 	background-color: hsl(200, 5%, 90%);
 	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+#search-container {
+	height: calc(100% - 6.5em);
 	overflow: auto;
 }
 
@@ -266,12 +272,76 @@ html, body {
 }
 
 #search-breadcrumb {
+	position: relative;
 	width: 80%;
 	margin-left: 10%;
 	height: 4em;
 	background-color: hsl(0, 0%, 95%);
 	border: solid 1px hsl(0, 0%, 70%);
 	margin-top: 2em;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+#search-breadcrumb.show-cat {
+	overflow: visible;
+}
+
+#search-breadcrumb-arrow {
+	width: 2.8284em;
+	height: 2.8284em;
+	background-color: hsl(0, 0%, 80%);
+	position: absolute;
+	top: 0;
+	margin-left: 12.5858em;
+	margin-top: 0.5857em;
+	-webkit-transform: rotate(45deg);
+}
+
+#search-breadcrumb-cat {
+	display: inline-block;
+	list-style-type: none;
+	background-color: hsl(0, 0%, 80%);
+	padding: 0;
+	margin-top: 0;
+	position: absolute;
+	width: 14em;
+	float: left;
+	z-index: 999;
+}
+
+#search-breadcrumb-cat li {
+	padding: 0 1em;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+#search-breadcrumb-cat li:hover {
+	background-color: hsl(0, 0%, 75%);
+}
+
+#search-breadcrumb-crit {
+	margin: 0;
+	display: block;
+	height: 4em;
+	margin-left: 14em;
+	list-style-type: none;
+}
+
+#search-breadcrumb-crit li {
+	display: inline-block;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	padding: 0 2em;
+	border-right: solid 1px hsl(0, 0%, 80%);
+	font-size: 1.2em;
+	color: hsl(0, 0%, 20%);
+}
+
+#search-breadcrumb-crit li:hover, #search-breadcrumb-crit li.selected {
+	background-color: hsl(0, 0%, 90%);
 }
 
 #search-question {
@@ -334,6 +404,82 @@ html, body {
 	padding: 1em;
 	margin-top: 3em;
 	display: inline-block;
+}
+
+#search-buttons {
+	position: absolute;
+	bottom: 0;
+	height: 6em;
+	width: 100%;
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
+	border-top: solid 1px hsl(0, 0%, 70%);
+	width: 100%;
+}
+
+#search-back {	
+	display: inline-block;
+	width: 10em;
+	height: 5em;
+	text-align: center;
+	cursor: pointer;
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+}
+
+#search-back:hover {
+	background-color: hsl(0, 0%, 85%);
+	border: solid 1px hsl(0, 0%, 75%);
+	margin-left: calc(0.5em - 1px); /* welcome in the wonderful word of css without border-box */
+	margin-top: calc(0.5em - 1px);
+}
+
+#search-back img {
+	width: 3.5em;
+	height: 3.5em;
+	margin-top: 0.75em;
+}
+
+#search-start {
+	position: absolute;
+	display: inline-block;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	width: calc(100% - 14.6666em);
+	text-align: center;
+	font-size: 1.5em;
+	color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	top: 0.3333em;
+	left: 7.3333em;
+}
+
+#search-start:hover {
+	background-color: hsl(180, 60%, 30%);
+	color: hsl(0, 0%, 90%);
+}
+
+#search-next {	
+	position: absolute;
+	display: inline-block;
+	width: 10em;
+	height: 5em;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 0.5em;
+	right: 0.5em;
+}
+
+#search-next:hover {
+	background-color: hsl(0, 0%, 85%);
+	border: solid 1px hsl(0, 0%, 75%);
+	margin-top: calc(0.5em - 1px);
+	right: calc(0.5em - 1px);
+}
+
+#search-next img {
+	width: 3.5em;
+	height: 3.5em;
+	margin-top: 0.75em;
 }
 
 /* ------------------------------------------ SEARCH INPUTS ---------------------------------------*/
@@ -500,7 +646,8 @@ html, body {
 }
 
 .tree-root {
-	margin: 0;
+	margin-left: 2em;
+	margin-top: 1em !important;
 	padding: 0;
 	list-style-type: none;
 	margin-top: calc(-1.8em - 2px);
