@@ -121,7 +121,7 @@
 			hideAllViews();
 			modules.menu.hide();
 			modules.menu.showOnlyHelp(true);
-			modules.help.setContext('login');
+			modules.help.pushContext('login');
 			view.classList.remove('hide');
 
 			if(app.getLongToken() != null) {
@@ -195,6 +195,7 @@
 			API.getModel().then(function(data) {
 				window.model = data.data;
 				// load the search view
+				modules.help.popContext();
 				loadView('search');
 			}).catch(function(data) {
 				// @TODO handle this case ? oO

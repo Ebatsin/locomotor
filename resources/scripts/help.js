@@ -4,6 +4,8 @@
 
 	var isOpened = false;
 
+	var contextStack = [];
+
 
 	if(!window.modules) {
 		window.modules = {};
@@ -49,7 +51,8 @@
 				}
 			}, 700);
 		},
-		setContext: function(context) {
+		pushContext: function(context) {
+			contextStack.push(context);
 			var elem = document.querySelector('#help-' + context);
 			if(elem) {
 				var current = document.querySelector('.help-page.current');
@@ -57,6 +60,19 @@
 					current.classList.remove('current');
 				}
 				elem.classList.add('current');
+			}
+		},
+		popContext: function() {
+			contextStack.pop();
+			if(contextStack.length > 0) {				
+				var elem = document.querySelector('#help-' + contextStack[contextStack.length - 1]);
+				if(elem) {
+					var current = document.querySelector('.help-page.current');
+					if(current) {
+						current.classList.remove('current');
+					}
+					elem.classList.add('current');
+				}
 			}
 		}
 	};

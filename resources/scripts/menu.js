@@ -196,8 +196,14 @@
 		},
 		popBackArrow: function() { // remove the top most callback on the stack
 			backArrowStack.pop();
+			if(backArrowStack.length < 2) {
+				modules.menu.showBackArrow(false);
+			}
 		},
 		pushBackArrow: function(callback) { // add a callback on the top of the stack
+			if(backArrowStack.length < 2) {
+				modules.menu.showBackArrow(true);
+			}
 			backArrowStack.push(callback);
 		}
 	};

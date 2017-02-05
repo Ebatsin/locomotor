@@ -23,18 +23,20 @@
 		load: function(params) {
 			view.classList.remove('hide');
 			view.style['z-index'] = getNextZIndex();
+			modules.help.pushContext('results');
 
 			rawList = params.data.results;
 
-			modules.menu.showBackArrow(true);
 			modules.menu.pushBackArrow(function() {
-				console.log('retour depuis la vue des résultats');
+				modules.results.unload();
 			});
 
 			modules.results.printList();
 		},
 		unload: function() {
 			modules.menu.popBackArrow();
+			view.classList.add('hide');
+			modules.help.popContext();
 		},
 		printList: function() {
 			listContainer.innerHTML = '';
