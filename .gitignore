@@ -19,8 +19,7 @@ hs_err_pid*
 
 class/
 doc/
-resources/core/
-resources/front/
+resources/cache
 server-resources/images/
 /.gtm/
 .token

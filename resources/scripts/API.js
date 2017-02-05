@@ -109,5 +109,12 @@ window.API = {
 		app.search(app.getShortToken(), criteria, prom.getId());
 
 		return prom;
+	},
+	getImageUrl: function(url) {
+		var prom = new JPromises();
+
+		app.getImage(app.getShortToken(), url, prom.getId());
+
+		return prom;
 	}
 };

@@ -713,6 +713,7 @@ html, body {
 	float: left;
 	margin-left: 1em;
 	margin-top: 1em;
+	border: solid 1px hsl(0, 0%, 50%);
 }
 
 #results-list ul li > div {
@@ -732,10 +733,16 @@ html, body {
 	margin-left: 1.5rem;
 }
 
+#results-list ul li .percentage {
+	margin-top: 1em;
+	margin-left: 1.5rem;
+}
+
 #results-preview img {
 	width: 15em;
 	height: 15em;
 	margin: 2em 5em;
+	border: solid 1px hsl(0, 0%, 50%);
 }
 
 #results-preview h2 {

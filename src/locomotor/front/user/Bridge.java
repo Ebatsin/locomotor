@@ -17,6 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import locomotor.front.components.FrontResourceManager;
 import locomotor.front.components.network.ClientRequest;
 
 public class Bridge {
@@ -177,6 +178,24 @@ public class Bridge {
 					@Override
 					public void run() {
 						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void getImage(String token, String url, int promiseID) {
+		FrontResourceManager rm = FrontResourceManager.getInstance();
+		rm.getRemoteResource("images/" + url, token).thenAccept(new Consumer<File>() {
+			public void accept(File file) {
+				if(file == null) {
+					System.out.println("Le fichier est null");
+					return;
+				}
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].resolve('" + file.toString() + "');");
 					}
 				});
 			}

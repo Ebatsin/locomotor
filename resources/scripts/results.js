@@ -32,7 +32,6 @@
 			});
 
 			modules.results.printList();
-
 		},
 		unload: function() {
 			modules.menu.popBackArrow();
@@ -51,6 +50,11 @@
 					universe.classList.add('universe');
 					percentage.classList.add('percentage');
 
+
+					API.getImageUrl(rawList[i].image).then(function(data) {
+						image.src = data.replace('resources/', '');
+					});
+
 					container.appendChild(title);
 					container.appendChild(universe);
 					container.appendChild(percentage);
@@ -61,6 +65,10 @@
 					universe.innerHTML = 'Universe : ' + rawList[i].universe;
 					percentage.innerHTML = 'Match : ' + Math.round(rawList[i].grade * 100) + '%';
 					listContainer.appendChild(item);
+
+					item.addEventListener('click', function() {
+						modules.results.showPreview(i);
+					});
 				})(i);
 			}
 
@@ -70,6 +78,10 @@
 			preview.querySelector('h2').innerHTML = rawList[id].name;
 			preview.querySelector('.universe').innerHTML = rawList[id].universe;
 			preview.querySelector('.percentage').innerHTML = Math.round(rawList[id].grade * 100) + '%';
+
+			API.getImageUrl(rawList[id].image).then(function(data) {
+				preview.querySelector('img').src = data.replace('resources/', '');
+			});
 
 			var ul = preview.querySelector('ul');
 			ul.innerHTML = '';

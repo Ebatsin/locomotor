@@ -626,6 +626,7 @@ public class API {
 				CoreResourceManager crm = CoreResourceManager.getInstance();
 				
 				if(!crm.exists(id)) {
+					System.out.println("The file requested does not exist : " + data.getAsString("id"));
 					
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						"The file requested does not exist", ErrorCode.DEFAULT_ERROR_CODE);
@@ -664,10 +665,10 @@ public class API {
 					return false;
 				}
 
-				File file = new File("resources/core/" + data.getAsString("id"));
+				File file = new File("server-resources/" + data.getAsString("id"));
 
 				if(!file.exists() || file.isDirectory()) {
-
+					System.out.println("The requested file : " + data.getAsString("id") + " doest not exist");
 					response.getJsonContext().failure(NetworkResponse.ErrorCode.NOT_FOUND, 
 						"The file requested does not exist", ErrorCode.DEFAULT_ERROR_CODE);
 					return false;
