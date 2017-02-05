@@ -474,7 +474,7 @@
 					});
 				}
 				else {
-					tmpId = categories[i].id;
+					tmpId = categories[i].oldId;
 
 					if(!categories[i].criteria[0].used) {
 						continue;
