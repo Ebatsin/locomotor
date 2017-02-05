@@ -205,6 +205,10 @@
 				modules.menu.showBackArrow(true);
 			}
 			backArrowStack.push(callback);
+		},
+		clearBackArrow: function() {
+			backArrowStack = [function() {console.log('back arrow pressed');}];
+			modules.menu.showBackArrow(false);
 		}
 	};
 })();

@@ -362,7 +362,7 @@ html, body {
 	margin-top: 2em;
 	width: 90%;
 	margin-left: 5%;
-	font-size: 1.3em;
+	font-size: 1.5em;
 	color: hsl(0, 0%, 11%);
 }
 
@@ -880,7 +880,7 @@ html, body {
 	margin-right: 2em;
 	font-size: 1.2em;
 	line-height: 170%;
-	font-weight: 200;
+	color: hsl(0, 0%, 11%);
 }
 
 #fullview-specs {
@@ -892,6 +892,7 @@ html, body {
 	color: hsl(180, 70%, 20%);
 	font-size: 1.4em;
 	margin-top: 0.5em;
+	text-transform: capitalize;
 }
 
 #fullview-specs .category-content {
@@ -903,6 +904,7 @@ html, body {
 	color: hsl(0, 0%, 20%);
 	font-size: 1.2em;
 	display: inline-block;
+	text-transform: capitalize;
 }
 
 #fullview-specs .criterion-value {
@@ -935,4 +937,5 @@ html, body {
 	width: 90%;
 	margin-left: 5%;
 	line-height: 170%;
+	color: hsl(0, 0%, 11%);
 }

@@ -74,6 +74,9 @@
 					elem.classList.add('current');
 				}
 			}
+		},
+		clearContext: function() {
+			contextStack = [];
 		}
 	};
 })();
