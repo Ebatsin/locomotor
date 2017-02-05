@@ -31,8 +31,16 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-menu-title="Présentation" data-external="modules/main/main.html"></section>
+
+				<!-- introduction -->
+
+				<section>
+					<h3>Introduction</h3>
+					<section id="intro" data-menu-title="Introduction"></section>
+					<section id="sujet" data-menu-title="Sujet" data-external="modules/intro/sujet.html"></section>
+				</section>
+
 			</div>
 		</div>
 
@@ -40,18 +48,107 @@
 		<script src="js/reveal.js"></script>
 
 		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+				help: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				
+				math: {
+					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+					config: 'TeX-AMS_HTML-full'
+				},
+
+				menu: {
+			        // Specifies which side of the presentation the menu will 
+			        // be shown. Use 'left' or 'right'.
+			        side: 'left',
+
+			        // Add slide numbers to the titles in the slide list.
+			        // Use 'true' or format string (same as reveal.js slide numbers)
+			        numbers: true,
+
+			        // Hide slides from the menu that do not have a title.
+			        // Set to 'true' to only list slides with titles.
+			        hideMissingTitles: false,
+
+			        // Add markers to the slide titles to indicate the 
+			        // progress through the presentation
+			        markers: true,
+
+			        // Specify custom panels to be included in the menu, by
+			        // providing an array of objects with 'title', 'icon'
+			        // properties, and either a 'src' or 'content' property.
+			        custom: false,
+
+			        // Specifies the themes that will be available in the themes
+			        // menu panel. Set to 'false' to hide themes panel.
+			        themes: false,
+
+			        // Specifies if the transitions menu panel will be shown.
+			        transitions: false,
+
+			        // Adds a menu button to the slides to open the menu panel.
+			        // Set to 'false' to hide the button.
+			        openButton: true,
+
+			        // If 'true' allows the slide number in the presentation to
+			        // open the menu panel. The reveal.js slideNumber option must 
+			        // be displayed for this to take effect
+			        openSlideNumber: false,
+
+			        // If true allows the user to open and navigate the menu using
+			        // the keyboard. Standard keyboard interaction with reveal
+			        // will be disabled while the menu is open.
+			        keyboard: true
+			    },
+
+				// Optional reveal.js plugins
 				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ 
+						src: 'lib/js/classList.js', condition: function() { 
+							return !document.body.classList; 
+						} 
+					},
+					{ 
+						src: 'plugin/markdown/marked.js', condition: function() { 
+							return !!document.querySelector( '[data-markdown]' ); 
+						} 
+					},
+					{ 
+						src: 'plugin/markdown/markdown.js', condition: function() { 
+						return !!document.querySelector( '[data-markdown]' ); 
+						} 
+					},
+					{ 
+						src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); 
+						} 
+					},
+					{ 
+						src: 'plugin/zoom-js/zoom.js', async: true 
+					},
+					{ 
+						src: 'plugin/notes/notes.js', async: true 
+					},
+					{ 
+						src: 'plugin/math/math.js', async: true 
+					},
+					{ 
+						src: 'plugin/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } 
+					},
+					{ src: 'plugin/menu/menu.js' }
 				]
+
 			});
+
 		</script>
 	</body>
 </html>
