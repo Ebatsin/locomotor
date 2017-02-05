@@ -73,6 +73,10 @@
 					modules.search.start();
 				});
 
+				categories = [];
+				currentCat = 0;
+				currentCrit = 0;
+
 				modules.search.initBreadcrumb();
 			}
 

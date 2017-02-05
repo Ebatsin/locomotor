@@ -173,8 +173,14 @@ function Tree(elem, tree) {
 			equivalentNode.select();
 		}
 		else {
+			// check if all the children are selected. If yes, do not print it
+			if(t.children.length === equivalentNode.children.length) {
+				return;
+			}
+
 			var j = 0;
 			for(var i = 0; i < t.children.length; ++i) {
+
 				while(t.children[i].id !== equivalentNode.children[j].id && j < equivalentNode.children.length) {
 					++j;
 				}
