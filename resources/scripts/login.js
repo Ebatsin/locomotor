@@ -108,6 +108,8 @@
 			// bind the disconnect function to the menu
 			modules.menu.bind('disconnect', function() {
 				app.deleteLongToken();
+				modules.help.clearContext();
+				modules.menu.clearBackArrow();
 				loadView('login');
 			});
 
