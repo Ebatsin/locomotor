@@ -66,7 +66,7 @@
 				});
 
 				reallyImportant.addEventListener('change', function() {
-					categories[currentCat].criteria[currentCrit].isCritical = !!(reallyImportant.checked);
+					categories[currentCat].criteria[currentCrit].isCritical = !!(reallyImportant.querySelector('input').checked);
 				});
 
 				start.addEventListener('click', function() {
@@ -280,6 +280,13 @@
 						else {
 							modules.search.setUnused();
 						}
+
+						if(criteria[i].isCritical) {
+							reallyImportant.querySelector('input').checked = true;
+						}
+						else {
+							reallyImportant.querySelector('input').checked = false;
+						}
 					};
 
 					item.addEventListener('click', function() {
@@ -430,8 +437,6 @@
 			var tmpId;
 
 			for(var i = 0; i < categories.length; ++i) {
-				console.log('category : ' + categories[i].name);
-				console.log('category id : ' + categories[i].oldId);
 				if(categories[i].oldName !== '_self_') {
 					if(tmpSelf.length !== 0) {
 						obj.push({
@@ -441,7 +446,6 @@
 						tmpSelf = [];
 					}
 
-					console.log('before criterion add');
 					// normal category
 					var crits = [];
 					for(var j = 0; j < categories[i].criteria.length; ++j) {
@@ -449,17 +453,12 @@
 							continue;
 						}
 
-						console.log('criterion : ' + categories[i].criteria[j].name);
-						console.log('value : ' + JSON.stringify(categories[i].criteria[j].userValue));
-						console.log('id : ' + JSON.stringify(categories[i].criteria[j].id));
-
 						crits.push({
 							criterionId: categories[i].criteria[j].id,
 							disableFlex: categories[i].criteria[j].isCritical,
 							value: categories[i].criteria[j].userValue
 						});
 					}
-					console.log('after criterion add');
 
 					if(crits.length == 0) {
 						continue;
@@ -471,9 +470,7 @@
 					});
 				}
 				else {
-					console.log('here');
 					tmpId = categories[i].id;
-					console.log('added the tmpid');
 
 					if(!categories[i].criteria[0].used) {
 						continue;
