@@ -678,18 +678,9 @@ html, body {
 	top: 0;
 }
 
-#results-criteria {
-	width: 20em;
-	height: 100%;
-	background-color: hsl(0, 0%, 75%);
-	display:inline-block;
-	float: left;
-}
-
 #results-list {
-	width: calc(100% - 45em);
+	width: calc(100% - 25em);
 	height: 100%;
-	margin-left: 20em;
 	overflow-x: auto;
 }
 
@@ -886,8 +877,9 @@ html, body {
 
 #fullview-description {
 	margin-left: 2em;
+	margin-right: 2em;
 	font-size: 1.2em;
-	line-height: 150%;
+	line-height: 170%;
 	font-weight: 200;
 }
 
@@ -918,4 +910,29 @@ html, body {
 	color: hsl(0, 0%, 11%);
 	margin-left: 0.4em;
 	display: inline-block;
+}
+
+#fullview-universe {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 25em;
+	height: 100%;
+}
+#fullview-universe img {
+	width: 15em;
+	height: 15em;
+	margin: 2em 5em;
+	border: solid 1px hsl(0, 0%, 50%);
+}
+
+#fullview-universe h2 {
+	text-align: center;
+	margin: 0;
+}
+
+#fullview-universe p {
+	width: 90%;
+	margin-left: 5%;
+	line-height: 170%;
 }

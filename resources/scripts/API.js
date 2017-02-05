@@ -123,5 +123,12 @@ window.API = {
 		app.getItem(app.getShortToken(), id, prom.getId());
 
 		return prom;
+	},
+	getUniverse: function(id) {
+		var prom = new JPromises();
+
+		app.getUniverse(app.getShortToken(), id, prom.getId());
+
+		return prom;
 	}
 };

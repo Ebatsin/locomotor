@@ -4,8 +4,13 @@
 	var itemImage = header.querySelector('img');
 	var itemName = header.querySelector('h1');
 	var itemPrice = header.querySelector('#fullview-price');
-	var itemDescription = document.querySelector('#fullview-description');
-	var itemSpecs = document.querySelector('#fullview-specs');
+	var itemDescription = view.querySelector('#fullview-description');
+	var itemSpecs = view.querySelector('#fullview-specs');
+
+	var universe = view.querySelector('#fullview-universe');
+	var universeImage = universe.querySelector('img');
+	var universeName = universe.querySelector('h2');
+	var universeDescription = universe.querySelector('p');
 
 	window.registerView('fullview');
 
@@ -48,6 +53,15 @@
 			API.getImageUrl(data.image).then(function(data) {
 				itemImage.src = data.replace('resources/', '');
 			});
+
+			API.getUniverse(data.universeID).then(function(data) {
+				universeName.innerHTML = data.data.universe.name;
+				universeDescription.innerHTML = data.data.universe.description;
+				API.getImageUrl(data.data.universe.image).then(function(data) {
+					universeImage.src = data.replace('resources/', '');
+				});
+			});
+
 			itemName.innerHTML = data.name;
 			itemDescription.innerHTML = data.description;
 			itemSpecs.innerHTML = '';
