@@ -36,9 +36,19 @@
 				<!-- introduction -->
 
 				<section>
-					<h3>Introduction</h3>
+					<h2>Introduction</h2>
 					<section id="intro" data-menu-title="Introduction"></section>
 					<section id="sujet" data-menu-title="Sujet" data-external="modules/intro/sujet.html"></section>
+					<section id="choix" data-menu-title="Choix" data-external="modules/intro/choix.html"></section>
+				</section>
+
+				<!-- comparaison -->
+
+				<section>
+					<h2>Comparaison</h2>
+					<section id="compar" data-menu-title="Comparaison"></section>
+					<section id="type" data-menu-title="Type de critères" data-external="modules/comparaison/type.html"></section>
+					<!-- <section id="test" data-menu-title="Test" data-external="modules/comparaison/test.html"></section> -->
 				</section>
 
 			</div>
@@ -111,6 +121,26 @@
 			        keyboard: true
 			    },
 
+			    chart: {
+			      defaults: { 
+			          global: { 
+			              title: { fontColor: "#FFF" }, 
+			          }, 
+			            legend: {
+			                labels: { fontColor: "#FFF" },
+			            },
+			            scale: { 
+			                scaleLabel: { fontColor: "#FFF" }, 
+			                gridLines: { color: "#FFF", zeroLineColor: "#FFF" }, 
+			                ticks: { fontColor: "#FFF" }, 
+			            } 
+			        },
+			        line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ]}, 
+			        bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			        pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+			        radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			    },
+
 				// Optional reveal.js plugins
 				dependencies: [
 					{ 
@@ -144,7 +174,9 @@
 					{ 
 						src: 'plugin/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } 
 					},
-					{ src: 'plugin/menu/menu.js' }
+					{ src: 'plugin/menu/menu.js' },
+					{ src: 'plugin/chart/Chart.min.js' },               
+        			{ src: 'plugin/chart/csv2chart.js' }
 				]
 
 			});
