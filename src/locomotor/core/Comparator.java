@@ -153,7 +153,8 @@ public class Comparator {
 			JsonObject itemJSON = Json.object();
 
 			HashMap<String, Object> partialInfo = DBH.getInstance().getPartialInfoOfItem(item.getLeft());
-
+			
+			itemJSON.add("_id", item.getLeft());
 			itemJSON.add("name", partialInfo.get("itemName").toString());
 			itemJSON.add("image", partialInfo.get("itemImageURL").toString());
 			itemJSON.add("universe", partialInfo.get("universeName").toString());
