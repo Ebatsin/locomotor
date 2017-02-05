@@ -155,7 +155,7 @@
 
 			modules.login.hideError();
 			app.setTitle('Register');
-			toggle.innerHTML = 'Log-in';
+			toggle.innerHTML = 'Log in';
 			title.innerHTML = 'REGISTER';
 			button.innerHTML = 'Register';
 			modules.login.emptyFields();
@@ -165,7 +165,7 @@
 			loginMode = true;
 
 			modules.login.hideError();
-			app.setTitle('Log-in');
+			app.setTitle('Log in');
 			toggle.innerHTML = 'Register';
 			title.innerHTML = 'LOG IN';
 			button.innerHTML = 'Log in';
