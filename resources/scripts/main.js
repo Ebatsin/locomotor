@@ -6,6 +6,8 @@
 	window.modules = {};
 	window.views = [];
 
+	var zindex = 1100; // the Zindex value of the topmost popin
+
 	window.initModules = function() {
 		for(var i in window.modules) {
 			if(window.modules.hasOwnProperty(i)) {
@@ -41,6 +43,11 @@
 		}
 	}
 
+	window.getNextZIndex = function() {
+		++zindex;
+		return zindex;
+	}
+
 	function checkReady() {
 		console.log('vérification de la readyness');
 		if(window.initWhenReady) {
@@ -60,6 +67,7 @@
 	size.style.position = "absolute";
 	size.style.right = 0;
 	size.style.bottom = 0;
+	size.style['z-index'] = 10001;
 
 	document.body.appendChild(size);
 

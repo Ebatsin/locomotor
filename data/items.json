@@ -7,7 +7,7 @@
 		"$oid": "584336b157ab9e1521a8bd9f"
 	},
 	"description": "The Knight Bus is a triple-decker, purple AEC Regent III RT that assists stranded individuals of the wizarding community through public transportation. It operates at a very fast speed and obstacles will jump out of its way. To hail the bus, a witch or wizard must stick their wand hand in the air in the same manner that a Muggle might do to hail a taxi, though it is possible to book tickets for travel on the bus in advance.",
-	"image": "url",
+	"image": "knight-bus.png",
 	"categories": [
 		{
 			"categoryModel": {

@@ -500,6 +500,7 @@
 			console.log(JSON.stringify(obj));
 
 			API.search(JSON.stringify(obj)).then(function(data) {
+				loadView('results', data);
 				console.log(JSON.stringify(data));
 			}).catch(function(data) {
 				console.log('Javascript : error while starting the search : ' + data.message);

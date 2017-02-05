@@ -97,6 +97,32 @@
 					<div id="search-next"><img src="icons/next-black.svg"></div>
 				</div>
 			</div>
+
+			<div id="results-page" class="page">
+				<div id="results-criteria">
+					<h1>Criteria</h1>
+				</div>
+				<div id="results-input"></div>
+				<div id="results-list">
+					<ul></ul>
+				</div>
+				<div id="results-preview">
+					<img src="">
+					<h2>Nom du moyen de transport</h2>
+					<div class="universe">Harry Potter</div>
+					<div class="percentage">100%</div>
+					<ul class="criteria-list">
+						<li><span class="criteria-name">Critère n°1</span><span class="criteria-match">100%</span></li>
+						<li><span class="criteria-name">Critère n°2</span><span class="criteria-match">100%</span></li>
+						<li><span class="criteria-name">Critère n°3</span><span class="criteria-match">89%</span></li>
+						<li><span class="criteria-name">Critère n°4</span><span class="criteria-match">77%</span></li>
+					</ul>
+					<div class="buttons">
+						<div id="results-book">Book</div>
+						<div id="results-fullview">See more</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="splashscreen"></div>
@@ -105,7 +131,7 @@
 		<script type="text/javascript" src="scripts/types/range.js"></script>
 		<script type="text/javascript" src="scripts/types/boolean.js"></script>
 		<script type="text/javascript" src="scripts/types/stringList.js"></script>
-		<script type="text/javascript" src="scripts/types/tree.js"></script>	
+		<script type="text/javascript" src="scripts/types/tree.js"></script>
 		<script type="text/javascript" src="scripts/API.js"></script>
 		<script type="text/javascript" src="scripts/main.js"></script>
 		<script type="text/javascript" src="scripts/splashscreen.js"></script>
@@ -113,10 +139,9 @@
 		<script type="text/javascript" src="scripts/help.js"></script>
 		<script type="text/javascript" src="scripts/login.js"></script>
 		<script type="text/javascript" src="scripts/search.js"></script>
+		<script type="text/javascript" src="scripts/results.js"></script>
 		<script type="text/javascript">
 			console.log("Client initialisé.");
-
-			console.log("tree : ");
 
 			// prevent selection
 			document.addEventListener("selectstart", function(e) {
