@@ -37,6 +37,7 @@
 			modules.menu.popBackArrow();
 		},
 		printList: function() {
+			listContainer.innerHTML = '';
 			for(var i = 0; i < rawList.length; ++i) {
 				(function(i) {
 					var item = document.createElement('li');

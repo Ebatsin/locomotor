@@ -69,9 +69,9 @@
 					categories[currentCat].criteria[currentCrit].isCritical = !!(reallyImportant.querySelector('input').checked);
 				});
 
-				start.addEventListener('click', function() {
-					modules.search.start();
-				});
+				start.removeEventListener('click', modules.search.start);
+
+				start.addEventListener('click', modules.search.start);
 
 				categories = [];
 				currentCat = 0;
@@ -304,6 +304,24 @@
 			var topOffset = 0;
 
 			breadcrumbCat.innerHTML = '';
+			// refreshing the breadcrumbcat item, back, next
+			var clone = breadcrumbCat.cloneNode();
+			breadcrumbCat.parentNode.replaceChild(clone, breadcrumbCat);
+			breadcrumbCat = clone;
+
+			clone = back.cloneNode();
+			while(back.firstChild) {
+				clone.appendChild(back.lastChild);
+			}
+			back.parentNode.replaceChild(clone, back);
+			back = clone;
+
+			clone = next.cloneNode();
+			while(next.firstChild) {
+				clone.appendChild(next.lastChild);
+			}
+			next.parentNode.replaceChild(clone, next);
+			next = clone;
 
 			for(var i = 0; i < model.model.length; ++i) {
 				if(model.model[i].name === '_self_') {
