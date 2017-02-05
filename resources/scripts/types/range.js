@@ -193,6 +193,7 @@ function Range(elem, minBound, maxBound, step, signiDigits) {
 
 	this.onChange = function(callback) {
 		onChangeEvent = callback;
+		updatePosition();
 	};
 
 	function updatePosition() {

@@ -189,5 +189,6 @@ function Tree(elem, tree) {
 
 	this.onChange = function(callback) {
 		onChangeEvent = callback;
+		callback(that.getTree());
 	};
 }

@@ -65,5 +65,6 @@ function StringList(elem, list) {
 
 	this.onChange = function(callback) {
 		onChangeEvent = callback;
+		callback(that.getIDs());
 	};
 }

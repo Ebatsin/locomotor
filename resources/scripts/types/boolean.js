@@ -100,5 +100,6 @@ function Boolean(elem) {
 
 	this.onChange = function(callback) {
 		onChangeEvent = callback;
+		callback(checked);
 	}
 }
