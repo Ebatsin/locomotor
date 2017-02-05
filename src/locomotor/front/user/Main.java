@@ -36,21 +36,6 @@ public class Main extends Application {
 		ClientRequest.setGenericHostname("https://localhost:8000/");
 
 		launch(args);
-
-		System.out.println("Tentative de requête");
-
-		// FrontResourceManager rm = FrontResourceManager.getInstance();
-		// rm.getRemoteVersion("images/chat.png").thenAccept(new Consumer<Long>() {
-		// 	public void accept(Long version) {
-		// 		System.out.println("Version récupérée pour cat.png : " + version);
-		// 	}
-		// });
-
-		// rm.getRemoteResource("images/chat.png").thenAccept(new Consumer<File>() {
-		// 	public void accept(File file) {
-		// 		System.out.println("fichier récupéré : " + file);
-		// 	}
-		// });
 	}
 
 	@Override

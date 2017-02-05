@@ -9,6 +9,12 @@
 	font-style: italic;
 }
 
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/Roboto/Roboto-Light.ttf");
+	font-weight: 200;
+}
+
 html, body {
 	/*font-family: "Roboto";*/
 	margin: 0;
@@ -805,4 +811,111 @@ html, body {
 
 #results-fullview {
 	float: right;
+}
+
+/* ------------------------------------------ FULLVIEW ---------------------------------------*/
+
+#fullview-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	z-index: 1500;
+	top: 0;
+}
+
+#fullview-left {
+	height: 100%;
+	width: calc(100% - 25em);
+	overflow-x: auto;
+}
+
+#fullview-header {
+	overflow: hidden;
+}
+
+#fullview-left img {
+	width: 15em;
+	height: 15em;
+	margin: 2em;
+	float: left;
+}
+
+#fullview-name-container {
+	margin-left: 17em;
+	margin-top: 2rem;
+}
+
+#fullview-name-container h1 {
+	margin: 0;
+	letter-spacing: 2px;
+	font-size: 2.9em;
+	font-weight: 200;
+}
+
+#fullview-price {
+	margin-top: 2em;
+}
+
+#fullview-name-container button {
+	display: inline-block;
+	height: 2.5em;
+	padding: 0 3em;
+	margin-top: 2em;
+	font-size: 1em;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#fullview-name-container button:hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+#fullview-left > h2 {
+	margin-top: 2em;
+	padding-left: 2em;
+	padding-top: 1em;
+	border-top: solid 1px hsl(0, 0%, 75%);
+	color: hsl(180, 60%, 40%);
+	letter-spacing: 1px;
+	font-size: 1.5em;
+}
+
+#fullview-description {
+	margin-left: 2em;
+	font-size: 1.2em;
+	line-height: 150%;
+	font-weight: 200;
+}
+
+#fullview-specs {
+	list-style-type: none;
+	margin-left: 2em;
+}
+
+#fullview-specs .category-name {
+	color: hsl(180, 70%, 20%);
+	font-size: 1.4em;
+	margin-top: 0.5em;
+}
+
+#fullview-specs .category-content {
+	list-style-type: none;
+	padding-left: 1.5em;
+}
+
+#fullview-specs .criterion-name {
+	color: hsl(0, 0%, 20%);
+	font-size: 1.2em;
+	display: inline-block;
+}
+
+#fullview-specs .criterion-value {
+	font-size: 1em;
+	color: hsl(0, 0%, 11%);
+	margin-left: 0.4em;
+	display: inline-block;
 }

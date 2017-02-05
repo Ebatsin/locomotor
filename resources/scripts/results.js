@@ -2,6 +2,7 @@
 	var view = document.querySelector('#results-page');
 	var listContainer = view.querySelector('#results-list ul');
 	var preview = document.querySelector('#results-preview');
+	var toFullview = document.querySelector('#results-fullview');
 
 	window.registerView('results');
 
@@ -10,10 +11,15 @@
 	}
 
 	var rawList;
+	var currentId;
 
 	window.modules['results'] = {
 		init: function() {
 			console.log('initialisation du module results');
+
+			toFullview.addEventListener('click', function() {
+				loadView('fullview', rawList[currentId]['_id']);
+			});
 		},
 		/**
 		* Load the login view.
@@ -78,6 +84,7 @@
 			modules.results.showPreview(0);
 		},
 		showPreview: function(id) {
+			currentId = id;
 			preview.querySelector('h2').innerHTML = rawList[id].name;
 			preview.querySelector('.universe').innerHTML = rawList[id].universe;
 			preview.querySelector('.percentage').innerHTML = Math.round(rawList[id].grade * 100) + '%';
