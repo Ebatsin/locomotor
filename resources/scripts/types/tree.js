@@ -6,13 +6,14 @@
 * @param an array of nodes [{value: "...", id: n, ?children: []}]
 */
 function Tree(elem, tree) {
-	console.log('meeeeeeeeeeeeeeeeeeh');
 	var parent = document.createElement('ul');
 	parent.classList.add('tree-root');
 
 	var that = this;
 	var treeBackup = tree;
 	tree = tree.children;
+
+	var onChangeEvent = function() {};
 
 	
 	this.init = function() {
@@ -75,6 +76,7 @@ function Tree(elem, tree) {
 				else {
 					node.select();
 				}
+				onChangeEvent(that.getTree());
 			});
 
 			name.addEventListener("mouseover", function() {
@@ -113,7 +115,6 @@ function Tree(elem, tree) {
 		}
 
 		return {
-			value: treeBackup.value,
 			id: treeBackup.id,
 			children: nodes
 		};
@@ -123,7 +124,6 @@ function Tree(elem, tree) {
 
 		if(!node.children) {
 			return {
-				value: node.value,
 				id: node.id
 			};
 		}
@@ -136,7 +136,6 @@ function Tree(elem, tree) {
 			}
 
 			return {
-				value: node.value,
 				id: node.id,
 				children: nodes
 			};
@@ -159,7 +158,6 @@ function Tree(elem, tree) {
 			}
 
 			return {
-				value: node.value,
 				id: node.id,
 				children: nodes
 			};
@@ -175,8 +173,14 @@ function Tree(elem, tree) {
 			equivalentNode.select();
 		}
 		else {
+			// check if all the children are selected. If yes, do not print it
+			if(t.children.length === equivalentNode.children.length) {
+				return;
+			}
+
 			var j = 0;
 			for(var i = 0; i < t.children.length; ++i) {
+
 				while(t.children[i].id !== equivalentNode.children[j].id && j < equivalentNode.children.length) {
 					++j;
 				}
@@ -187,5 +191,10 @@ function Tree(elem, tree) {
 				}
 			}
 		}			
+	};
+
+	this.onChange = function(callback) {
+		onChangeEvent = callback;
+		callback(that.getTree());
 	};
 }

@@ -15,6 +15,8 @@
 	var menuWidth = menu.offsetWidth; // needed for the animations
 	var animationDuration = 0.2; // length of the opening/closing animation in seconds
 
+	var backArrowStack = [function() {console.log('back arrow pressed');}]; // the callback to call when the back arrow is clicked
+
 	// close the menu after having read its width
 	menu.classList.remove('open');
 	menu.style.width = '4em';
@@ -40,9 +42,6 @@
 	}
 
 	var callbacks = {
-		back: function() {
-			console.log('back item pressed');
-		},
 		settings: function() {
 			console.log('settings item pressed');
 		},
@@ -86,7 +85,9 @@
 			});
 
 			// hooks des items
-			backArrow.addEventListener('click', backItem);
+			backArrow.addEventListener('click', function() {
+				backArrowStack[backArrowStack.length - 1]();
+			});
 			settings.addEventListener('click', settingsItem);
 			booking.addEventListener('click', bookingItem);
 			helpElem.addEventListener('click', helpItem);
@@ -182,8 +183,7 @@
 			}
 		},
 		/**
-		* item : 
-		* back
+		* item
 		* settings
 		* booking
 		* help
@@ -193,6 +193,12 @@
 			if(callbacks[item]) {
 				callbacks[item] = callback;
 			}
+		},
+		popBackArrow: function() { // remove the top most callback on the stack
+			backArrowStack.pop();
+		},
+		pushBackArrow: function(callback) { // add a callback on the top of the stack
+			backArrowStack.push(callback);
 		}
 	};
 })();

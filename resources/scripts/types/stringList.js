@@ -9,6 +9,8 @@ function StringList(elem, list) {
 	var parent = document.createElement('ul');
 	var that = this;
 
+	var onChangeEvent = function() {};
+
 	parent.classList.add('stringlist');
 
 	this.init = function() {
@@ -21,6 +23,7 @@ function StringList(elem, list) {
 
 					item.addEventListener('click', function() {
 						item.classList.toggle('selected');
+						onChangeEvent(that.getIDs());
 					});
 
 					parent.appendChild(item);
@@ -58,5 +61,10 @@ function StringList(elem, list) {
 		}
 
 		return ids;
+	};
+
+	this.onChange = function(callback) {
+		onChangeEvent = callback;
+		callback(that.getIDs());
 	};
 }

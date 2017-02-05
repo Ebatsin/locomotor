@@ -17,7 +17,7 @@ public class CoreResourceManager extends ResourceManager {
 	 */
 	protected CoreResourceManager() {
 		super();
-		_baseURL = "resources/core/";
+		_baseURL = "server-resources/";
 	}
 	
 	/**

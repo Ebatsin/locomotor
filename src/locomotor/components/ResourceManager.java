@@ -21,7 +21,7 @@ public class ResourceManager {
 	 * Constructs the object.
 	 */
 	protected ResourceManager() {
-		_baseURL = "resources/";
+		_baseURL = "server-resources/";
 	}
 
 	/**

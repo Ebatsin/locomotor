@@ -27,7 +27,7 @@ public class FrontResourceManager extends ResourceManager {
 	 */
 	protected FrontResourceManager() {
 		super();
-		_baseURL = "resources/front/";
+		_baseURL = "resources/cache/";
 	}
 
 	/**
@@ -43,17 +43,9 @@ public class FrontResourceManager extends ResourceManager {
 		return _instance;
 	}
 
-	/**
-	 * Gets the remote version.
-	 *
-	 * @param      resource  The resource
-	 *
-	 * @return     The remote version.
-	 */
-	public CompletableFuture<Long> getRemoteVersion(String resource) {
-		ClientRequest cr = new ClientRequest("https://localhost:8000/");
-		// @todo: retrieve short token
-		cr.addParam("token", "");
+	public CompletableFuture<Long> getRemoteVersion(String resource, String token) {
+		ClientRequest cr = new ClientRequest();
+		cr.addParam("token", token);
 		cr.addParam("id", resource);
 		return cr.requestJson("api/resource/version").thenApply(new Function<JsonObject, Long>() {
 			public Long apply(JsonObject obj) {
@@ -61,7 +53,7 @@ public class FrontResourceManager extends ResourceManager {
 					return obj.get("data").asObject().get("version").asLong();
 				}
 				else {
-					System.out.println("erreur");
+					System.out.println("version : erreur");
 				}
 
 				return new Long(0);
@@ -74,13 +66,12 @@ public class FrontResourceManager extends ResourceManager {
 	* @returns A promise containing the resource stored locally. When resolved, the promise contains either the resource as a File object 
 	* or null if the resource was not found on the server
 	*/
-	public CompletableFuture<File> getRemoteResource(String resource) {
+	public CompletableFuture<File> getRemoteResource(String resource, String token) {
 		// check if the ressource exists locally
 		if(!exists(resource)) {
 			// get the remote resource
-			ClientRequest cr = new ClientRequest("https://localhost:8000/");
-			// @todo: retrieve short token
-			cr.addParam("token", "");
+			ClientRequest cr = new ClientRequest();
+			cr.addParam("token", token);
 			cr.addParam("id", resource);
 			return cr.requestBinary("api/resource/get").thenApply(new Function<BinaryObject, File>() {
 				public File apply(BinaryObject obj) {
@@ -105,12 +96,11 @@ public class FrontResourceManager extends ResourceManager {
 			CompletableFuture<File> file = new CompletableFuture<File>();
 
 			// get the remote version
-			getRemoteVersion(resource).thenAccept(new Consumer<Long>() {
+			getRemoteVersion(resource, token).thenAccept(new Consumer<Long>() {
 				public void accept(Long version) {
 					if(version > getVersion(resource)) { // update the local version
-						ClientRequest crUpdate = new ClientRequest("https://localhost:8000/");
-						// @todo: retrieve short token
-						crUpdate.addParam("token", "");
+						ClientRequest crUpdate = new ClientRequest();
+						crUpdate.addParam("token", token);
 						crUpdate.addParam("id", resource);
 						crUpdate.requestBinary("api/resource/get").thenAccept(new Consumer<BinaryObject>() {
 							public void accept(BinaryObject obj) {

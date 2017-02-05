@@ -7,7 +7,7 @@
 		"$oid": "584336b157ab9e1521a8bd9f"
 	},
 	"description": "The Knight Bus is a triple-decker, purple AEC Regent III RT that assists stranded individuals of the wizarding community through public transportation. It operates at a very fast speed and obstacles will jump out of its way. To hail the bus, a witch or wizard must stick their wand hand in the air in the same manner that a Muggle might do to hail a taxi, though it is possible to book tickets for travel on the bus in advance.",
-	"image": "url",
+	"image": "knight-bus.png",
 	"categories": [
 		{
 			"categoryModel": {
@@ -265,7 +265,7 @@
 		"$oid": "58433b6557ab9e238922b8cc"
 	},
 	"description": "With its sleek arrowhead shape, streamlined cockpit, and massive twin engines, the A-wing starfighter suggests raw speed even when parked within Alliance hangar bays. Faster than even the TIE interceptor, the A-wing is well suited for lightning strikes. It sports a pair of pivoting laser cannons on each wingtip. The starfighters of Green Squadron, which flew in the Battle of Endor, were made up of A-wing starfighter.",
-	"image": "url",
+	"image": "awing-fighter.png",
 	"categories": [
 		{
 			"categoryModel": {
@@ -484,7 +484,7 @@
 		"$oid": "584336b157ab9e1521a8bd9f"
 	},
 	"description": "The Firebolt is a world-class broomstick. It was the fastest at the time of its production, and was released in 1993. In time the Firebolt broomstick was used by the Bulgarian and Irish International Quidditch Teams. The teams played on Firebolts during the 1994 Quidditch World Cup. By 2014, the Firebolt had been superseded by the Firebolt Supreme, apparently manufactured by the same makers.",
-	"image": "url",
+	"image": "firebolt.jpg",
 	"categories": [
 		{
 			"categoryModel": {
@@ -692,7 +692,7 @@
 		"$oid": "58717def7e37eaf5657984aa"
 	},
 	"description": "The Batmobile is the primary vehicle driven by the superhero Batman in American comic books published by DC Comics. The Batmobile is a state of the art all-terrain, self-powered, armored fighting motor vehicle used for vehicular hot pursuit, prisoner transportation, anti-tank warfare, riot control, and as a mobile crime lab. Kept in the Batcave, which it accesses through a hidden entrance, the heavily armoured, gadget-laden vehicle is used by Batman in his crime-fighting activities.",
-	"image": "url",
+	"image": "batmobile.png",
 	"categories": [
 		{
 			"categoryModel": {
@@ -957,7 +957,7 @@
 		"$oid": "58950cde674f568f496d0bce"
 	},
 	"description": "It is a large creature, depicted as a grinning, twelve legged cat with a hollow body that serves as a bus, complete with windows and seats coated with fur, and a large, bushy tail.",
-	"image": "url",
+	"image": "catbus.png",
 	"categories": [
 		{
 			"categoryModel": {
@@ -1216,7 +1216,7 @@
 		"$oid": "589510a5674f56a09af3db78"
 	},
 	"description": "Fast and maneuverable, the Ghost could be used for everything from deep reconnaissance to assault runs. A testament to its field success, the T-32 has remained largely unchanged for centuries. This perfected design utilizes a single-mount rear-positioned seat and twin-linked plasma cannons; it maintains excellent mobility, regardless of the terrain it finds itself deployed in.",
-	"image": "url",
+	"image": "ghost.png",
 	"categories": [
 		{
 			"categoryModel": {

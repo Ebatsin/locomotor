@@ -17,6 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import locomotor.front.components.FrontResourceManager;
 import locomotor.front.components.network.ClientRequest;
 
 /**
@@ -244,6 +245,40 @@ public class Bridge {
 					@Override
 					public void run() {
 						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void search(String token, String criteria, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.addParam("criterias", criteria);
+		c.requestJson("api/search").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void getImage(String token, String url, int promiseID) {
+		FrontResourceManager rm = FrontResourceManager.getInstance();
+		rm.getRemoteResource("images/" + url, token).thenAccept(new Consumer<File>() {
+			public void accept(File file) {
+				if(file == null) {
+					System.out.println("Le fichier est null");
+					return;
+				}
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].resolve('" + file.toString() + "');");
 					}
 				});
 			}
