@@ -12,6 +12,7 @@
 	var breadcrumbCat = document.querySelector('#search-breadcrumb-cat');
 	var breadcrumbCrit = document.querySelector('#search-breadcrumb-crit');
 
+	var refresh = document.querySelector('#search-refresh');
 	var back = document.querySelector('#search-back');
 	var next = document.querySelector('#search-next');
 	var start = document.querySelector('#search-start');
@@ -43,6 +44,9 @@
 	window.modules['search'] = {
 		init: function() {
 			console.log('initialisation du module search');
+			refresh.addEventListener('click', function() {
+				loadView('search');
+			})
 		},
 		load: function() {
 			console.log('loading search');

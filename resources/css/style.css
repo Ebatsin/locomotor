@@ -431,6 +431,18 @@ html, body {
 	width: 100%;
 }
 
+#search-refresh {
+	position: absolute;
+	left: calc(2.5% - 1em);
+	top: -3em;
+	cursor: pointer;
+}
+
+#search-refresh img {	
+	width: 2em;
+	height: 2em;
+}
+
 #search-back {	
 	display: inline-block;
 	width: 10em;
