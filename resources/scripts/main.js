@@ -67,6 +67,24 @@
 		return fixed !== undefined ? value.toFixed(fixed) : value;
 	};
 
+	/**
+	* @param value The value
+	* @param str a string that contains ${unit} in which the long unit will me placed
+	*/
+	window.formatLongUnit = function(value, str, unitID) {
+		for(var i = 0; i < window.units.length; ++i) {
+			if(units[i]['_id'] == unitID) {
+				// find the base unit
+				for(var j = 0; j < units[i].alt.length; ++j) {
+					if(units[i].alt[j].factor == 1) {
+						return str.replace('${unit}', units[i].alt[j].longName.replace('%s', value >= 2 ? 's': ''));					
+					}
+				}
+			}
+		}
+		return str.replace('${unit}', '');
+	};
+
 	function checkReady() {
 		console.log('vérification de la readyness');
 		if(window.initWhenReady) {
