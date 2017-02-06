@@ -144,7 +144,7 @@
 				case 0: // Integer
 					switch(universe.universeType) {
 						case 3: // integer interval
-							return formatLongUnit(data, data + ' ${unit}', universe.unitID);
+							return formatLongUnit(data, '${value} ${unit}', universe.unitID);
 						case 6: // weighted string list
 							return findWeightedString(universe.universe.values, data);
 						default:
@@ -154,7 +154,7 @@
 				case 1: // float
 					switch(universe.universeType) {
 						case 4: // float interval
-							return formatLongUnit(data, data + ' ${unit}', universe.unitID);
+							return formatLongUnit(data, '${value} ${unit}', universe.unitID);
 						default:
 							console.log('unhandled float type : ' + universe.universeType);
 					}
@@ -164,7 +164,7 @@
 				case 3: // Integer interval
 					switch(universe.universeType) {
 						case 3: // integer interval
-							return formatLongUnit(data.min, data.min + ' ${unit}', universe.unitID) + ' to ' + formatLongUnit(data.max, data.max + ' ${unit}', universe.unitID);
+							return formatLongUnit(data.min, '${value} ${unit}', universe.unitID) + ' to ' + formatLongUnit(data.max, '${value} ${unit}', universe.unitID);
 						case 6: //weighted string list
 							return findWeightedString(universe.universe.values, data.min) + ' to ' + findWeightedString(universe.universe.values, data.max);
 						default:
@@ -174,7 +174,7 @@
 				case 4: // float interval
 					switch(universe.universeType) {
 						case 4: // float interval
-							return formatLongUnit(data.min, data.min + ' ${unit}', universe.unitID) + ' to ' + formatLongUnit(data.max, data.max + ' ${unit}', universe.unitID);
+							return formatLongUnit(data.min, '${value} ${unit}', universe.unitID) + ' to ' + formatLongUnit(data.max, '${value} ${unit}', universe.unitID);
 						default:
 							console.log('unhandled float interval type : ' + universe.universeType);
 					}
