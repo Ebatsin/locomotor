@@ -73,7 +73,7 @@
 					buttonColumn.classList.add('booking-list-button-container');
 
 					name.innerHTML = data.itemName;
-					universe.innerHTML = 'Not in the json';
+					universe.innerHTML = data.universeName;
 					quantity.innerHTML = 'Quantity : ' + data.qt;
 
 					fromDate.innerHTML = 'From ' + (new Date(data.startDate)).toLocaleDateString();

@@ -704,7 +704,7 @@ html, body {
 
 #results-list {
 	width: calc(100% - 25em);
-	height: 100%;
+	height: calc(100% - 4.5em + 1px);
 	overflow-x: auto;
 }
 

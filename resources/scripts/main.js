@@ -112,22 +112,4 @@
 	}
 
 	checkReady();
-
-
-	// @TODO remove that
-	// debug
-	var size = document.createElement('div');
-	size.style.position = "absolute";
-	size.style.right = 0;
-	size.style.bottom = 0;
-	size.style['z-index'] = 10001;
-
-	document.body.appendChild(size);
-
-	size.innerHTML = $(window).width() + 'x' + $(window).height();
-
-	window.addEventListener('resize', function(e) {
-		size.innerHTML = $(window).width() + 'x' + $(window).height();
-	});
-
 })();

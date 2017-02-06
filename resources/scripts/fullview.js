@@ -104,7 +104,8 @@
 							name.innerHTML = criterion.name + ' : ';
 							value.innerHTML = modules.fullview.formatData(criterion.value, modules.fullview.getItemUniverse(criterion.criterionModel));
 							if(criterion.name == 'price') {
-								itemPrice.innerHTML = value.innerHTML + '€ per day';
+								//itemPrice.innerHTML = value.innerHTML + '€ per day';
+								itemPrice.innerHTML = formatUnit(criterion.value, modules.fullview.getItemUniverse(criterion.criterionModel).unitID, 0) + ' per day';
 							}
 
 							item.appendChild(name);
@@ -138,6 +139,19 @@
 						return data[i].name;
 					}
 				}
+			}
+
+			function genTree(node) {
+				if(!node.children) {
+					return node.value;
+				}
+
+				var tab = [];
+				for(var i = 0; i < node.children.length; ++i) {
+					tab.push(genTree(node.children[i]));
+				}
+
+				return '(' + node.value + ': ' + tab.join(', ') + ')';
 			}
 
 			switch(universe.itemType) {
@@ -189,7 +203,7 @@
 							return output.join(', ');
 					}
 				case 9: // tree
-					return 'it posess some of what you want';
+					return genTree(data);
 			}
 		}
 	};

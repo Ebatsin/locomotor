@@ -88,8 +88,9 @@
 					});
 				})(i);
 			}
-
-			modules.results.showPreview(0);
+			if(rawList.length > 0) {
+				modules.results.showPreview(0);
+			}
 		},
 		showPreview: function(id) {
 			currentId = id;
