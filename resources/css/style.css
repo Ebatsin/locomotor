@@ -167,12 +167,23 @@ html, body {
 	margin-bottom: 1em;
 	letter-spacing: 1px;
 	margin-left: 1.3em;
+	margin-right: 1.3em;
+}
+
+#help h3 {
+	color: hsl(180, 50%, 30%);
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	margin-bottom: 0.2em;
+	letter-spacing: 1px;
+	font-size: 1.3rem;
 }
 
 #help p {
 	font-size: 1.2em;
 	margin-left: 1.5em;
 	margin-right: 1.5em;
+	margin-top: 0;
 }
 
 /* ------------------------------------------ LOGIN VIEW ---------------------------------------*/

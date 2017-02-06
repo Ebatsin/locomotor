@@ -161,6 +161,9 @@
 		showRegister: function() {
 			loginMode = false;
 
+			modules.help.popContext();
+			modules.help.pushContext('register');
+
 			modules.login.hideError();
 			app.setTitle('Register');
 			toggle.innerHTML = 'Log in';
@@ -171,6 +174,9 @@
 		},
 		showLogin: function() {
 			loginMode = true;
+
+			modules.help.popContext();
+			modules.help.pushContext('login');
 
 			modules.login.hideError();
 			app.setTitle('Log in');

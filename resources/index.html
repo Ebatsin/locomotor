@@ -30,86 +30,97 @@
 			<div id="help-pages">
 				<div id="help-login" class="help-page current">
 					<h2>Authentification</h2>
-						<p>Log in</p>
-						<p>You simply need to enter your name and your password in the adjacents fields and press the green button "Log in". </p>
-						<p>Register</p>
-						<p>You need to click the on the link "Register" at the bottom of the central box. Then enter your name and your password twice and press the green button "Register".</p>
+						<h3>How do I log in ?</h3>
+						<p>To log in, you need to type in your name and your password in the adjacent fields and then, press the green button reading "Log in".</p>
+						<h3>I do not have an account</h3>
+						<p>If you do not have an account, press on the "register" link at the bottom of the screen to be redirected to the register view.</p>
+						<h3>I lost my password</h3>
+						<p>If you have lost your password, please contact your local administrator to reset it.</p>
+					</p>
+				</div>
+
+				<div id="help-register" class="help-page">
+					<h2>Registration</h2>
+						<h3>How do I register ?</h3>
+						<p>To register, you need to type in your name and your password. To prevent typing errors, you need to enter the password twice. Then click on the green button reading "register".</p>
+						<h3>I already have an account</h3>
+						<p>If you already have an account, press on the "log in" link at the bottom og the screen to be redirected to the login view.</p>
 					</p>
 				</div>
 
 				<div id="help-search" class="help-page">
 					<h2>Search</h2>
-					<p>To search for a vehicle that suits you needs, select only the criterias that matter to you.</p>
-					<p>If a criteria is not important to you, select the big upper box "This criterion is not useful to me".</p>
-					<p>On the opposite, if a criteria is very important to you, check the small box "This criterion is really important to me" at the bottom-left-hand corner of the window.</p>
-					<p>There are multiple type of values you can select :</p>
-					<p>Set</p>
-					<p>Click on the value that you want, their color will be brighter. To remove a value from your selection, simply click again on it.</p>
-					<p>Interval</p>
-					<p>Drag the range bounds to select the range you want.</p>
-					<p>Tree</p>
-					<p>Same as set selection, click on a node to select it and display its leaves. To remove a node and its children from your selection, simply click again on the node.</p>
-					<p>Navigation</p>
-					<p>You can either use the bottom left-hand or right-hand arrow to navigate to the previous of the next criteria or the breadcrumb at the top of the window. With the breadcrumb, you can jump to another category quickly by clicking on the current category or go the another criteria of the current category by clicking on it.</p>
-					<p>Start the search !</p>
-					<p>Press the big button at the bottom to start a research !</p>
+					<p>This view allows you to select the criteria that interests you in the vehicle your are searching.</p>
+					<p>The view is composed of 3 major components. The breadcrumb, the criterion selector and the button bar at the bottom</p>
+
+					<h3>I want to select a criterion</h3>
+					<p>The criteria are organized in "groups" called categories. In the head of the breadcrumb is displayed the name of the category you are curretly in. To switch to another one, press on the name and pick the one that interests you in the list. To select a criterion, press on its name on the right part on the breadcrumb. You can also use the left and right icons at the bottom of the screen to navigate between the criteria. <br>
+					Be aware that once you have seen a criterion, it becomes used for your research. if you want to prevent this, press on the "this criterion is not useful to me" button before changing the current criterion.</p>
+
+					<h3>This criterion is really important to me</h3>
+					<p>By checking this option, you specify that the vehicle that you want <b>must</b> totally match this criterion.</p>
+
+					<h3>How do I use the range selector ?</h3>
+					<p>To use the range selector, drag the lower knog to the min value that you want to match and the upper knob to the max value that you want. be aware that if you cannot set both knob to the max value of the range or it will get stuck. Our developers are kinda lazy. The selected range is highlighted.</p>
+
+					<h3>How do I use the option selector ?</h3>
+					<p>The option selector shows a list of the options proposed by this criterion. You can select one or more options. <br>
+					To select an option, press one time on it. it will become highlighted. To remove the option, press on it again, it will fall back to its default state.</p>
+
+					<h3>How do I use the tree selector ?</h3>
+					<p>The tree selector show a list of the root values. To select a node, click on it. To unselect it along with all its children, press on it again. Note that if you select a node but none of its children, all will be implicitly selected.</p>
+
+					<h3>Oops, I made a mistake, how do I clear everything ?</h3>
+					<p>To clear all the criteria you have selected, click on the "refresh" icon in the left hand side bottom corner.</p>
+
+					<h3>I'm ready ! How do I start my research ?</h3>
+					<p>When you have selected all the criteria that interests you, press on the big button in the bottom of the screen. Don't be afraid, if you have made a mistake, you will be able to go back, all your selection will be saved !</p>
 				</div>
 
 				<div id="help-results" class="help-page">
 					<h2>Results</h2>
-					<p>Here are represented the results of the research based on your criteria' selection. Up to 10 vehicles are displayed, in order of proximity from your request.</p>
-					<p>Quick view</p>
-					<p>To display a quick view on the right. In this panel, you can see the best criterias that matter you with their grade.</p>
-					<p>See more</p>
-					<p>To see more of the specifications of the vehicle, simply click on the button "See more" in the quick view on the right.</p>
-					<p>Booking</p>
-					<p>To book a vehicle, simply click on the button "See more" in the quick view on the right.</p>
-					<p>Back to research</p>
-					<p>If the results aren't interesting for you, you can go back to selection of the criterias with the left arrow on top-left-corder of the window.</p>
+					<p>In this view are displayed the results of the research based on your criteria's selection. Up to 10 vehicles are displayed, ordered by their proximity with your research</p>
+					<h3>Preview</h3>
+					<p>On the right side of the screen is displayed the preview of the currently selected vehicle. It displays some useful informations about the vehicle, such as the overall grade given to the vehicle regarding is proximity to your request. The 5 criteria that matched the best are shown along with their grade.</p>
+
+					<p>If you want to learn more about a vehicle, press on the "see more" button in the vehicle's preview</p>
+
+					<p>If you want to book a vehicle, press on the button "Book" in the vehicle's preview.</p>
+
+					<p>If the results aren't interesting to you, you can go back to the selection of the criterias view by pressing on the left arrow in the menu.</p>
 				</div>
 
 				<div id="help-settings" class="help-page">
 					<h2>Settings</h2>
-					<p>To search for a vehicle that suits you ... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<p>The settings view allow you to control your informations. You can change your name, your password or delete your account. To go back to the previews view, click on the back icon in the menu.</p>
+					<h3>How do I change my name ?</h3>
+					<p>To change your name, press on the edit icon on the right of your current name. You will then be prompted to type in a new name. Press on the tick icon to validate the change. Press on the cross icon to cancel the change.</p>
+					<h3>How do I change my password ?</h3>
+					<p>To change your password, press on the big green button that reads "Change my password". You will then be prompted to type in your current password for security reasons and your new password two times to prevent typing errors. Press on the tick icon to validate the change or on the cross icon to cancel it.<br>Do not lose the new password, you will need it to connect to the application !</p>
+					<h3>How do I delete my account ?</h3>
+					<p>To delete your account, press on the big green button that reads "delete my account". You will be asked to type in your password and confirm your choice. Be aware that this action is irreversible. All your booking will be lost.</p>
 				</div>
 
 				<div id="help-booking" class="help-page">
 					<h2>Booking</h2>
-					<p>To search for a vehicle that suits you ... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<p>This view allows you to book one or more vehicles for a defined time period. Type in the amount of vehicles your want then pick in the date picker the dates between which you want to have the vehicle(s). <br>
+					To validate the booking, press the "book" button. To cancel and close the view, click on the back icon in the menu or the "cancel" button.</p>
 				</div>
 
 				<div id="help-fullview" class="help-page">
 					<h2>Detailed view</h2>
-					<p>Here are represented the detailed view of the vehicle, with all its attributs. The top part gives a brief description of the vehicle and the possibility to book it.</p>
-					<p>Specifications</p>
+					<p>In this view is displayed all the informations about a vehicle. The top part describes the vehicle and states its name.</p>
+					<h3>Specifications</h3>
 					<p>The bottom part gives all the technical specifications of the vehicle.</p>
-					<p>Universe</p>
+					<h3>Universe</h3>
 					<p>The right panel gives a brief description of the universe (fictionnal or not) where the vehicle belongs.</p>
+					<h3>Booking the vehicle</h3>
+					<p>To book the vehicle, press on the "book this vehicle" button. The price of the vehicle is displayed per day.</p>
 				</div>
 
 				<div id="help-booking-list" class="help-page">
 					<h2>Booking list</h2>
-					<p>wiiiiiiiiiiiiiiiii iwiiiiiiiiiiiiiiiiiiii wi iw wiiiiiiiiii wi iwwwwwwwwww wiiiiiiiiiiwi           w iiiiiiiiiiii wi         wiwwwwwwwwww</p>
+					<p>This view allow you to manage your bookings. It lists all your current booked vehicles. You can cancel a booking simply by pressing on the "delete this booking" button. If you want to know more about the vehicle that you booked, press in the "See more" button.</p>
 				</div>
 			</div>
 		</div>
@@ -216,7 +227,7 @@
 				</div>
 				
 				<div id="settings-password" class="option">
-					<div class="title">Change your password</div>
+					<div class="title">Change my password</div>
 					<div class="container">
 						<label>Current password :</label>
 						<input id="settings-pass-old" type="password" name="">
@@ -228,7 +239,7 @@
 					</div>
 				</div>
 				<div id="settings-delete" class="option">
-					<div class="title">Delete your account</div>
+					<div class="title">Delete my account</div>
 				</div>
 			</div>
 
