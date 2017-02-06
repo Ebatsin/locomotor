@@ -1299,8 +1299,15 @@ public class DBH {
 			long endDate = booking.getLong("endDate");
 
 			bookingsFinal.add(new Booking(
-				id, itemID, itemInfo.get("itemName").toString(), 
-				itemInfo.get("itemImageURL").toString(), qt, startDate, endDate)
+				id,
+				itemID,
+				itemInfo.get("itemName").toString(), 
+				itemInfo.get("itemImageURL").toString(),
+				itemInfo.get("universeName").toString(),
+				qt,
+				startDate,
+				endDate
+				)
 			);
 		}
 
