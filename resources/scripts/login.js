@@ -114,8 +114,11 @@
 			});
 
 			modules.menu.bind('settings', function() {
-				console.log('clicked');
 				loadView('settings');
+			});
+
+			modules.menu.bind('booking', function() {
+				loadView('booking-list');
 			});
 
 		},

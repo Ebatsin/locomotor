@@ -12,17 +12,26 @@
 	var universeName = universe.querySelector('h2');
 	var universeDescription = universe.querySelector('p');
 
+	var book = view.querySelector('#fullview-name-container button');
+
 	window.registerView('fullview');
 
 	if(!window.modules) {
 		window.modules = {};
 	}
 
-	var rawList;
+	var id, name;
 
 	window.modules['fullview'] = {
 		init: function() {
 			console.log('initialisation du module fullview');
+
+			book.addEventListener('click', function() {
+				loadView('booking', {
+					id: id,
+					name: name
+				});
+			});
 		},
 		/**
 		* Load the login view.
@@ -33,6 +42,8 @@
 			view.classList.remove('hide');
 			view.style['z-index'] = getNextZIndex();
 			modules.help.pushContext('fullview');
+
+			id = params;
 
 			modules.menu.pushBackArrow(function() {
 				modules.fullview.unload();
@@ -61,6 +72,8 @@
 					universeImage.src = data.replace('resources/', '');
 				});
 			});
+
+			name = data.name;
 
 			itemName.innerHTML = data.name;
 			itemDescription.innerHTML = data.description;

@@ -1186,3 +1186,110 @@ html, body {
 #booking-options button:hover {
 	background-color: hsl(180, 60%, 40%);
 }
+
+/* ------------------------------------------ BOOKING LIST ---------------------------------------*/
+
+#booking-list-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	z-index: 1500;
+	top: 0;
+}
+
+#booking-list-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#booking-list-page ul {	
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	height: calc(100% - 4.5em);
+	list-style-type: none;
+}
+
+#booking-list-page li {
+	height: 11em;
+	border-bottom: solid 1px hsl(0, 0%, 80%);
+}
+
+#booking-list-page li img {
+	width: 10em;
+	display: inline-block;
+	margin: 0.5em;
+	float: left;
+}
+
+#booking-list-page .booking-list-name-container {
+	display: inline-block;
+	margin-left: 1em;
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+#booking-list-page .booking-list-name {
+	font-size: 1.4em;
+	margin-top: 1em;
+	letter-spacing: 1px;
+}
+
+#booking-list-page .booking-list-universe {
+	margin-top: 0.5em;
+	font-style: italic;
+}
+
+#booking-list-page .booking-list-quantity {
+	margin-top: 4em;
+}
+
+#booking-list-page .booking-list-date-container {
+	display: inline-block;
+	margin-left: 1em;
+	width: 20%;
+	height: 100%;
+	float: right;
+}
+
+#booking-list-page .booking-list-from {
+	margin-left: 0.5em;
+	margin-top: 3em;
+}
+
+#booking-list-page .booking-list-to {
+	margin-left: 0.5em;
+	margin-top: 3em;
+}
+
+#booking-list-page .booking-list-button-container {
+	float: right;
+	text-align: center;
+}
+
+#booking-list-page .booking-list-button-container button {
+	display: block;
+	width: 12rem;
+	height: 2rem;
+	margin-right: 2rem;
+	padding: 0.3rem 0;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	margin-top: 3em;
+}
+
+#booking-list-page .booking-list-button-container button:hover {
+	background-color: hsl(180, 60%, 40%);
+}

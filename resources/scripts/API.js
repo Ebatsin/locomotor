@@ -158,5 +158,19 @@ window.API = {
 		app.book(app.getShortToken(), id, startDate, endDate, quantity, prom.getId());
 
 		return prom;
+	},
+	getAllBooking: function() {
+		var prom = new JPromises();
+
+		app.getAllBooking(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	removeBooking: function(id) {
+		var prom = new JPromises();
+
+		app.removeBooking(app.getShortToken(), id, prom.getId());
+
+		return prom;
 	}
 };
