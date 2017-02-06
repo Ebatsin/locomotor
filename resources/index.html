@@ -5,6 +5,7 @@
 		<title>Locomotor</title>
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/pikaday.css">
 	</head>
 	<body>
 		<div id="menu-only-help"><img src="icons/help-black.svg"></div>
@@ -224,11 +225,27 @@
 					<div class="title">Delete your account</div>
 				</div>
 			</div>
+
+			<div id="booking-page" class="page">
+				<div id="booking-side">
+					<h2>Booking</h2>
+					<div id="booking-item-name"></div>
+					<label><span>Quantity : </span><input id="booking-quantity" type="number" name=""></label>
+					<label><span>From : </span><input id="booking-from" type="text" name=""></label>
+					<label><span>To : </span><input id="booking-to" type="text" name=""></label>
+
+					<div id="booking-options">
+						<button id="booking-cancel">Cancel</button>
+						<button id="booking-book">Book</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="splashscreen"></div>
 
 		<script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="scripts/pikaday.js"></script>
 		<script type="text/javascript" src="scripts/types/range.js"></script>
 		<script type="text/javascript" src="scripts/types/boolean.js"></script>
 		<script type="text/javascript" src="scripts/types/stringList.js"></script>
@@ -243,6 +260,7 @@
 		<script type="text/javascript" src="scripts/results.js"></script>
 		<script type="text/javascript" src="scripts/fullview.js"></script>
 		<script type="text/javascript" src="scripts/settings.js"></script>
+		<script type="text/javascript" src="scripts/booking.js"></script>
 		<script type="text/javascript">
 			console.log("Client initialisé.");
 

@@ -151,5 +151,12 @@ window.API = {
 		app.changePassword(app.getShortToken(), oldPass, newPass, prom.getId());
 
 		return prom;
+	},
+	book: function(id, startDate, endDate, quantity) {
+		var prom = new JPromises();
+
+		app.book(app.getShortToken(), id, startDate, endDate, quantity, prom.getId());
+
+		return prom;
 	}
 };

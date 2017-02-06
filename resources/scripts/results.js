@@ -2,6 +2,7 @@
 	var view = document.querySelector('#results-page');
 	var listContainer = view.querySelector('#results-list ul');
 	var preview = document.querySelector('#results-preview');
+	var book = document.querySelector('#results-book');
 	var toFullview = document.querySelector('#results-fullview');
 
 	window.registerView('results');
@@ -19,6 +20,13 @@
 
 			toFullview.addEventListener('click', function() {
 				loadView('fullview', rawList[currentId]['_id']);
+			});
+
+			book.addEventListener('click', function() {
+				loadView('booking', {
+					id: rawList[currentId]['_id'],
+					name: rawList[currentId].name
+				});
 			});
 		},
 		/**
