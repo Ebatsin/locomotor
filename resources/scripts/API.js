@@ -172,5 +172,12 @@ window.API = {
 		app.removeBooking(app.getShortToken(), id, prom.getId());
 
 		return prom;
+	},
+	getUnits: function() {
+		var prom = new JPromises();
+
+		app.getUnits(app.getShortToken(), prom.getId());
+
+		return prom;
 	}
 };

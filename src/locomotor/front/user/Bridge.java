@@ -331,4 +331,19 @@ public class Bridge {
 			}
 		});
 	}
+
+	public void getUnits(String token, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.requestJson("api/unit/get-all").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
 }

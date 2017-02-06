@@ -48,6 +48,25 @@
 		return zindex;
 	}
 
+	window.formatUnit = function(value, unitID, fixed) {
+		for(var i = 0; i < window.units.length; ++i) {
+			if(units[i]['_id'] == unitID) {
+				// find the base unit
+				for(var j = 0; j < units[i].alt.length; ++j) {
+					if(units[i].alt[j].factor == 1) {
+						if(fixed !== undefined) {
+							return value.toFixed(fixed) + units[i].alt[j].shortName;
+						}
+						else {
+							return value + units[i].alt[j].shortName;
+						}						
+					}
+				}
+			}
+		}
+		return fixed !== undefined ? value.toFixed(fixed) : value;
+	};
+
 	function checkReady() {
 		console.log('vérification de la readyness');
 		if(window.initWhenReady) {

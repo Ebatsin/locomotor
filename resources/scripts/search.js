@@ -180,11 +180,12 @@
 								});
 
 								break;
-							case 'integer-interval': 
+							case 'integer-interval':
 								var range;
 								if(criteria[i].universe.max - criteria[i].universe.min > 1000) {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.0001, 0);
 									range.init(true);
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -194,6 +195,7 @@
 								else {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max);								
 									range.init();
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -211,6 +213,7 @@
 								if(criteria[i].universe.max - criteria[i].universe.min > 1000) {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.0001, 2);
 									range.init(true);
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -220,6 +223,7 @@
 								else {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.01, 2);								
 									range.init();
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -343,7 +347,8 @@
 								id: model.model[i].criteria[j]['_id'],
 								question: model.model[i].criteria[j].question,
 								type: model.model[i].criteria[j].userType,
-								universe: model.model[i].criteria[j].universe
+								universe: model.model[i].criteria[j].universe,
+								unitID: model.model[i].criteria[j].unitID
 							}]
 						});
 					}
@@ -362,7 +367,8 @@
 							id: model.model[i].criteria[j]['_id'],
 							question: model.model[i].criteria[j].question,
 							type: model.model[i].criteria[j].userType,
-							universe: model.model[i].criteria[j].universe
+							universe: model.model[i].criteria[j].universe,
+								unitID: model.model[i].criteria[j].unitID
 						});
 					}
 

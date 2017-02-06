@@ -203,10 +203,16 @@
 
 			console.log('sending modelRequest');
 			API.getModel().then(function(data) {
-				window.model = data.data;
-				// load the search view
-				modules.help.popContext();
-				loadView('search');
+				API.getUnits().then(function(dataUnit) {
+					window.model = data.data;
+					window.units = dataUnit.data.units;
+					// load the search view
+					modules.help.popContext();
+					loadView('search');
+
+				}).catch(function(data) {
+					console.log('Javascript : error while loading the units ' + data.message);
+				});
 			}).catch(function(data) {
 				// @TODO handle this case ? oO
 				console.log("Javascript : error while loading the model : " + data.message);
