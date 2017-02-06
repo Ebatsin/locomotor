@@ -233,4 +233,52 @@ public class Bridge {
 			}
 		});
 	}
+
+	public void getUserInfo(String token, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.requestJson("api/user/info").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void changeUsername(String token, String newName, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.addParam("newUsername", newName);
+		c.requestJson("api/user/change/username").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void changePassword(String token, String oldPass, String newPass, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.addParam("oldPassword", oldPass);
+		c.addParam("newPassword", newPass);
+		c.requestJson("api/user/change/password").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
 }

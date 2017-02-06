@@ -113,6 +113,11 @@
 				loadView('login');
 			});
 
+			modules.menu.bind('settings', function() {
+				console.log('clicked');
+				loadView('settings');
+			});
+
 		},
 		/**
 		* Load the login view.

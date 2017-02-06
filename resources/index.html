@@ -148,6 +148,7 @@
 			</div>
 
 			<div id="results-page" class="page">
+				<h1>Search results</h1>
 				<div id="results-input"></div>
 				<div id="results-list">
 					<ul></ul>
@@ -198,6 +199,31 @@
 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				</div>
 			</div>
+
+			<div id="settings-page" class="page">
+				<h1>Account settings</h1>
+				<div id="settings-header">
+					<div><div id="settings-username"></div><input id="settings-username-input" class="hidden" type="text" name=""><img id="settings-change-username" src="icons/edit.svg">
+					<span id="settings-change-username-options" class="hidden"><img id="settings-username-cancel" src="icons/cancel.svg"><img id="settings-username-valid" src="icons/valid.svg"></span></div>
+					<p id="settings-name-error">The name you have chosen is already in use</p>
+				</div>
+				
+				<div id="settings-password" class="option">
+					<div class="title">Change your password</div>
+					<div class="container">
+						<label>Current password :</label>
+						<input id="settings-pass-old" type="password" name="">
+						<label>New password :</label>
+						<input id="settings-pass-new" type="password" name="">
+						<label>Verify new password :</label>
+						<input id="settings-pass-verif" type="password" name="">
+						<span id="settings-change-password-options"><img id="settings-password-cancel" src="icons/cancel.svg"><img id="settings-password-valid" src="icons/valid.svg"></span>
+					</div>
+				</div>
+				<div id="settings-delete" class="option">
+					<div class="title">Delete your account</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="splashscreen"></div>
@@ -216,6 +242,7 @@
 		<script type="text/javascript" src="scripts/search.js"></script>
 		<script type="text/javascript" src="scripts/results.js"></script>
 		<script type="text/javascript" src="scripts/fullview.js"></script>
+		<script type="text/javascript" src="scripts/settings.js"></script>
 		<script type="text/javascript">
 			console.log("Client initialisé.");
 

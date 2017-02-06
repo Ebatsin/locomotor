@@ -130,5 +130,26 @@ window.API = {
 		app.getUniverse(app.getShortToken(), id, prom.getId());
 
 		return prom;
+	},
+	getUserInfo: function() {
+		var prom = new JPromises();
+
+		app.getUserInfo(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	changeUsername: function(newName) {
+		var prom = new JPromises();
+
+		app.changeUsername(app.getShortToken(), newName, prom.getId());
+
+		return prom;
+	},
+	changePassword: function(oldPass, newPass) {
+		var prom = new JPromises();
+
+		app.changePassword(app.getShortToken(), oldPass, newPass, prom.getId());
+
+		return prom;
 	}
 };
