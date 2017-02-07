@@ -307,6 +307,11 @@ body {
   display: inline-block;
 }
 
+.reveal *.side-by-side-by-side {
+  width: 32%;
+  display: inline-block;
+}
+
 .reveal *.sbs-title {
   font-size: 0.7em;
 }
@@ -322,4 +327,8 @@ body {
 .reveal .table,
 .reveal .ae-example {
   font-family: "LatoWeb";
+}
+
+.reveal *.line {
+  display: inline-block;
 }
