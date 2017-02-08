@@ -332,3 +332,8 @@ body {
 .reveal *.line {
   display: inline-block;
 }
+
+.reveal .demo {
+  color: black;
+  margin-bottom: 70%;
+}
