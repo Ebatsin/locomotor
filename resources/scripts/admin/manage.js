@@ -4,6 +4,7 @@
 	var preview = document.querySelector('#manage-preview');
 	var toFullview = document.querySelector('#manage-fullview');
 	var edit = view.querySelector('#manage-edit');
+	var remove = view.querySelector('#manage-delete');
 
 	window.registerView('manage');
 
@@ -28,6 +29,19 @@
 				}
 				API.getItem(rawList[currentId]['_id']).then(function(data) {
 					loadView('add', data.data.item);
+				});
+			});
+
+			remove.addEventListener('click', function() {
+				if(rawList.length == 0)  {
+					return;
+				}
+				(new Popin()).open("Delete the vehicle", "Are you sure that you want to delete this vehicle ?", function() {
+					API.removeItem(rawList[currentId]['_id']).then(function(data) {
+						rawList[currentId].remove();
+					}).catch(function(data) {
+						console.log(data.message);
+					});
 				});
 			});
 		},
@@ -97,6 +111,10 @@
 					item.addEventListener('click', function() {
 						modules.manage.showPreview(i);
 					});
+
+					rawList[i].remove = function() {
+						item.parentNode.removeChild(item);
+					};
 				})(i);
 			}
 

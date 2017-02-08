@@ -223,4 +223,11 @@ window.API = {
 
 		return prom;
 	},
+	removeItem:function(item) {
+		var prom = new JPromises();
+
+		app.removeItem(app.getShortToken(), item, prom.getId());
+
+		return prom;
+	},
 };

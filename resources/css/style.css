@@ -1464,6 +1464,11 @@ html, body {
 	float: right;
 }
 
+#manage-delete {
+	margin-top: 1em;
+	width: 20em !important;
+}
+
 /* ------------------------------------------ ADD ---------------------------------------*/
 
 #add-page {
@@ -1712,4 +1717,60 @@ html, body {
 	font-size: 2em;
 	color: hsl(180, 60%, 40%);
 	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+/* ------------------------------------------ USERS ---------------------------------------*/
+
+#mary-overlay {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: black;
+	opacity: 0.3;
+	z-index: 9998;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#mary {
+	position: fixed;
+	z-index: 9999;
+	width: 30em;
+	left: calc(50% - 19em);
+	top: 15em;
+	background-color: hsl(207, 12%, 95%);
+	padding: 2em;
+	border: solid 1px hsl(0, 0%, 80%);
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
+	opacity: 0;
+	pointer-events: none;
+}
+
+#mary h1 {
+	margin: 0;
+}
+
+#mary p {
+	margin: 2em 0;
+}
+
+#mary button {
+	float: right;
+	width: 9.5em;
+	display: inline-block;
+	padding: 0.3em 0;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+#mary button:hover {	
+	background-color: hsl(180, 60%, 40%);
 }
