@@ -540,10 +540,10 @@
 							return;
 						}
 
-						if(['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1) {
+						if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1) {
 							categories[i].criteria[j].userValue = categories[i].criteria[j].userValue[0];
 						}
-						else if(types[categories[i].criteria[j].type] == 'integer-list') {
+						else if(modification && types[categories[i].criteria[j].type] == 'integer-list') {
 							if(categories[i].criteria[j].userValue.length > 0 && categories[i].criteria[j].userValue[0].value) {
 								// oncverting to the right format
 								var tmp = [];
@@ -578,10 +578,10 @@
 						return; 
 					}
 
-					if(['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1) {
+					if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1) {
 						categories[i].criteria[0].userValue = categories[i].criteria[0].userValue[0];
 					}
-					else if(types[categories[i].criteria[0].type] == 'integer-list') {
+					else if(modification && types[categories[i].criteria[0].type] == 'integer-list') {
 						if(categories[i].criteria[0].userValue.length > 0 && categories[i].criteria[0].userValue[0].value) {
 							// oncverting to the right format
 							var tmp = [];
