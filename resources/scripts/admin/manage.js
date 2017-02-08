@@ -3,6 +3,7 @@
 	var listContainer = view.querySelector('#manage-list ul');
 	var preview = document.querySelector('#manage-preview');
 	var toFullview = document.querySelector('#manage-fullview');
+	var edit = view.querySelector('#manage-edit');
 
 	window.registerView('manage');
 
@@ -20,6 +21,15 @@
 			toFullview.addEventListener('click', function() {
 				loadView('fullview', rawList[currentId]['_id']);
 			});
+
+			edit.addEventListener('click', function() {
+				if(rawList.length == 0) {
+					return;
+				}
+				API.getItem(rawList[currentId]['_id']).then(function(data) {
+					loadView('add', data.data.item);
+				});
+			});
 		},
 		/**
 		* Load the login view.
@@ -32,6 +42,7 @@
 				hideAllViews();
 				modules.menu.show();
 				modules.menu.showBackArrow(false);
+				modules.menu.clearBackArrow();
 				modules.help.pushContext('manage');
 				view.classList.remove('hide');
 				app.setTitle('Administration - Manage the vehicles');

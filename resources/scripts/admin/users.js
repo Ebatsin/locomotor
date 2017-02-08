@@ -17,6 +17,7 @@
 				hideAllViews();
 				modules.menu.show();
 				modules.menu.showBackArrow(false);
+				modules.menu.clearBackArrow();
 				modules.help.pushContext('users');
 				view.classList.remove('hide');
 				app.setTitle('Administration - Manage users');

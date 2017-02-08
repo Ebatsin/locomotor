@@ -220,10 +220,10 @@
 			}
 		},
 		pushBackArrow: function(callback) { // add a callback on the top of the stack
-			if(backArrowStack.length < 2) {
+			backArrowStack.push(callback);
+			if(backArrowStack.length >= 2) {
 				modules.menu.showBackArrow(true);
 			}
-			backArrowStack.push(callback);
 		},
 		clearBackArrow: function() {
 			backArrowStack = [function() {console.log('back arrow pressed');}];

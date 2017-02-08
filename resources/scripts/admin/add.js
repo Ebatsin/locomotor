@@ -35,6 +35,7 @@
 	var validCallback = function(){return true;};
 
 	var modification = false;
+	var data;
 
 	window.registerView('add');
 
@@ -59,6 +60,7 @@
 			if(params) {
 				title.innerHTML = 'Modify a vehicle';
 				modification = true;
+				data = params;
 			}
 			else {
 				title.innerHTML = 'Create a vehicle';
@@ -85,6 +87,40 @@
 			}
 			strli = new StringList(document.querySelector('#add-vehicle-universe'), uni);
 			strli.init();
+
+			var strSelect;
+
+			if(modification) {
+				for(var i = 0; i < universes.length; ++i) {
+					if(universes[i]['_id'] == data.universeID) {
+						strli.setSelected([i]);
+						strSelect = i;
+						break;
+					}
+				}
+			}
+
+			strli.onChange(function() {
+				console.log('before : selected : ' + strli.getIDs() + ', ' + strSelect + ' : ' + strli.getIDs().length);
+				if(strSelect) {
+					if(strli.getIDs()[0] === strSelect && strli.getIDs().length > 1) {
+						console.log('selecting ' + strli.getIDs()[1]);
+						strli.setSelected([strli.getIDs()[1]]);
+					}
+					else {
+						strli.setSelected([strli.getIDs()[0]]);
+					}
+					strSelect = strli.getIDs()[0];
+				}
+				else {
+					strSelect = strli.getIDs()[0];
+				}
+				console.log('after : selected : ' + strli.getIDs() + ', ' + strSelect);
+			});
+
+			itemName.value = modification ? data.name : '';
+			itemDesc.value = modification ? data.description : '';
+			itemUrl.value = modification ? data.image : '';
 
 			modules.add.initBreadcrumb();
 		},
@@ -334,8 +370,6 @@
 			next.parentNode.replaceChild(clone, next);
 			next = clone;
 
-			console.log('cloned');
-
 			for(var i = 0; i < model.model.length; ++i) {
 				if(model.model[i].name === '_self_') {
 					for(var j = 0; j < model.model[i].criteria.length; ++j) {
@@ -359,9 +393,6 @@
 				else {
 					var criteria = [];
 					for(var j = 0; j < model.model[i].criteria.length; ++j) {
-						if(!model.model[i].criteria[j].isComparable) {
-							continue;
-						}
 						criteria.push({
 							filled: modification,
 							name: model.model[i].criteria[j].name,
@@ -477,7 +508,7 @@
 				if(categories[i].oldName !== '_self_') {
 					if(tmpSelf.length !== 0) {
 						obj.push({
-							categoryModel: tmpId,
+							categoryId: tmpId,
 							criteria: tmpSelf
 						});
 						tmpSelf = [];
@@ -494,7 +525,7 @@
 						}
 
 						crits.push({
-							criterionModel: categories[i].criteria[j].id,
+							criterionId: categories[i].criteria[j].id,
 							value: categories[i].criteria[j].userValue
 						});
 					}
@@ -519,7 +550,7 @@
 					// each criteria of this category is on the _self_ category
 					// we know there is only one criterion in this category
 					tmpSelf.push({
-						criterionModel: categories[i].criteria[0].id,
+						criterionId: categories[i].criteria[0].id,
 						value: categories[i].criteria[0].userValue
 					});
 				}
@@ -560,17 +591,20 @@
 			var out = {
 				name: itemName.value.trim(),
 				image: itemUrl.value.trim(),
-				universeID: universes[strli.getIDs()[0]]['_id'],
+				universe: universes[strli.getIDs()[0]]['_id'],
 				description: itemDesc.value.replace(/\n/g, '<br>').trim(),
 				categories: obj
 			};
 
 			console.log(JSON.stringify(out));
 
-			API.addItem(out).then(function(data) {
-				console.log('fuckin hell, it worked');
+			API.addItem(out).then(function() {
+				modules.menu.popBackArrow();
+				API.getAllItems().then(function(data) {
+					loadView('manage', data);
+				});
 			}).catch(function(data) {
-				console.log('Javascript : error while starting the search : ' + data.message);
+				console.log('Javascript : error while adding the item : ' + data.message);
 			});
 		}
 	};
