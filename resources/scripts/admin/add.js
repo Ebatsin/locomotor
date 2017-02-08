@@ -477,7 +477,7 @@
 				if(categories[i].oldName !== '_self_') {
 					if(tmpSelf.length !== 0) {
 						obj.push({
-							categoryId: tmpId,
+							categoryModel: tmpId,
 							criteria: tmpSelf
 						});
 						tmpSelf = [];
@@ -494,7 +494,7 @@
 						}
 
 						crits.push({
-							criterionId: categories[i].criteria[j].id,
+							criterionModel: categories[i].criteria[j].id,
 							value: categories[i].criteria[j].userValue
 						});
 					}
@@ -519,7 +519,7 @@
 					// each criteria of this category is on the _self_ category
 					// we know there is only one criterion in this category
 					tmpSelf.push({
-						criterionId: categories[i].criteria[0].id,
+						criterionModel: categories[i].criteria[0].id,
 						value: categories[i].criteria[0].userValue
 					});
 				}
