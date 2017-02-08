@@ -1,25 +1,231 @@
-<!doctype html>
-    <html lang="en">
-      <head>
-        <meta charset="utf-8">
-          <title>Locomotor</title>
-          
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="css/bulma.css">      
-      
-        </head>
-      
-        <body>
-          <section class="hero is-fullheight is-light">
-            <div class="hero-body">
-            <div class="container has-text-centered">
-              <h1 class="title">
-                ADMIIIIIIIIIN
-              </h1>
-              
-             
-            </div>
-          </div>
-          </section>
-      </body>
-  </html>
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>Locomotor - Administration</title>
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/pikaday.css">
+	</head>
+	<body>
+	<div id="menu-only-help"><img src="icons/help-black.svg"></div>
+	<div id="menu" class="open">
+		<ul id="menu-top">
+		<li id="menu-toggle"><span class="menu-icon"><img src="icons/sandwich.svg"/></span><span class="menu-text">MENU</span></li>
+		<li id="menu-back"><span class="menu-icon"><img src="icons/back.svg"/></span><span class="menu-text">Go to the last page</span></li>
+		</ul>
+
+		<ul id="menu-bottom">
+		<li id="menu-settings"><span class="menu-icon"><img src="icons/settings.svg"/></span><span class="menu-text">Settings</span></li>
+		<li id="menu-users"><span class="menu-icon"><img src="icons/admin/users.svg"/></span><span class="menu-text">Manage users</span></li>
+		<li id="menu-add"><span class="menu-icon"><img src="icons/admin/add.svg"/></span><span class="menu-text">Add a vehicle</span></li>
+		<li id="menu-edit"><span class="menu-icon"><img src="icons/admin/edit.svg"/></span><span class="menu-text">Manage vehicles</span></li>
+		<li id="menu-help"><span class="menu-icon"><img src="icons/help.svg"/></span><span class="menu-text">Help</span></li>
+		<li id="menu-disconnect"><span class="menu-icon"><img src="icons/disconnect.svg"/></span><span class="menu-text">Logout</span></li>
+		
+		</ul>
+	</div>
+
+	<div id="help">
+		<span id="help-close"><img src="icons/close.svg"/></span>
+		<h1>HELP</h1>
+		<div id="help-pages">
+		<div id="help-admin-login" class="help-page current">
+			<h2>Authentification</h2>
+			<h3>How do I log in ?</h3>
+			<p>To log in, you need to type in your name and your password in the adjacent fields and then, press the green button reading "Log in".</p>
+			<h3>I lost my password</h3>
+			<p>You are an admin... Take your responsabilities dude...</p>
+		</div>
+
+		<div id="help-manage" class="help-page">
+			<h2>Managing the vehicles</h2>
+			<h3>How do I log in ?</h3>
+			<p>To log in, you need to type in your name and your password in the adjacent fields and then, press the green button reading "Log in".</p>
+			<h3>I lost my password</h3>
+			<p>You are an admin... Take your responsabilities dude...</p>
+		</div>
+
+		<div id="help-add" class="help-page">
+			<h2>Create a vehicle</h2>
+			<h3>How do I log in ?</h3>
+			<p>To log in, you need to type in your name and your password in the adjacent fields and then, press the green button reading "Log in".</p>
+			<h3>I lost my password</h3>
+			<p>You are an admin... Take your responsabilities dude...</p>
+		</div>
+
+		<div id="help-users" class="help-page">
+			<h2>User management</h2>
+			<h3>How do I log in ?</h3>
+			<p>To log in, you need to type in your name and your password in the adjacent fields and then, press the green button reading "Log in".</p>
+			<h3>I lost my password</h3>
+			<p>You are an admin... Take your responsabilities dude...</p>
+		</div>
+
+		<div id="help-settings" class="help-page">
+			<h2>Settings</h2>
+			<p>The settings view allow you to control your informations. You can change your name, your password or delete your account. To go back to the previews view, click on the back icon in the menu.</p>
+			<h3>How do I change my name ?</h3>
+			<p>To change your name, press on the edit icon on the right of your current name. You will then be prompted to type in a new name. Press on the tick icon to validate the change. Press on the cross icon to cancel the change.</p>
+			<h3>How do I change my password ?</h3>
+			<p>To change your password, press on the big green button that reads "Change my password". You will then be prompted to type in your current password for security reasons and your new password two times to prevent typing errors. Press on the tick icon to validate the change or on the cross icon to cancel it.<br>Do not lose the new password, you will need it to connect to the application !</p>
+			<h3>How do I delete my account ?</h3>
+			<p>To delete your account, press on the big green button that reads "delete my account". You will be asked to type in your password and confirm your choice. Be aware that this action is irreversible. All your booking will be lost.</p>
+		</div>
+		</div>
+	</div>
+
+	<div id="main-page">
+		<div id="login-page" class="page">
+		<h1>Locomotor</h1>
+		<form id="login-form">
+			<h2>LOG IN</h2>
+			<p></p>
+			<input id="login-form-name" type="text" name="" placeholder="Name">
+			<input id="login-form-password" type="password" name="" placeholder="password">
+			<button>Log in</button>
+		</form>
+		</div>
+
+		<div id="manage-page" class="page">
+		<h1>Manage the vehicles</h1>
+		<div id="manage-input"></div>
+		<div id="manage-list">
+			<ul></ul>
+		</div>
+		<div id="manage-preview">
+			<img src="">
+			<h2></h2>
+			<div class="universe"></div>
+			</ul>
+			<div class="buttons">
+			<div id="manage-edit">Edit</div>
+			<div id="manage-fullview">See more</div>
+			</div>
+		</div>
+		</div>
+
+		<div id="add-page" class="page">
+				<div id="add-container">
+					<h1>Create a vehicle</h1>
+					<div id="add-infos">
+						<label>Vehicle's name : <input id="add-vehicle-name" type="" name=""></label><br>
+						<label>Vehicle's image url : <input id="add-vehicle-url" type="" name=""></label><br>
+						<label>Vehicle's universe :</label>
+						<div id="add-vehicle-universe"></div>
+						<label>Vehicle's description :</label><br>
+						<textarea id="add-vehicle-desc"></textarea><br>
+					</div>
+					<div id="add-breadcrumb">
+						<div id="add-breadcrumb-arrow"></div>
+						<ul id="add-breadcrumb-cat"></ul>
+						<ul id="add-breadcrumb-crit"></ul>
+					</div>
+					<div id="add-universe"></div>
+					<div id="add-input"></div>
+				</div>
+				<div id="add-buttons">
+					<div id="add-back"><img src="icons/back-black.svg"></div>
+					<div id="add-start">Validate</div>
+					<div id="add-next"><img src="icons/next-black.svg"></div>
+				</div>
+		</div>
+
+		<div id="users-page" class="page">
+		<h1>Users management</h1>
+		</div>
+
+		<div id="settings-page" class="page">
+		<h1>Account settings</h1>
+		<div id="settings-header">
+			<div><div id="settings-username"></div><input id="settings-username-input" class="hidden" type="text" name=""><img id="settings-change-username" src="icons/edit.svg">
+			<span id="settings-change-username-options" class="hidden"><img id="settings-username-cancel" src="icons/cancel.svg"><img id="settings-username-valid" src="icons/valid.svg"></span></div>
+			<p id="settings-name-error">The name you have chosen is already in use</p>
+		</div>
+		
+		<div id="settings-password" class="option">
+			<div class="title">Change my password</div>
+			<div class="container">
+			<label>Current password :</label>
+			<input id="settings-pass-old" type="password" name="">
+			<label>New password :</label>
+			<input id="settings-pass-new" type="password" name="">
+			<label>Verify new password :</label>
+			<input id="settings-pass-verif" type="password" name="">
+			<span id="settings-change-password-options"><img id="settings-password-cancel" src="icons/cancel.svg"><img id="settings-password-valid" src="icons/valid.svg"></span>
+			</div>
+		</div>
+		<div id="settings-delete" class="option">
+			<div class="title">Delete my account</div>
+		</div>
+		</div>      
+
+		<div id="fullview-page" class="page">
+		<div id="fullview-left">
+			<div id="fullview-header">
+			<img src="">
+			<div id="fullview-name-container">
+				<h1>Item name</h1>
+				<div id="fullview-price">Price : $525/day</div>
+			</div>
+			</div>
+			<div id="fullview-description">
+			Description du véhicule : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+			<h2>Technical Specifications</h2>
+			<ul id="fullview-specs"></ul>
+		</div>
+		<div id="fullview-universe">
+			<img src="">
+			<h2>Nom de l'univers</h2>
+			<p>Description de l'univers : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		</div>
+	</div>
+
+	<div id="splashscreen"></div>
+
+	<script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="scripts/pikaday.js"></script>
+	<script type="text/javascript" src="scripts/types/integer.js"></script>
+	<script type="text/javascript" src="scripts/types/float.js"></script>
+	<script type="text/javascript" src="scripts/types/poorIntegerRange.js"></script>
+	<script type="text/javascript" src="scripts/types/range.js"></script>
+	<script type="text/javascript" src="scripts/types/boolean.js"></script>
+	<script type="text/javascript" src="scripts/types/stringList.js"></script>
+	<script type="text/javascript" src="scripts/types/tree.js"></script>
+	<script type="text/javascript" src="scripts/API.js"></script>
+	<script type="text/javascript" src="scripts/main.js"></script>
+	<script type="text/javascript" src="scripts/splashscreen.js"></script>
+	<script type="text/javascript" src="scripts/help.js"></script>
+	<script type="text/javascript" src="scripts/admin/menu.js"></script>
+	<script type="text/javascript" src="scripts/admin/login.js"></script>
+	<script type="text/javascript" src="scripts/admin/manage.js"></script>
+	<script type="text/javascript" src="scripts/admin/add.js"></script>
+	<script type="text/javascript" src="scripts/admin/users.js"></script>
+	<script type="text/javascript" src="scripts/settings.js"></script>
+	<script type="text/javascript" src="scripts/admin/fullview.js"></script>
+	<!--<script type="text/javascript" src="scripts/search.js"></script>
+	<script type="text/javascript" src="scripts/results.js"></script>
+	<script type="text/javascript" src="scripts/booking.js"></script>
+	<script type="text/javascript" src="scripts/booking-list.js"></script>-->
+	<script type="text/javascript">
+		console.log("Client initialisé.");
+
+		// prevent selection
+		document.addEventListener("selectstart", function(e) {
+		e.preventDefault();
+		});
+	</script>
+	</body>
+</html>

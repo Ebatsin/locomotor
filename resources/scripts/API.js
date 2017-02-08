@@ -179,5 +179,41 @@ window.API = {
 		app.getUnits(app.getShortToken(), prom.getId());
 
 		return prom;
+	},
+
+	/* ----------------------------------- ADMIN ------------------------------- */
+
+	adminAuth: function(name, password) {
+		var prom = new JPromises();
+
+		if(password) {
+			app.adminAuth(name.trim().toLowerCase(), password, prom.getId());
+		}
+		else {
+			app.adminTokenAuth(name.trim(), prom.getId());
+		}
+
+		return prom;
+	},
+	getAllItems: function() {
+		var prom = new JPromises();
+
+		app.getAllItems(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	getAllUniverses: function() {
+		var prom = new JPromises();
+
+		app.getAllUniverses(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	addItem: function(item) {
+		var prom = new JPromises();
+
+		app.addItem(app.getShortToken(), JSON.stringify(item), prom.getId());
+
+		return prom;
 	}
 };

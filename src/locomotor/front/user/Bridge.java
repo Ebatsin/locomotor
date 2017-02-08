@@ -107,6 +107,7 @@ public class Bridge {
 	// API
 
 	public void auth(String name, String password, int promiseID) {
+		System.out.println("bormal fucking auth");
 		ClientRequest c = new ClientRequest();
 		c.addParam("username", name);
 		c.addParam("password", password);
@@ -336,6 +337,85 @@ public class Bridge {
 		ClientRequest c = new ClientRequest();
 		c.addParam("token", token);
 		c.requestJson("api/unit/get-all").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	/* -------------------------------------- ADMIN ------------------------------- */
+
+	public void adminAuth(String login, String password, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("username", login);
+		c.addParam("password", password);
+		c.requestJson("api/admin/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void adminTokenAuth(String token, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.requestJson("api/admin/auth").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void getAllItems(String token, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.requestJson("api/admin/item/get-all").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void getAllUniverses(String token, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.requestJson("api/admin/universe/get-all").thenAccept(new Consumer<JsonObject>() {
+			public void accept(JsonObject obj) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						_view.getEngine().executeScript("window.promises[" + promiseID + "].jsonResolve(" + obj + ");");
+					}
+				});
+			}
+		});
+	}
+
+	public void addItem(String token, String item, int promiseID) {
+		ClientRequest c = new ClientRequest();
+		c.addParam("token", token);
+		c.addParam("item", item);
+		c.requestJson("api/admin/item/add").thenAccept(new Consumer<JsonObject>() {
 			public void accept(JsonObject obj) {
 				Platform.runLater(new Runnable() {
 					@Override

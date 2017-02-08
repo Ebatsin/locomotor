@@ -16,3 +16,13 @@
 	"isAdmin": 0,
 	"notifications": []
 }
+{
+	"_id": {
+		"$oid": "589a2cb115dd9419e428b03c"
+	},
+	"username": "ebatsin",
+	"password": "sha1:64000:18:21X3qdYUHLNUBJP20e9yxbq+pv1xq9sx:1lZ9x5oglnX4greyeBCPhzWQ",
+	"isAdmin": 1,
+	"notifications": [],
+	"bookings": []
+}

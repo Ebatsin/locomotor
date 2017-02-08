@@ -17,9 +17,13 @@
 
 		document.body.style.fontFamily = 'Roboto';
 
+		console.log('everything went ok');
+
 		loadView('login', {
 			mode: 'login'
 		});
+
+		console.log('main > login loaded');
 	};
 
 	/**
@@ -31,7 +35,7 @@
 
 	window.loadView = function(view, params) {
 		if(window.views.indexOf(view) != -1) {
-			modules.help.close();
+			//modules.help.close();
 			window.modules[view].load(params);
 		}
 	};
