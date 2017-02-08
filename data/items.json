@@ -1482,3 +1482,537 @@
 		}
 	]
 }
+{
+	"_id": {
+		"$oid": "589b7a4822049c61e4c97665"
+	},
+	"name": "Chopper",
+	"universe": {
+		"$oid": "589510a5674f56a09af3db78"
+	},
+	"description": "The Brute Chopper is a heavily-armored, dual-wheeled assault vehicle, kept aloft by a gravity array under the seat at the rear and a massive double wheel in the front (which supports the vehicle's balance by its axis of gravity). The Chopper is best described as an \"anti-anything\" vehicle. Its powerful 35mm auto-cannons can take down most light ground vehicles with ease, and the large blades on the front can instantly destroy any light armored vehicle by ramming into it.",
+	"image": "chopper.jpg",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						10
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "10000"
+						},
+						"max": {
+							"$numberLong": "271000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 1.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 1000.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 6.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 2.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 2.0
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 90.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 300.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											},
+											{
+												"value": 14
+											}
+										]
+									},
+									{
+										"value": 19,
+										"children": [
+											{
+												"value": 16
+											},
+											{
+												"value": 17
+											},
+											{
+												"value": 18
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						1,
+						6
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "20"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				}
+			]
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "589b7c9f22049c61e4c97666"
+	},
+	"name": "Prowler convenant",
+	"universe": {
+		"$oid": "589510a5674f56a09af3db78"
+	},
+	"description": "The Brute Prowler is the designation of the Loyalist's replacement for the Spectre from Halo 2, but this time, driven only by the Jiralhanae . The Prowler seems to hover on a gravity-assisted \"sled,\" as the bottom incorporates a pair of metal runners with an anti-gravity projector running between them. A Plasma Turret is located at the front of the vehicle, the driver sits in the rear of the vehicle, and two passengers can make use of the jump seats on either side. It's aesthetically similar in its clear-cut, brutal nature to the Brute Chopper. The concept of its anti-gravitational propulsion is also similar to the Chopper's, but it differs by utilizing two dual engines rotating in opposite directions.",
+	"image": "prowler.png",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						10
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "3"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "10000"
+						},
+						"max": {
+							"$numberLong": "950000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 1.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 812.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 7.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 4.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 3.0
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 100.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 375.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "2"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 7,
+								"children": [
+									{
+										"value": 6
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											},
+											{
+												"value": 14
+											}
+										]
+									},
+									{
+										"value": 19,
+										"children": [
+											{
+												"value": 16
+											},
+											{
+												"value": 17
+											},
+											{
+												"value": 18
+											}
+										]
+									}
+								]
+							},
+							{
+								"value": 26,
+								"children": [
+									{
+										"value": 22
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						0,
+						1
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "61"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "6"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		}
+	]
+}
