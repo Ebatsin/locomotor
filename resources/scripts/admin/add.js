@@ -101,10 +101,8 @@
 			}
 
 			strli.onChange(function() {
-				console.log('before : selected : ' + strli.getIDs() + ', ' + strSelect + ' : ' + strli.getIDs().length);
-				if(strSelect) {
+				if(strSelect !== undefined) {
 					if(strli.getIDs()[0] === strSelect && strli.getIDs().length > 1) {
-						console.log('selecting ' + strli.getIDs()[1]);
 						strli.setSelected([strli.getIDs()[1]]);
 					}
 					else {
@@ -115,7 +113,6 @@
 				else {
 					strSelect = strli.getIDs()[0];
 				}
-				console.log('after : selected : ' + strli.getIDs() + ', ' + strSelect);
 			});
 
 			itemName.value = modification ? data.name : '';
@@ -305,7 +302,17 @@
 								strli.init();
 
 								if(criteria[i].userValue) {
-									strli.setSelected(criteria[i].userValue);
+									if(criteria[i].userValue.length > 0 && criteria[i].userValue[0].value) {
+										// formating it right
+										var arr = [];
+										for(var k = 0; k < criteria[i].userValue.length; ++k) {
+											arr.push(criteria[i].userValue[k].value);
+										}
+										strli.setSelected(arr);
+									}
+									else {
+										strli.setSelected(criteria[i].userValue);
+									}
 								}
 
 								strli.onChange(function(data) {
@@ -373,7 +380,7 @@
 			for(var i = 0; i < model.model.length; ++i) {
 				if(model.model[i].name === '_self_') {
 					for(var j = 0; j < model.model[i].criteria.length; ++j) {
-						categories.push({
+						var curitem = {
 							name: model.model[i].criteria[j].name,
 							oldName: model.model[i].name,
 							id: model.model[i].criteria[j]['_id'],
@@ -387,13 +394,19 @@
 								universe: model.model[i].criteria[j].universe,
 								unitID: model.model[i].criteria[j].unitID
 							}]
-						});
+						};
+
+						if(modification) {
+							curitem.criteria[0].userValue = findCriterion(model.model[i]['_id'], model.model[i].criteria[j]['_id']);
+						}
+
+						categories.push(curitem);
 					}
 				}
 				else {
 					var criteria = [];
 					for(var j = 0; j < model.model[i].criteria.length; ++j) {
-						criteria.push({
+						var curitem = {
 							filled: modification,
 							name: model.model[i].criteria[j].name,
 							id: model.model[i].criteria[j]['_id'],
@@ -401,7 +414,13 @@
 							universeType: model.model[i].criteria[j].universeType,
 							universe: model.model[i].criteria[j].universe,
 							unitID: model.model[i].criteria[j].unitID
-						});
+						};
+
+						if(modification) {
+							curitem.userValue = findCriterion(model.model[i]['_id'], model.model[i].criteria[j]['_id']);
+						}
+
+						criteria.push(curitem);
 					}
 
 					categories.push({
@@ -497,14 +516,12 @@
 			});
 		},
 		start: function() { // start a research
-			console.log('building the output');
 			validCallback();
 			var obj = [];
 			var tmpSelf = [];
 			var tmpId;
 
 			for(var i = 0; i < categories.length; ++i) {
-				console.log('hey. handling ' + categories[i].oldName);
 				if(categories[i].oldName !== '_self_') {
 					if(tmpSelf.length !== 0) {
 						obj.push({
@@ -517,11 +534,24 @@
 					// normal category
 					var crits = [];
 					for(var j = 0; j < categories[i].criteria.length; ++j) {
-						console.log('handling criterion ' + categories[i].criteria[j].name);
 						if(!categories[i].criteria[j].filled) {
-						console.log('one criterion not filled : ' + categories[i].criteria[j].name);
-						console.log('one criterion not filled : ' + categories[i].criteria[j].userValue);
+							console.log('one criterion not filled : ' + categories[i].criteria[j].name);
+							console.log('one criterion not filled : ' + categories[i].criteria[j].userValue);
 							return;
+						}
+
+						if(['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1) {
+							categories[i].criteria[j].userValue = categories[i].criteria[j].userValue[0];
+						}
+						else if(types[categories[i].criteria[j].type] == 'integer-list') {
+							if(categories[i].criteria[j].userValue.length > 0 && categories[i].criteria[j].userValue[0].value) {
+								// oncverting to the right format
+								var tmp = [];
+								for(var k = 0; k < categories[i].criteria[j].userValue.length; ++k) {
+									tmp.push(categories[i].criteria[j].userValue[k].value);
+								}
+								categories[i].criteria[j].userValue = tmp;
+							}
 						}
 
 						crits.push({
@@ -547,6 +577,21 @@
 						console.log('one criterion not filled : ' + categories[i].criteria[0].userValue);
 						return; 
 					}
+
+					if(['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1) {
+						categories[i].criteria[0].userValue = categories[i].criteria[0].userValue[0];
+					}
+					else if(types[categories[i].criteria[0].type] == 'integer-list') {
+						if(categories[i].criteria[0].userValue.length > 0 && categories[i].criteria[0].userValue[0].value) {
+							// oncverting to the right format
+							var tmp = [];
+							for(var k = 0; k < categories[i].criteria[0].userValue.length; ++k) {
+								tmp.push(categories[i].criteria[0].userValue[k].value);
+							}
+							categories[i].criteria[0].userValue = tmp;
+						}
+					}
+
 					// each criteria of this category is on the _self_ category
 					// we know there is only one criterion in this category
 					tmpSelf.push({
@@ -554,8 +599,6 @@
 						value: categories[i].criteria[0].userValue
 					});
 				}
-
-				console.log('done handling ' + categories[i].oldName);
 			}
 
 			if(tmpSelf.length !== 0) {
@@ -596,16 +639,41 @@
 				categories: obj
 			};
 
-			console.log(JSON.stringify(out));
-
-			API.addItem(out).then(function() {
-				modules.menu.popBackArrow();
-				API.getAllItems().then(function(data) {
-					loadView('manage', data);
+			if(modification) {
+				out.id = data.id;
+				API.updateItem(out).then(function() {
+					modules.menu.popBackArrow();
+					API.getAllItems().then(function(data) {
+						loadView('manage', data);
+					});
+				}).catch(function(data) {
+					console.log('Javascript : error while adding the item : ' + data.message);
 				});
-			}).catch(function(data) {
-				console.log('Javascript : error while adding the item : ' + data.message);
-			});
+			}
+			else {
+				API.addItem(out).then(function() {
+					modules.menu.popBackArrow();
+					API.getAllItems().then(function(data) {
+						loadView('manage', data);
+					});
+				}).catch(function(data) {
+					console.log('Javascript : error while adding the item : ' + data.message);
+				});
+			}
+
 		}
 	};
+
+	// returns item values
+	function findCriterion(catId, critId) {
+		for(var i = 0; i < data.categories.length; ++i) {
+			if(data.categories[i].categoryModel == catId) {
+				for(var j = 0; j < data.categories[i].criteria.length; ++j) {
+					if(data.categories[i].criteria[j].criterionModel == critId) {
+						return data.categories[i].criteria[j].value;
+					}
+				}
+			}
+		}
+	}
 })();

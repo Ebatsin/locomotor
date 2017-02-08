@@ -215,5 +215,12 @@ window.API = {
 		app.addItem(app.getShortToken(), JSON.stringify(item), prom.getId());
 
 		return prom;
-	}
+	},
+	updateItem:function(item) {
+		var prom = new JPromises();
+
+		app.updateItem(app.getShortToken(), JSON.stringify(item), prom.getId());
+
+		return prom;
+	},
 };
