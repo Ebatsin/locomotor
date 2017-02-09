@@ -40,6 +40,62 @@
 }
 {
 	"_id": {
+		"$oid": "589be0cd15dd94231734249c"
+	},
+	"name": "Real world",
+	"description": "The real world is the world you are in everyday.",
+	"image": "real.png"
+}
+{
+	"_id": {
+		"$oid": "589be15815dd94231734249d"
+	},
+	"name": "Back to the future",
+	"description": "On October 26, 1985, Marty meets his scientist friend, Dr. Emmett Brown, at a shopping mall parking lot. Doc unveils a time machine built from a modified DeLorean and powered by plutonium stolen from Libyan terrorists. Doc demonstrates the navigation system with the example date of November 5, 1955: the day he conceived the machine. A moment later, the Libyans arrive and shoot him, apparently killing him. Marty escapes in the DeLorean, but inadvertently activates the time machine, and arrives in 1955 without the required plutonium needed to return.",
+	"image": "back-to-the-future.png"
+}
+{
+	"_id": {
+		"$oid": "589be1db15dd94231734249e"
+	},
+	"name": "Eragon",
+	"description": "Alagaësia is a large continent and the setting of the Inheritance Cycle of books. It features a varied climate and terrain and is home to a wide number of races including Humans, Elves, Dwarves, Urgals, Werecats and Dragons. Several of the races inhabiting Alagaësia, including Humans, Elves, as well as Urgals, were not native to the land, having migrated to Alagaësia in centuries past. \u003cbr\u003eThe terrain of Alagaësia varies greatly. The north is mountainous but predominantly forested while the heart of Alagaësia is composed primarily of the vast Hadarac Desert. Southwestern Alagaësia is fairly flat, but the towering Beor Mountains dominate much of the southeast. The eastern portion of Alagaësia is flat, like a grassland. The map does not extend all of the way to the eastern coast. If it did, Paolini has stated that the east-west distance depicted by the map would be slightly larger than the width of the continental United States.",
+	"image": "eragon.png"
+}
+{
+	"_id": {
+		"$oid": "589be31d15dd94231734249f"
+	},
+	"name": "My Little Pony",
+	"description": "Equestria is the main setting of the My Little Pony Friendship is Magic franchise. Equestria is inhabited by magical ponies and other talking creatures, such as griffons and dragons. Other animals and creatures also live in Equestria. Equestria is called a kingdom in the first episode of the show and in other media, though it does contain other \"kingdoms\" within it such as the Crystal Empire; the show and other media take place in many locations and their exact affiliation with Equestria is not explored. Equestria is co-ruled by Princess Celestia and Princess Luna, who reside in a palace in the city of Canterlot. The name \"Equestria\" is derived from the word \"equestrian\" (which means of or related to horseback riding), which stems from equus, the Latin word for \"horse.\"",
+	"image": "mlp.png"
+}
+{
+	"_id": {
+		"$oid": "589be4c915dd9423173424a0"
+	},
+	"name": "Battlestar Galactica",
+	"description": "All Battlestar Galactica productions share the premise that in a distant part of the universe, a human civilization has extended to a group of planets known as the Twelve Colonies, to which they have migrated from their ancestral homeworld of Kobol. The Twelve Colonies have been engaged in a lengthy war with a cybernetic race known as the Cylons, whose goal is the extermination of the human race. The Cylons offer peace to the humans, which proves to be a ruse. With the aid of a human named Baltar, the Cylons carry out a massive attack on the Twelve Colonies and on the Colonial Fleet of starships that protect them. These attacks devastate the Colonial Fleet, lay waste to the Colonies, and virtually destroy their populations. Scattered survivors flee into outer space aboard a ragtag array of available spaceships. Of the entire Colonial battle fleet, only the Battlestar Galactica, a gigantic battleship and spacecraft carrier, appears to have survived the Cylon attack. Under the leadership of Commander Adama, the Galactica and the pilots of \"Viper fighters\" lead a fugitive fleet of survivors in search of the fabled thirteenth colony known as Earth.",
+	"image": "battlestar.png"
+}
+{
+	"_id": {
+		"$oid": "589be58215dd9423173424a1"
+	},
+	"name": "Aladdin",
+	"description": "A peddler sets up shop in the fictional sultanate of Agrabah, offering to tell the audience about the story of an oil lamp in his possession. Jafar, the Grand Vizier of the Sultan, and his parrot Iago, seek the lamp hidden within the Cave of Wonders but is told that only a “diamond in the rough” may enter. Jafar identifies a street urchin named Aladdin as worthy. Aladdin and his pet monkey Abu cross paths with Princess Jasmine, who has run away from the palace, unwilling to be betrothed to yet another snobbish suitor. Aladdin and Jasmine become friends and fall in love, but Jafar has Aladdin apprehended, tricking Jasmine into thinking that he has been decapitated.",
+	"image": "aladdin.png"
+}
+{
+	"_id": {
+		"$oid": "589be5d715dd9423173424a2"
+	},
+	"name": "The Knights of Emeral",
+	"description": "Five hundred years ago, Enkidiev, a continent populated by humans, elves, and fairies, is being attacked by Amecareth, emperor of Irianeth and the insect empire. The threat of a new invasion looms over Enkidiev. The only hope for them to survive is to recreate the order of the Knights of Emerald by the King Emerald 1st. These magic warriors are to protect the continent until the prophesized Light holder can destroy the threat.",
+	"image": "knight-emerald.png"
+}
+{
+	"_id": {
 		"$oid": "589be40c22049c61e4c97669"
 	},
 	"name": "One Piece",
