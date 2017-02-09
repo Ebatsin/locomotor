@@ -1,9 +1,0 @@
-<map id="removeUniverse" name="removeUniverse">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="172,5,378,44"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="172,68,378,107"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0b2d292079fe232a4c3dae4636167641" title="getInstance" alt="" coords="483,132,574,157"/>
-<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1_d_b_h.html#a97b6d481686edd4c5a932108475e5e1c" title="deleteItemWith" alt="" coords="220,183,330,208"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="426,68,632,107"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2d5f1f766f5863a46ed29b7e56118364" title="DBH" alt="" coords="680,132,729,157"/>
-<area shape="rect" id="node8" href="$classlocomotor_1_1core_1_1_d_b_h.html#ae57fb51ee28914968135398ce849d8e1" title="deleteBookingWith" alt="" coords="462,183,595,208"/>
-</map>

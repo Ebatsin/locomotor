@@ -1,7 +1,0 @@
-<map id="computeGradeOfCriteria" name="computeGradeOfCriteria">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_criteria.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCriteria.getID" alt="" coords="224,5,430,44"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria.html#ad1dc198074d5d5e901d0e5159ded14fa" title="locomotor.components.models.\lItemCriteria.getValue" alt="" coords="224,68,430,107"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#ae439cd3f7be14d7e03f87a7ca9367d54" title="locomotor.components.models.\lUserCriteria.getValue" alt="" coords="224,131,430,169"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#a671adef5afc1b82389174abfaff3c892" title="locomotor.components.models.\lUserCriteria.getDisableFlexibility" alt="" coords="220,193,434,232"/>
-<area shape="rect" id="node6" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html#a1d9a08e9f962c76e6525f8da05ca7f21" title="locomotor.components.types.\lCComparable.compare" alt="" coords="230,256,424,295"/>
-</map>

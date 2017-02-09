@@ -1,9 +1,0 @@
-<map id="send" name="send">
-<area shape="rect" id="node2" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_client_request.html#a59600462d6c0408758265fc36016fb6b" title="locomotor.front.components.network.\lClientRequest.requestBinary" alt="" coords="104,51,344,89"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_client_request.html#af820b68be6077f053a589af5c865700c" title="locomotor.front.components.network.\lClientRequest.requestJson" alt="" coords="104,113,344,152"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1front_1_1components_1_1_front_resource_manager.html#aa21c4cd4a2808249949e545c69057811" title="locomotor.front.components.\lFrontResourceManager.getInstance" alt="" coords="397,5,631,44"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#afa7ac789194b4e4f08000205a0f96f11" title="locomotor.front.user.Bridge.get\lModel" alt="" coords="684,35,887,73"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#a581292d008b50003a8bd95e9c511ad00" title="locomotor.front.user.Bridge.auth" alt="" coords="409,120,619,145"/>
-<area shape="rect" id="node7" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#a1780491711ed9d08ecb55808f269c1ff" title="locomotor.front.user.Bridge.tokenAuth" alt="" coords="392,169,636,195"/>
-<area shape="rect" id="node8" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#ae0a6da5df3d6b00c1721fd865cbd8098" title="locomotor.front.user.Bridge.register" alt="" coords="399,219,628,244"/>
-</map>

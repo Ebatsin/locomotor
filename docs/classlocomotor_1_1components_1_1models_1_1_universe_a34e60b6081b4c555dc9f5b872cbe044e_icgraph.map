@@ -1,7 +1,0 @@
-<map id="getID" name="getID">
-<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0565ab8a7a56491fca163a1b0977c0db" title="locomotor.core.DBH.update\lUniverse" alt="" coords="369,5,554,44"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_d_b_h.html#a756e5af44b74ea39a44a71cde06102fd" title="locomotor.core.DBH.checking\lParsingUniverse" alt="" coords="107,61,304,100"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="619,33,828,72"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="876,40,1050,65"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2b2232ca307c4877316e8b6097902f2c" title="locomotor.core.DBH.addUniverse" alt="" coords="352,68,571,93"/>
-</map>

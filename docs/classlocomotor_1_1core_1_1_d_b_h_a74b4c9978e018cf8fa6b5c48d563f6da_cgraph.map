@@ -1,7 +1,0 @@
-<map id="changePassword" name="changePassword">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="219,5,425,44"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="219,68,425,107"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_password_storage.html#a94489a4402c7c9e62b25fd69c050b4f2" title="locomotor.core.PasswordStorage.verify\lPassword" alt="" coords="195,131,448,169"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_password_storage.html#a8aed671707607cbe03d43c3d785f177e" title="locomotor.core.PasswordStorage.createHash" alt="" coords="177,193,467,219"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="515,68,720,107"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="getPartialInfoOfItem" name="getPartialInfoOfItem">
-<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_comparator.html#a2ac714803f2cf6e544315619a14ff13c" title="locomotor.core.Comparator.toJSON" alt="" coords="193,13,426,39"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_d_b_h.html#a21cbb63c5e6f48995e2da4a48db8edff" title="getAllBooking" alt="" coords="541,68,644,93"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_comparator.html#a092fb76ad264eeccd8f30eadb70e36e3" title="locomotor.core.Comparator.compute\lGradeOfItems" alt="" coords="474,5,711,44"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="759,33,968,72"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1016,40,1190,65"/>
-</map>

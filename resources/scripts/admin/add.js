@@ -540,7 +540,7 @@
 							return;
 						}
 
-						if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1) {
+						if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1 && categories[i].criteria[j].userValue instanceof Array) {
 							categories[i].criteria[j].userValue = categories[i].criteria[j].userValue[0];
 						}
 						else if(modification && types[categories[i].criteria[j].type] == 'integer-list') {
@@ -578,7 +578,7 @@
 						return; 
 					}
 
-					if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1) {
+					if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1 && categories[i].criteria[0].userValue instanceof Array) {
 						categories[i].criteria[0].userValue = categories[i].criteria[0].userValue[0];
 					}
 					else if(modification && types[categories[i].criteria[0].type] == 'integer-list') {

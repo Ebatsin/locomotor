@@ -1,6 +1,0 @@
-<map id="getDiameter" name="getDiameter">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1_compare.html#ac5771638a144db6c7e42db1c36288d48" title="locomotor.components.Compare.graph\lValue" alt="" coords="147,37,399,76"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1types_1_1_c_set_graph.html#ad2c8768ec5b11a8e7e13195ef5f1ba2f" title="compare" alt="" coords="447,44,520,69"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_c_mapped_string_list.html#ae36471b20bdf46c47cf487ffe88a1e42" title="locomotor.components.types.\lCMappedStringList.compare" alt="" coords="568,5,763,44"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html#a46596b48ff97821f142f902f7ac6d471" title="locomotor.components.types.\lCTree.compare" alt="" coords="568,68,763,107"/>
-</map>
