@@ -1239,7 +1239,7 @@ public class DBH {
 	private static void deleteItemWith(String universeID) {
 
 		MongoCollection<Document> items = md.getCollection("items");
-		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		Bson filter = Filters.eq("universe", new ObjectId(universeID));
 		FindIterable<Document> item = items.find(filter);
 
 		// for each item that belongs to the universe
