@@ -1,0 +1,11 @@
+<map id="registerUser" name="registerUser">
+<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0b2d292079fe232a4c3dae4636167641" title="getInstance" alt="" coords="247,5,337,31"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_d_b_h.html#aaf30c71e17b7eba3eb56a3b121089e53" title="usernameAlreadyTaken" alt="" coords="211,55,373,80"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="189,104,395,143"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="189,167,395,205"/>
+<area shape="rect" id="node8" href="$enumlocomotor_1_1core_1_1_accreditation_level.html#aae714dc01fe7f5bb1a175d0d1068bb92" title="locomotor.core.Accreditation\lLevel.getValue" alt="" coords="197,229,387,268"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1core_1_1_password_storage.html#a8aed671707607cbe03d43c3d785f177e" title="locomotor.core.PasswordStorage.createHash" alt="" coords="147,292,437,317"/>
+<area shape="rect" id="node10" href="$enumlocomotor_1_1core_1_1_accreditation_level.html#a9ba37c7260408517fd4e4c0196cf4a28" title="locomotor.core.Accreditation\lLevel.valueOf" alt="" coords="197,341,387,380"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2d5f1f766f5863a46ed29b7e56118364" title="DBH" alt="" coords="563,5,613,31"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="485,167,691,205"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="CriteriaModel" name="CriteriaModel">
+<area shape="rect" id="node2" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_universe_type.html" title="CEnumUniverseType" alt="" coords="371,21,518,47"/>
+<area shape="rect" id="node4" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_user_type.html" title="CEnumUserType" alt="" coords="383,79,506,104"/>
+<area shape="rect" id="node6" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_item_type.html" title="CEnumItemType" alt="" coords="384,131,505,156"/>
+<area shape="rect" id="node8" href="$interfacelocomotor_1_1components_1_1types_1_1_c_universe_type.html" title="CUniverseType" alt="" coords="388,193,501,219"/>
+<area shape="rect" id="node9" href="$interfacelocomotor_1_1components_1_1types_1_1_c_type.html" title="CType" alt="" coords="116,193,175,219"/>
+<area shape="rect" id="node10" href="$interfacelocomotor_1_1components_1_1_j_s_o_n_displayable.html" title="JSONDisplayable" alt="" coords="83,243,208,268"/>
+</map>

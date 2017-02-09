@@ -1,0 +1,5 @@
+<map id="getUniverse" name="getUniverse">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="146,5,352,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="146,68,352,107"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="400,68,606,107"/>
+</map>

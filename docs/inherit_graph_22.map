@@ -1,0 +1,45 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classlocomotor_1_1components_1_1models_1_1_category.html" title="Category" alt="" coords="5,31,81,56"/>
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_item_category.html" title="ItemCategory" alt="" coords="151,5,252,31"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1models_1_1_user_category.html" title="UserCategory" alt="" coords="150,55,253,80"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_item_category_full.html" title="ItemCategoryFull" alt="" coords="368,5,490,31"/>
+<area shape="rect" id="node5" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html" title="CComparable\&lt; CBoolean,\l CBoolean \&gt;" alt="" coords="340,673,518,712"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1types_1_1_c_boolean.html" title="CBoolean" alt="" coords="652,687,732,712"/>
+<area shape="rect" id="node7" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html" title="CComparable\&lt; CIntervalDouble,\l CIntervalDouble \&gt;" alt="" coords="322,301,536,340"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1types_1_1_c_float.html" title="CFloat" alt="" coords="662,301,722,327"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_double.html" title="CIntervalDouble" alt="" coords="861,304,978,329"/>
+<area shape="rect" id="node10" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html" title="CComparable\&lt; CIntervalInteger,\l CIntervalInteger \&gt;" alt="" coords="586,463,799,501"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1components_1_1types_1_1_c_integer.html" title="CInteger" alt="" coords="883,507,955,532"/>
+<area shape="rect" id="node12" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_integer.html" title="CIntervalInteger" alt="" coords="861,439,977,464"/>
+<area shape="rect" id="node13" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html" title="CComparable\&lt; CMappedString\lList, CGraphStringList \&gt;" alt="" coords="588,785,796,824"/>
+<area shape="rect" id="node14" href="$classlocomotor_1_1components_1_1types_1_1_c_mapped_string_list.html" title="CMappedStringList" alt="" coords="852,739,987,764"/>
+<area shape="rect" id="node15" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html" title="CComparable\&lt; CTree,\l CGraphTree \&gt;" alt="" coords="351,736,507,775"/>
+<area shape="rect" id="node16" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html" title="CTree" alt="" coords="663,736,721,761"/>
+<area shape="rect" id="node17" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html" title="CComparable\&lt; CWeightedString\lList, CWeightedStringList \&gt;" alt="" coords="584,575,800,613"/>
+<area shape="rect" id="node18" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_integer.html" title="CWeightedInteger" alt="" coords="855,569,983,595"/>
+<area shape="rect" id="node19" href="$classlocomotor_1_1components_1_1models_1_1_criteria.html" title="Criteria" alt="" coords="11,191,75,216"/>
+<area shape="rect" id="node20" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria.html" title="ItemCriteria" alt="" coords="156,128,246,153"/>
+<area shape="rect" id="node22" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html" title="UserCriteria" alt="" coords="155,252,248,277"/>
+<area shape="rect" id="node21" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria_full.html" title="ItemCriteriaFull" alt="" coords="373,55,485,80"/>
+<area shape="rect" id="node23" href="$interfacelocomotor_1_1components_1_1types_1_1_c_type.html" title="CType" alt="" coords="13,476,73,501"/>
+<area shape="rect" id="node24" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable_type.html" title="CComparableType" alt="" coords="135,549,268,575"/>
+<area shape="rect" id="node32" href="$interfacelocomotor_1_1components_1_1types_1_1_c_universe_type.html" title="CUniverseType" alt="" coords="373,413,485,439"/>
+<area shape="rect" id="node25" href="$interfacelocomotor_1_1components_1_1types_1_1_c_item_type.html" title="CItemType" alt="" coords="386,524,472,549"/>
+<area shape="rect" id="node31" href="$interfacelocomotor_1_1components_1_1types_1_1_c_user_type.html" title="CUserType" alt="" coords="385,601,473,627"/>
+<area shape="rect" id="node26" href="$classlocomotor_1_1components_1_1types_1_1_c_integer_list.html" title="CIntegerList" alt="" coords="645,351,739,376"/>
+<area shape="rect" id="node27" href="$classlocomotor_1_1components_1_1types_1_1_c_interval.html" title="CInterval\&lt; T extends\l Number \&gt;" alt="" coords="620,400,764,439"/>
+<area shape="rect" id="node28" href="$classlocomotor_1_1components_1_1types_1_1_c_long.html" title="CLong" alt="" coords="662,525,722,551"/>
+<area shape="rect" id="node29" href="$classlocomotor_1_1components_1_1types_1_1_c_string_list.html" title="CStringList" alt="" coords="649,637,735,663"/>
+<area shape="rect" id="node30" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_string_list.html" title="CWeightedStringList" alt="" coords="848,637,991,663"/>
+<area shape="rect" id="node33" href="$classlocomotor_1_1components_1_1types_1_1_c_graph_string_list.html" title="CGraphStringList" alt="" coords="630,151,754,176"/>
+<area shape="rect" id="node34" href="$classlocomotor_1_1components_1_1types_1_1_c_graph_tree.html" title="CGraphTree" alt="" coords="645,252,740,277"/>
+<area shape="rect" id="node35" href="$classlocomotor_1_1components_1_1models_1_1_item.html" title="Item" alt="" coords="178,364,225,389"/>
+<area shape="rect" id="node36" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html" title="ItemFull" alt="" coords="395,364,463,389"/>
+<area shape="rect" id="node37" href="$interfacelocomotor_1_1components_1_1_j_s_o_n_convertissable.html" title="JSONConvertissable" alt="" coords="129,500,274,525"/>
+<area shape="rect" id="node38" href="$classlocomotor_1_1components_1_1models_1_1_universe.html" title="Universe" alt="" coords="392,467,466,492"/>
+<area shape="rect" id="node39" href="$interfacelocomotor_1_1components_1_1_j_s_o_n_displayable.html" title="JSONDisplayable" alt="" coords="138,203,264,228"/>
+<area shape="rect" id="node40" href="$classlocomotor_1_1components_1_1models_1_1_booking.html" title="Booking" alt="" coords="394,203,464,228"/>
+<area shape="rect" id="node41" href="$classlocomotor_1_1components_1_1models_1_1_unit.html" title="Unit" alt="" coords="407,252,452,277"/>
+<area shape="rect" id="node42" href="$classlocomotor_1_1components_1_1models_1_1_unit_alt.html" title="UnitAlt" alt="" coords="399,104,459,129"/>
+<area shape="rect" id="node43" href="$classlocomotor_1_1components_1_1types_1_1_c_set_graph.html" title="CSetGraph" alt="" coords="385,153,473,179"/>
+</map>

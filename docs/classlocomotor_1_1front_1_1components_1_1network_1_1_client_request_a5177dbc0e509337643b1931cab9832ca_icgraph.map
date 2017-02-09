@@ -1,0 +1,8 @@
+<map id="addParam" name="addParam">
+<area shape="rect" id="node2" href="$classlocomotor_1_1front_1_1components_1_1_front_resource_manager.html#aa21c4cd4a2808249949e545c69057811" title="locomotor.front.components.\lFrontResourceManager.getInstance" alt="" coords="163,5,397,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#afa7ac789194b4e4f08000205a0f96f11" title="locomotor.front.user.Bridge.get\lModel" alt="" coords="472,63,675,101"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1front_1_1components_1_1_front_resource_manager.html#a90ec9cbe2d393ac172e03972abf97f1d" title="locomotor.front.components.\lFrontResourceManager.getRemoteResource" alt="" coords="136,120,424,159"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#a581292d008b50003a8bd95e9c511ad00" title="locomotor.front.user.Bridge.auth" alt="" coords="175,183,385,208"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#a1780491711ed9d08ecb55808f269c1ff" title="locomotor.front.user.Bridge.tokenAuth" alt="" coords="158,232,402,257"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#ae0a6da5df3d6b00c1721fd865cbd8098" title="locomotor.front.user.Bridge.register" alt="" coords="165,281,394,307"/>
+</map>

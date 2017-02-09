@@ -1,0 +1,13 @@
+<map id="value" name="value">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1types_1_1_c_integer.html#a535607ef73128c96e7b4c3831a537c15" title="locomotor.components.types.\lCInteger.compare" alt="" coords="107,5,301,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1types_1_1_c_integer.html#acc13169c043f180e6472a29d19ff5124" title="locomotor.components.types.\lCInteger.fromJSON" alt="" coords="107,68,301,107"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1components_1_1types_1_1_c_long.html#a8a11fea74d05dac7b0427b11d7c1d708" title="CLong" alt="" coords="174,131,234,156"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_integer.html#acb085d655773a5014997582a57ae2ab2" title="locomotor.components.types.\lCWeightedInteger.compare" alt="" coords="107,180,301,219"/>
+<area shape="rect" id="node12" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_integer.html#af46cf72d2c75b781f89dcce0e0e5ef95" title="locomotor.components.types.\lCWeightedInteger.fromJSON" alt="" coords="107,243,301,281"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_type_factory.html#a8827604831ff8a1764b7639c82820497" title="locomotor.components.types.\lTypeFactory.getItemFromJson" alt="" coords="349,156,550,195"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria_full.html#a436730a3499b6d7b1d0359e12aa2f04a" title="locomotor.components.models.\lItemCriteriaFull.fromJSON" alt="" coords="598,156,804,195"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1models_1_1_item_category_full.html#a50ab7c0f8e4a65f80ca141f1fa1c7df8" title="locomotor.components.models.\lItemCategoryFull.fromJSON" alt="" coords="852,156,1058,195"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html#afe56c5f49cb59d04ec69bbf32b58a2f8" title="locomotor.components.models.\lItemFull.fromJSON" alt="" coords="1106,156,1312,195"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="1360,156,1570,195"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1618,163,1792,188"/>
+</map>

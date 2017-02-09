@@ -1,0 +1,11 @@
+<map id="getValue" name="getValue">
+<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_comparator.html#a686a6117a0c0951d6b70fb883b2b5937" title="locomotor.core.Comparator.compute\lGradeOfCriteria" alt="" coords="126,8,363,47"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad067053be75a3170dc9c2ce7b922e176" title="locomotor.core.DBH.checking\lParsingItem" alt="" coords="716,68,913,107"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_comparator.html#a3f526c90b5b3a645974bbb81e30d3c74" title="locomotor.core.Comparator.compute\lGradeOfCategory" alt="" coords="411,7,648,45"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_comparator.html#a589b06b817cbbc74ceb4812d0ba6c245" title="locomotor.core.Comparator.compute\lGradeOfItem" alt="" coords="696,5,933,44"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_comparator.html#a092fb76ad264eeccd8f30eadb70e36e3" title="locomotor.core.Comparator.compute\lGradeOfItems" alt="" coords="981,5,1218,44"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="1266,61,1476,100"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1524,68,1698,93"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1core_1_1_d_b_h.html#ae26eef1ee7482f2e0167c6a18924d214" title="locomotor.core.DBH.addItem" alt="" coords="1004,68,1196,93"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1core_1_1_d_b_h.html#aa0e39c547d06fd9d0ad2de70251c9cc0" title="locomotor.core.DBH.updateItem" alt="" coords="994,117,1205,143"/>
+</map>

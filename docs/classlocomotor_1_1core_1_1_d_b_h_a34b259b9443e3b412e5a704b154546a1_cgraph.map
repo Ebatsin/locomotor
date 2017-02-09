@@ -1,0 +1,7 @@
+<map id="authUser" name="authUser">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="152,5,358,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="152,68,358,107"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_password_storage.html#a94489a4402c7c9e62b25fd69c050b4f2" title="locomotor.core.PasswordStorage.verify\lPassword" alt="" coords="129,131,382,169"/>
+<area shape="rect" id="node6" href="$enumlocomotor_1_1core_1_1_accreditation_level.html#a9ba37c7260408517fd4e4c0196cf4a28" title="locomotor.core.Accreditation\lLevel.valueOf" alt="" coords="161,193,350,232"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="430,68,636,107"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="CUniverseType" name="CUniverseType">
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_c_boolean.html" title="CBoolean" alt="" coords="5,159,85,184"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1types_1_1_c_graph_string_list.html" title="CGraphStringList" alt="" coords="109,159,232,184"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1types_1_1_c_graph_tree.html" title="CGraphTree" alt="" coords="256,159,351,184"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1types_1_1_c_interval.html" title="CInterval\&lt; T extends\l Number \&gt;" alt="" coords="376,152,520,191"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1components_1_1types_1_1_c_string_list.html" title="CStringList" alt="" coords="554,159,641,184"/>
+<area shape="rect" id="node2" href="$interfacelocomotor_1_1components_1_1types_1_1_c_type.html" title="CType" alt="" coords="215,5,275,31"/>
+<area shape="rect" id="node3" href="$interfacelocomotor_1_1components_1_1_j_s_o_n_displayable.html" title="JSONDisplayable" alt="" coords="300,5,426,31"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_double.html" title="CIntervalDouble" alt="" coords="249,239,366,264"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_integer.html" title="CIntervalInteger" alt="" coords="390,239,506,264"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1components_1_1types_1_1_c_mapped_string_list.html" title="CMappedStringList" alt="" coords="530,239,665,264"/>
+<area shape="rect" id="node12" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_string_list.html" title="CWeightedStringList" alt="" coords="689,239,831,264"/>
+</map>

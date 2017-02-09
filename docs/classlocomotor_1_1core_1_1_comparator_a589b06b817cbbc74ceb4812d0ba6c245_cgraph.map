@@ -1,0 +1,12 @@
+<map id="computeGradeOfItem" name="computeGradeOfItem">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_item.html#aac70f654e73d90f5caea40c18ace4312" title="locomotor.components.models.\lItem.getCategories" alt="" coords="203,5,409,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_user_item.html#a9bd0f78e7cc56fec919e63d723a4806a" title="locomotor.components.models.\lUserItem.getCategories" alt="" coords="203,68,409,107"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_comparator.html#a3f526c90b5b3a645974bbb81e30d3c74" title="computeGradeOfCategory" alt="" coords="217,131,395,156"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1models_1_1_category.html#a0e11818fedf98727494278ea27386dea" title="locomotor.components.models.\lCategory.getCriterias" alt="" coords="457,67,663,105"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_comparator.html#a686a6117a0c0951d6b70fb883b2b5937" title="computeGradeOfCriteria" alt="" coords="476,203,643,228"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1models_1_1_criteria.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCriteria.getID" alt="" coords="715,101,921,140"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria.html#ad1dc198074d5d5e901d0e5159ded14fa" title="locomotor.components.models.\lItemCriteria.getValue" alt="" coords="715,164,921,203"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#ae439cd3f7be14d7e03f87a7ca9367d54" title="locomotor.components.models.\lUserCriteria.getValue" alt="" coords="715,227,921,265"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#a671adef5afc1b82389174abfaff3c892" title="locomotor.components.models.\lUserCriteria.getDisableFlexibility" alt="" coords="711,289,925,328"/>
+<area shape="rect" id="node11" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html#a1d9a08e9f962c76e6525f8da05ca7f21" title="locomotor.components.types.\lCComparable.compare" alt="" coords="720,352,915,391"/>
+</map>

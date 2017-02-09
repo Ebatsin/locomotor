@@ -1,0 +1,31 @@
+<map id="updateItem" name="updateItem">
+<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0b2d292079fe232a4c3dae4636167641" title="getInstance" alt="" coords="392,5,483,31"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad067053be75a3170dc9c2ce7b922e176" title="checkingParsingItem" alt="" coords="141,528,286,553"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1models_1_1_item.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lItem.getID" alt="" coords="334,55,540,93"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2d5f1f766f5863a46ed29b7e56118364" title="DBH" alt="" coords="667,5,716,31"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html#a27e15ff845320cbae7ca4dbb6a882eb4" title="locomotor.components.models.\lItemFull.getUniverse" alt="" coords="334,493,540,532"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad8a1ee8704cdfdf81c7e495c1f388874" title="universeStillExists" alt="" coords="373,556,502,581"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html#a78ee178b6a73658d65ca60da4d1e6683" title="locomotor.components.models.\lItemFull.getName" alt="" coords="334,605,540,644"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1core_1_1_d_b_h.html#af8f30eaa4ef362f206b2cbd21045cf0a" title="itemNameAlreadyTaken" alt="" coords="356,668,519,693"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="334,717,540,756"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="334,780,540,819"/>
+<area shape="rect" id="node13" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html#ac7feffb7a33f63504ff1f87f19e2d2d8" title="locomotor.components.models.\lItemFull.getDescription" alt="" coords="334,843,540,881"/>
+<area shape="rect" id="node14" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html#a832e57df908361dd86dc673520d7fb81" title="locomotor.components.models.\lItemFull.getImage" alt="" coords="334,905,540,944"/>
+<area shape="rect" id="node15" href="$classlocomotor_1_1core_1_1_d_b_h.html#a910cd77455fb55ffce6f9b65cb8104cc" title="getCategoriesModel" alt="" coords="367,968,508,993"/>
+<area shape="rect" id="node19" href="$classlocomotor_1_1components_1_1models_1_1_item.html#aac70f654e73d90f5caea40c18ace4312" title="locomotor.components.models.\lItem.getCategories" alt="" coords="334,1017,540,1056"/>
+<area shape="rect" id="node20" href="$classlocomotor_1_1components_1_1models_1_1_category.html#a0e11818fedf98727494278ea27386dea" title="locomotor.components.models.\lCategory.getCriterias" alt="" coords="334,1080,540,1119"/>
+<area shape="rect" id="node21" href="$classlocomotor_1_1components_1_1models_1_1_criteria.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCriteria.getID" alt="" coords="334,117,540,156"/>
+<area shape="rect" id="node22" href="$classlocomotor_1_1components_1_1types_1_1_type_factory.html#a5f92827e8d1d5348ebff49dc8bae4f65" title="locomotor.components.types.\lTypeFactory.getItem" alt="" coords="340,180,535,219"/>
+<area shape="rect" id="node27" href="$classlocomotor_1_1components_1_1models_1_1_criteria_model.html#a19fc0aeef83333878b7af08e6eb7dbea" title="locomotor.components.models.\lCriteriaModel.getItemType" alt="" coords="334,243,540,281"/>
+<area shape="rect" id="node28" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria.html#ad1dc198074d5d5e901d0e5159ded14fa" title="locomotor.components.models.\lItemCriteria.getValue" alt="" coords="334,305,540,344"/>
+<area shape="rect" id="node29" href="$classlocomotor_1_1components_1_1models_1_1_criteria_model.html#afe6cac49dd51cda8f8dfedab30c83009" title="locomotor.components.models.\lCriteriaModel.getUniverse" alt="" coords="334,368,540,407"/>
+<area shape="rect" id="node30" href="$classlocomotor_1_1components_1_1models_1_1_category.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCategory.getID" alt="" coords="334,431,540,469"/>
+<area shape="rect" id="node12" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="588,780,794,819"/>
+<area shape="rect" id="node16" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_universe_type.html#a27351fda5fe6de820d869025880f326c" title="locomotor.components.types.\lCEnumUniverseType.valueOf" alt="" coords="593,961,790,1000"/>
+<area shape="rect" id="node17" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_item_type.html#ab48bf5b7b36a336edf6c49f42c126494" title="locomotor.components.types.\lCEnumItemType.valueOf" alt="" coords="594,1024,789,1063"/>
+<area shape="rect" id="node18" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_user_type.html#a9dece4179b4a5039a4651e4885dfeec8" title="locomotor.components.types.\lCEnumUserType.valueOf" alt="" coords="594,899,789,937"/>
+<area shape="rect" id="node23" href="$classlocomotor_1_1components_1_1types_1_1_type_factory.html#aa1f74ce70c02a7665f32b4ec438a6c3c" title="locomotor.components.types.\lTypeFactory.getTree" alt="" coords="594,212,789,251"/>
+<area shape="rect" id="node26" href="$classlocomotor_1_1components_1_1types_1_1_c_graph_tree.html#a83eddfad98b66bd627c4b0d1cb7056ac" title="locomotor.components.types.\lCGraphTree.getTree" alt="" coords="594,149,789,188"/>
+<area shape="rect" id="node24" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html#a74382cb3a3153edc32f1cfed8c4ee364" title="locomotor.components.types.\lCTree.addChild" alt="" coords="842,212,1037,251"/>
+<area shape="rect" id="node25" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html#af0e7a198496b1627d0ff15ce0e6de1f2" title="locomotor.components.types.\lCTree.CTree" alt="" coords="1085,212,1280,251"/>
+</map>

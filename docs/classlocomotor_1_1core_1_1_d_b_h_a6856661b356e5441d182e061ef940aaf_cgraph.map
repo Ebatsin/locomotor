@@ -1,0 +1,9 @@
+<map id="getItems" name="getItems">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_category_model.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCategoryModel.getID" alt="" coords="126,5,332,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_category_model.html#ad146fa8579a5f8a876c4688cc5a68520" title="locomotor.components.models.\lCategoryModel.toString" alt="" coords="126,68,332,107"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1models_1_1_category_model.html#a337145f3b2fdaaed1506d52b80d2ac86" title="locomotor.components.models.\lCategoryModel.getCriterias" alt="" coords="126,131,332,169"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1models_1_1_criteria_model.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCriteriaModel.getID" alt="" coords="126,193,332,232"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1models_1_1_criteria_model.html#ad146fa8579a5f8a876c4688cc5a68520" title="locomotor.components.models.\lCriteriaModel.toString" alt="" coords="126,256,332,295"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1models_1_1_criteria_model.html#a19fc0aeef83333878b7af08e6eb7dbea" title="locomotor.components.models.\lCriteriaModel.getItemType" alt="" coords="126,319,332,357"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1models_1_1_criteria_model.html#afe6cac49dd51cda8f8dfedab30c83009" title="locomotor.components.models.\lCriteriaModel.getUniverse" alt="" coords="126,381,332,420"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="DBH" name="DBH">
+<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0b2d292079fe232a4c3dae4636167641" title="getInstance" alt="" coords="103,388,193,414"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="807,360,1016,399"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1064,112,1238,138"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_comparator.html#a2ac714803f2cf6e544315619a14ff13c" title="locomotor.core.Comparator.toJSON" alt="" coords="241,314,474,339"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1_d_b_h.html#a17eef13d222e2f7d4cc413a965de3069" title="registerUser" alt="" coords="593,112,687,138"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1core_1_1_d_b_h.html#ae26eef1ee7482f2e0167c6a18924d214" title="addItem" alt="" coords="605,418,675,443"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1core_1_1_d_b_h.html#aa0e39c547d06fd9d0ad2de70251c9cc0" title="updateItem" alt="" coords="596,467,684,492"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad067053be75a3170dc9c2ce7b922e176" title="checkingParsingItem" alt="" coords="285,464,430,490"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1core_1_1_d_b_h.html#a048720c7d5d922d646d5ee0ff38f78ad" title="removeItem" alt="" coords="312,566,403,591"/>
+<area shape="rect" id="node12" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2b2232ca307c4877316e8b6097902f2c" title="addUniverse" alt="" coords="592,616,688,642"/>
+<area shape="rect" id="node13" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0565ab8a7a56491fca163a1b0977c0db" title="updateUniverse" alt="" coords="583,667,697,692"/>
+<area shape="rect" id="node14" href="$classlocomotor_1_1core_1_1_d_b_h.html#a756e5af44b74ea39a44a71cde06102fd" title="checkingParsingUniverse" alt="" coords="271,667,443,692"/>
+<area shape="rect" id="node15" href="$classlocomotor_1_1core_1_1_d_b_h.html#a46cbafb4c7422171cf07c3d0521d3f47" title="removeUniverse" alt="" coords="581,254,699,279"/>
+<area shape="rect" id="node16" href="$classlocomotor_1_1core_1_1_d_b_h.html#a97b6d481686edd4c5a932108475e5e1c" title="deleteItemWith" alt="" coords="302,264,412,290"/>
+<area shape="rect" id="node17" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad707f520f60fe68ea8a8818698560d9d" title="authAdmin" alt="" coords="315,363,400,388"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_comparator.html#a092fb76ad264eeccd8f30eadb70e36e3" title="locomotor.core.Comparator.compute\lGradeOfItems" alt="" coords="522,303,759,342"/>
+</map>
