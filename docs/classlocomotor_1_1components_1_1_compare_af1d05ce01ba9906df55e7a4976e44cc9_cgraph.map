@@ -1,7 +1,0 @@
-<map id="intervalValue" name="intervalValue">
-<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_gaussian.html#a2a6f2336ca6a2ad6a5406575827bbb56" title="locomotor.core.Gaussian.get\lInstance" alt="" coords="151,5,342,44"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_gaussian.html#ab70945dfe6d593e49a767670c903e653" title="locomotor.core.Gaussian.cdf" alt="" coords="390,69,580,95"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_gaussian.html#aa4cd1241f20f836cbf5facbf2d8379e4" title="locomotor.core.Gaussian.\lGaussian" alt="" coords="399,7,571,45"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_gaussian.html#aaa66f1ce25c09e6e7cbd82c46ba0b4ae" title="locomotor.core.Gaussian.pdf" alt="" coords="628,15,819,40"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_gaussian.html#afd611f311f6fe230f8fad8bd0c7e0a51" title="locomotor.core.Gaussian.get\lNearestStep" alt="" coords="867,35,1058,73"/>
-</map>

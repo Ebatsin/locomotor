@@ -1,7 +1,0 @@
-<map id="getJsonContext" name="getJsonContext">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="459,5,669,44"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1network_1_1_i_endpoint_handler.html#ab14119ba2d6d06adbe73a9805f5130c6" title="locomotor.components.network.\lIEndpointHandler.handle" alt="" coords="184,67,394,105"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1network_1_1_i_endpoint_handler.html#a754e26560b323ad92f51d07b4cd02d2a" title="locomotor.components.network.\lIEndpointHandler.sendDefaultMissing\lParametersMessage" alt="" coords="167,129,411,181"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="717,44,891,69"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1network_1_1_network_handler.html#a63d431845f1fd2adc1f96432f6003e25" title="locomotor.components.network.\lNetworkHandler.init" alt="" coords="459,68,669,107"/>
-</map>

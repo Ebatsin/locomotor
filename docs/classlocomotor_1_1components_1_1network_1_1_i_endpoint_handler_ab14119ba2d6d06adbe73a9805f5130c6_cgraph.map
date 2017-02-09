@@ -1,9 +1,0 @@
-<map id="handle" name="handle">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_network_data.html#a487d5f454cff4db530ed7b5b690ec71d" title="locomotor.components.network.\lNetworkData.isValid" alt="" coords="145,5,355,44"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_network_response_factory.html#ac0b036a3baf908af83be69be93f1ec75" title="locomotor.components.network.\lNetworkResponseFactory.getJsonContext" alt="" coords="115,68,385,107"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#ab1be964e3a5f4dfc34483da5bfd13a8a" title="locomotor.components.network.\lNetworkResponse.failure" alt="" coords="145,131,355,169"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#a143bb7402270f3dc0872ab5586653f61" title="locomotor.components.network.\lNetworkResponse.toByteArrayOutput\lStream" alt="" coords="436,23,680,75"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#a66b0dd722c150e0c2eac12c9e6e813ef" title="locomotor.components.network.\lNetworkResponse.sendAnswer" alt="" coords="453,99,663,137"/>
-<area shape="rect" id="node7" href="$enumlocomotor_1_1components_1_1network_1_1_network_response_1_1_error_code.html#aae714dc01fe7f5bb1a175d0d1068bb92" title="locomotor.components.network.\lNetworkResponse.ErrorCode.getValue" alt="" coords="433,161,684,200"/>
-<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1_mutable_integer.html#ab1285c4f05252364e32fd03079fa2f35" title="locomotor.components.Mutable\lInteger.intValue" alt="" coords="455,224,662,263"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="valueOf" name="valueOf">
-<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#a17eef13d222e2f7d4cc413a965de3069" title="locomotor.core.DBH.registerUser" alt="" coords="377,5,594,31"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_d_b_h.html#a34b259b9443e3b412e5a704b154546a1" title="locomotor.core.DBH.authUser" alt="" coords="125,107,324,132"/>
-<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1_d_b_h.html#a3d7a9a94e400a13566495c07c3b1be00" title="locomotor.core.DBH.admin\lStillExists" alt="" coords="395,156,575,195"/>
-<area shape="rect" id="node8" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#a5bfe06ebb1f388e7fb4fb42c6c2a3875" title="locomotor.core.jwt.JWTH.check\lToken" alt="" coords="121,211,329,249"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="642,79,851,117"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="899,57,1073,83"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad707f520f60fe68ea8a8818698560d9d" title="locomotor.core.DBH.authAdmin" alt="" coords="381,107,589,132"/>
-</map>

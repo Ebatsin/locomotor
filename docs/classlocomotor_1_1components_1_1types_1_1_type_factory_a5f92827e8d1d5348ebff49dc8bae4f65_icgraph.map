@@ -1,8 +1,0 @@
-<map id="getItem" name="getItem">
-<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#ae573347d7e17b2bf2bac3c4a41caf0fa" title="locomotor.core.DBH.getItem" alt="" coords="123,5,312,31"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad067053be75a3170dc9c2ce7b922e176" title="locomotor.core.DBH.checking\lParsingItem" alt="" coords="119,55,316,93"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="623,49,833,88"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="881,56,1055,81"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_d_b_h.html#ae26eef1ee7482f2e0167c6a18924d214" title="locomotor.core.DBH.addItem" alt="" coords="373,56,566,81"/>
-<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1_d_b_h.html#aa0e39c547d06fd9d0ad2de70251c9cc0" title="locomotor.core.DBH.updateItem" alt="" coords="364,105,575,131"/>
-</map>

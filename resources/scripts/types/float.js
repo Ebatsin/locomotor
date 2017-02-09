@@ -49,7 +49,7 @@ function Float(elem, lowBound, upBound) {
 	};
 
 	this.getValue = function() {
-		return parseInt(input.value);
+		return parseFloat(input.value);
 	};
 
 	this.setValue = function(value) {

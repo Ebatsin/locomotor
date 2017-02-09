@@ -1,5 +1,0 @@
-<map id="success" name="success">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#a143bb7402270f3dc0872ab5586653f61" title="locomotor.components.network.\lNetworkResponse.toByteArrayOutput\lStream" alt="" coords="123,5,366,57"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#a66b0dd722c150e0c2eac12c9e6e813ef" title="locomotor.components.network.\lNetworkResponse.sendAnswer" alt="" coords="140,81,349,120"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1_mutable_integer.html#ab1285c4f05252364e32fd03079fa2f35" title="locomotor.components.Mutable\lInteger.intValue" alt="" coords="141,144,348,183"/>
-</map>

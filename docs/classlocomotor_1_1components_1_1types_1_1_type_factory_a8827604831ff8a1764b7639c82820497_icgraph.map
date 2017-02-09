@@ -1,7 +1,0 @@
-<map id="getItemFromJson" name="getItemFromJson">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria_full.html#a436730a3499b6d7b1d0359e12aa2f04a" title="locomotor.components.models.\lItemCriteriaFull.fromJSON" alt="" coords="178,5,384,44"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_item_category_full.html#a50ab7c0f8e4a65f80ca141f1fa1c7df8" title="locomotor.components.models.\lItemCategoryFull.fromJSON" alt="" coords="432,5,638,44"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1models_1_1_item_full.html#afe56c5f49cb59d04ec69bbf32b58a2f8" title="locomotor.components.models.\lItemFull.fromJSON" alt="" coords="686,5,892,44"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="940,5,1150,44"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1198,12,1372,37"/>
-</map>

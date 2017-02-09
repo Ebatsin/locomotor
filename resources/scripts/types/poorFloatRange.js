@@ -65,11 +65,11 @@ function PoorFloatRange(elem, lowBound, upBound) {
 	};
 
 	this.getMinValue = function() {
-		return parseInt(inputMin.value);
+		return parseFloat(inputMin.value);
 	};
 
 	this.getMaxValue = function() {
-		return parseInt(inputMax.value);
+		return parseFloat(inputMax.value);
 	};
 
 	this.setMinValue = function(value) {

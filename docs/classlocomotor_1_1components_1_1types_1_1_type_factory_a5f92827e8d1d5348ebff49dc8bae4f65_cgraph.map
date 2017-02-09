@@ -1,6 +1,0 @@
-<map id="getItem" name="getItem">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1types_1_1_type_factory.html#aa1f74ce70c02a7665f32b4ec438a6c3c" title="getTree" alt="" coords="183,12,250,37"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1types_1_1_c_graph_tree.html#a83eddfad98b66bd627c4b0d1cb7056ac" title="locomotor.components.types.\lCGraphTree.getTree" alt="" coords="119,61,314,100"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html#a74382cb3a3153edc32f1cfed8c4ee364" title="locomotor.components.types.\lCTree.addChild" alt="" coords="362,5,557,44"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html#af0e7a198496b1627d0ff15ce0e6de1f2" title="locomotor.components.types.\lCTree.CTree" alt="" coords="605,5,799,44"/>
-</map>

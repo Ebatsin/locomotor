@@ -171,7 +171,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									integer.setValue(criteria[i].userValue);
 								}
 
@@ -195,7 +195,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									float.setValue(criteria[i].userValue);
 								}
 
@@ -215,7 +215,7 @@
 								var boolean = new Boolean(inputElem);
 								boolean.init();
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									boolean.setChecked(criteria[i].userValue);
 								}
 
@@ -245,7 +245,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									integer.setMinValue(criteria[i].userValue.min);
 									integer.setMaxValue(criteria[i].userValue.max);
 								}
@@ -273,7 +273,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									float.setMinValue(criteria[i].userValue.min);
 									float.setMaxValue(criteria[i].userValue.max);
 								}
@@ -301,7 +301,7 @@
 								var strli = new StringList(inputElem, list);
 								strli.init();
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									if(criteria[i].userValue.length > 0 && criteria[i].userValue[0].value) {
 										// formating it right
 										var arr = [];
@@ -331,7 +331,7 @@
 								var tree = new Tree(inputElem, criteria[i].universe.tree);
 								tree.init();
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									tree.selectTree(criteria[i].userValue);
 								}
 
@@ -540,7 +540,7 @@
 							return;
 						}
 
-						if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1) {
+						if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[j].type]) != -1 && categories[i].criteria[j].userValue instanceof Array) {
 							categories[i].criteria[j].userValue = categories[i].criteria[j].userValue[0];
 						}
 						else if(modification && types[categories[i].criteria[j].type] == 'integer-list') {
@@ -578,7 +578,7 @@
 						return; 
 					}
 
-					if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1) {
+					if(modification && ['integer', 'float'].indexOf(types[categories[i].criteria[0].type]) != -1 && categories[i].criteria[0].userValue instanceof Array) {
 						categories[i].criteria[0].userValue = categories[i].criteria[0].userValue[0];
 					}
 					else if(modification && types[categories[i].criteria[0].type] == 'integer-list') {

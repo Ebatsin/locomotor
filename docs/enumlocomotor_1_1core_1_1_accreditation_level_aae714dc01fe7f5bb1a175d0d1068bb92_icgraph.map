@@ -1,8 +1,0 @@
-<map id="getValue" name="getValue">
-<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_d_b_h.html#a17eef13d222e2f7d4cc413a965de3069" title="locomotor.core.DBH.registerUser" alt="" coords="385,5,602,31"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#af3751461e4a7ff92b13b5988200d76d7" title="locomotor.core.jwt.JWTH.create\lToken" alt="" coords="126,56,337,95"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="650,56,859,95"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="907,35,1081,60"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#a1ced72f10559e8525f069895d88d129e" title="locomotor.core.jwt.JWTH.create\lShortToken" alt="" coords="388,55,598,93"/>
-<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#aecfcf9e71a9ee5c1446176865a746a5c" title="locomotor.core.jwt.JWTH.create\lLongToken" alt="" coords="388,117,598,156"/>
-</map>

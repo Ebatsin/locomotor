@@ -1,6 +1,0 @@
-<map id="UserCategory" name="UserCategory">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_user_category.html#a52e02970889790bace019e61fb256ff0" title="fromJSON" alt="" coords="157,12,240,37"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_user_item.html#ab97f79cf43a9a73bcd77cec6b449a79a" title="locomotor.components.models.\lUserItem.fromJSON" alt="" coords="288,5,494,44"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="542,5,752,44"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="800,12,974,37"/>
-</map>

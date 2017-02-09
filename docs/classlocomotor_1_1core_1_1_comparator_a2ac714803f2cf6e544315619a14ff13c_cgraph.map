@@ -1,7 +1,0 @@
-<map id="toJSON" name="toJSON">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1_pair.html#a54ce528c748b0b56861a8179404e34f5" title="locomotor.components.Pair.getLeft" alt="" coords="121,5,348,31"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0b2d292079fe232a4c3dae4636167641" title="locomotor.core.DBH.getInstance" alt="" coords="128,55,341,80"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_d_b_h.html#a187693f2e10c94113aefcb345fe5f518" title="locomotor.core.DBH.getPartial\lInfoOfItem" alt="" coords="134,104,335,143"/>
-<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1_pair.html#a372a73c0f39951186746e06a624f43d8" title="locomotor.components.Pair.get\lRight" alt="" coords="132,167,337,205"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2d5f1f766f5863a46ed29b7e56118364" title="locomotor.core.DBH.DBH" alt="" coords="396,55,568,80"/>
-</map>

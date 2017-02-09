@@ -1,6 +1,0 @@
-<map id="getVersion" name="getVersion">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="177,5,386,44"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1front_1_1components_1_1_front_resource_manager.html#a90ec9cbe2d393ac172e03972abf97f1d" title="locomotor.front.components.\lFrontResourceManager.getRemoteResource" alt="" coords="138,68,425,107"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="488,12,662,37"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1front_1_1user_1_1_bridge.html#afa7ac789194b4e4f08000205a0f96f11" title="locomotor.front.user.Bridge.get\lModel" alt="" coords="473,68,676,107"/>
-</map>

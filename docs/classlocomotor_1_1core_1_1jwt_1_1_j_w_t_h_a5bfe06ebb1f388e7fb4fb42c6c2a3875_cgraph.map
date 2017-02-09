@@ -1,7 +1,0 @@
-<map id="checkToken" name="checkToken">
-<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#a75e8f6535bdb8db9a7d570e1b839af47" title="locomotor.components.logging.\lErrorHandler.getInstance" alt="" coords="383,5,589,44"/>
-<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1logging_1_1_error_handler.html#abd00a9c37627740763cef91d76a77437" title="locomotor.components.logging.\lErrorHandler.push" alt="" coords="383,77,589,116"/>
-<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#a9666df772d67ab0c2213cdb4a528549b" title="verifyTokenSignature" alt="" coords="167,52,313,77"/>
-<area shape="rect" id="node6" href="$enumlocomotor_1_1core_1_1_accreditation_level.html#a9ba37c7260408517fd4e4c0196cf4a28" title="locomotor.core.Accreditation\lLevel.valueOf" alt="" coords="145,153,335,192"/>
-<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1logging_1_1_error_context.html#afcf30b71bfc65c74878c7ab77c951842" title="locomotor.components.logging.\lErrorContext.push" alt="" coords="637,77,842,116"/>
-</map>
