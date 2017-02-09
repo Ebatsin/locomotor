@@ -29,7 +29,6 @@
 		*/
 		load: function(params) {
 			function init() {
-				console.log('add manage laucnhed');
 				hideAllViews();
 				modules.menu.show();
 				modules.menu.showBackArrow(false);
@@ -41,11 +40,9 @@
 			}
 
 			if(!modules.splash.isShown()) {
-				console.log('not shown');
 				modules.splash.show(init);
 			}
 			else {
-				console.log('shown');
 				init();
 			}
 		}

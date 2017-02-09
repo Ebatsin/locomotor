@@ -44,12 +44,10 @@ function Boolean(elem) {
 
 		dummyYes.addEventListener('click', function() {
 			that.setChecked(true);
-			console.log(that.isChecked());
 		});
 
 		dummyNo.addEventListener('click', function() {
 			that.setChecked(false);
-			console.log(that.isChecked());
 		});
 	};
 

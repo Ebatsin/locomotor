@@ -107,7 +107,6 @@ public class Bridge {
 	// API
 
 	public void auth(String name, String password, int promiseID) {
-		System.out.println("bormal fucking auth");
 		ClientRequest c = new ClientRequest();
 		c.addParam("username", name);
 		c.addParam("password", password);
@@ -190,7 +189,6 @@ public class Bridge {
 		rm.getRemoteResource("images/" + url, token).thenAccept(new Consumer<File>() {
 			public void accept(File file) {
 				if(file == null) {
-					System.out.println("Le fichier est null");
 					return;
 				}
 				Platform.runLater(new Runnable() {

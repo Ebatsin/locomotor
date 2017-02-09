@@ -4,7 +4,6 @@
 	var toggle = menu.querySelector('#menu-toggle');
 	var backArrow = menu.querySelector('#menu-back');
 	var settings = menu.querySelector('#menu-settings');
-	var users = menu.querySelector('#menu-users');
 	var add = menu.querySelector('#menu-add');
 	var edit = menu.querySelector('#menu-edit');
 	var helpElem = menu.querySelector('#menu-help');
@@ -31,10 +30,6 @@
 		callbacks.settings();
 	}
 
-	function usersItem() {
-		callbacks.users();
-	}
-
 	function addItem() {
 		callbacks.add();
 	}
@@ -54,9 +49,6 @@
 	var callbacks = {
 		settings: function() {
 			console.log('settings item pressed');
-		},
-		users: function() {
-			console.log('users item pressed');
 		},
 		add: function() {
 			console.log('add item pressed');
@@ -106,7 +98,6 @@
 			});
 			
 			settings.addEventListener('click', settingsItem);
-			users.addEventListener('click', usersItem);
 			add.addEventListener('click', addItem);
 			edit.addEventListener('click', editItem);
 			helpElem.addEventListener('click', helpItem);

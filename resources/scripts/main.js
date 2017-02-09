@@ -17,13 +17,9 @@
 
 		document.body.style.fontFamily = 'Roboto';
 
-		console.log('everything went ok');
-
 		loadView('login', {
 			mode: 'login'
 		});
-
-		console.log('main > login loaded');
 	};
 
 	/**
@@ -106,7 +102,6 @@
 	};
 
 	function checkReady() {
-		console.log('vérification de la readyness');
 		if(window.initWhenReady) {
 			setTimeout(initModules, 200);
 		}

@@ -68,7 +68,6 @@
 						modules.login.showError('All the fields must be filled to continue.');
 					}
 					else {
-						console.log('send the login request');
 						API.auth(name.value, password.value).then(function(data) {
 							modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
 						}).catch(function(data) {
@@ -88,7 +87,6 @@
 					}
 					else {
 						// @todo send the request
-						console.log('send the register request');
 						API.register(name.value, password.value).then(function(data) {
 							modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
 						}).catch(function(data) {
@@ -207,7 +205,6 @@
 			app.setShortToken(shortToken);
 			app.setLongToken(longToken);
 
-			console.log('sending modelRequest');
 			API.getModel().then(function(data) {
 				API.getUnits().then(function(dataUnit) {
 					window.model = data.data;

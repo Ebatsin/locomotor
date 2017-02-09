@@ -56,7 +56,6 @@
 			view.classList.remove('hide');
 			view.style['z-index'] = getNextZIndex();
 			modules.help.pushContext('add');
-			console.log('faaaaaaaaaaaaaaaack');
 
 			if(params) {
 				title.innerHTML = 'Modify a vehicle';
@@ -610,27 +609,21 @@
 				tmpSelf = [];
 			}
 
-			console.log('checking name');
-
 			if(itemName.value.trim().length == 0) {
 				return;
 			}
-			console.log('checking desc');
+
 			if(itemDesc.value.replace(/\n/g, '<br>').trim().length == 0) {
 				return;
 			}
-			console.log('checking url');
 
 			if(itemUrl.value.trim().length == 0) {
-				console.log('not good ' + itemUrl.value.trim());
 				return;
 			}
-			console.log('checking ids');
 
 			if(strli.getIDs().length == 0) {
 				return;
 			}
-			console.log('gen output');
 
 			var out = {
 				name: itemName.value.trim(),

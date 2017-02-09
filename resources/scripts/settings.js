@@ -48,7 +48,6 @@
 		* mode: 'login' | 'register'
 		*/
 		load: function(params) {
-			console.log('loading');
 			view.classList.remove('hide');
 			view.style['z-index'] = getNextZIndex();
 			modules.help.pushContext('settings');
@@ -178,7 +177,6 @@
 				else {
 					error.style.display = 'none';
 					// send the request to change
-					console.log('sending the request');
 					API.changePassword(passOld.value, passNew.value).then(function(data) {
 						// close the menu
 						modules.settings.closePass();

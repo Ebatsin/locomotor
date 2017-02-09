@@ -18,7 +18,6 @@
 		* mode: 'login' | 'register'
 		*/
 		load: function(params) {
-			console.log('manage loaded');
 			view.classList.remove('hide');
 			modules.menu.show();
 

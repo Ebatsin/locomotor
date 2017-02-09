@@ -52,7 +52,6 @@
 					modules.login.showError('All the fields must be filled to continue.');
 				}
 				else {
-					console.log('send the login request from here with : ' + name.value + ', ' + password.value);
 					API.adminAuth(name.value, password.value).then(function(data) {
 						modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
 					}).catch(function(data) {
@@ -83,14 +82,9 @@
 				loadView('add-choice');
 			});
 
-			modules.menu.bind('users', function() {
-				loadView('users');
-			});
-
 			modules.menu.bind('settings', function() {
 				loadView('settings');
 			});
-			console.log('loggin has been inited');
 		},
 		/**
 		* Load the login view.
@@ -98,7 +92,6 @@
 		* mode: 'login' | 'register'
 		*/
 		load: function(params) {
-			console.log('loggin is starting');
 			hideAllViews();
 			modules.menu.hide();
 			modules.menu.showOnlyHelp(true);
@@ -132,8 +125,6 @@
 			app.setTitle('Administration - Log in');
 
 			modules.login.emptyFields();
-
-			console.log('shown');
 		},
 		emptyFields: function() {
 			name.value = '';
@@ -154,8 +145,7 @@
 		validAuth: function(shortToken, longToken) {
 			app.setShortToken(shortToken);
 			app.setLongToken(longToken);
-
-			console.log('sending modelRequest');
+			
 			API.getModel().then(function(data) {
 				API.getUnits().then(function(dataUnit) {
 					API.getAllUniverses().then(function(uni) {
