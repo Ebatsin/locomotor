@@ -72,6 +72,14 @@
 }
 {
 	"_id": {
+		"$oid": "589be40c22049c61e4c97669"
+	},
+	"name": "One Piece",
+	"description": "The world of One Piece is populated by humans and numerous other races such as \"fishmen\" (a race of fish/human hybrids, similar to mermen and mermaids), dwarves, Minkmen (a race of humanoid animals), and giants. It is covered by two vast oceans, which are divided by a massive mountain range called the Red Line, which is also the only continent in the world.",
+	"image": "one-piece.jpg"
+}
+{
+	"_id": {
 		"$oid": "589be4c915dd9423173424a0"
 	},
 	"name": "Battlestar Galactica",
@@ -96,9 +104,33 @@
 }
 {
 	"_id": {
-		"$oid": "589be40c22049c61e4c97669"
+		"$oid": "589be91115dd9423173424a3"
 	},
-	"name": "One Piece",
-	"description": "The world of One Piece is populated by humans and numerous other races such as \"fishmen\" (a race of fish/human hybrids, similar to mermen and mermaids), dwarves, Minkmen (a race of humanoid animals), and giants. It is covered by two vast oceans, which are divided by a massive mountain range called the Red Line, which is also the only continent in the world.",
-	"image": "one-piece.jpg"
+	"name": "Yakari",
+	"description": "Yakari is a young Sioux Native American who has the ability to understand and speak animal languages. During his adventures, he meets all sorts of North American animals. His best friends are a girl Sioux, \"Rainbow\", a Sioux boy \"Buffalo Seed\" and his pony \"Little Thunder\". He has a totem animal, \"Great Eagle\", who frequently appears to him to give him critical advice.\n\nThe setting is the North American Great Plains, mainly. Horses have already been introduced by the Spanish, but there is no mentioning of white man whatsoever in the series. (In one book, there's even a mention by an old tribesman that there's a mystery how the horse came to the land, and that it hasn't always been there.) It can therefore be assumed that Yakari's adventures take place after the 15th century, but long before the settling rush in the late 18th/19th century.",
+	"image": "yakari.png"
+}
+{
+	"_id": {
+		"$oid": "589bea0015dd9423173424a4"
+	},
+	"name": "Avatar",
+	"description": "By 2154, humans have depleted Earth's natural resources, leading to a severe energy crisis. The Resources Development Administration (RDA for short) mines for a valuable mineral – unobtanium – on Pandora, a densely forested habitable moon orbiting the gas giant Polyphemus in the Alpha Centauri star system.[10] Pandora, whose atmosphere is poisonous to humans, is inhabited by the Na'vi, 10-foot tall (3.0 m), blue-skinned, sapient humanoids[33] who live in harmony with nature and worship a mother goddess called Eywa.",
+	"image": "avatar.png"
+}
+{
+	"_id": {
+		"$oid": "589bea9215dd9423173424a5"
+	},
+	"name": "Morrowind",
+	"description": "Morrowind takes place on Vvardenfell, an island in the Dunmer province of Morrowind, far from the typically \"European\" lands to the west and south depicted in Daggerfall and Arena. Along with graphical improvements, one of the most obvious differences between Morrowind and the earlier games in the series is that Morrowind takes place in a much smaller area than the previous games. While Arena featured the entirety of Tamriel as an explorable area, and Daggerfall featured sizeable portions of two provinces of Tamriel, Hammerfell and High Rock, Morrowind includes only the \"relatively small\" island of Vvardenfell within the province of Morrowind.[16] The change was a result of a conscious choice on the part of the developers to feature more detail and variety in the game. Whereas Daggerfall and Arena's dungeons were randomly generated, each area in Morrowind was specifically detailed, and each item specifically placed. As a result, reviewers were generally impressed with the game-world's variety, as this maintained the perception of an \"enormous\" game-world.[16] The game area expands to Mournhold on Morrowind's mainland in the Tribunal expansion, and to the island of Solstheim to the northwest of Vvardenfell in the Bloodmoon expansion.",
+	"image": "morrowind.png"
+}
+{
+	"_id": {
+		"$oid": "589bebcc15dd9423173424a6"
+	},
+	"name": "Lord Of The Ring",
+	"description": "Long ago, twenty rings existed: three for elves, seven for dwarves, nine for men, and one made by the Dark Lord Sauron, in Mordor, which would rule all the others. Sauron poured all his evil and his will to dominate into this ring. An alliance of elves and humans resisted Sauron’s ring and fought against Mordor. They won the battle and the ring fell to Isildur, the son of the king of Gondor, but just as he was about to destroy the ring in Mount Doom, he changed his mind and held on to it for himself. Later he was killed, and the ring fell to the bottom of the sea. The creature Gollum discovered it and brought it to his cave. Then he lost it to the hobbit Bilbo Baggins.",
+	"image": "lotr.png"
 }
