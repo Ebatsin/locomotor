@@ -38,3 +38,11 @@
 	"description": "The Halo universe is the sprawling fictional universe in which all Halo media takes place. In the 26th century, humankind has colonized hundreds of worlds across the Orion Arm of the Milky Way galaxy, only to stumble upon a hostile alliance of aliens known as the Covenant.",
 	"image": "halo.png"
 }
+{
+	"_id": {
+		"$oid": "589be40c22049c61e4c97669"
+	},
+	"name": "One Piece",
+	"description": "The world of One Piece is populated by humans and numerous other races such as \"fishmen\" (a race of fish/human hybrids, similar to mermen and mermaids), dwarves, Minkmen (a race of humanoid animals), and giants. It is covered by two vast oceans, which are divided by a massive mountain range called the Red Line, which is also the only continent in the world.",
+	"image": "one-piece.jpg"
+}
