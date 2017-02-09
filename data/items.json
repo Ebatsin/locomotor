@@ -6588,3 +6588,451 @@
 		}
 	]
 }
+{
+	"_id": {
+		"$oid": "589bff1522049c61e4c97672"
+	},
+	"name": "Pedalboat",
+	"universe": {
+		"$oid": "589be0cd15dd94231734249c"
+	},
+	"description": "The paddle wheel of a pedalo is a smaller version of that used by a paddle steamer. A two-seat pedalo has two sets of pedals, side by side, designed to be used together. Some models, however, have three pedals on each side to allow a person boating alone to pedal from a centrally seated position.",
+	"image": "pedalboat.png",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						4
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "1"
+						},
+						"max": {
+							"$numberLong": "1000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 0.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 20.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 3.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 3.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 1.0
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 20.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 50.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 26,
+								"children": [
+									{
+										"value": 22
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						0
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "8"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "589c006522049c61e4c97673"
+	},
+	"name": "Carriage",
+	"universe": {
+		"$oid": "589be0cd15dd94231734249c"
+	},
+	"description": "A carriage is a wheeled vehicle for people, usually horse-drawn; litters (palanquins) and sedan chairs are excluded, since they are wheelless vehicles. The carriage is especially designed for private passenger use and for comfort or elegance, though some are also used to transport goods. It may be light, smart and fast or heavy, large and comfortable.",
+	"image": "carriage.png",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						3,
+						4
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "3"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "100"
+						},
+						"max": {
+							"$numberLong": "10000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 0.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 200.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 3.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 3.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 2.0
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 70.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 150.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "9"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "1"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": true
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						1,
+						4
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "10"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		}
+	]
+}
