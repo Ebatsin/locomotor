@@ -108,7 +108,7 @@
 	function checkReady() {
 		console.log('vérification de la readyness');
 		if(window.initWhenReady) {
-			setTimeout(initModules, 100);
+			setTimeout(initModules, 200);
 		}
 		else {
 			setTimeout(checkReady, 100);

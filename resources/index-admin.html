@@ -18,8 +18,8 @@
 		<ul id="menu-bottom">
 		<li id="menu-settings"><span class="menu-icon"><img src="icons/settings.svg"/></span><span class="menu-text">Settings</span></li>
 		<li id="menu-users"><span class="menu-icon"><img src="icons/admin/users.svg"/></span><span class="menu-text">Manage users</span></li>
-		<li id="menu-add"><span class="menu-icon"><img src="icons/admin/add.svg"/></span><span class="menu-text">Add a vehicle</span></li>
-		<li id="menu-edit"><span class="menu-icon"><img src="icons/admin/edit.svg"/></span><span class="menu-text">Manage vehicles</span></li>
+		<li id="menu-add"><span class="menu-icon"><img src="icons/admin/add.svg"/></span><span class="menu-text">Create...</span></li>
+		<li id="menu-edit"><span class="menu-icon"><img src="icons/admin/edit.svg"/></span><span class="menu-text">Manage...</span></li>
 		<li id="menu-help"><span class="menu-icon"><img src="icons/help.svg"/></span><span class="menu-text">Help</span></li>
 		<li id="menu-disconnect"><span class="menu-icon"><img src="icons/disconnect.svg"/></span><span class="menu-text">Logout</span></li>
 		
@@ -88,22 +88,29 @@
 		</div>
 
 		<div id="manage-page" class="page">
-		<h1>Manage the vehicles</h1>
-		<div id="manage-input"></div>
-		<div id="manage-list">
-			<ul></ul>
-		</div>
-		<div id="manage-preview">
-			<img src="">
-			<h2></h2>
-			<div class="universe"></div>
-			</ul>
-			<div class="buttons">
-			<div id="manage-edit">Edit</div>
-			<div id="manage-fullview">See more</div>
-			<div id="manage-delete">Delete the vehicle</div>
+			<h1>Manage the vehicles</h1>
+			<div id="manage-input"></div>
+			<div id="manage-list">
+				<ul></ul>
+			</div>
+			<div id="manage-preview">
+				<img src="">
+				<h2></h2>
+				<div class="universe"></div>
+				<div class="buttons">
+				<div id="manage-edit">Edit</div>
+				<div id="manage-fullview">See more</div>
+				<div id="manage-delete">Delete the vehicle</div>
+				</div>
 			</div>
 		</div>
+
+		<div id="manage-universes-page" class="page">
+			<h1>Manage the universes</h1>
+			<div id="manage-universes-input"></div>
+			<div id="manage-universes-list">
+				<ul></ul>
+			</div>
 		</div>
 
 		<div id="add-page" class="page">
@@ -133,33 +140,57 @@
 		</div>
 
 		<div id="users-page" class="page">
-		<h1>Users management</h1>
+			<h1>Users management</h1>
 		</div>
 
 		<div id="settings-page" class="page">
-		<h1>Account settings</h1>
-		<div id="settings-header">
-			<div><div id="settings-username"></div><input id="settings-username-input" class="hidden" type="text" name=""><img id="settings-change-username" src="icons/edit.svg">
-			<span id="settings-change-username-options" class="hidden"><img id="settings-username-cancel" src="icons/cancel.svg"><img id="settings-username-valid" src="icons/valid.svg"></span></div>
-			<p id="settings-name-error">The name you have chosen is already in use</p>
-		</div>
-		
-		<div id="settings-password" class="option">
-			<div class="title">Change my password</div>
-			<div class="container">
-			<label>Current password :</label>
-			<input id="settings-pass-old" type="password" name="">
-			<label>New password :</label>
-			<input id="settings-pass-new" type="password" name="">
-			<label>Verify new password :</label>
-			<input id="settings-pass-verif" type="password" name="">
-			<span id="settings-change-password-options"><img id="settings-password-cancel" src="icons/cancel.svg"><img id="settings-password-valid" src="icons/valid.svg"></span>
+			<h1>Account settings</h1>
+			<div id="settings-header">
+				<div><div id="settings-username"></div><input id="settings-username-input" class="hidden" type="text" name=""><img id="settings-change-username" src="icons/edit.svg">
+				<span id="settings-change-username-options" class="hidden"><img id="settings-username-cancel" src="icons/cancel.svg"><img id="settings-username-valid" src="icons/valid.svg"></span></div>
+				<p id="settings-name-error">The name you have chosen is already in use</p>
+			</div>
+			
+			<div id="settings-password" class="option">
+				<div class="title">Change my password</div>
+				<div class="container">
+				<label>Current password :</label>
+				<input id="settings-pass-old" type="password" name="">
+				<label>New password :</label>
+				<input id="settings-pass-new" type="password" name="">
+				<label>Verify new password :</label>
+				<input id="settings-pass-verif" type="password" name="">
+				<span id="settings-change-password-options"><img id="settings-password-cancel" src="icons/cancel.svg"><img id="settings-password-valid" src="icons/valid.svg"></span>
+				</div>
+			</div>
+			<div id="settings-delete" class="option">
+				<div class="title">Delete my account</div>
 			</div>
 		</div>
-		<div id="settings-delete" class="option">
-			<div class="title">Delete my account</div>
+
+		<div id="add-choice-page" class="page">
+			<h1>Choose what to create</h1>
+			
+			<div id="add-choice-item" class="option">
+				<div class="title">Create a vehicle</div>
+			</div>
+
+			<div id="add-choice-universe" class="option">
+				<div class="title">Create a universe</div>
+			</div>
 		</div>
-		</div>      
+
+		<div id="add-manage-page" class="page">
+			<h1>Choose what to manage</h1>
+			
+			<div id="add-manage-item" class="option">
+				<div class="title">Manage the vehicles</div>
+			</div>
+
+			<div id="add-manage-universe" class="option">
+				<div class="title">Manage the universes</div>
+			</div>
+		</div> 
 
 		<div id="fullview-page" class="page">
 		<div id="fullview-left">
@@ -220,9 +251,12 @@
 	<script type="text/javascript" src="scripts/admin/menu.js"></script>
 	<script type="text/javascript" src="scripts/admin/login.js"></script>
 	<script type="text/javascript" src="scripts/admin/manage.js"></script>
+	<script type="text/javascript" src="scripts/admin/manageUniverses.js"></script>
 	<script type="text/javascript" src="scripts/admin/add.js"></script>
 	<script type="text/javascript" src="scripts/admin/users.js"></script>
 	<script type="text/javascript" src="scripts/settings.js"></script>
+	<script type="text/javascript" src="scripts/admin/addChoice.js"></script>
+	<script type="text/javascript" src="scripts/admin/addManage.js"></script>
 	<script type="text/javascript" src="scripts/admin/fullview.js"></script>
 	<!--<script type="text/javascript" src="scripts/search.js"></script>
 	<script type="text/javascript" src="scripts/results.js"></script>

@@ -51,30 +51,21 @@
 		* mode: 'login' | 'register'
 		*/
 		load: function(params) {
-			function init() {
-				console.log('manage loaded');
-				hideAllViews();
-				modules.menu.show();
-				modules.menu.showBackArrow(false);
-				modules.menu.clearBackArrow();
-				modules.help.pushContext('manage');
-				view.classList.remove('hide');
-				app.setTitle('Administration - Manage the vehicles');
+			console.log('manage loaded');
+			view.classList.remove('hide');
+			modules.menu.show();
 
-				rawList = params.data.items;
+			modules.menu.pushBackArrow(function() {
+				modules.manage.unload();
+			});
+			view.style['z-index'] = getNextZIndex();
+			modules.help.pushContext('manage');
 
-				modules.splash.hide();
-				modules.manage.printList();
-			}
+			rawList = params.data.items;
 
-			if(!modules.splash.isShown()) {
-				console.log('not shown');
-				modules.splash.show(init);
-			}
-			else {
-				console.log('shown');
-				init();
-			}
+			modules.splash.hide();
+			modules.manage.printList();
+
 		},
 		unload: function() {
 			modules.menu.popBackArrow();

@@ -56,6 +56,7 @@
 			view.classList.remove('hide');
 			view.style['z-index'] = getNextZIndex();
 			modules.help.pushContext('add');
+			console.log('faaaaaaaaaaaaaaaack');
 
 			if(params) {
 				title.innerHTML = 'Modify a vehicle';

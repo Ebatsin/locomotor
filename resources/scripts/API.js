@@ -216,17 +216,31 @@ window.API = {
 
 		return prom;
 	},
-	updateItem:function(item) {
+	updateItem: function(item) {
 		var prom = new JPromises();
 
 		app.updateItem(app.getShortToken(), JSON.stringify(item), prom.getId());
 
 		return prom;
 	},
-	removeItem:function(item) {
+	removeItem: function(item) {
 		var prom = new JPromises();
 
 		app.removeItem(app.getShortToken(), item, prom.getId());
+
+		return prom;
+	},
+	removeUniverse: function(universe) {
+		var prom = new JPromises();
+
+		app.removeUniverse(app.getShortToken(), universe, prom.getId());
+
+		return prom;
+	},
+	updateUniverse: function(item) {
+		var prom = new JPromises();
+
+		app.updateUniverse(app.getShortToken(), JSON.stringify(item), prom.getId());
 
 		return prom;
 	},

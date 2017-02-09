@@ -76,13 +76,11 @@
 			});
 
 			modules.menu.bind('edit', function() {
-				API.getAllItems().then(function(data) {
-					loadView('manage', data);
-				});
+				loadView('add-manage');
 			});
 
 			modules.menu.bind('add', function() {
-				loadView('add');
+				loadView('add-choice');
 			});
 
 			modules.menu.bind('users', function() {
@@ -166,9 +164,7 @@
 						window.universes = uni.data.universes;
 						// load the search view
 						modules.help.popContext();
-						API.getAllItems().then(function(data) {
-							loadView('manage', data);
-						});
+						loadView('add-manage');
 					});
 
 				}).catch(function(data) {
