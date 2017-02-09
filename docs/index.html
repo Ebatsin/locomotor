@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Locomotor: Locomotor</title>
+        <title>Locomotor: Main Page</title>
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -89,40 +89,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Locomotor </div>  </div>
+<div class="title">Locomotor Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Locomotor is a real and fictional vehicles comparator. It is based on predefined criterias that the user can select. It outputs a list of the vehicles that fit "the most" the user's query. The comparator works in a client/server design, allowing multiple users to use the same dataset at the same time.</p>
-<p>The project offers 2 clients:</p>
-<ul>
-<li>the first one is an administation interface which allow the user to modify the dataset.</li>
-<li>the other is an easy to use interface enabling the user to search for a vehicle and retrieve his booking.</li>
-</ul>
-<h2>Getting Started</h2>
-<p>These instructions will get you a copy of the project up and running on your local machine.</p>
-<h3>Prerequisites</h3>
-<p>To run this project, you will need :</p>
-<ul>
-<li>JAVA SE 6+ (JavaFX 2.0 required)</li>
-<li>MongoDB installed and running</li>
-</ul>
-<h3>Installing</h3>
-<p>To build this project, simply clone this repository and build the project.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;git clone https://github.com/gaelfoppolo/locomotor</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;cd locomotor</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;make</div></div><!-- fragment --><p>To run the application, you need to start the core first.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;make run-core</div></div><!-- fragment --><p>Then, you can use either the administration or the user interface</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;make run-user-interface</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;make run-admin-interface</div></div><!-- fragment --><p>To stop the core, use</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;make stop-core</div></div><!-- fragment --><h3>Fill the database</h3>
-<p>If you want to use a prefilled database, use the ones in the <code>data</code> directory.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;for i in data/*.json; do mongoimport -d locomotor -c $(basename $i .json) $i; done</div></div><!-- fragment --><h2>Running the tests</h2>
-<p>To check that your code is compliant with our coding convention without having to compile the project, use:</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;make linter</div></div><!-- fragment --><h2>Authors</h2>
-<ul>
-<li><b>Bastien Philip</b> - <em>Initial work</em> - <a href="https://github.com/ebatsin">ebatsin</a></li>
-<li><b>Gaël Foppolo</b> - <em>Initial work</em> - <a href="https://github.com/gaelfoppolo">gaelfoppolo</a></li>
-</ul>
-<h2>License</h2>
-<p>This project is licensed under the GPLv3 license </p>
-</div></div><!-- contents -->
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 </div>
