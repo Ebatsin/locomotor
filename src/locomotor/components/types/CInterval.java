@@ -32,7 +32,7 @@ public abstract class CInterval<T extends Number> implements CUniverseType, CIte
 	 * @throws IllegalArgumentException if the min endpoint is greater than the max endpoint
 	 */
 	public CInterval(T min, T max) {
-		if(min.doubleValue() < max.doubleValue()) {
+		if(min.doubleValue() <= max.doubleValue()) {
 			_min = min;
 			_max = max;
 		}

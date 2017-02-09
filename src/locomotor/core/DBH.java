@@ -1239,7 +1239,7 @@ public class DBH {
 	private static void deleteItemWith(String universeID) {
 
 		MongoCollection<Document> items = md.getCollection("items");
-		Bson filter = Filters.eq("_id", new ObjectId(universeID));
+		Bson filter = Filters.eq("universe", new ObjectId(universeID));
 		FindIterable<Document> item = items.find(filter);
 
 		// for each item that belongs to the universe
@@ -1299,8 +1299,15 @@ public class DBH {
 			long endDate = booking.getLong("endDate");
 
 			bookingsFinal.add(new Booking(
-				id, itemID, itemInfo.get("itemName").toString(), 
-				itemInfo.get("itemImageURL").toString(), qt, startDate, endDate)
+				id,
+				itemID,
+				itemInfo.get("itemName").toString(), 
+				itemInfo.get("itemImageURL").toString(),
+				itemInfo.get("universeName").toString(),
+				qt,
+				startDate,
+				endDate
+				)
 			);
 		}
 

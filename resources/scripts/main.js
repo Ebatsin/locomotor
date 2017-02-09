@@ -31,7 +31,7 @@
 
 	window.loadView = function(view, params) {
 		if(window.views.indexOf(view) != -1) {
-			modules.help.close();
+			//modules.help.close();
 			window.modules[view].load(params);
 		}
 	};
@@ -48,10 +48,62 @@
 		return zindex;
 	}
 
+	window.getBestAlt = function(value, unit) {
+		var currentBest = 1000000000000;
+		var id = 0;
+		for(var i = 0; i < unit.length; ++i) {
+			var grade = value / unit[i].factor;
+			if(grade >= 1 && grade < currentBest) {
+				currentBest = grade;
+				id = i;
+			}
+		}
+		return unit[id];
+	};
+
+	window.formatUnit = function(value, unitID, fixed) {
+		for(var i = 0; i < window.units.length; ++i) {
+			if(units[i]['_id'] == unitID) {
+				var best = getBestAlt(value, units[i].alt);
+				var factoredValue = value / best.factor;
+				var term = best.shortName;
+
+				if(factoredValue.toFixed(2).indexOf('.00') != -1) {
+					return factoredValue.toFixed(0) + term;
+				}
+				else {
+					return factoredValue.toFixed(2) + term;
+				}
+			}
+		}
+		return fixed !== undefined ? value.toFixed(fixed) : value;
+	};
+
+	/**
+	* @param value The value
+	* @param str a string that contains ${unit} in which the long unit will me placed and ${value} in which the value will be placed
+	*/
+	window.formatLongUnit = function(value, str, unitID) {
+		for(var i = 0; i < window.units.length; ++i) {
+			if(units[i]['_id'] == unitID) {
+				var best = getBestAlt(value, units[i].alt);
+				var factoredValue = value / best.factor;
+				var term = best.longName.replace('%s', factoredValue >= 2 ? 's': '');
+				
+				if(factoredValue.toFixed(2).indexOf('.00') != -1) {
+					return str.replace('${unit}', term).replace('${value}', factoredValue.toFixed(0));
+				}
+				else {
+					return str.replace('${unit}', term).replace('${value}', factoredValue.toFixed(2));
+				}
+			}
+		}
+		return str.replace('${unit}', '').replace('${value}', value);
+	};
+
 	function checkReady() {
-		console.log('vérification de la readyness');
 		if(window.initWhenReady) {
-			setTimeout(initModules, 100);
+			setTimeout(initModules, 200);
 		}
 		else {
 			setTimeout(checkReady, 100);
@@ -59,22 +111,4 @@
 	}
 
 	checkReady();
-
-
-	// @TODO remove that
-	// debug
-	var size = document.createElement('div');
-	size.style.position = "absolute";
-	size.style.right = 0;
-	size.style.bottom = 0;
-	size.style['z-index'] = 10001;
-
-	document.body.appendChild(size);
-
-	size.innerHTML = $(window).width() + 'x' + $(window).height();
-
-	window.addEventListener('resize', function(e) {
-		size.innerHTML = $(window).width() + 'x' + $(window).height();
-	});
-
 })();

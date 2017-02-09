@@ -9,6 +9,12 @@
 	font-style: italic;
 }
 
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/Roboto/Roboto-Light.ttf");
+	font-weight: 200;
+}
+
 html, body {
 	/*font-family: "Roboto";*/
 	margin: 0;
@@ -17,6 +23,7 @@ html, body {
 	background-color: hsl(0, 0%, 90%);
 	user-select: none;
 	overflow: hidden;
+	cursor: default;
 }
 
 #splashscreen {
@@ -52,7 +59,7 @@ html, body {
 	height: 100%;
 	background-color: hsl(0, 0%, 11%);
 	overflow: hidden;
-	z-index: 9000
+	z-index: 9000;
 }
 
 #menu-bottom {
@@ -96,6 +103,7 @@ html, body {
 	position: absolute;
 	cursor: pointer;
 	display: none;
+	z-index: 9000;
 }
 
 .menu-text {	
@@ -159,12 +167,23 @@ html, body {
 	margin-bottom: 1em;
 	letter-spacing: 1px;
 	margin-left: 1.3em;
+	margin-right: 1.3em;
+}
+
+#help h3 {
+	color: hsl(180, 50%, 30%);
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	margin-bottom: 0.2em;
+	letter-spacing: 1px;
+	font-size: 1.3rem;
 }
 
 #help p {
 	font-size: 1.2em;
 	margin-left: 1.5em;
 	margin-right: 1.5em;
+	margin-top: 0;
 }
 
 /* ------------------------------------------ LOGIN VIEW ---------------------------------------*/
@@ -355,7 +374,7 @@ html, body {
 	margin-top: 2em;
 	width: 90%;
 	margin-left: 5%;
-	font-size: 1.3em;
+	font-size: 1.5em;
 	color: hsl(0, 0%, 11%);
 }
 
@@ -421,6 +440,18 @@ html, body {
 	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
 	border-top: solid 1px hsl(0, 0%, 70%);
 	width: 100%;
+}
+
+#search-refresh {
+	position: absolute;
+	left: calc(2.5% - 1em);
+	top: -3em;
+	cursor: pointer;
+}
+
+#search-refresh img {	
+	width: 2em;
+	height: 2em;
 }
 
 #search-back {	
@@ -671,25 +702,27 @@ html, body {
 	top: 0;
 }
 
-#results-criteria {
-	width: 20em;
-	height: 100%;
-	background-color: hsl(0, 0%, 75%);
-	display:inline-block;
-	float: left;
+#results-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
 }
 
 #results-list {
-	width: calc(100% - 45em);
-	height: 100%;
-	margin-left: 20em;
+	width: calc(100% - 25em);
+	height: calc(100% - 4.5em + 1px);
 	overflow-x: auto;
 }
 
 #results-preview {
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: calc(5em - 10px);
 	width: 25em;
 	height: 100%;
 	border-left: solid 1px hsl(0, 0%, 75%);
@@ -804,4 +837,1206 @@ html, body {
 
 #results-fullview {
 	float: right;
+}
+
+/* ------------------------------------------ FULLVIEW ---------------------------------------*/
+
+#fullview-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	z-index: 1500;
+	top: 0;
+}
+
+#fullview-left {
+	height: 100%;
+	width: calc(100% - 25em);
+	overflow-x: auto;
+}
+
+#fullview-header {
+	overflow: hidden;
+}
+
+#fullview-left img {
+	width: 15em;
+	height: 15em;
+	margin: 2em;
+	float: left;
+}
+
+#fullview-name-container {
+	margin-left: 17em;
+	margin-top: 2rem;
+}
+
+#fullview-name-container h1 {
+	margin: 0;
+	letter-spacing: 2px;
+	font-size: 2.9em;
+	font-weight: 200;
+}
+
+#fullview-price {
+	margin-top: 2em;
+}
+
+#fullview-name-container button {
+	display: inline-block;
+	height: 2.5em;
+	padding: 0 3em;
+	margin-top: 2em;
+	font-size: 1em;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#fullview-name-container button:hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+#fullview-left > h2 {
+	margin-top: 2em;
+	padding-left: 2em;
+	padding-top: 1em;
+	border-top: solid 1px hsl(0, 0%, 75%);
+	color: hsl(180, 60%, 40%);
+	letter-spacing: 1px;
+	font-size: 1.5em;
+}
+
+#fullview-description {
+	margin-left: 2em;
+	margin-right: 2em;
+	font-size: 1.2em;
+	line-height: 170%;
+	color: hsl(0, 0%, 11%);
+}
+
+#fullview-specs {
+	list-style-type: none;
+	margin-left: 2em;
+}
+
+#fullview-specs .category-name {
+	color: hsl(180, 70%, 20%);
+	font-size: 1.4em;
+	margin-top: 0.5em;
+	text-transform: capitalize;
+}
+
+#fullview-specs .category-content {
+	list-style-type: none;
+	padding-left: 1.5em;
+}
+
+#fullview-specs .criterion-name {
+	color: hsl(0, 0%, 20%);
+	font-size: 1.2em;
+	display: inline-block;
+	text-transform: capitalize;
+}
+
+#fullview-specs .criterion-value {
+	font-size: 1em;
+	color: hsl(0, 0%, 11%);
+	margin-left: 0.4em;
+	display: inline-block;
+}
+
+#fullview-universe {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 25em;
+	height: 100%;
+}
+#fullview-universe img {
+	width: 15em;
+	height: 15em;
+	margin: 2em 5em;
+	border: solid 1px hsl(0, 0%, 50%);
+}
+
+#fullview-universe h2 {
+	text-align: center;
+	margin: 0;
+}
+
+#fullview-universe p {
+	width: 90%;
+	margin-left: 5%;
+	line-height: 170%;
+	color: hsl(0, 0%, 11%);
+}
+
+/* ------------------------------------------ SETTINGS ---------------------------------------*/
+
+#settings-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	z-index: 1500;
+	top: 0;
+}
+
+#settings-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#settings-header {
+	margin: 2em;
+}
+
+#settings-header > div {
+	text-align: center;
+}
+
+#settings-username {
+	display: inline-block;
+	font-size: 2.5em;
+}
+
+#settings-header img {
+	font-size: 1rem;
+	height: 1em;
+	margin-left: 0.5em;
+	margin-bottom: 0.25em;
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+#settings-header img:hover {
+	opacity: 1;
+}
+
+#settings-page .option {
+	display: inline-block;
+	font-size: 1.3rem;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	width: 25%;
+	height: 15em;
+	top: 15em;
+	left: 16.6666%;
+	overflow: hidden;
+	position: absolute;
+}
+
+#settings-delete {
+	left: 58.3333% !important;
+}
+
+#settings-header input {	
+	width: 20rem;
+	line-height: 3em;
+	font-size: 1.5em;
+	height: 1.8em;
+	line-height: 1.8em;
+	padding: 0 0.5em;
+	border-radius: 0;
+	border: solid hsl(0, 0%, 85%) 1px;
+}
+
+#settings-page .option .title {
+	margin-top: 7em;
+	text-align: center;
+	overflow: hidden;
+}
+
+#settings-page .option:not(.selected):hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+#settings-page .hidden {
+	display: none;
+}
+
+#settings-username-cancel {
+	margin-right: 0.4em;
+}
+
+#settings-name-error {
+	text-align: center;
+	color: hsl(0, 60%, 60%);
+	display: none;
+}
+
+#settings-password .container {
+	margin: 1em;
+	font-size: 1rem;
+	position: relative;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#settings-password .container span {
+	display: inline-block;
+	float: right;
+	margin-right: 5%;
+	margin-top: 0.5em;
+}
+
+#settings-password .container span img {
+	width: 1.5em;
+	height: 1.5em;
+	cursor: pointer;
+	margin-left: 2em;
+	opacity: 0.6;
+}
+
+#settings-password .container span img:hover {
+	opacity: 1;
+}
+
+#settings-password.selected {	
+	background-color: hsl(207, 12%, 95%);
+	border: solid 1px hsl(0, 0%, 80%);
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
+	color: black;
+	cursor: default;
+}
+
+#settings-password input {
+	margin-left: 1em;
+	width: 90%;
+	height: 2em;
+	margin-bottom: 1em;
+}
+#settings-password label {
+	margin-left: 1em;
+}
+
+/* ------------------------------------------ BOOKING ---------------------------------------*/
+
+#booking-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	opacity: 0;
+	z-index: 1500;
+	top: 0;
+	left: -1px;
+}
+
+#booking-side {
+	position: absolute;
+	background-color: hsl(207, 12%, 95%);
+	width: 30em;
+	height: 100%;
+	right: -30em;
+	top: 0;
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.31);
+}
+
+#booking-side h2 {
+	margin: 0;
+	padding-left: 2em;
+	padding: 1em;
+	font-size: 2em;
+	border-bottom: solid 1px hsl(0, 0%, 80%);
+}
+
+#booking-item-name {
+	text-align: center;
+	font-size: 1.5em;
+	color: hsl(0, 0%, 20%);
+	margin-top: 1em;
+	margin-bottom: 2em;
+}
+
+#booking-side label {
+	margin-left: 1em;
+	margin-right: 1em;
+	display: block;
+	clear: both;
+	margin-top: 1.5em;
+	height: 1.5em;
+	line-height: 1.5em;
+}
+
+#booking-side label span {
+	width: 5em;
+	text-align: right;
+	display: inline-block;
+}
+
+#booking-side input {
+	float: right;
+	width: 23em;
+	margin-right: 3em;
+	height: 1.5em;
+	line-height: 1.5em;
+	border-radius: 0;
+}
+
+#booking-options {
+	margin-top: 2em;
+}
+
+#booking-options button {
+	width: 10rem;
+	height: 2.5rem;
+	margin-left: 3.5rem;
+	padding: 0.3rem 0;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	font-size: 1.1em;
+	margin-top: 1.5em;
+}
+
+#booking-options button:hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+/* ------------------------------------------ BOOKING LIST ---------------------------------------*/
+
+#booking-list-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	z-index: 1500;
+	top: 0;
+}
+
+#booking-list-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#booking-list-page ul {	
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	height: calc(100% - 4.5em);
+	list-style-type: none;
+}
+
+#booking-list-page li {
+	height: 11em;
+	border-bottom: solid 1px hsl(0, 0%, 80%);
+}
+
+#booking-list-page li img {
+	width: 10em;
+	display: inline-block;
+	margin: 0.5em;
+	float: left;
+}
+
+#booking-list-page .booking-list-name-container {
+	display: inline-block;
+	margin-left: 1em;
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+#booking-list-page .booking-list-name {
+	font-size: 1.4em;
+	margin-top: 1em;
+	letter-spacing: 1px;
+}
+
+#booking-list-page .booking-list-universe {
+	margin-top: 0.5em;
+	font-style: italic;
+}
+
+#booking-list-page .booking-list-quantity {
+	margin-top: 4em;
+}
+
+#booking-list-page .booking-list-date-container {
+	display: inline-block;
+	margin-left: 1em;
+	width: 20%;
+	height: 100%;
+	float: right;
+}
+
+#booking-list-page .booking-list-from {
+	margin-left: 0.5em;
+	margin-top: 3em;
+}
+
+#booking-list-page .booking-list-to {
+	margin-left: 0.5em;
+	margin-top: 3em;
+}
+
+#booking-list-page .booking-list-button-container {
+	float: right;
+	text-align: center;
+}
+
+#booking-list-page .booking-list-button-container button {
+	display: block;
+	width: 12rem;
+	height: 2rem;
+	margin-right: 2rem;
+	padding: 0.3rem 0;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	margin-top: 3em;
+}
+
+#booking-list-page .booking-list-button-container button:hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+/* ------------------------------------------ MANAGE ---------------------------------------*/
+
+#manage-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	top: 0;
+}
+
+#manage-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#manage-list {
+	width: calc(100% - 25em);
+	height: calc(100% - 4.5em + 1px);
+	overflow-x: auto;
+}
+
+#manage-preview {
+	position: absolute;
+	right: 0;
+	top: calc(5em - 10px);
+	width: 25em;
+	height: 100%;
+	border-left: solid 1px hsl(0, 0%, 75%);
+}
+
+#manage-list ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#manage-list ul li {
+	border-bottom: solid 1px hsl(0, 0%, 70%);
+	height: 10em;
+	padding: 0;
+}
+
+#manage-list ul li img {
+	height: 8em;
+	width: 8em;
+	float: left;
+	margin-left: 1em;
+	margin-top: 1em;
+	border: solid 1px hsl(0, 0%, 50%);
+}
+
+#manage-list ul li > div {
+	margin-left: 10em;
+	overflow: hidden;
+}
+
+#manage-list ul li h2 {
+	margin: 0;
+	margin-top: 1rem;
+	margin-left: 1.5rem;
+	letter-spacing: 1px;
+}
+
+#manage-list ul li .universe {
+	margin-top: 1em;
+	margin-left: 1.5rem;
+}
+
+#manage-list ul li .percentage {
+	margin-top: 1em;
+	margin-left: 1.5rem;
+}
+
+#manage-preview img {
+	width: 15em;
+	height: 15em;
+	margin: 2em 5em;
+	border: solid 1px hsl(0, 0%, 50%);
+}
+
+#manage-preview h2 {
+	text-align: center;
+	margin: 0;
+}
+
+#manage-preview .universe {
+	text-align: center;
+	margin-top: 1.5em;
+}
+
+#manage-preview .percentage {
+	text-align: center;
+	font-style: italic;
+	margin-top: 1em;
+}
+
+#manage-preview .criteria-list {
+	margin: 0;
+	padding: 0;
+	width: 20em;
+	margin-left: 2.5em;
+	margin-top: 1em;
+	list-style-type: none;
+	border: solid 1px hsl(0, 0%, 75%);
+	background-color: hsl(0, 0%, 95%);
+}
+
+#manage-preview .criteria-list li {
+	margin: 0.5em 1em;
+}
+
+#manage-preview .criteria-list li .criteria-match {
+	float: right;
+}
+
+#manage-preview .buttons {
+	margin-top: 1.5em;
+	width: 20em;
+	margin-left: 2.5em;
+}
+
+#manage-preview .buttons div {
+	width: 9.5em;
+	display: inline-block;
+	padding: 0.3em 0;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#manage-preview .buttons div:hover {	
+	background-color: hsl(180, 60%, 40%);
+}
+
+#manage-fullview {
+	float: right;
+}
+
+#manage-delete {
+	margin-top: 1em;
+	width: 20em !important;
+}
+
+/* ------------------------------------------ ADD ---------------------------------------*/
+
+#add-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	top: 0;
+}
+
+#add-container {
+	height: calc(100% - 6.5em);
+	overflow: auto;
+}
+
+#add-page h1 {
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#add-breadcrumb {
+	position: relative;
+	width: 80%;
+	margin-left: 10%;
+	height: 4em;
+	background-color: hsl(0, 0%, 95%);
+	border: solid 1px hsl(0, 0%, 70%);
+	margin-top: 2em;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+#add-breadcrumb.show-cat {
+	overflow: visible;
+}
+
+#add-breadcrumb-arrow {
+	width: 2.8284em;
+	height: 2.8284em;
+	background-color: hsl(0, 0%, 80%);
+	position: absolute;
+	top: 0;
+	margin-left: 12.5858em;
+	margin-top: 0.5857em;
+	-webkit-transform: rotate(45deg);
+}
+
+#add-breadcrumb-cat {
+	display: inline-block;
+	list-style-type: none;
+	background-color: hsl(0, 0%, 80%);
+	padding: 0;
+	margin-top: 0;
+	position: absolute;
+	width: 14em;
+	float: left;
+	z-index: 999;
+}
+
+#add-breadcrumb-cat li {
+	padding: 0 1em;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+#add-breadcrumb-cat li:hover {
+	background-color: hsl(0, 0%, 75%);
+}
+
+#add-breadcrumb-crit {
+	margin: 0;
+	display: block;
+	height: 4em;
+	margin-left: 14em;
+	list-style-type: none;
+}
+
+#add-breadcrumb-crit li {
+	display: inline-block;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	padding: 0 2em;
+	border-right: solid 1px hsl(0, 0%, 80%);
+	font-size: 1.2em;
+	color: hsl(0, 0%, 20%);
+}
+
+#add-breadcrumb-crit li:hover, #add-breadcrumb-crit li.selected {
+	background-color: hsl(0, 0%, 90%);
+}
+
+#add-input {
+	margin-top: 2em;
+}
+
+#add-buttons {
+	position: absolute;
+	bottom: 0;
+	height: 6em;
+	width: 100%;
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
+	border-top: solid 1px hsl(0, 0%, 70%);
+	width: 100%;
+}
+
+#add-back {	
+	display: inline-block;
+	width: 10em;
+	height: 5em;
+	text-align: center;
+	cursor: pointer;
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+}
+
+#add-back:hover {
+	background-color: hsl(0, 0%, 85%);
+	border: solid 1px hsl(0, 0%, 75%);
+	margin-left: calc(0.5em - 1px); /* welcome in the wonderful word of css without border-box */
+	margin-top: calc(0.5em - 1px);
+}
+
+#add-back img {
+	width: 3.5em;
+	height: 3.5em;
+	margin-top: 0.75em;
+}
+
+#add-start {
+	position: absolute;
+	display: inline-block;
+	height: 3.3333em;
+	line-height: 3.3333em;
+	width: calc(100% - 14.6666em);
+	text-align: center;
+	font-size: 1.5em;
+	color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	top: 0.3333em;
+	left: 7.3333em;
+}
+
+#add-start:hover {
+	background-color: hsl(180, 60%, 30%);
+	color: hsl(0, 0%, 90%);
+}
+
+#add-next {	
+	position: absolute;
+	display: inline-block;
+	width: 10em;
+	height: 5em;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 0.5em;
+	right: 0.5em;
+}
+
+#add-next:hover {
+	background-color: hsl(0, 0%, 85%);
+	border: solid 1px hsl(0, 0%, 75%);
+	margin-top: calc(0.5em - 1px);
+	right: calc(0.5em - 1px);
+}
+
+#add-next img {
+	width: 3.5em;
+	height: 3.5em;
+	margin-top: 0.75em;
+}
+
+#add-universe {
+	text-align: center;
+	margin-top: 3em;
+}
+
+#add-infos {
+	width: 80%;
+	margin-left: 10%;
+}
+
+#add-infos label {
+	margin-top: 1em;
+	font-size: 1.2em;
+	display: inline-block;
+}
+
+#add-infos input {
+	height: 1em;
+	font-size: 1em;
+	width: 20em;
+	margin-left: 1em;
+}
+
+#add-infos textarea {
+	width: calc(100% - 2em);
+	height: 10em;
+	background-color: hsl(0, 0%, 95%);
+	border: solid 1px hsl(0, 0%, 70%);
+	padding: 1em;
+}
+
+#add-input {
+	width: 80%;
+	margin-left: 10%;
+}
+
+.integer, .float,  .poor-int-range, .poor-float-range {
+	text-align: center;
+}
+
+.integer *, .float *,  .poor-int-range *, .poor-float-range * {
+	display: inline-block;
+}
+
+.integer input, .float input,  .poor-int-range input, .poor-float-range input {
+	height: 1.5em;
+	line-height: 1.5em;
+	margin: 0 0.5em;
+}
+
+/* ------------------------------------------ USERS ---------------------------------------*/
+
+#users-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	top: 0;
+}
+
+#users-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+/* ------------------------------------------ POPIN ---------------------------------------*/
+
+#mary-overlay {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: black;
+	opacity: 0.3;
+	z-index: 9998;
+	opacity: 0;
+	pointer-events: none;
+}
+
+#mary {
+	position: fixed;
+	z-index: 9999;
+	width: 30em;
+	left: calc(50% - 19em);
+	top: 15em;
+	background-color: hsl(207, 12%, 95%);
+	padding: 2em;
+	border: solid 1px hsl(0, 0%, 80%);
+	box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.21);
+	opacity: 0;
+	pointer-events: none;
+}
+
+#mary h1 {
+	margin: 0;
+}
+
+#mary p {
+	margin: 2em 0;
+}
+
+#mary button {
+	float: right;
+	width: 9.5em;
+	display: inline-block;
+	padding: 0.3em 0;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	margin-left: 1em;
+	margin-top: 1em;
+}
+
+#mary button:hover {	
+	background-color: hsl(180, 60%, 40%);
+}
+
+/* ------------------------------------------ ADD CHOICE ---------------------------------------*/
+
+#add-choice-page {
+	background-color: hsl(200, 5%, 90%);
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+#add-choice-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#add-choice-page .option {
+	display: inline-block;
+	font-size: 1.3rem;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	width: 25%;
+	height: 15em;
+	top: 15em;
+	left: 16.6666%;
+	overflow: hidden;
+	position: absolute;
+}
+
+#add-choice-universe {
+	left: 58.3333% !important;
+}
+
+#add-choice-page .option .title {
+	margin-top: 7em;
+	text-align: center;
+	overflow: hidden;
+}
+
+#add-choice-page .option:not(.selected):hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+/* ------------------------------------------ MANAGE CHOICE ---------------------------------------*/
+
+#add-manage-page {
+	background-color: hsl(200, 5%, 90%);
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+#add-manage-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#add-manage-page .option {
+	display: inline-block;
+	font-size: 1.3rem;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+	width: 25%;
+	height: 15em;
+	top: 15em;
+	left: 16.6666%;
+	overflow: hidden;
+	position: absolute;
+}
+
+#add-manage-universe {
+	left: 58.3333% !important;
+}
+
+#add-manage-page .option .title {
+	margin-top: 7em;
+	text-align: center;
+	overflow: hidden;
+}
+
+#add-manage-page .option:not(.selected):hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+/* ------------------------------------------ MANAGE UNIVERSES ---------------------------------------*/
+
+#manage-universes-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	top: 0;
+}
+
+#manage-universes-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+}
+
+#manage-universes-list {
+	width: 100%;
+	height: calc(100% - 4.5em + 1px);
+	overflow-x: auto;
+}
+
+#manage-universes-list .hidden {
+	display: none;
+}
+
+#manage-universes-list ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#manage-universes-list ul li {
+	border-bottom: solid 1px hsl(0, 0%, 70%);
+	height: 10em;
+	padding: 0;
+	overflow: hidden;
+}
+
+#manage-universes-list .scolumn {
+	padding-top: 1em;
+	margin-left: 10em;
+	margin-right: 20em;
+}
+
+#manage-universes-list .tcolumn {
+	float: right;
+	margin-top: 2em;
+	margin-right: 2em;
+}
+
+#manage-universes-list .tcolumn button {
+	margin: 1em 0;
+	height: 2em;
+	width: 15em;
+	display: block;
+	text-align: center;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#manage-universes-list .tcolumn button:hover {
+	background-color: hsl(180, 60%, 40%);
+}
+
+#manage-universes-list ul li img {
+	height: 8em;
+	width: 8em;
+	float: left;
+	margin-left: 1em;
+	margin-top: 1em;
+	border: solid 1px hsl(0, 0%, 50%);
+}
+
+#manage-universes-list ul li h2 {
+	margin: 0;
+	letter-spacing: 1px;
+}
+
+#manage-universes-list ul li label {
+	margin-left: 1em;
+	margin-top: 1em;
+	display: inline-block;
+}
+
+#manage-universes-list ul li textarea {
+	margin-left: 1em;
+	height: 5em;
+	resize: none;
+	width: calc(90% - 20em);
+}
+
+#manage-universes-list .universes-description {
+	display: block;
+}
+
+/* ------------------------------------------ CREATE UNIVERSES ---------------------------------------*/
+
+#create-universes-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	top: 0;
+}
+
+#create-universes-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+	margin-bottom: 1.5em;
+}
+
+#create-universes-page label {
+	margin-left: 10%;
+	font-size: 1.4em;
+	margin-top: 2em;
+	width: 28em;
+	display: block;
+}
+
+#create-universes-page input {
+	width: 20em;
+	font-size: 1em;
+	height: 1.4rem;
+	margin-left: 1em;
+	float: right;
+}
+
+#create-universes-page textarea {
+	margin-left: 10%;
+	width: 80%;
+	height: 10em;
+}
+
+#create-universes-page button {
+	float: right;
+	margin-right: 10%;
+	margin-top: 2em;
+	height: 2.5em;
+	padding: 0 2em;
+	font-size: 1.5em;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#create-universes-page button:hover {
+	background-color: hsl(180, 60%, 40%);
 }

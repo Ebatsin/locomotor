@@ -1,11 +1,12 @@
 (function() {
-	var view = document.querySelector('#results-page');
-	var listContainer = view.querySelector('#results-list ul');
-	var preview = document.querySelector('#results-preview');
-	var book = document.querySelector('#results-book');
-	var toFullview = document.querySelector('#results-fullview');
+	var view = document.querySelector('#manage-page');
+	var listContainer = view.querySelector('#manage-list ul');
+	var preview = document.querySelector('#manage-preview');
+	var toFullview = document.querySelector('#manage-fullview');
+	var edit = view.querySelector('#manage-edit');
+	var remove = view.querySelector('#manage-delete');
 
-	window.registerView('results');
+	window.registerView('manage');
 
 	if(!window.modules) {
 		window.modules = {};
@@ -14,18 +15,33 @@
 	var rawList;
 	var currentId;
 
-	window.modules['results'] = {
+	window.modules['manage'] = {
 		init: function() {
-			console.log('initialisation du module results');
+			console.log('initialisation du module manage');
 
 			toFullview.addEventListener('click', function() {
 				loadView('fullview', rawList[currentId]['_id']);
 			});
 
-			book.addEventListener('click', function() {
-				loadView('booking', {
-					id: rawList[currentId]['_id'],
-					name: rawList[currentId].name
+			edit.addEventListener('click', function() {
+				if(rawList.length == 0) {
+					return;
+				}
+				API.getItem(rawList[currentId]['_id']).then(function(data) {
+					loadView('add', data.data.item);
+				});
+			});
+
+			remove.addEventListener('click', function() {
+				if(rawList.length == 0)  {
+					return;
+				}
+				(new Popin()).open("Delete the vehicle", "Are you sure that you want to delete this vehicle ?", function() {
+					API.removeItem(rawList[currentId]['_id']).then(function(data) {
+						rawList[currentId].remove();
+					}).catch(function(data) {
+						console.log(data.message);
+					});
 				});
 			});
 		},
@@ -36,16 +52,19 @@
 		*/
 		load: function(params) {
 			view.classList.remove('hide');
-			view.style['z-index'] = getNextZIndex();
-			modules.help.pushContext('results');
-
-			rawList = params.data.results;
+			modules.menu.show();
 
 			modules.menu.pushBackArrow(function() {
-				modules.results.unload();
+				modules.manage.unload();
 			});
+			view.style['z-index'] = getNextZIndex();
+			modules.help.pushContext('manage');
 
-			modules.results.printList();
+			rawList = params.data.items;
+
+			modules.splash.hide();
+			modules.manage.printList();
+
 		},
 		unload: function() {
 			modules.menu.popBackArrow();
@@ -62,10 +81,8 @@
 
 					var title = document.createElement('h2');
 					var universe = document.createElement('div');
-					var percentage = document.createElement('div');
 
 					universe.classList.add('universe');
-					percentage.classList.add('percentage');
 
 
 					API.getImageUrl(rawList[i].image).then(function(data) {
@@ -74,52 +91,35 @@
 
 					container.appendChild(title);
 					container.appendChild(universe);
-					container.appendChild(percentage);
 					item.appendChild(image);
 					item.appendChild(container);
 
 					title.innerHTML = rawList[i].name;
 					universe.innerHTML = 'Universe : ' + rawList[i].universe;
-					percentage.innerHTML = 'Match : ' + Math.round(rawList[i].grade * 100) + '%';
 					listContainer.appendChild(item);
 
 					item.addEventListener('click', function() {
-						modules.results.showPreview(i);
+						modules.manage.showPreview(i);
 					});
+
+					rawList[i].remove = function() {
+						item.parentNode.removeChild(item);
+					};
 				})(i);
 			}
+
 			if(rawList.length > 0) {
-				modules.results.showPreview(0);
+				modules.manage.showPreview(0);
 			}
 		},
 		showPreview: function(id) {
 			currentId = id;
 			preview.querySelector('h2').innerHTML = rawList[id].name;
 			preview.querySelector('.universe').innerHTML = rawList[id].universe;
-			preview.querySelector('.percentage').innerHTML = Math.round(rawList[id].grade * 100) + '%';
 
 			API.getImageUrl(rawList[id].image).then(function(data) {
 				preview.querySelector('img').src = data.replace('resources/', '');
 			});
-
-			var ul = preview.querySelector('ul');
-			ul.innerHTML = '';
-			for(var i = 0; i < rawList[id].criterias.length; ++i) {
-				(function(i) {
-					var li = document.createElement('li');
-					var name = document.createElement('span');
-					var percentage = document.createElement('span');
-
-					percentage.classList.add('criteria-match');
-
-					name.innerHTML = rawList[id].criterias[i].name;
-					percentage.innerHTML = Math.round(rawList[id].criterias[i].grade * 100) + '%';
-
-					li.appendChild(name);
-					li.appendChild(percentage);
-					ul.appendChild(li);
-				})(i);
-			}
 		}
 	};
 })();

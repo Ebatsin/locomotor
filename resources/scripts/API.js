@@ -116,5 +116,139 @@ window.API = {
 		app.getImage(app.getShortToken(), url, prom.getId());
 
 		return prom;
+	},
+	getItem: function(id) {
+		var prom = new JPromises();
+
+		app.getItem(app.getShortToken(), id, prom.getId());
+
+		return prom;
+	},
+	getUniverse: function(id) {
+		var prom = new JPromises();
+
+		app.getUniverse(app.getShortToken(), id, prom.getId());
+
+		return prom;
+	},
+	getUserInfo: function() {
+		var prom = new JPromises();
+
+		app.getUserInfo(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	changeUsername: function(newName) {
+		var prom = new JPromises();
+
+		app.changeUsername(app.getShortToken(), newName, prom.getId());
+
+		return prom;
+	},
+	changePassword: function(oldPass, newPass) {
+		var prom = new JPromises();
+
+		app.changePassword(app.getShortToken(), oldPass, newPass, prom.getId());
+
+		return prom;
+	},
+	book: function(id, startDate, endDate, quantity) {
+		var prom = new JPromises();
+
+		app.book(app.getShortToken(), id, startDate, endDate, quantity, prom.getId());
+
+		return prom;
+	},
+	getAllBooking: function() {
+		var prom = new JPromises();
+
+		app.getAllBooking(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	removeBooking: function(id) {
+		var prom = new JPromises();
+
+		app.removeBooking(app.getShortToken(), id, prom.getId());
+
+		return prom;
+	},
+	getUnits: function() {
+		var prom = new JPromises();
+
+		app.getUnits(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+
+	/* ----------------------------------- ADMIN ------------------------------- */
+
+	adminAuth: function(name, password) {
+		var prom = new JPromises();
+
+		if(password) {
+			app.adminAuth(name.trim().toLowerCase(), password, prom.getId());
+		}
+		else {
+			app.adminTokenAuth(name.trim(), prom.getId());
+		}
+
+		return prom;
+	},
+	getAllItems: function() {
+		var prom = new JPromises();
+
+		app.getAllItems(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	getAllUniverses: function() {
+		var prom = new JPromises();
+
+		app.getAllUniverses(app.getShortToken(), prom.getId());
+
+		return prom;
+	},
+	addItem: function(item) {
+		var prom = new JPromises();
+
+		app.addItem(app.getShortToken(), JSON.stringify(item), prom.getId());
+
+		return prom;
+	},
+	updateItem: function(item) {
+		var prom = new JPromises();
+
+		app.updateItem(app.getShortToken(), JSON.stringify(item), prom.getId());
+
+		return prom;
+	},
+	removeItem: function(item) {
+		var prom = new JPromises();
+
+		app.removeItem(app.getShortToken(), item, prom.getId());
+
+		return prom;
+	},
+	removeUniverse: function(universe) {
+		var prom = new JPromises();
+
+		app.removeUniverse(app.getShortToken(), universe, prom.getId());
+
+		return prom;
+	},
+	updateUniverse: function(item) {
+		var prom = new JPromises();
+
+		app.updateUniverse(app.getShortToken(), JSON.stringify(item), prom.getId());
+
+		return prom;
+	},
+	addUniverse: function(universe) {
+		var prom = new JPromises();
+
+		app.addUniverse(app.getShortToken(), JSON.stringify(universe), prom.getId());
+
+		return prom;
 	}
 };

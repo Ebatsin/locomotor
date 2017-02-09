@@ -4,7 +4,8 @@
 	var toggle = menu.querySelector('#menu-toggle');
 	var backArrow = menu.querySelector('#menu-back');
 	var settings = menu.querySelector('#menu-settings');
-	var booking = menu.querySelector('#menu-booking');
+	var add = menu.querySelector('#menu-add');
+	var edit = menu.querySelector('#menu-edit');
 	var helpElem = menu.querySelector('#menu-help');
 	var disconnect = menu.querySelector('#menu-disconnect');
 
@@ -29,8 +30,12 @@
 		callbacks.settings();
 	}
 
-	function bookingItem() {
-		callbacks.booking();
+	function addItem() {
+		callbacks.add();
+	}
+
+	function editItem() {
+		callbacks.edit();
 	}
 
 	function helpItem() {
@@ -45,8 +50,11 @@
 		settings: function() {
 			console.log('settings item pressed');
 		},
-		booking: function() {
-			console.log('booking item pressed');
+		add: function() {
+			console.log('add item pressed');
+		},
+		edit: function() {
+			console.log('edit item pressed');
 		},
 		help: function() {
 			console.log('help item pressed');
@@ -88,8 +96,10 @@
 			backArrow.addEventListener('click', function() {
 				backArrowStack[backArrowStack.length - 1]();
 			});
+			
 			settings.addEventListener('click', settingsItem);
-			booking.addEventListener('click', bookingItem);
+			add.addEventListener('click', addItem);
+			edit.addEventListener('click', editItem);
 			helpElem.addEventListener('click', helpItem);
 			help.addEventListener('click', helpItem);
 			disconnect.addEventListener('click', disconnectItem);

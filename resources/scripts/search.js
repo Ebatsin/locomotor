@@ -12,6 +12,7 @@
 	var breadcrumbCat = document.querySelector('#search-breadcrumb-cat');
 	var breadcrumbCrit = document.querySelector('#search-breadcrumb-crit');
 
+	var refresh = document.querySelector('#search-refresh');
 	var back = document.querySelector('#search-back');
 	var next = document.querySelector('#search-next');
 	var start = document.querySelector('#search-start');
@@ -43,15 +44,16 @@
 	window.modules['search'] = {
 		init: function() {
 			console.log('initialisation du module search');
+			refresh.addEventListener('click', function() {
+				loadView('search');
+			})
 		},
 		load: function() {
-			console.log('loading search');
 			function init() {
-				console.log('search loaded');
 				hideAllViews();
 				modules.menu.show();
 				modules.menu.showBackArrow(false);
-				modules.help.setContext('search');
+				modules.help.pushContext('search');
 				view.classList.remove('hide');
 				app.setTitle('Search');
 
@@ -81,11 +83,9 @@
 			}
 
 			if(!modules.splash.isShown()) {
-				console.log('not shown');
 				modules.splash.show(init);
 			}
 			else {
-				console.log('shown');
 				init();
 			}
 		},
@@ -176,11 +176,12 @@
 								});
 
 								break;
-							case 'integer-interval': 
+							case 'integer-interval':
 								var range;
 								if(criteria[i].universe.max - criteria[i].universe.min > 1000) {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.0001, 0);
 									range.init(true);
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -190,6 +191,7 @@
 								else {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max);								
 									range.init();
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -207,6 +209,7 @@
 								if(criteria[i].universe.max - criteria[i].universe.min > 1000) {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.0001, 2);
 									range.init(true);
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -216,6 +219,7 @@
 								else {
 									range = new Range(inputElem, criteria[i].universe.min, criteria[i].universe.max, 0.01, 2);								
 									range.init();
+									range.setUnitID(criteria[i].unitID);
 
 									if(criteria[i].userValue) { // put back the old values in the field
 										range.setMin(criteria[i].userValue.min);
@@ -339,7 +343,8 @@
 								id: model.model[i].criteria[j]['_id'],
 								question: model.model[i].criteria[j].question,
 								type: model.model[i].criteria[j].userType,
-								universe: model.model[i].criteria[j].universe
+								universe: model.model[i].criteria[j].universe,
+								unitID: model.model[i].criteria[j].unitID
 							}]
 						});
 					}
@@ -358,7 +363,8 @@
 							id: model.model[i].criteria[j]['_id'],
 							question: model.model[i].criteria[j].question,
 							type: model.model[i].criteria[j].userType,
-							universe: model.model[i].criteria[j].universe
+							universe: model.model[i].criteria[j].universe,
+								unitID: model.model[i].criteria[j].unitID
 						});
 					}
 
@@ -453,7 +459,6 @@
 			});
 		},
 		start: function() { // start a research
-			console.log('building the output');
 			var obj = [];
 			var tmpSelf = [];
 			var tmpId;
@@ -515,11 +520,8 @@
 				tmpSelf = [];
 			}
 
-			console.log(JSON.stringify(obj));
-
 			API.search(JSON.stringify(obj)).then(function(data) {
 				loadView('results', data);
-				console.log(JSON.stringify(data));
 			}).catch(function(data) {
 				console.log('Javascript : error while starting the search : ' + data.message);
 			});

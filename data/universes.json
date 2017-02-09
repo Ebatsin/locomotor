@@ -4,7 +4,7 @@
 	},
 	"name": "Harry Potter",
 	"description": "The fictional universe of Harry Potter comprises two distinct societies: the Wizarding World and the Muggle world. The Muggle world is for the world inhabited by the non-magical majority, with which the Wizarding World exists coextensively, albeit mostly remaining hidden from the non-magical humans.",
-	"image": "url"
+	"image": "harry-potter.png"
 }
 {
 	"_id": {
@@ -12,7 +12,7 @@
 	},
 	"name": "Star Wars",
 	"description": "The events depicted in the Star Wars franchise take place in an unnamed fictional galaxy at an undetermined point in the distant past. Many species of alien creatures (often humanoid) are depicted. Robotic droids are also commonplace and are generally built to serve their owners. Space travel is common, and many planets in the galaxy are members of a single galactic government.",
-	"image": "url"
+	"image": "star-wars.png"
 }
 {
 	"_id": {
@@ -20,7 +20,7 @@
 	},
 	"name": "Batman",
 	"description": "Batman's secret identity is Bruce Wayne, an American billionaire, playboy, philanthropist, and owner of Wayne Enterprises. After witnessing the murder of his parents Thomas Wayne and Martha Wayne as a child, he swore vengeance against criminals, an oath tempered by a sense of justice. Wayne trains himself physically and intellectually and crafts a bat-inspired persona to fight crime.",
-	"image": "url"
+	"image": "batman.png"
 }
 {
 	"_id": {
@@ -28,7 +28,7 @@
 	},
 	"name": "My Neighbor Totoro",
 	"description": "The film tells the story of the two young daughters (Satsuki and Mei) of a professor and their interactions with friendly wood spirits in postwar rural Japan.",
-	"image": "url"
+	"image": "totoro.png"
 }
 {
 	"_id": {
@@ -36,5 +36,5 @@
 	},
 	"name": "Halo",
 	"description": "The Halo universe is the sprawling fictional universe in which all Halo media takes place. In the 26th century, humankind has colonized hundreds of worlds across the Orion Arm of the Milky Way galaxy, only to stumble upon a hostile alliance of aliens known as the Covenant.",
-	"image": "url"
+	"image": "halo.png"
 }

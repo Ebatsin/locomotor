@@ -1,23 +1,16 @@
 (function() {
 	var view = document.querySelector('#login-page');
 
-	// title
-	var title = view.querySelector('#login-form h2');
-
 	// fields
 	var name = view.querySelector('#login-form-name');
 	var password = view.querySelector('#login-form-password');
-	var confirm = view.querySelector('#login-form-confirm');
 
 	// buttons
 	var button = view.querySelector('#login-form button');
-	var toggle = view.querySelector('#login-form-toggle');
 
 	var form = view.querySelector('#login-form');
 
 	var error = view.querySelector('#login-form p');
-
-	var loginMode = true;
 
 	// error handling
 	var errorDisplayed = false;
@@ -51,49 +44,20 @@
 	window.modules['login'] = {
 		init: function() {
 			console.log('initialisation du module login');
-			toggle.addEventListener('click', function() {
-				if(loginMode) {
-					modules.login.showRegister();
-				}
-				else {
-					modules.login.showLogin();
-				}
-			});
 
 			form.addEventListener('submit', function(e) {
 				// check if all the fields are filled
-				if(loginMode) {
-					if(name.value.trim().length === 0 || password.value.length === 0) {
-						modules.login.setFixingMethod(fixEmptyField);
-						modules.login.showError('All the fields must be filled to continue.');
-					}
-					else {
-						API.auth(name.value, password.value).then(function(data) {
-							modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
-						}).catch(function(data) {
-							modules.login.showError(data.message);
-						});
-						modules.login.emptyFields();
-					}
+				if(name.value.trim().length === 0 || password.value.length === 0) {
+					modules.login.setFixingMethod(fixEmptyField);
+					modules.login.showError('All the fields must be filled to continue.');
 				}
-				else { // register
-					if(name.value.trim().length === 0 || password.value.length === 0 || confirm.value.length === 0) {
-						modules.login.setFixingMethod(fixEmptyField);
-						modules.login.showError('All the fields must be filled to continue.');
-					}
-					else if(confirm.value !== password.value) {
-						modules.login.setFixingMethod(fixMismatchingPasswords);
-						modules.login.showError('The password field and the password confirmation field do not match. Please try again.');
-					}
-					else {
-						// @todo send the request
-						API.register(name.value, password.value).then(function(data) {
-							modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
-						}).catch(function(data) {
-							modules.login.showError(data.message);
-						});
-						modules.login.emptyFields();
-					}
+				else {
+					API.adminAuth(name.value, password.value).then(function(data) {
+						modules.login.validAuth(data.data['short-term-token'], data.data['long-term-token']);
+					}).catch(function(data) {
+						modules.login.showError(data.message);
+					});
+					modules.login.emptyFields();
 				}
 
 				e.preventDefault();
@@ -101,24 +65,26 @@
 
 			name.addEventListener('input', checkForFix);
 			password.addEventListener('input', checkForFix);
-			confirm.addEventListener('input', checkForFix);
 
 			// bind the disconnect function to the menu
 			modules.menu.bind('disconnect', function() {
 				app.deleteLongToken();
-				modules.help.clearContext();
+				//modules.help.clearContext();
 				modules.menu.clearBackArrow();
 				loadView('login');
+			});
+
+			modules.menu.bind('edit', function() {
+				loadView('add-manage');
+			});
+
+			modules.menu.bind('add', function() {
+				loadView('add-choice');
 			});
 
 			modules.menu.bind('settings', function() {
 				loadView('settings');
 			});
-
-			modules.menu.bind('booking', function() {
-				loadView('booking-list');
-			});
-
 		},
 		/**
 		* Load the login view.
@@ -129,13 +95,13 @@
 			hideAllViews();
 			modules.menu.hide();
 			modules.menu.showOnlyHelp(true);
-			modules.help.pushContext('login');
+			modules.help.pushContext('admin-login');
 			view.classList.remove('hide');
 
 			if(app.getLongToken() != null) {
 				console.log('local long token found. Using it');
 				// try to log with this token
-				API.auth(app.getLongToken()).then(function(data) {
+				API.adminAuth(app.getLongToken()).then(function(data) {
 					console.log('successful token login');
 					modules.login.validAuth(data.data['short-term-token'], app.getLongToken());
 				}).catch(function(data) {
@@ -149,45 +115,20 @@
 				modules.splash.hide();
 			}
 
-			if(params && params.mode === 'register') {
-				modules.login.showRegister();
-			}
-			else {
-				modules.login.showLogin();
-			}
-		},
-		showRegister: function() {
-			loginMode = false;
+			
+			modules.login.showLogin();
 
-			modules.help.popContext();
-			modules.help.pushContext('register');
-
-			modules.login.hideError();
-			app.setTitle('Register');
-			toggle.innerHTML = 'Log in';
-			title.innerHTML = 'REGISTER';
-			button.innerHTML = 'Register';
-			modules.login.emptyFields();
-			confirm.classList.remove('hide');
 		},
 		showLogin: function() {
-			loginMode = true;
-
-			modules.help.popContext();
-			modules.help.pushContext('login');
-
 			modules.login.hideError();
-			app.setTitle('Log in');
-			toggle.innerHTML = 'Register';
-			title.innerHTML = 'LOG IN';
-			button.innerHTML = 'Log in';
+
+			app.setTitle('Administration - Log in');
+
 			modules.login.emptyFields();
-			confirm.classList.add('hide');
 		},
 		emptyFields: function() {
 			name.value = '';
 			password.value = '';
-			confirm.value = '';
 		},
 		showError: function(message) {
 			errorDisplayed = true;
@@ -204,14 +145,17 @@
 		validAuth: function(shortToken, longToken) {
 			app.setShortToken(shortToken);
 			app.setLongToken(longToken);
-
+			
 			API.getModel().then(function(data) {
 				API.getUnits().then(function(dataUnit) {
-					window.model = data.data;
-					window.units = dataUnit.data.units;
-					// load the search view
-					modules.help.popContext();
-					loadView('search');
+					API.getAllUniverses().then(function(uni) {
+						window.model = data.data;
+						window.units = dataUnit.data.units;
+						window.universes = uni.data.universes;
+						// load the search view
+						modules.help.popContext();
+						loadView('add-manage');
+					});
 
 				}).catch(function(data) {
 					console.log('Javascript : error while loading the units ' + data.message);

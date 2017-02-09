@@ -112,19 +112,14 @@
 	"unitname": "speed",
 	"alt": [
 		{
-			"name": "m/s",
-			"long": "meter%s per second",
-			"factor": 1.0
-		},
-		{
 			"name": "km/h",
 			"long": "kilometer%s per hour",
-			"factor": 3.5999999046325684
+			"factor": 0.27777777778
 		},
 		{
 			"name": "km/s",
 			"long": "kilometer%s per second",
-			"factor": 0.0010000000474974513
+			"factor": 1000.0
 		}
 	]
 }
