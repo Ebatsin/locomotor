@@ -1978,3 +1978,65 @@ html, body {
 #manage-universes-list .universes-description {
 	display: block;
 }
+
+/* ------------------------------------------ CREATE UNIVERSES ---------------------------------------*/
+
+#create-universes-page {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: hsl(200, 5%, 90%);
+	top: 0;
+}
+
+#create-universes-page h1 {	
+	background-color: hsl(0, 0%, 95%);
+	margin: 0;
+	padding: 0.5em;
+	padding-left: 1.2em;
+	letter-spacing: 2px;
+	font-size: 2em;
+	color: hsl(180, 60%, 40%);
+	border-bottom: solid 1px hsl(0, 0%, 85%);
+	margin-bottom: 1.5em;
+}
+
+#create-universes-page label {
+	margin-left: 10%;
+	font-size: 1.4em;
+	margin-top: 2em;
+	width: 28em;
+	display: block;
+}
+
+#create-universes-page input {
+	width: 20em;
+	font-size: 1em;
+	height: 1.4rem;
+	margin-left: 1em;
+	float: right;
+}
+
+#create-universes-page textarea {
+	margin-left: 10%;
+	width: 80%;
+	height: 10em;
+}
+
+#create-universes-page button {
+	float: right;
+	margin-right: 10%;
+	margin-top: 2em;
+	height: 2.5em;
+	padding: 0 2em;
+	font-size: 1.5em;
+	color: hsl(0, 0%, 95%);
+	border-radius: 0;
+	border: none;
+	background-color: hsl(180, 60%, 30%);
+	cursor: pointer;
+}
+
+#create-universes-page button:hover {
+	background-color: hsl(180, 60%, 40%);
+}

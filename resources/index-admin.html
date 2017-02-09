@@ -193,36 +193,45 @@
 		</div> 
 
 		<div id="fullview-page" class="page">
-		<div id="fullview-left">
-			<div id="fullview-header">
-			<img src="">
-			<div id="fullview-name-container">
-				<h1>Item name</h1>
-				<div id="fullview-price">Price : $525/day</div>
+			<div id="fullview-left">
+				<div id="fullview-header">
+				<img src="">
+				<div id="fullview-name-container">
+					<h1>Item name</h1>
+					<div id="fullview-price">Price : $525/day</div>
+				</div>
+				</div>
+				<div id="fullview-description">
+				Description du véhicule : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+				<h2>Technical Specifications</h2>
+				<ul id="fullview-specs"></ul>
 			</div>
+			<div id="fullview-universe">
+				<img src="">
+				<h2>Nom de l'univers</h2>
+				<p>Description de l'univers : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			</div>
-			<div id="fullview-description">
-			Description du véhicule : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</div>
-			<h2>Technical Specifications</h2>
-			<ul id="fullview-specs"></ul>
 		</div>
-		<div id="fullview-universe">
-			<img src="">
-			<h2>Nom de l'univers</h2>
-			<p>Description de l'univers : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-		</div>
+
+		<div id="create-universes-page" class="page">
+			<h1>Create a universe</h1>
+			<label>Name: <input id="create-universes-name" type="" name=""></label><br>
+			<label>Image URL: <input id="create-universes-image" type="" name=""></label><br>
+			<label>Description:</label><br>
+			<textarea id="create-universes-description"></textarea>
+			<button id="create-universes-create">Create</button>
+		</div> 
 	</div>
 
 	<div id="mary-overlay"></div>
@@ -258,13 +267,8 @@
 	<script type="text/javascript" src="scripts/admin/addChoice.js"></script>
 	<script type="text/javascript" src="scripts/admin/addManage.js"></script>
 	<script type="text/javascript" src="scripts/admin/fullview.js"></script>
-	<!--<script type="text/javascript" src="scripts/search.js"></script>
-	<script type="text/javascript" src="scripts/results.js"></script>
-	<script type="text/javascript" src="scripts/booking.js"></script>
-	<script type="text/javascript" src="scripts/booking-list.js"></script>-->
+	<script type="text/javascript" src="scripts/admin/addUniverse.js"></script>
 	<script type="text/javascript">
-		console.log("Client initialisé.");
-
 		// prevent selection
 		document.addEventListener("selectstart", function(e) {
 		e.preventDefault();

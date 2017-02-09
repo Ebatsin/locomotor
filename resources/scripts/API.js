@@ -244,4 +244,11 @@ window.API = {
 
 		return prom;
 	},
+	addUniverse: function(universe) {
+		var prom = new JPromises();
+
+		app.addUniverse(app.getShortToken(), JSON.stringify(universe), prom.getId());
+
+		return prom;
+	}
 };

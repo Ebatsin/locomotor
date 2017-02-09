@@ -15,6 +15,9 @@
 			item.addEventListener('click', function() {
 				loadView('add');
 			});
+			universe.addEventListener('click', function() {
+				loadView('create-universe');
+			});
 		},
 		/**
 		* Load the login view.
