@@ -171,7 +171,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									integer.setValue(criteria[i].userValue);
 								}
 
@@ -195,7 +195,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									float.setValue(criteria[i].userValue);
 								}
 
@@ -215,7 +215,7 @@
 								var boolean = new Boolean(inputElem);
 								boolean.init();
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									boolean.setChecked(criteria[i].userValue);
 								}
 
@@ -245,7 +245,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									integer.setMinValue(criteria[i].userValue.min);
 									integer.setMaxValue(criteria[i].userValue.max);
 								}
@@ -273,7 +273,7 @@
 									next.click();
 								});
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									float.setMinValue(criteria[i].userValue.min);
 									float.setMaxValue(criteria[i].userValue.max);
 								}
@@ -301,7 +301,7 @@
 								var strli = new StringList(inputElem, list);
 								strli.init();
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									if(criteria[i].userValue.length > 0 && criteria[i].userValue[0].value) {
 										// formating it right
 										var arr = [];
@@ -331,7 +331,7 @@
 								var tree = new Tree(inputElem, criteria[i].universe.tree);
 								tree.init();
 
-								if(criteria[i].userValue) {
+								if(criteria[i].userValue !== undefined) {
 									tree.selectTree(criteria[i].userValue);
 								}
 
