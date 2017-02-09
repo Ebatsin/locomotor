@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000px" height="1000px">
+	<line font-family="Lato" x1="878" y1="743" x2="680" y2="905" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="437" y1="945" x2="68" y2="626" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="437" y1="945" x2="72" y2="374" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="68" y1="626" x2="72" y2="374" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="207" y1="162" x2="437" y2="54" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="437" y1="54" x2="684" y2="95" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="207" y1="162" x2="684" y2="95" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="878" y1="257" x2="950" y2="500" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="878" y1="257" x2="878" y2="743" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+	<line font-family="Lato" x1="878" y1="257" x2="680" y2="905" style="stroke:rgb(255, 255, 255);stroke-width:6" />
+
+
+	<circle font-family="Lato" cx="878" cy="743" r="30" fill="white" />
+	<circle font-family="Lato" cx="680" cy="905" r="30" fill="white" />
+	<circle font-family="Lato" cx="437" cy="945" r="30" fill="white" />
+	<circle font-family="Lato" cx="207" cy="837" r="30" fill="white" />
+	<circle font-family="Lato" cx="68" cy="626" r="30" fill="white" />
+	<circle font-family="Lato" cx="72" cy="374" r="30" fill="white" />
+	<circle font-family="Lato" cx="207" cy="162" r="30" fill="white" />
+	<circle font-family="Lato" cx="437" cy="54" r="30" fill="white" />
+	<circle font-family="Lato" cx="684" cy="95" r="30" fill="white" />
+	<circle font-family="Lato" cx="878" cy="257" r="30" fill="white" />
+	<circle font-family="Lato" cx="950" cy="500" r="30" fill="white" />
+
+
+	<circle font-family="Lato" cx="207" cy="162" r="25" fill="hsl(0, 45%, 46%)" />
+	<circle font-family="Lato" cx="437" cy="54" r="25" fill="hsl(0, 45%, 46%)" />
+
+	<circle font-family="Lato" cx="207" cy="162" r="15" fill="hsl(174, 60%, 10%)" />
+	<circle font-family="Lato" cx="684" cy="95" r="15" fill="hsl(174, 60%, 10%)" />
+
+	<text font-family="Lato" x="865" y="810" font-size="30" fill="white">Wind</text>
+	<text font-family="Lato" x="650" y="970" font-size="30" fill="white">Wood</text>
+	<text font-family="Lato" x="390" y="1000" font-size="30" fill="white">Nuclear</text>
+	<text font-family="Lato" x="175" y="900" font-size="30" fill="white">Magic</text>
+	<text font-family="Lato" x="0" y="700" font-size="30" fill="white">Antimatter</text>
+	<text font-family="Lato" x="0" y="330" font-size="30" fill="white">Antigravity</text>
+	<text font-family="Lato" x="150" y="120" font-size="30" fill="white">Electric</text>
+	<text font-family="Lato" x="380" y="20" font-size="30" fill="white">Gasoline</text>
+	<text font-family="Lato" x="645" y="45" font-size="30" fill="white">Diesel</text>
+	<text font-family="Lato" x="855" y="210" font-size="30" fill="white">Hay</text>
+	<text font-family="Lato" x="920" y="560" font-size="30" fill="white">Meat</text>
+</svg>
