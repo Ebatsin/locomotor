@@ -64,6 +64,16 @@
 					<section id="web-api" data-menu-title="API" data-external="modules/architecture/api.html"></section>
 				</section>
 
+				<!-- outils -->
+
+				<section>
+					<h2>Outils</h2>
+					<section id="outils" data-menu-title="Outils"></section>
+					<section id="trello" data-menu-title="Trello" data-external="modules/outils/trello.html"></section>
+					<section id="github" data-menu-title="GitHub" data-external="modules/outils/github.html"></section>
+					<section id="workflow" data-menu-title="Workflow" data-external="modules/outils/workflow.html"></section>
+				</section>
+
 				<!-- conclusion -->
 
 				<section id="conclusion" data-menu-title="Conclusion">
@@ -90,6 +100,8 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="js/init.js"></script>
+		<script src="modules/outils/workflow.js"></script>
 
 		<script>
 
@@ -222,6 +234,17 @@
         			{ src: 'plugin/chart/csv2chart.js' }
 				]
 
+			});
+
+			Reveal.addEventListener('slidechanged', function(event) {
+				// on désactive toutes les animations
+				disableAeListeners();
+
+    			switch (event.currentSlide.id) {
+    				case "workflow":
+    					enableAeListener('workflow');
+    					break;
+    			}
 			});
 
 		</script>

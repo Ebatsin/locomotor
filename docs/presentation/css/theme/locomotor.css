@@ -337,3 +337,34 @@ body {
   color: black;
   margin-bottom: 70%;
 }
+
+/****************************************************
+***************** WORKFLOW **************************
+****************************************************/
+
+svg * {
+  transition: ease 0.4s all;
+}
+
+svg {
+  margin-top: 8rem;
+}
+
+svg.workflow {
+  width: 980px;
+  height: 190px;
+}
+
+path.domain {
+  fill-opacity: 0;
+}
+
+path.area {
+  fill: #1db34f;
+  fill-opacity: 0.8;
+}
+
+g.axis {
+  font-size: 20px;
+  fill:white;
+}    
