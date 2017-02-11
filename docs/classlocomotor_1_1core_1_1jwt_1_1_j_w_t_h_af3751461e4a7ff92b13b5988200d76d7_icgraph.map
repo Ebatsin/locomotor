@@ -1,0 +1,6 @@
+<map id="createToken" name="createToken">
+<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#a1ced72f10559e8525f069895d88d129e" title="createShortToken" alt="" coords="147,5,273,31"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1jwt_1_1_j_w_t_h.html#aecfcf9e71a9ee5c1446176865a746a5c" title="createLongToken" alt="" coords="148,55,272,80"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="321,24,531,63"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="579,31,753,56"/>
+</map>

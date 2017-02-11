@@ -1,0 +1,7 @@
+<map id="UserCriteria" name="UserCriteria">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#aaca1c5ec640a1453943ce97d40e12a63" title="fromJSON" alt="" coords="146,12,229,37"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_user_category.html#a52e02970889790bace019e61fb256ff0" title="locomotor.components.models.\lUserCategory.fromJSON" alt="" coords="277,5,483,44"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1models_1_1_user_item.html#ab97f79cf43a9a73bcd77cec6b449a79a" title="locomotor.components.models.\lUserItem.fromJSON" alt="" coords="531,5,737,44"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="785,5,995,44"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1043,12,1217,37"/>
+</map>

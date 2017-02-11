@@ -1,0 +1,11 @@
+<map id="max" name="max">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_integer.html#acb085d655773a5014997582a57ae2ab2" title="locomotor.components.types.\lCWeightedInteger.compare" alt="" coords="100,5,295,44"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_string_list.html#af359d6fddb9c42710b6546ed2337eec7" title="CWeightedStringList" alt="" coords="126,68,269,93"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_string_list.html#a7a08dcf44cd83920ed5e14cef6361de8" title="fromJSON" alt="" coords="343,93,426,119"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1types_1_1_type_factory.html#a1a64701bf13afa82b6b32bf422a171e2" title="locomotor.components.types.\lTypeFactory.getUser" alt="" coords="474,87,669,125"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#aaca1c5ec640a1453943ce97d40e12a63" title="locomotor.components.models.\lUserCriteria.fromJSON" alt="" coords="717,87,923,125"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1models_1_1_user_category.html#a52e02970889790bace019e61fb256ff0" title="locomotor.components.models.\lUserCategory.fromJSON" alt="" coords="971,87,1177,125"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1models_1_1_user_item.html#ab97f79cf43a9a73bcd77cec6b449a79a" title="locomotor.components.models.\lUserItem.fromJSON" alt="" coords="1225,87,1431,125"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="1479,87,1688,125"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="1736,93,1910,119"/>
+</map>

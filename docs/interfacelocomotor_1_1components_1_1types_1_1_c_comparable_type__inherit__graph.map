@@ -1,0 +1,18 @@
+<map id="CComparableType" name="CComparableType">
+<area shape="rect" id="node3" href="$interfacelocomotor_1_1components_1_1types_1_1_c_item_type.html" title="CItemType" alt="" coords="295,213,381,239"/>
+<area shape="rect" id="node17" href="$interfacelocomotor_1_1components_1_1types_1_1_c_user_type.html" title="CUserType" alt="" coords="294,164,382,189"/>
+<area shape="rect" id="node2" href="$interfacelocomotor_1_1components_1_1types_1_1_c_type.html" title="CType" alt="" coords="5,189,65,215"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_c_boolean.html" title="CBoolean" alt="" coords="462,213,542,239"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1types_1_1_c_float.html" title="CFloat" alt="" coords="472,263,532,288"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1types_1_1_c_integer_list.html" title="CIntegerList" alt="" coords="455,312,548,337"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1types_1_1_c_interval.html" title="CInterval\&lt; T extends\l Number \&gt;" alt="" coords="430,101,574,140"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1components_1_1types_1_1_c_long.html" title="CLong" alt="" coords="472,361,532,387"/>
+<area shape="rect" id="node13" href="$classlocomotor_1_1components_1_1types_1_1_c_string_list.html" title="CStringList" alt="" coords="459,52,545,77"/>
+<area shape="rect" id="node16" href="$classlocomotor_1_1components_1_1types_1_1_c_tree.html" title="CTree" alt="" coords="473,164,531,189"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_double.html" title="CIntervalDouble" alt="" coords="635,105,752,131"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_integer.html" title="CIntervalInteger" alt="" coords="635,155,751,180"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1components_1_1types_1_1_c_integer.html" title="CInteger" alt="" coords="657,336,730,361"/>
+<area shape="rect" id="node12" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_integer.html" title="CWeightedInteger" alt="" coords="629,385,758,411"/>
+<area shape="rect" id="node14" href="$classlocomotor_1_1components_1_1types_1_1_c_mapped_string_list.html" title="CMappedStringList" alt="" coords="626,5,761,31"/>
+<area shape="rect" id="node15" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_string_list.html" title="CWeightedStringList" alt="" coords="622,55,765,80"/>
+</map>

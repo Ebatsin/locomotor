@@ -1,0 +1,20 @@
+<map id="computeGradeOfItems" name="computeGradeOfItems">
+<area shape="rect" id="node2" href="$classlocomotor_1_1core_1_1_comparator.html#a589b06b817cbbc74ceb4812d0ba6c245" title="computeGradeOfItem" alt="" coords="210,131,359,156"/>
+<area shape="rect" id="node13" href="$classlocomotor_1_1core_1_1_comparator.html#aa3aafa0139df54622b181928d3518488" title="filterResults" alt="" coords="239,180,330,205"/>
+<area shape="rect" id="node14" href="$classlocomotor_1_1core_1_1_comparator.html#a2ac714803f2cf6e544315619a14ff13c" title="toJSON" alt="" coords="250,229,318,255"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1models_1_1_item.html#aac70f654e73d90f5caea40c18ace4312" title="locomotor.components.models.\lItem.getCategories" alt="" coords="417,5,623,44"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1models_1_1_user_item.html#a9bd0f78e7cc56fec919e63d723a4806a" title="locomotor.components.models.\lUserItem.getCategories" alt="" coords="417,68,623,107"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_comparator.html#a3f526c90b5b3a645974bbb81e30d3c74" title="computeGradeOfCategory" alt="" coords="432,131,609,156"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1models_1_1_category.html#a0e11818fedf98727494278ea27386dea" title="locomotor.components.models.\lCategory.getCriterias" alt="" coords="682,65,888,104"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1core_1_1_comparator.html#a686a6117a0c0951d6b70fb883b2b5937" title="computeGradeOfCriteria" alt="" coords="701,180,868,205"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1models_1_1_criteria.html#a34e60b6081b4c555dc9f5b872cbe044e" title="locomotor.components.models.\lCriteria.getID" alt="" coords="940,79,1146,117"/>
+<area shape="rect" id="node9" href="$classlocomotor_1_1components_1_1models_1_1_item_criteria.html#ad1dc198074d5d5e901d0e5159ded14fa" title="locomotor.components.models.\lItemCriteria.getValue" alt="" coords="940,141,1146,180"/>
+<area shape="rect" id="node10" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#ae439cd3f7be14d7e03f87a7ca9367d54" title="locomotor.components.models.\lUserCriteria.getValue" alt="" coords="940,204,1146,243"/>
+<area shape="rect" id="node11" href="$classlocomotor_1_1components_1_1models_1_1_user_criteria.html#a671adef5afc1b82389174abfaff3c892" title="locomotor.components.models.\lUserCriteria.getDisableFlexibility" alt="" coords="936,267,1150,305"/>
+<area shape="rect" id="node12" href="$interfacelocomotor_1_1components_1_1types_1_1_c_comparable.html#a1d9a08e9f962c76e6525f8da05ca7f21" title="locomotor.components.types.\lCComparable.compare" alt="" coords="945,329,1140,368"/>
+<area shape="rect" id="node15" href="$classlocomotor_1_1components_1_1_pair.html#a54ce528c748b0b56861a8179404e34f5" title="locomotor.components.Pair.getLeft" alt="" coords="407,180,634,205"/>
+<area shape="rect" id="node16" href="$classlocomotor_1_1core_1_1_d_b_h.html#a0b2d292079fe232a4c3dae4636167641" title="locomotor.core.DBH.getInstance" alt="" coords="414,229,627,255"/>
+<area shape="rect" id="node18" href="$classlocomotor_1_1core_1_1_d_b_h.html#a187693f2e10c94113aefcb345fe5f518" title="locomotor.core.DBH.getPartial\lInfoOfItem" alt="" coords="420,279,621,317"/>
+<area shape="rect" id="node19" href="$classlocomotor_1_1components_1_1_pair.html#a372a73c0f39951186746e06a624f43d8" title="locomotor.components.Pair.get\lRight" alt="" coords="418,341,623,380"/>
+<area shape="rect" id="node17" href="$classlocomotor_1_1core_1_1_d_b_h.html#a2d5f1f766f5863a46ed29b7e56118364" title="locomotor.core.DBH.DBH" alt="" coords="698,229,871,255"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="failure" name="failure">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#a143bb7402270f3dc0872ab5586653f61" title="toByteArrayOutputStream" alt="" coords="149,5,323,31"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#a66b0dd722c150e0c2eac12c9e6e813ef" title="sendAnswer" alt="" coords="189,55,284,80"/>
+<area shape="rect" id="node4" href="$enumlocomotor_1_1components_1_1network_1_1_network_response_1_1_error_code.html#aae714dc01fe7f5bb1a175d0d1068bb92" title="locomotor.components.network.\lNetworkResponse.ErrorCode.getValue" alt="" coords="111,104,362,143"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1_mutable_integer.html#ab1285c4f05252364e32fd03079fa2f35" title="locomotor.components.Mutable\lInteger.intValue" alt="" coords="133,167,340,205"/>
+</map>

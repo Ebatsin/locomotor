@@ -1,0 +1,8 @@
+<map id="getInstance" name="getInstance">
+<area shape="rect" id="node2" href="$classlocomotor_1_1front_1_1components_1_1_front_resource_manager.html#a0137fff2228ab372a477b862b10abd00" title="FrontResourceManager" alt="" coords="183,5,345,31"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_client_request.html#a5177dbc0e509337643b1931cab9832ca" title="locomotor.front.components.network.\lClientRequest.addParam" alt="" coords="144,55,384,93"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_client_request.html#af820b68be6077f053a589af5c865700c" title="locomotor.front.components.network.\lClientRequest.requestJson" alt="" coords="144,117,384,156"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_file_upload.html#ab075e2b20b12151e05bf1fb51e40c1db" title="locomotor.front.components.network.\lFileUpload.add" alt="" coords="432,55,672,93"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_file_upload.html#abbb8544c46b88f1a6f1e163725aaa1b3" title="locomotor.front.components.network.\lFileUpload.send" alt="" coords="432,117,672,156"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1front_1_1components_1_1network_1_1_file_upload.html#ad90278946fac31b255b0ea524061a60b" title="locomotor.front.components.network.\lFileUpload.getURLConnection" alt="" coords="432,180,672,219"/>
+</map>

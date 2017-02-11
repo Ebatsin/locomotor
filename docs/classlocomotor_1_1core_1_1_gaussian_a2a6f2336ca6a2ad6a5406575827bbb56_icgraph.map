@@ -1,0 +1,9 @@
+<map id="getInstance" name="getInstance">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1_compare.html#a2a101cdb459b3ee3a59e76aaaa08750c" title="locomotor.components.Compare.unique\lValue" alt="" coords="145,100,403,139"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1_compare.html#af1d05ce01ba9906df55e7a4976e44cc9" title="locomotor.components.Compare.interval\lValue" alt="" coords="144,193,404,232"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1types_1_1_c_float.html#a871921d9d041c5c7993927dde6332e2c" title="locomotor.components.types.\lCFloat.compare" alt="" coords="452,5,647,44"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1components_1_1types_1_1_c_integer.html#a535607ef73128c96e7b4c3831a537c15" title="locomotor.components.types.\lCInteger.compare" alt="" coords="452,68,647,107"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1types_1_1_c_weighted_integer.html#acb085d655773a5014997582a57ae2ab2" title="locomotor.components.types.\lCWeightedInteger.compare" alt="" coords="452,131,647,169"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_double.html#a871921d9d041c5c7993927dde6332e2c" title="locomotor.components.types.\lCIntervalDouble.compare" alt="" coords="452,193,647,232"/>
+<area shape="rect" id="node8" href="$classlocomotor_1_1components_1_1types_1_1_c_interval_integer.html#a535607ef73128c96e7b4c3831a537c15" title="locomotor.components.types.\lCIntervalInteger.compare" alt="" coords="452,256,647,295"/>
+</map>

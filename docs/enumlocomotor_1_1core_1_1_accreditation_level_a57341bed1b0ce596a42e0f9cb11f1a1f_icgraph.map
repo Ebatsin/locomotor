@@ -1,0 +1,6 @@
+<map id="isAdmin" name="isAdmin">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="378,18,588,57"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_d_b_h.html#ad707f520f60fe68ea8a8818698560d9d" title="locomotor.core.DBH.authAdmin" alt="" coords="122,25,330,50"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1core_1_1_d_b_h.html#a3d7a9a94e400a13566495c07c3b1be00" title="locomotor.core.DBH.admin\lStillExists" alt="" coords="136,74,316,113"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="636,25,810,50"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="getValue" name="getValue">
+<area shape="rect" id="node2" href="$classlocomotor_1_1components_1_1network_1_1_network_response.html#ab1be964e3a5f4dfc34483da5bfd13a8a" title="locomotor.components.network.\lNetworkResponse.failure" alt="" coords="126,92,336,131"/>
+<area shape="rect" id="node3" href="$classlocomotor_1_1components_1_1network_1_1_a_p_i.html#a547463fbc7fb7b485886f0917e2c0b78" title="locomotor.components.network.\lAPI.createHooks" alt="" coords="676,5,885,44"/>
+<area shape="rect" id="node5" href="$classlocomotor_1_1components_1_1network_1_1_i_endpoint_handler.html#ab14119ba2d6d06adbe73a9805f5130c6" title="locomotor.components.network.\lIEndpointHandler.handle" alt="" coords="401,63,611,101"/>
+<area shape="rect" id="node6" href="$classlocomotor_1_1components_1_1network_1_1_network_handler.html#a63d431845f1fd2adc1f96432f6003e25" title="locomotor.components.network.\lNetworkHandler.init" alt="" coords="676,68,885,107"/>
+<area shape="rect" id="node7" href="$classlocomotor_1_1components_1_1network_1_1_i_endpoint_handler.html#a754e26560b323ad92f51d07b4cd02d2a" title="locomotor.components.network.\lIEndpointHandler.sendDefaultMissing\lParametersMessage" alt="" coords="384,177,628,229"/>
+<area shape="rect" id="node4" href="$classlocomotor_1_1core_1_1_main.html#a8b260eecbaabcef8473fd87ada040682" title="locomotor.core.Main.main" alt="" coords="933,44,1107,69"/>
+</map>

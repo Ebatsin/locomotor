@@ -2,9 +2,9 @@
 
 Locomotor is a real and fictional vehicles comparator. It is based on predefined criterias that the user can select. It outputs a list of the vehicles that fit "the most" the user's query. The comparator works in a client/server design, allowing multiple users to use the same dataset at the same time.
 
-![Search results](https://raw.githubusercontent.com/gaelfoppolo/locomotor/master/screenshort_results.png)
+![Search results](https://raw.githubusercontent.com/gaelfoppolo/locomotor/master/screenshot_results.png)
 
-![Criterias selection](https://raw.githubusercontent.com/gaelfoppolo/locomotor/master/screenshort_selection.png)
+![Criterias selection](https://raw.githubusercontent.com/gaelfoppolo/locomotor/master/screenshot_selection.png)
 
 The project offers 2 clients: 
 

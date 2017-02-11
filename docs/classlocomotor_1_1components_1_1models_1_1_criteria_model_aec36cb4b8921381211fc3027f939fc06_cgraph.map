@@ -1,0 +1,6 @@
+<map id="toJSON" name="toJSON">
+<area shape="rect" id="node2" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_item_type.html#aea93026f92028ac88f6b60cd2f3e438b" title="locomotor.components.types.\lCEnumItemType.getID" alt="" coords="181,5,376,44"/>
+<area shape="rect" id="node3" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_user_type.html#aea93026f92028ac88f6b60cd2f3e438b" title="locomotor.components.types.\lCEnumUserType.getID" alt="" coords="181,68,376,107"/>
+<area shape="rect" id="node4" href="$enumlocomotor_1_1components_1_1types_1_1_c_enum_universe_type.html#aea93026f92028ac88f6b60cd2f3e438b" title="locomotor.components.types.\lCEnumUniverseType.getID" alt="" coords="181,131,376,169"/>
+<area shape="rect" id="node5" href="$interfacelocomotor_1_1components_1_1_j_s_o_n_displayable.html#a16e008a8f442c180f94c7c8f03f416bd" title="locomotor.components.JSONDisplayable.toJSON" alt="" coords="121,193,435,219"/>
+</map>
