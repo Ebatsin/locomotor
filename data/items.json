@@ -200,20 +200,6 @@
 												"value": 14
 											}
 										]
-									},
-									{
-										"value": 16,
-										"children": [
-											{
-												"value": 17
-											},
-											{
-												"value": 18
-											},
-											{
-												"value": 19
-											}
-										]
 									}
 								]
 							}
@@ -7022,6 +7008,264 @@
 					},
 					"value": {
 						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f7f857ab9e93bb852085"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "589c47eb22049c25015e247a"
+	},
+	"name": "Tesla Model S",
+	"universe": {
+		"$oid": "589be0cd15dd94231734249c"
+	},
+	"description": "The Tesla Model S is a full-sized all-electric five-door, luxury liftback, produced by Tesla Inc., and introduced in June 2012. It scored a perfect 5.0 NHTSA automobile safety rating, as well as being the \"third fastest accelerating production car ever produced,\" and the fastest accelerating car in production as of December 2016.",
+	"image": "tesla.png",
+	"categories": [
+		{
+			"categoryModel": {
+				"$oid": "5842ccbf57ab9e689507bc13"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842dffe57ab9e7e37048793"
+					},
+					"value": [
+						0
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e19957ab9e7e37048794"
+					},
+					"value": {
+						"$numberLong": "5"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "58435bb857ab9e1127b9f105"
+					},
+					"value": {
+						"min": {
+							"$numberLong": "10000"
+						},
+						"max": {
+							"$numberLong": "3000000"
+						}
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7a657ab9e6a5495f3ee"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e66a57ab9e83054cd9c0"
+					},
+					"value": 1.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e6db57ab9e83054cd9c1"
+					},
+					"value": 1000.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e72e57ab9e83054cd9c2"
+					},
+					"value": 4.9
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e80f57ab9e845efbe02c"
+					},
+					"value": 1.9
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842e83357ab9e845efbe02d"
+					},
+					"value": 1.4
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7b257ab9e6a5495f3ef"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842e9b057ab9e881b260712"
+					},
+					"value": 100.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea4c57ab9e888ccd9378"
+					},
+					"value": 500.0
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842ea7a57ab9e888ccd9379"
+					},
+					"value": {
+						"$numberLong": "7"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842d7be57ab9e6a5495f3f0"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842ebfb57ab9e888ccd937a"
+					},
+					"value": {
+						"$numberLong": "4"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f07057ab9e8ee0ed6c84"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f08e57ab9e8ee0ed6c85"
+					},
+					"value": {
+						"$numberLong": "0"
+					}
+				}
+			]
+		},
+		{
+			"categoryModel": {
+				"$oid": "5842f0b257ab9e8ee0ed6c86"
+			},
+			"criteria": [
+				{
+					"criterionModel": {
+						"$oid": "5842f0b857ab9e8ee0ed6c87"
+					},
+					"value": false
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f0e057ab9e8ee0ed6c88"
+					},
+					"value": {
+						"value": 31,
+						"children": [
+							{
+								"value": 3,
+								"children": [
+									{
+										"value": 0
+									},
+									{
+										"value": 1
+									},
+									{
+										"value": 2
+									}
+								]
+							},
+							{
+								"value": 20,
+								"children": [
+									{
+										"value": 11,
+										"children": [
+											{
+												"value": 8
+											},
+											{
+												"value": 9
+											},
+											{
+												"value": 10
+											}
+										]
+									},
+									{
+										"value": 15,
+										"children": [
+											{
+												"value": 12
+											},
+											{
+												"value": 13
+											},
+											{
+												"value": 14
+											}
+										]
+									},
+									{
+										"value": 19,
+										"children": [
+											{
+												"value": 16
+											},
+											{
+												"value": 17
+											},
+											{
+												"value": 18
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f3e257ab9e8ee0ed6c89"
+					},
+					"value": [
+						1
+					]
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f6e557ab9e93bb852083"
+					},
+					"value": {
+						"$numberLong": "55"
+					}
+				},
+				{
+					"criterionModel": {
+						"$oid": "5842f77457ab9e93bb852084"
+					},
+					"value": {
+						"$numberLong": "6"
 					}
 				},
 				{
