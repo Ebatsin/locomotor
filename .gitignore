@@ -18,7 +18,5 @@
 hs_err_pid*
 
 class/
-resources/cache
-server-resources/images/
 /.gtm/
 .token

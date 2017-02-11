@@ -56,7 +56,7 @@ DOC_CONF = doxygen.cfg
 # Targets:
 ###################################################
 
-all: build-core
+all: build-core build-front-user
 
 build-components: linter-components build-components-types build-components-models
 
